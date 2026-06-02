@@ -1,0 +1,84 @@
+aid: paytronix
+name: Paytronix
+description: >-
+  Paytronix is a cloud-based digital guest engagement platform for restaurants
+  and convenience stores, providing loyalty programs, gift and stored-value
+  cards, online ordering, branded mobile apps, messaging, and analytics to more
+  than 1,800 brands. Paytronix publishes extensive public integration
+  documentation describing a REST-based Server API with 40-plus services
+  spanning guests, enrollment, transactions, checks, payments, gift, messaging,
+  campaigns, stores, and mobile wallet passes. Authentication supports OAuth,
+  client credentials (integration identifier and secret via HTTP Basic), and
+  B2B flows. A separate Online Ordering API is documented for ordering
+  integrations, making Paytronix a developer-friendly guest engagement provider.
+type: Index
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+tags:
+  - Restaurant
+  - Loyalty
+  - Gift Cards
+  - Online Ordering
+  - Guest Engagement
+  - Payments
+  - Messaging
+url: https://raw.githubusercontent.com/api-evangelist/paytronix/refs/heads/main/apis.yml
+created: '2026-06-02'
+modified: '2026-06-02'
+specificationVersion: '0.19'
+apis:
+  - aid: paytronix:rest-api
+    name: Paytronix Server API
+    description: >-
+      The Paytronix Server (PXS) REST API exposes 40-plus services for guest
+      engagement, including Guest, Enrollment, Transaction, Check, Sale,
+      Payment, Gift, Message, Campaign Feedback, Store, and mobile wallet
+      services. Authentication is handled through the OAuth Service, with client
+      credentials supplied via HTTP Basic, plus email and B2B authentication
+      options. Start with the API Primer covering authentication, formatting,
+      and versioning.
+    humanURL: https://developers.paytronix.com/pxs_api_reference/index.html
+    tags:
+      - Loyalty
+      - Transactions
+      - Payments
+      - Gift Cards
+      - Messaging
+    properties:
+      - type: Documentation
+        url: https://developers.paytronix.com/pxs_api_reference/index.html
+      - type: Authentication
+        url: https://developers.paytronix.com/pxs_api_reference/oauth.html
+      - type: GettingStarted
+        url: https://developers.paytronix.com/welcome/index.html
+  - aid: paytronix:online-ordering-api
+    name: Paytronix Online Ordering API
+    description: >-
+      The Paytronix Online Ordering API supports building and integrating
+      ordering experiences across order methods including in store, online web,
+      online app, call in, call center, and drive through. It connects ordering
+      systems with the broader Paytronix loyalty and guest engagement platform.
+    humanURL: http://docs.opendining.net/
+    tags:
+      - Online Ordering
+      - Restaurant
+    properties:
+      - type: Documentation
+        url: http://docs.opendining.net/
+common:
+  - type: Website
+    url: https://www.paytronix.com/
+  - type: Documentation
+    url: https://developers.paytronix.com/
+  - type: APIReference
+    url: https://developers.paytronix.com/pxs_api_reference/index.html
+  - type: Pricing
+    url: https://www.paytronix.com/platform/
+  - type: Support
+    url: https://www.paytronix.com/support/
+  - type: Blog
+    url: https://www.paytronix.com/blog
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/paytronix-systems
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
