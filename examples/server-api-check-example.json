@@ -1,0 +1,13 @@
+{
+  "number": "4501",
+  "openTime": "2026-06-03T12:00:00Z",
+  "subtotal": 42.5,
+  "items": [
+    {
+      "itemCode": "string",
+      "name": "string",
+      "quantity": 0,
+      "price": 0
+    }
+  ]
+}

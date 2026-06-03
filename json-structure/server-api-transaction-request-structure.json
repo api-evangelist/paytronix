@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/paytronix/refs/heads/main/json-structure/server-api-transaction-request-structure.json",
+  "name": "TransactionRequest",
+  "description": "TransactionRequest schema from Paytronix Server API",
+  "type": "object",
+  "properties": {
+    "headerInfo": {
+      "$ref": "#/components/schemas/HeaderInfo"
+    },
+    "cardInfo": {
+      "$ref": "#/components/schemas/CardInfo"
+    },
+    "autoActivateCard": {
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "headerInfo",
+    "cardInfo"
+  ]
+}

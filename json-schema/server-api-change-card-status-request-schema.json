@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ChangeCardStatusRequest",
+  "description": "ChangeCardStatusRequest schema from Paytronix Server API",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/paytronix/refs/heads/main/json-schema/server-api-change-card-status-request-schema.json",
+  "type": "object",
+  "properties": {
+    "merchantId": {
+      "type": "integer",
+      "example": 1000
+    },
+    "printedCardNumber": {
+      "type": "string",
+      "example": "60490012345678"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "ACTIVE",
+        "DISABLED"
+      ],
+      "example": "DISABLED"
+    }
+  },
+  "required": [
+    "merchantId",
+    "printedCardNumber",
+    "status"
+  ]
+}

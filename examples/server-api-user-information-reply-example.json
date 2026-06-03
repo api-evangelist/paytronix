@@ -1,0 +1,14 @@
+{
+  "result": "success",
+  "userFields": {
+    "firstName": "Jane",
+    "lastName": "Doe",
+    "email": "jane@example.com"
+  },
+  "primaryCardNumbers": [
+    "string"
+  ],
+  "accountIds": [
+    0
+  ]
+}

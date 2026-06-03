@@ -1,0 +1,18 @@
+{
+  "merchantId": 1000,
+  "printedCardNumber": "60490012345678",
+  "amount": 25.0,
+  "paymentMethod": {
+    "type": "CREDIT_CARD",
+    "token": "string",
+    "lastFour": "4242"
+  },
+  "address": {
+    "address1": "string",
+    "address2": "string",
+    "city": "string",
+    "stateProvince": "string",
+    "postalCode": "string",
+    "country": "US"
+  }
+}

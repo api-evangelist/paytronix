@@ -1,0 +1,206 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: "Paytronix Server API \u2014 Transaction"
+  description: "Guest Engagement \u2014 Transaction. 4 operations. Lead operation: Activate Card. Self-contained Naftiko capability covering one Paytronix business surface."
+  tags:
+  - Paytronix
+  - Guest
+  - Transaction
+  created: '2026-06-03'
+  modified: '2026-06-03'
+binds:
+- namespace: env
+  keys:
+    PAYTRONIX_INTEGRATION_ID: PAYTRONIX_INTEGRATION_ID
+    PAYTRONIX_INTEGRATION_SECRET: PAYTRONIX_INTEGRATION_SECRET
+capability:
+  consumes:
+  - type: http
+    namespace: server-api-transaction
+    baseUri: https://m{merchantId}.api.paytronix.com/rest/26.6
+    description: "Paytronix Server API \u2014 Transaction. Self-contained, no shared references."
+    authentication:
+      type: basic
+      username: '{{env.PAYTRONIX_INTEGRATION_ID}}'
+      password: '{{env.PAYTRONIX_INTEGRATION_SECRET}}'
+    resources:
+    - name: transaction-activate-json
+      path: /transaction/activate.json
+      operations:
+      - name: activateCard
+        method: POST
+        description: Activate Card
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: Request body payload.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: transaction-balanceinquiry-json
+      path: /transaction/balanceInquiry.json
+      operations:
+      - name: balanceInquiry
+        method: POST
+        description: Balance Inquiry
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: Request body payload.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: transaction-addredeem-json
+      path: /transaction/addRedeem.json
+      operations:
+      - name: addRedeem
+        method: POST
+        description: Add Or Redeem Wallet Value
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: Request body payload.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: transaction-accountquery-json
+      path: /transaction/accountQuery.json
+      operations:
+      - name: accountQuery
+        method: POST
+        description: Query Accounts
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: Request body payload.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  exposes:
+  - type: rest
+    namespace: server-api-transaction-rest
+    port: 8080
+    description: "REST adapter for Paytronix Server API \u2014 Transaction. One Spectral-compliant resource per consumed operation, prefixed with /v1."
+    resources:
+    - path: /v1/transaction/activate
+      name: transaction-activate
+      description: REST surface for Activate Card.
+      operations:
+      - method: POST
+        name: activateCard
+        description: Activate Card
+        call: server-api-transaction.activateCard
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/transaction/balanceinquiry
+      name: transaction-balanceinquiry
+      description: REST surface for Balance Inquiry.
+      operations:
+      - method: POST
+        name: balanceInquiry
+        description: Balance Inquiry
+        call: server-api-transaction.balanceInquiry
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/transaction/addredeem
+      name: transaction-addredeem
+      description: REST surface for Add Or Redeem Wallet Value.
+      operations:
+      - method: POST
+        name: addRedeem
+        description: Add Or Redeem Wallet Value
+        call: server-api-transaction.addRedeem
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/transaction/accountquery
+      name: transaction-accountquery
+      description: REST surface for Query Accounts.
+      operations:
+      - method: POST
+        name: accountQuery
+        description: Query Accounts
+        call: server-api-transaction.accountQuery
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: server-api-transaction-mcp
+    port: 9090
+    transport: http
+    description: "MCP adapter for Paytronix Server API \u2014 Transaction. One tool per consumed operation, routed inline through this capability's consumes block."
+    tools:
+    - name: activate-card
+      description: Activate Card
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: server-api-transaction.activateCard
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: balance-inquiry
+      description: Balance Inquiry
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: server-api-transaction.balanceInquiry
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: add-redeem-wallet-value
+      description: Add Or Redeem Wallet Value
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: server-api-transaction.addRedeem
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: query-accounts
+      description: Query Accounts
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: server-api-transaction.accountQuery
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

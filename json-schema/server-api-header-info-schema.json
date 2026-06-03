@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "HeaderInfo",
+  "description": "Common transaction header. programId is PX, SV, or LP.",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/paytronix/refs/heads/main/json-schema/server-api-header-info-schema.json",
+  "type": "object",
+  "properties": {
+    "merchantId": {
+      "type": "integer",
+      "example": 1000
+    },
+    "storeCode": {
+      "type": "string",
+      "example": "1"
+    },
+    "programId": {
+      "type": "string",
+      "example": "PX"
+    },
+    "terminal": {
+      "type": "string",
+      "example": "1"
+    },
+    "operator": {
+      "type": "string",
+      "example": "100"
+    },
+    "posTransactionId": {
+      "type": "string"
+    }
+  }
+}

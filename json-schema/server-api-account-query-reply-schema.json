@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AccountQueryReply",
+  "description": "AccountQueryReply schema from Paytronix Server API",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/paytronix/refs/heads/main/json-schema/server-api-account-query-reply-schema.json",
+  "type": "object",
+  "properties": {
+    "result": {
+      "type": "string",
+      "example": "success"
+    },
+    "accounts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "accountId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "printedCardNumber": {
+            "type": "string"
+          },
+          "fieldValues": {
+            "type": "object",
+            "additionalProperties": true
+          }
+        }
+      }
+    }
+  }
+}

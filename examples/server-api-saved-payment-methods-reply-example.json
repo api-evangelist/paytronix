@@ -1,0 +1,13 @@
+{
+  "result": "success",
+  "paymentMethods": [
+    {
+      "type": "CREDIT_CARD",
+      "cardholderName": "Jane Doe",
+      "lastFour": "4242",
+      "defaultUsages": [
+        "string"
+      ]
+    }
+  ]
+}

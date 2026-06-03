@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/paytronix/refs/heads/main/json-structure/server-api-charge-response-structure.json",
+  "name": "ChargeResponse",
+  "description": "ChargeResponse schema from Paytronix Server API",
+  "type": "object",
+  "properties": {
+    "result": {
+      "type": "string",
+      "example": "success"
+    },
+    "amount": {
+      "type": "double",
+      "example": 25.0
+    },
+    "cardType": {
+      "type": "string",
+      "example": "VISA"
+    },
+    "lastFour": {
+      "type": "string",
+      "example": "4242"
+    },
+    "processorAuthCode": {
+      "type": "string",
+      "example": "AUTH123"
+    },
+    "transactionState": {
+      "type": "string",
+      "example": "APPROVED"
+    }
+  }
+}

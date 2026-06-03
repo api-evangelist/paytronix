@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/paytronix/refs/heads/main/json-structure/server-api-add-redeem-request-structure.json",
+  "name": "AddRedeemRequest",
+  "description": "AddRedeemRequest schema from Paytronix Server API",
+  "type": "object",
+  "properties": {
+    "headerInfo": {
+      "$ref": "#/components/schemas/HeaderInfo"
+    },
+    "cardInfo": {
+      "$ref": "#/components/schemas/CardInfo"
+    },
+    "addWalletContents": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/WalletContent"
+      }
+    },
+    "redeemWalletContents": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/WalletContent"
+      }
+    }
+  },
+  "required": [
+    "headerInfo",
+    "cardInfo"
+  ]
+}

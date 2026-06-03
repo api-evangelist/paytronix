@@ -1,0 +1,11 @@
+{
+  "result": "success",
+  "pxTransactionId": "TXN-67890",
+  "walletContents": [
+    {
+      "walletCode": "1",
+      "name": "Points",
+      "balance": 1250
+    }
+  ]
+}

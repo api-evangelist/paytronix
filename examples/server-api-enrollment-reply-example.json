@@ -1,0 +1,8 @@
+{
+  "result": "success",
+  "printedCardNumber": "60490012345678",
+  "accountId": 998877,
+  "username": "jdoe",
+  "errorCode": "string",
+  "errorsByField": {}
+}

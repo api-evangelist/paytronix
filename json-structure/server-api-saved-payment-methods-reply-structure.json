@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/paytronix/refs/heads/main/json-structure/server-api-saved-payment-methods-reply-structure.json",
+  "name": "SavedPaymentMethodsReply",
+  "description": "SavedPaymentMethodsReply schema from Paytronix Server API",
+  "type": "object",
+  "properties": {
+    "result": {
+      "type": "string",
+      "example": "success"
+    },
+    "paymentMethods": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "example": "CREDIT_CARD"
+          },
+          "cardholderName": {
+            "type": "string",
+            "example": "Jane Doe"
+          },
+          "lastFour": {
+            "type": "string",
+            "example": "4242"
+          },
+          "defaultUsages": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  }
+}

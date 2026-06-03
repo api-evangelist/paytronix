@@ -1,0 +1,17 @@
+{
+  "merchantId": 1000,
+  "cardTemplateCode": "1",
+  "enforceUniqueFields": [
+    "email"
+  ],
+  "setUserFields": {
+    "username": "jdoe",
+    "password": "s3cret",
+    "firstName": "Jane",
+    "lastName": "Doe",
+    "email": "jane@example.com"
+  },
+  "setAccountFields": {},
+  "sendSmsVerification": true,
+  "smsVerificationCode": "string"
+}

@@ -1,0 +1,20 @@
+{
+  "result": "success",
+  "username": "jdoe",
+  "accountStatus": "ACTIVE",
+  "queryCardStatus": "ACTIVE",
+  "registrationStatus": "REGISTERED",
+  "cardTemplateCode": "1",
+  "tierCode": "GOLD",
+  "primaryCard": "60490012345678",
+  "additionalCards": [
+    "string"
+  ],
+  "walletBalances": [
+    {
+      "walletCode": "1",
+      "name": "Points",
+      "balance": 1250
+    }
+  ]
+}

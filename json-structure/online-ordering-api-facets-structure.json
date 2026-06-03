@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/paytronix/refs/heads/main/json-structure/online-ordering-api-facets-structure.json",
+  "name": "Facets",
+  "description": "Applicable search facets such as tags for refining a search.",
+  "type": "object",
+  "additionalProperties": true
+}

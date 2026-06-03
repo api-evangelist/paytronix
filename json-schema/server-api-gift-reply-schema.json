@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "GiftReply",
+  "description": "GiftReply schema from Paytronix Server API",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/paytronix/refs/heads/main/json-schema/server-api-gift-reply-schema.json",
+  "type": "object",
+  "properties": {
+    "result": {
+      "type": "string",
+      "example": "success"
+    },
+    "pxTransactionId": {
+      "type": "string",
+      "example": "GIFT-44556"
+    },
+    "printedCardNumber": {
+      "type": "string",
+      "example": "70123456789012"
+    },
+    "currentBalance": {
+      "type": "number",
+      "example": 50.0
+    },
+    "errorCode": {
+      "type": "string"
+    },
+    "errorMessage": {
+      "type": "string"
+    }
+  }
+}

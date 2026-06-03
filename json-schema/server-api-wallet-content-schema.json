@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "WalletContent",
+  "description": "A wallet code and quantity used in add/redeem operations.",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/paytronix/refs/heads/main/json-schema/server-api-wallet-content-schema.json",
+  "type": "object",
+  "properties": {
+    "walletCode": {
+      "type": "string",
+      "example": "1"
+    },
+    "quantity": {
+      "type": "number",
+      "example": 10
+    },
+    "expiration": {
+      "type": "string",
+      "format": "date"
+    }
+  }
+}

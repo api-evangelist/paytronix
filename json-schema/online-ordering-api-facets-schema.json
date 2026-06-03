@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Facets",
+  "description": "Applicable search facets such as tags for refining a search.",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/paytronix/refs/heads/main/json-schema/online-ordering-api-facets-schema.json",
+  "type": "object",
+  "additionalProperties": true
+}

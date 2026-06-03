@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "RestaurantSearchResults",
+  "description": "RestaurantSearchResults schema from Paytronix Online Ordering API",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/paytronix/refs/heads/main/json-schema/online-ordering-api-restaurant-search-results-schema.json",
+  "type": "object",
+  "properties": {
+    "count": {
+      "type": "integer",
+      "example": 12
+    },
+    "results": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/Restaurant"
+      }
+    },
+    "facets": {
+      "$ref": "#/components/schemas/Facets"
+    }
+  }
+}

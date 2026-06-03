@@ -1,0 +1,8 @@
+{
+  "access_token": "9f8c1a2b3c4d5e6f",
+  "token_type": "bearer",
+  "expires_in": 1800,
+  "refresh_token": "1a2b3c4d5e6f7a8b",
+  "scope": "user_read account_read",
+  "username": "jdoe"
+}

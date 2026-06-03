@@ -1,0 +1,318 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: "Paytronix Server API \u2014 Guest"
+  description: "Guest Engagement \u2014 Guest. 5 operations. Lead operation: Get Account Information. Self-contained Naftiko capability covering one Paytronix business surface."
+  tags:
+  - Paytronix
+  - Guest
+  - Guest
+  created: '2026-06-03'
+  modified: '2026-06-03'
+binds:
+- namespace: env
+  keys:
+    PAYTRONIX_INTEGRATION_ID: PAYTRONIX_INTEGRATION_ID
+    PAYTRONIX_INTEGRATION_SECRET: PAYTRONIX_INTEGRATION_SECRET
+capability:
+  consumes:
+  - type: http
+    namespace: server-api-guest
+    baseUri: https://m{merchantId}.api.paytronix.com/rest/26.6
+    description: "Paytronix Server API \u2014 Guest. Self-contained, no shared references."
+    authentication:
+      type: basic
+      username: '{{env.PAYTRONIX_INTEGRATION_ID}}'
+      password: '{{env.PAYTRONIX_INTEGRATION_SECRET}}'
+    resources:
+    - name: guest-accountinformation-json
+      path: /guest/accountInformation.json
+      operations:
+      - name: getAccountInformation
+        method: GET
+        description: Get Account Information
+        inputParameters:
+        - name: merchantId
+          in: query
+          type: integer
+          required: true
+          description: Paytronix-assigned merchant identifier.
+        - name: printedCardNumber
+          in: query
+          type: string
+          required: true
+          description: Printed card number identifying the account.
+        - name: accessFilterStoreGroupCode
+          in: query
+          type: string
+          required: false
+          description: Optional store group code used to filter access.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: guest-accountinformationbyid-json
+      path: /guest/accountInformationById.json
+      operations:
+      - name: getAccountInformationById
+        method: GET
+        description: Get Account Information By Account ID
+        inputParameters:
+        - name: merchantId
+          in: query
+          type: integer
+          required: true
+          description: Paytronix-assigned merchant identifier.
+        - name: accountId
+          in: query
+          type: integer
+          required: true
+          description: Paytronix account identifier.
+        - name: accessFilterStoreGroupCode
+          in: query
+          type: string
+          required: false
+          description: Optional store group code used to filter access.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: guest-userinformation-json
+      path: /guest/userInformation.json
+      operations:
+      - name: getUserInformation
+        method: GET
+        description: Get User Information
+        inputParameters:
+        - name: merchantId
+          in: query
+          type: integer
+          required: true
+          description: Paytronix-assigned merchant identifier.
+        - name: username
+          in: query
+          type: string
+          required: true
+          description: Registered guest username.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: guest-transactionhistory-json
+      path: /guest/transactionHistory.json
+      operations:
+      - name: getTransactionHistory
+        method: GET
+        description: Get Transaction History
+        inputParameters:
+        - name: merchantId
+          in: query
+          type: integer
+          required: true
+          description: Paytronix-assigned merchant identifier.
+        - name: printedCardNumber
+          in: query
+          type: string
+          required: true
+          description: Printed card number identifying the account.
+        - name: dateStart
+          in: query
+          type: string
+          required: false
+          description: Inclusive start date for the history window.
+        - name: dateEnd
+          in: query
+          type: string
+          required: false
+          description: Inclusive end date for the history window.
+        - name: maxNumberOfResults
+          in: query
+          type: integer
+          required: false
+          description: Maximum number of transactions to return.
+        - name: limitToBalanceAffectingTransactions
+          in: query
+          type: boolean
+          required: false
+          description: When true, only balance-affecting transactions are returned.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: guest-changecardstatus-json
+      path: /guest/changeCardStatus.json
+      operations:
+      - name: changeCardStatus
+        method: POST
+        description: Change Card Status
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: Request body payload.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  exposes:
+  - type: rest
+    namespace: server-api-guest-rest
+    port: 8080
+    description: "REST adapter for Paytronix Server API \u2014 Guest. One Spectral-compliant resource per consumed operation, prefixed with /v1."
+    resources:
+    - path: /v1/guest/accountinformation
+      name: guest-accountinformation
+      description: REST surface for Get Account Information.
+      operations:
+      - method: GET
+        name: getAccountInformation
+        description: Get Account Information
+        call: server-api-guest.getAccountInformation
+        with:
+          merchantId: rest.merchantId
+          printedCardNumber: rest.printedCardNumber
+          accessFilterStoreGroupCode: rest.accessFilterStoreGroupCode
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/guest/accountinformationbyid
+      name: guest-accountinformationbyid
+      description: REST surface for Get Account Information By Account ID.
+      operations:
+      - method: GET
+        name: getAccountInformationById
+        description: Get Account Information By Account ID
+        call: server-api-guest.getAccountInformationById
+        with:
+          merchantId: rest.merchantId
+          accountId: rest.accountId
+          accessFilterStoreGroupCode: rest.accessFilterStoreGroupCode
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/guest/userinformation
+      name: guest-userinformation
+      description: REST surface for Get User Information.
+      operations:
+      - method: GET
+        name: getUserInformation
+        description: Get User Information
+        call: server-api-guest.getUserInformation
+        with:
+          merchantId: rest.merchantId
+          username: rest.username
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/guest/transactionhistory
+      name: guest-transactionhistory
+      description: REST surface for Get Transaction History.
+      operations:
+      - method: GET
+        name: getTransactionHistory
+        description: Get Transaction History
+        call: server-api-guest.getTransactionHistory
+        with:
+          merchantId: rest.merchantId
+          printedCardNumber: rest.printedCardNumber
+          dateStart: rest.dateStart
+          dateEnd: rest.dateEnd
+          maxNumberOfResults: rest.maxNumberOfResults
+          limitToBalanceAffectingTransactions: rest.limitToBalanceAffectingTransactions
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/guest/changecardstatus
+      name: guest-changecardstatus
+      description: REST surface for Change Card Status.
+      operations:
+      - method: POST
+        name: changeCardStatus
+        description: Change Card Status
+        call: server-api-guest.changeCardStatus
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: server-api-guest-mcp
+    port: 9090
+    transport: http
+    description: "MCP adapter for Paytronix Server API \u2014 Guest. One tool per consumed operation, routed inline through this capability's consumes block."
+    tools:
+    - name: get-account-information
+      description: Get Account Information
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: server-api-guest.getAccountInformation
+      with:
+        merchantId: tools.merchantId
+        printedCardNumber: tools.printedCardNumber
+        accessFilterStoreGroupCode: tools.accessFilterStoreGroupCode
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-account-information-account-id
+      description: Get Account Information By Account ID
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: server-api-guest.getAccountInformationById
+      with:
+        merchantId: tools.merchantId
+        accountId: tools.accountId
+        accessFilterStoreGroupCode: tools.accessFilterStoreGroupCode
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-user-information
+      description: Get User Information
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: server-api-guest.getUserInformation
+      with:
+        merchantId: tools.merchantId
+        username: tools.username
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-transaction-history
+      description: Get Transaction History
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: server-api-guest.getTransactionHistory
+      with:
+        merchantId: tools.merchantId
+        printedCardNumber: tools.printedCardNumber
+        dateStart: tools.dateStart
+        dateEnd: tools.dateEnd
+        maxNumberOfResults: tools.maxNumberOfResults
+        limitToBalanceAffectingTransactions: tools.limitToBalanceAffectingTransactions
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: change-card-status
+      description: Change Card Status
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: server-api-guest.changeCardStatus
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,10 @@
+{
+  "result": "success",
+  "accounts": [
+    {
+      "accountId": 0,
+      "printedCardNumber": "string",
+      "fieldValues": {}
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/paytronix/refs/heads/main/json-structure/server-api-compute-rewards-request-structure.json",
+  "name": "ComputeRewardsRequest",
+  "description": "ComputeRewardsRequest schema from Paytronix Server API",
+  "type": "object",
+  "properties": {
+    "merchantId": {
+      "type": "int32",
+      "example": 1000
+    },
+    "storeCode": {
+      "type": "string",
+      "example": "1"
+    },
+    "check": {
+      "$ref": "#/components/schemas/Check"
+    },
+    "cardInfo": {
+      "$ref": "#/components/schemas/CardInfo"
+    },
+    "terminal": {
+      "type": "string"
+    },
+    "operator": {
+      "type": "string"
+    },
+    "rewardSelectionMode": {
+      "type": "object",
+      "properties": {
+        "mode": {
+          "type": "string",
+          "example": "AUTOMATIC"
+        }
+      }
+    }
+  },
+  "required": [
+    "merchantId",
+    "storeCode",
+    "check",
+    "cardInfo"
+  ]
+}

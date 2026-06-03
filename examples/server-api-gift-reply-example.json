@@ -1,0 +1,8 @@
+{
+  "result": "success",
+  "pxTransactionId": "GIFT-44556",
+  "printedCardNumber": "70123456789012",
+  "currentBalance": 50.0,
+  "errorCode": "string",
+  "errorMessage": "string"
+}

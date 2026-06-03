@@ -1,0 +1,9 @@
+{
+  "merchantId": 1000,
+  "printedCardNumber": "60490012345678",
+  "enforceUniqueFields": [
+    "string"
+  ],
+  "setUserFields": {},
+  "setAccountFields": {}
+}

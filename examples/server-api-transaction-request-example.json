@@ -1,0 +1,16 @@
+{
+  "headerInfo": {
+    "merchantId": 1000,
+    "storeCode": "1",
+    "programId": "PX",
+    "terminal": "1",
+    "operator": "100",
+    "posTransactionId": "string"
+  },
+  "cardInfo": {
+    "printedCardNumber": "60490012345678",
+    "magstripe": "string",
+    "cardTemplateCode": "1"
+  },
+  "autoActivateCard": true
+}

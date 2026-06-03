@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Restaurant",
+  "description": "Restaurant schema from Paytronix Online Ordering API",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/paytronix/refs/heads/main/json-schema/online-ordering-api-restaurant-schema.json",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "example": "4b96f1bafc9f100ca79231ef"
+    },
+    "name": {
+      "type": "string",
+      "example": "Taqueria Downtown"
+    },
+    "distance": {
+      "type": "number",
+      "example": 1.2
+    },
+    "coordinates": {
+      "$ref": "#/components/schemas/Coordinates"
+    },
+    "address": {
+      "type": "string",
+      "example": "123 Main St"
+    },
+    "city": {
+      "type": "string",
+      "example": "Boston"
+    },
+    "state": {
+      "type": "string",
+      "example": "MA"
+    },
+    "postalCode": {
+      "type": "string",
+      "example": "02110"
+    },
+    "phone": {
+      "type": "string",
+      "example": "+16175551234"
+    },
+    "website": {
+      "type": "string",
+      "example": "https://example.com"
+    },
+    "organizationId": {
+      "type": "string"
+    },
+    "imageUrl": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    }
+  }
+}

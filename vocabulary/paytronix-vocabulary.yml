@@ -1,0 +1,358 @@
+vocabulary: "1.0.0"
+
+info:
+  provider: "Paytronix"
+  description: >-
+    Unified operational and capability vocabulary for the Paytronix guest
+    engagement platform, spanning the Server (PXS) REST API and the Online
+    Ordering (Open Dining) API. The operational dimension is derived from the
+    OpenAPI specifications in openapi/; the capability dimension is derived from
+    the self-contained Naftiko capability files in capabilities/.
+  created: "2026-06-03"
+  modified: "2026-06-03"
+
+operational:
+  apis:
+    - name: "Paytronix Server API"
+      namespace: "server-api"
+      version: "26.6"
+      baseUrl: "https://m{merchantId}.api.paytronix.com/rest/26.6"
+      status: active
+    - name: "Paytronix Online Ordering API"
+      namespace: "online-ordering-api"
+      version: "1.0"
+      baseUrl: "https://api.opendining.net"
+      status: active
+
+  resources:
+    - name: token
+      api: "Paytronix Server API"
+      actions: [request]
+    - name: guests
+      api: "Paytronix Server API"
+      actions: [get, query]
+    - name: accounts
+      api: "Paytronix Server API"
+      actions: [get, query, changeStatus]
+    - name: enrollments
+      api: "Paytronix Server API"
+      actions: [create, activate, register, getConfig]
+    - name: transactions
+      api: "Paytronix Server API"
+      actions: [activate, balanceInquiry, addRedeem, query]
+    - name: gift-cards
+      api: "Paytronix Server API"
+      actions: [sell, reload, balance, redeem]
+    - name: payments
+      api: "Paytronix Server API"
+      actions: [recharge, getSavedMethods]
+    - name: stores
+      api: "Paytronix Server API"
+      actions: [getNearby, list]
+    - name: checks
+      api: "Paytronix Server API"
+      actions: [computeRewards, postAndAccrue]
+    - name: restaurants
+      api: "Paytronix Online Ordering API"
+      actions: [get, search]
+    - name: menu-items
+      api: "Paytronix Online Ordering API"
+      actions: [get, search]
+    - name: orders
+      api: "Paytronix Online Ordering API"
+      actions: [create, get, update]
+
+  actions:
+    - name: get
+      methods: [GET]
+      pattern: read
+    - name: list
+      methods: [GET]
+      pattern: read
+    - name: search
+      methods: [GET]
+      pattern: query
+    - name: query
+      methods: [POST]
+      pattern: query
+    - name: balanceInquiry
+      methods: [POST]
+      pattern: read
+    - name: create
+      methods: [POST]
+      pattern: write
+    - name: register
+      methods: [POST]
+      pattern: write
+    - name: activate
+      methods: [POST]
+      pattern: write
+    - name: sell
+      methods: [POST]
+      pattern: write
+    - name: reload
+      methods: [POST]
+      pattern: write
+    - name: redeem
+      methods: [POST]
+      pattern: write
+    - name: recharge
+      methods: [POST]
+      pattern: write
+    - name: addRedeem
+      methods: [POST]
+      pattern: write
+    - name: update
+      methods: [PUT]
+      pattern: write
+    - name: changeStatus
+      methods: [POST]
+      pattern: write
+
+  schemas:
+    core:
+      - CardInfo
+      - HeaderInfo
+      - WalletBalance
+      - WalletContent
+      - Address
+    guest:
+      - AccountInformationReply
+      - UserInformationReply
+      - TransactionHistoryReply
+    enrollment:
+      - CreateAndRegisterRequest
+      - ActivateAndRegisterRequest
+      - EnrollmentReply
+      - EnrollmentConfigReply
+    transaction:
+      - TransactionRequest
+      - TransactionReply
+      - AddRedeemRequest
+      - AddRedeemReply
+      - AccountQueryReply
+    gift:
+      - GiftRequest
+      - GiftReply
+    payment:
+      - RechargeRequest
+      - ChargeResponse
+      - SavedPaymentMethodsReply
+    store:
+      - Location
+      - LocationsReply
+    check:
+      - Check
+      - ComputeRewardsRequest
+      - ComputeRewardsReply
+    ordering:
+      - Restaurant
+      - MenuItem
+      - Order
+      - OrderInput
+      - RestaurantSearchResults
+      - MenuItemSearchResults
+
+  parameters:
+    identifiers:
+      - merchantId
+      - printedCardNumber
+      - accountId
+      - username
+      - cardTemplateCode
+      - storeCode
+      - restaurantId
+      - menuItemId
+      - orderId
+    filters:
+      - dateStart
+      - dateEnd
+      - storeGroupCode
+      - accessFilterStoreGroupCode
+      - q
+      - tags
+      - name
+    pagination:
+      - limit
+      - skip
+      - maxNumberOfResults
+      - maxLocations
+      - pageSize
+    measurement:
+      - latitude
+      - longitude
+      - maxDistance
+
+  enums:
+    cardStatus:
+      - ACTIVE
+      - DISABLED
+    grantType:
+      - password
+      - one_time_password
+      - authorization_code
+      - refresh_token
+    programId:
+      - PX
+      - SV
+      - LP
+    orderMethod:
+      - in_store
+      - online_web
+      - online_app
+      - call_in
+      - call_center
+      - drive_through
+    orderStatus:
+      - created
+      - submitted
+      - paid
+      - in_progress
+      - completed
+      - cancelled
+
+  authentication:
+    - scheme: "HTTP Basic"
+      description: "Integration identifier and secret, base64-encoded as identifier:secret."
+      apis: ["Paytronix Server API"]
+    - scheme: "OAuth Bearer"
+      description: "Guest-scoped bearer token issued by the OAuth Service."
+      apis: ["Paytronix Server API"]
+      scopes: [user_read, user_write, account_read, account_write, register]
+    - scheme: "API Key"
+      description: "Open Dining API key supplied in a request header."
+      apis: ["Paytronix Online Ordering API"]
+
+capability:
+  workflows:
+    - name: "OAuth"
+      file: capabilities/server-api-oauth.yaml
+      apis: ["Paytronix Server API"]
+      domains: [Authentication]
+      personas: [Integration Engineer]
+    - name: "Guest"
+      file: capabilities/server-api-guest.yaml
+      apis: ["Paytronix Server API"]
+      domains: [Guest Engagement]
+      personas: [App Developer]
+    - name: "Enrollment"
+      file: capabilities/server-api-enrollment.yaml
+      apis: ["Paytronix Server API"]
+      domains: [Loyalty]
+      personas: [App Developer]
+    - name: "Transaction"
+      file: capabilities/server-api-transaction.yaml
+      apis: ["Paytronix Server API"]
+      domains: [Loyalty, Point Of Sale]
+      personas: [POS Integrator]
+    - name: "Gift"
+      file: capabilities/server-api-gift.yaml
+      apis: ["Paytronix Server API"]
+      domains: [Gift Cards]
+      personas: [POS Integrator]
+    - name: "Payment"
+      file: capabilities/server-api-payment.yaml
+      apis: ["Paytronix Server API"]
+      domains: [Payments]
+      personas: [App Developer]
+    - name: "Store"
+      file: capabilities/server-api-store.yaml
+      apis: ["Paytronix Server API"]
+      domains: [Locations]
+      personas: [App Developer]
+    - name: "Check"
+      file: capabilities/server-api-check.yaml
+      apis: ["Paytronix Server API"]
+      domains: [Loyalty, Point Of Sale]
+      personas: [POS Integrator]
+    - name: "Restaurants"
+      file: capabilities/online-ordering-api-restaurants.yaml
+      apis: ["Paytronix Online Ordering API"]
+      domains: [Online Ordering]
+      personas: [App Developer]
+    - name: "Menu Items"
+      file: capabilities/online-ordering-api-menu-items.yaml
+      apis: ["Paytronix Online Ordering API"]
+      domains: [Online Ordering]
+      personas: [App Developer]
+    - name: "Search"
+      file: capabilities/online-ordering-api-search.yaml
+      apis: ["Paytronix Online Ordering API"]
+      domains: [Online Ordering]
+      personas: [App Developer]
+    - name: "Orders"
+      file: capabilities/online-ordering-api-orders.yaml
+      apis: ["Paytronix Online Ordering API"]
+      domains: [Online Ordering]
+      personas: [App Developer]
+
+  personas:
+    - id: integration-engineer
+      name: "Integration Engineer"
+      description: "Builds and authenticates the connection between a brand system and Paytronix."
+      workflows: [OAuth]
+    - id: app-developer
+      name: "App Developer"
+      description: "Builds guest-facing web and mobile experiences on loyalty, ordering, and payment."
+      workflows: [Guest, Enrollment, Payment, Store, Restaurants, Menu Items, Search, Orders]
+    - id: pos-integrator
+      name: "POS Integrator"
+      description: "Integrates point-of-sale systems for transaction processing and reward redemption."
+      workflows: [Transaction, Gift, Check]
+
+  domains:
+    - Authentication
+    - Guest Engagement
+    - Loyalty
+    - Gift Cards
+    - Payments
+    - Locations
+    - Point Of Sale
+    - Online Ordering
+
+  namespaces:
+    - consumed: server-api-oauth
+      rest: server-api-oauth-rest
+      mcp: server-api-oauth-mcp
+      restPort: 8080
+      mcpPort: 9090
+    - consumed: server-api-guest
+      rest: server-api-guest-rest
+      mcp: server-api-guest-mcp
+      restPort: 8080
+      mcpPort: 9090
+    - consumed: online-ordering-api-orders
+      rest: online-ordering-api-orders-rest
+      mcp: online-ordering-api-orders-mcp
+      restPort: 8080
+      mcpPort: 9090
+
+  binds:
+    - key: PAYTRONIX_INTEGRATION_ID
+      workflows: [OAuth, Guest, Enrollment, Transaction, Gift, Payment, Store, Check]
+    - key: PAYTRONIX_INTEGRATION_SECRET
+      workflows: [OAuth, Guest, Enrollment, Transaction, Gift, Payment, Store, Check]
+    - key: OPENDINING_API_KEY
+      workflows: [Restaurants, Menu Items, Search, Orders]
+
+crossReference:
+  - resource: gift-cards
+    operations: [sellGiftCard, reloadGiftCard, getGiftBalance, redeemGiftCard]
+    workflows: [Gift]
+    personas: [POS Integrator]
+  - resource: transactions
+    operations: [activateCard, balanceInquiry, addRedeem, accountQuery]
+    workflows: [Transaction]
+    personas: [POS Integrator]
+  - resource: orders
+    operations: [createOrder, getOrder, updateOrder]
+    workflows: [Orders]
+    personas: [App Developer]
+  - resource: accounts
+    operations: [getAccountInformation, getAccountInformationById, changeCardStatus]
+    workflows: [Guest]
+    personas: [App Developer]
+  - resource: payments
+    operations: [rechargeStoredValue, getSavedPaymentMethods]
+    workflows: [Payment]
+    personas: [App Developer]

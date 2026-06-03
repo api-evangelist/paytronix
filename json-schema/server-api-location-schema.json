@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Location",
+  "description": "Location schema from Paytronix Server API",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/paytronix/refs/heads/main/json-schema/server-api-location-schema.json",
+  "type": "object",
+  "properties": {
+    "code": {
+      "type": "string",
+      "example": "1"
+    },
+    "name": {
+      "type": "string",
+      "example": "Downtown"
+    },
+    "address": {
+      "$ref": "#/components/schemas/Address"
+    },
+    "latitude": {
+      "type": "number",
+      "format": "double",
+      "example": 42.3601
+    },
+    "longitude": {
+      "type": "number",
+      "format": "double",
+      "example": -71.0589
+    },
+    "hoursOfOperation": {
+      "type": "string"
+    },
+    "distance": {
+      "type": "number",
+      "example": 1.2
+    },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": true
+    }
+  }
+}

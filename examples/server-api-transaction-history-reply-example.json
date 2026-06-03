@@ -1,0 +1,20 @@
+{
+  "result": "success",
+  "walletInfo": [
+    {
+      "walletCode": "1",
+      "name": "Points",
+      "balance": 1250
+    }
+  ],
+  "transactions": [
+    {
+      "transactionId": "string",
+      "datetime": "2026-06-03T12:00:00Z",
+      "type": "ACCRUAL",
+      "walletCode": "string",
+      "amount": 0,
+      "balance": 0
+    }
+  ]
+}

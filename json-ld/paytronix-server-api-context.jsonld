@@ -1,0 +1,514 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "ptx": "https://developers.paytronix.com/schema/",
+    "schema": "https://schema.org/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "CreateAndRegisterRequest": "ptx:CreateAndRegisterRequest",
+    "Location": "ptx:Location",
+    "HeaderInfo": "ptx:HeaderInfo",
+    "AccountInformationReply": "ptx:AccountInformationReply",
+    "SavedPaymentMethodsReply": "ptx:SavedPaymentMethodsReply",
+    "GiftReply": "ptx:GiftReply",
+    "EnrollmentReply": "ptx:EnrollmentReply",
+    "AddRedeemRequest": "ptx:AddRedeemRequest",
+    "LocationsReply": "ptx:LocationsReply",
+    "TransactionRequest": "ptx:TransactionRequest",
+    "UserInformationReply": "ptx:UserInformationReply",
+    "Check": "ptx:Check",
+    "EnrollmentConfigReply": "ptx:EnrollmentConfigReply",
+    "GiftBalanceRequest": "ptx:GiftBalanceRequest",
+    "ChangeCardStatusRequest": "ptx:ChangeCardStatusRequest",
+    "AddRedeemReply": "ptx:AddRedeemReply",
+    "RechargeRequest": "ptx:RechargeRequest",
+    "ComputeRewardsReply": "ptx:ComputeRewardsReply",
+    "ChargeResponse": "ptx:ChargeResponse",
+    "AccountQueryReply": "ptx:AccountQueryReply",
+    "ActivateAndRegisterRequest": "ptx:ActivateAndRegisterRequest",
+    "Address": "ptx:Address",
+    "AccountQueryRequest": "ptx:AccountQueryRequest",
+    "ComputeRewardsRequest": "ptx:ComputeRewardsRequest",
+    "GuestTokenResponse": "ptx:GuestTokenResponse",
+    "CardInfo": "ptx:CardInfo",
+    "WalletContent": "ptx:WalletContent",
+    "TransactionReply": "ptx:TransactionReply",
+    "TransactionHistoryReply": "ptx:TransactionHistoryReply",
+    "GuestTokenRequest": "ptx:GuestTokenRequest",
+    "WalletBalance": "ptx:WalletBalance",
+    "PostAndAccrueRequest": "ptx:PostAndAccrueRequest",
+    "GiftRequest": "ptx:GiftRequest",
+    "merchantId": {
+      "@id": "ptx:merchant_id",
+      "@type": "xsd:integer"
+    },
+    "cardTemplateCode": {
+      "@id": "ptx:card_template_code",
+      "@type": "xsd:string"
+    },
+    "enforceUniqueFields": {
+      "@id": "ptx:enforce_unique_fields",
+      "@container": "@set"
+    },
+    "setUserFields": {
+      "@id": "ptx:set_user_fields",
+      "@type": "@id"
+    },
+    "setAccountFields": {
+      "@id": "ptx:set_account_fields",
+      "@type": "@id"
+    },
+    "sendSmsVerification": {
+      "@id": "ptx:send_sms_verification",
+      "@type": "xsd:boolean"
+    },
+    "smsVerificationCode": {
+      "@id": "ptx:sms_verification_code",
+      "@type": "xsd:string"
+    },
+    "code": {
+      "@id": "ptx:code",
+      "@type": "xsd:string"
+    },
+    "name": {
+      "@id": "schema:name"
+    },
+    "address": {
+      "@id": "schema:address"
+    },
+    "latitude": {
+      "@id": "schema:latitude"
+    },
+    "longitude": {
+      "@id": "schema:longitude"
+    },
+    "hoursOfOperation": {
+      "@id": "ptx:hours_of_operation",
+      "@type": "xsd:string"
+    },
+    "distance": {
+      "@id": "ptx:distance",
+      "@type": "xsd:double"
+    },
+    "metadata": {
+      "@id": "ptx:metadata",
+      "@type": "@id"
+    },
+    "storeCode": {
+      "@id": "ptx:store_code",
+      "@type": "xsd:string"
+    },
+    "programId": {
+      "@id": "ptx:program_id",
+      "@type": "xsd:string"
+    },
+    "terminal": {
+      "@id": "ptx:terminal",
+      "@type": "xsd:string"
+    },
+    "operator": {
+      "@id": "ptx:operator",
+      "@type": "xsd:string"
+    },
+    "posTransactionId": {
+      "@id": "ptx:pos_transaction_id",
+      "@type": "xsd:string"
+    },
+    "result": {
+      "@id": "ptx:result",
+      "@type": "xsd:string"
+    },
+    "username": {
+      "@id": "ptx:username",
+      "@type": "xsd:string"
+    },
+    "accountStatus": {
+      "@id": "ptx:account_status",
+      "@type": "xsd:string"
+    },
+    "queryCardStatus": {
+      "@id": "ptx:query_card_status",
+      "@type": "xsd:string"
+    },
+    "registrationStatus": {
+      "@id": "ptx:registration_status",
+      "@type": "xsd:string"
+    },
+    "tierCode": {
+      "@id": "ptx:tier_code",
+      "@type": "xsd:string"
+    },
+    "primaryCard": {
+      "@id": "ptx:primary_card",
+      "@type": "xsd:string"
+    },
+    "additionalCards": {
+      "@id": "ptx:additional_cards",
+      "@container": "@set"
+    },
+    "walletBalances": {
+      "@id": "ptx:wallet_balances",
+      "@container": "@set",
+      "@type": "@id"
+    },
+    "paymentMethods": {
+      "@id": "ptx:payment_methods",
+      "@container": "@set",
+      "@type": "@id"
+    },
+    "type": {
+      "@id": "ptx:type",
+      "@type": "xsd:string"
+    },
+    "cardholderName": {
+      "@id": "ptx:cardholder_name",
+      "@type": "xsd:string"
+    },
+    "lastFour": {
+      "@id": "ptx:last_four",
+      "@type": "xsd:string"
+    },
+    "defaultUsages": {
+      "@id": "ptx:default_usages",
+      "@container": "@set"
+    },
+    "pxTransactionId": {
+      "@id": "ptx:px_transaction_id",
+      "@type": "xsd:string"
+    },
+    "printedCardNumber": {
+      "@id": "ptx:printed_card_number",
+      "@type": "xsd:string"
+    },
+    "currentBalance": {
+      "@id": "ptx:current_balance",
+      "@type": "xsd:double"
+    },
+    "errorCode": {
+      "@id": "ptx:error_code",
+      "@type": "xsd:string"
+    },
+    "errorMessage": {
+      "@id": "ptx:error_message",
+      "@type": "xsd:string"
+    },
+    "accountId": {
+      "@id": "ptx:account_id",
+      "@type": "xsd:integer"
+    },
+    "errorsByField": {
+      "@id": "ptx:errors_by_field",
+      "@type": "@id"
+    },
+    "headerInfo": {
+      "@id": "ptx:header_info",
+      "@type": "xsd:string"
+    },
+    "cardInfo": {
+      "@id": "ptx:card_info",
+      "@type": "xsd:string"
+    },
+    "addWalletContents": {
+      "@id": "ptx:add_wallet_contents",
+      "@container": "@set",
+      "@type": "@id"
+    },
+    "redeemWalletContents": {
+      "@id": "ptx:redeem_wallet_contents",
+      "@container": "@set",
+      "@type": "@id"
+    },
+    "locations": {
+      "@id": "ptx:locations",
+      "@container": "@set",
+      "@type": "@id"
+    },
+    "autoActivateCard": {
+      "@id": "ptx:auto_activate_card",
+      "@type": "xsd:boolean"
+    },
+    "userFields": {
+      "@id": "ptx:user_fields",
+      "@type": "@id"
+    },
+    "primaryCardNumbers": {
+      "@id": "ptx:primary_card_numbers",
+      "@container": "@set"
+    },
+    "accountIds": {
+      "@id": "ptx:account_ids",
+      "@container": "@set"
+    },
+    "number": {
+      "@id": "ptx:number",
+      "@type": "xsd:string"
+    },
+    "openTime": {
+      "@id": "ptx:open_time",
+      "@type": "xsd:dateTime"
+    },
+    "subtotal": {
+      "@id": "ptx:subtotal",
+      "@type": "xsd:double"
+    },
+    "items": {
+      "@id": "ptx:items",
+      "@container": "@set",
+      "@type": "@id"
+    },
+    "itemCode": {
+      "@id": "ptx:item_code",
+      "@type": "xsd:string"
+    },
+    "quantity": {
+      "@id": "ptx:quantity",
+      "@type": "xsd:double"
+    },
+    "price": {
+      "@id": "ptx:price",
+      "@type": "xsd:double"
+    },
+    "config": {
+      "@id": "ptx:config",
+      "@type": "@id"
+    },
+    "fields": {
+      "@id": "ptx:fields",
+      "@container": "@set",
+      "@type": "@id"
+    },
+    "label": {
+      "@id": "ptx:label",
+      "@type": "xsd:string"
+    },
+    "required": {
+      "@id": "ptx:required",
+      "@type": "xsd:boolean"
+    },
+    "pattern": {
+      "@id": "ptx:pattern",
+      "@type": "xsd:string"
+    },
+    "status": {
+      "@id": "ptx:status",
+      "@type": "xsd:string"
+    },
+    "walletContents": {
+      "@id": "ptx:wallet_contents",
+      "@container": "@set",
+      "@type": "@id"
+    },
+    "amount": {
+      "@id": "ptx:amount",
+      "@type": "xsd:double"
+    },
+    "paymentMethod": {
+      "@id": "ptx:payment_method",
+      "@type": "@id"
+    },
+    "token": {
+      "@id": "ptx:token",
+      "@type": "xsd:string"
+    },
+    "customerName": {
+      "@id": "ptx:customer_name",
+      "@type": "xsd:string"
+    },
+    "itemDiscounts": {
+      "@id": "ptx:item_discounts",
+      "@container": "@set",
+      "@type": "@id"
+    },
+    "discountAmount": {
+      "@id": "ptx:discount_amount",
+      "@type": "xsd:double"
+    },
+    "rewardName": {
+      "@id": "ptx:reward_name",
+      "@type": "xsd:string"
+    },
+    "subtotalDiscounts": {
+      "@id": "ptx:subtotal_discounts",
+      "@container": "@set",
+      "@type": "@id"
+    },
+    "receiptText": {
+      "@id": "ptx:receipt_text",
+      "@type": "xsd:string"
+    },
+    "cardType": {
+      "@id": "ptx:card_type",
+      "@type": "xsd:string"
+    },
+    "processorAuthCode": {
+      "@id": "ptx:processor_auth_code",
+      "@type": "xsd:string"
+    },
+    "transactionState": {
+      "@id": "ptx:transaction_state",
+      "@type": "xsd:string"
+    },
+    "accounts": {
+      "@id": "ptx:accounts",
+      "@container": "@set",
+      "@type": "@id"
+    },
+    "fieldValues": {
+      "@id": "ptx:field_values",
+      "@type": "@id"
+    },
+    "address1": {
+      "@id": "ptx:address1",
+      "@type": "xsd:string"
+    },
+    "address2": {
+      "@id": "ptx:address2",
+      "@type": "xsd:string"
+    },
+    "city": {
+      "@id": "ptx:city",
+      "@type": "xsd:string"
+    },
+    "stateProvince": {
+      "@id": "ptx:state_province",
+      "@type": "xsd:string"
+    },
+    "postalCode": {
+      "@id": "ptx:postal_code",
+      "@type": "xsd:string"
+    },
+    "country": {
+      "@id": "ptx:country",
+      "@type": "xsd:string"
+    },
+    "pageSize": {
+      "@id": "ptx:page_size",
+      "@type": "xsd:integer"
+    },
+    "accountQueries": {
+      "@id": "ptx:account_queries",
+      "@container": "@set",
+      "@type": "@id"
+    },
+    "phone": {
+      "@id": "schema:telephone"
+    },
+    "email": {
+      "@id": "schema:email"
+    },
+    "firstName": {
+      "@id": "ptx:first_name",
+      "@type": "xsd:string"
+    },
+    "lastName": {
+      "@id": "ptx:last_name",
+      "@type": "xsd:string"
+    },
+    "check": {
+      "@id": "ptx:check",
+      "@type": "xsd:string"
+    },
+    "rewardSelectionMode": {
+      "@id": "ptx:reward_selection_mode",
+      "@type": "@id"
+    },
+    "mode": {
+      "@id": "ptx:mode",
+      "@type": "xsd:string"
+    },
+    "access_token": {
+      "@id": "ptx:access_token",
+      "@type": "xsd:string"
+    },
+    "token_type": {
+      "@id": "ptx:token_type",
+      "@type": "xsd:string"
+    },
+    "expires_in": {
+      "@id": "ptx:expires_in",
+      "@type": "xsd:integer"
+    },
+    "refresh_token": {
+      "@id": "ptx:refresh_token",
+      "@type": "xsd:string"
+    },
+    "scope": {
+      "@id": "ptx:scope",
+      "@type": "xsd:string"
+    },
+    "magstripe": {
+      "@id": "ptx:magstripe",
+      "@type": "xsd:string"
+    },
+    "walletCode": {
+      "@id": "ptx:wallet_code",
+      "@type": "xsd:string"
+    },
+    "expiration": {
+      "@id": "ptx:expiration",
+      "@type": "xsd:date"
+    },
+    "maskedCardNumber": {
+      "@id": "ptx:masked_card_number",
+      "@type": "xsd:string"
+    },
+    "enrollmentDate": {
+      "@id": "ptx:enrollment_date",
+      "@type": "xsd:date"
+    },
+    "walletInfo": {
+      "@id": "ptx:wallet_info",
+      "@container": "@set",
+      "@type": "@id"
+    },
+    "transactions": {
+      "@id": "ptx:transactions",
+      "@container": "@set",
+      "@type": "@id"
+    },
+    "transactionId": {
+      "@id": "ptx:transaction_id",
+      "@type": "xsd:string"
+    },
+    "datetime": {
+      "@id": "ptx:datetime",
+      "@type": "xsd:dateTime"
+    },
+    "balance": {
+      "@id": "ptx:balance",
+      "@type": "xsd:double"
+    },
+    "grant_type": {
+      "@id": "ptx:grant_type",
+      "@type": "xsd:string"
+    },
+    "password": {
+      "@id": "ptx:password",
+      "@type": "xsd:string"
+    },
+    "receiptSettings": {
+      "@id": "ptx:receipt_settings",
+      "@type": "@id"
+    },
+    "checkNumber": {
+      "@id": "ptx:check_number",
+      "@type": "xsd:string"
+    },
+    "cashier": {
+      "@id": "ptx:cashier",
+      "@type": "xsd:string"
+    },
+    "terminalId": {
+      "@id": "ptx:terminal_id",
+      "@type": "xsd:string"
+    },
+    "externalTransactionId": {
+      "@id": "ptx:external_transaction_id",
+      "@type": "xsd:string"
+    },
+    "tip": {
+      "@id": "ptx:tip",
+      "@type": "xsd:double"
+    }
+  }
+}

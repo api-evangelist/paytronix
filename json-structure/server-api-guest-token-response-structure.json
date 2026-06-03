@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/paytronix/refs/heads/main/json-structure/server-api-guest-token-response-structure.json",
+  "name": "GuestTokenResponse",
+  "description": "GuestTokenResponse schema from Paytronix Server API",
+  "type": "object",
+  "properties": {
+    "access_token": {
+      "type": "string",
+      "example": "9f8c1a2b3c4d5e6f"
+    },
+    "token_type": {
+      "type": "string",
+      "example": "bearer"
+    },
+    "expires_in": {
+      "type": "int32",
+      "example": 1800
+    },
+    "refresh_token": {
+      "type": "string",
+      "example": "1a2b3c4d5e6f7a8b"
+    },
+    "scope": {
+      "type": "string",
+      "example": "user_read account_read"
+    },
+    "username": {
+      "type": "string",
+      "example": "jdoe"
+    }
+  }
+}

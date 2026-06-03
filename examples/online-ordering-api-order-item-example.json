@@ -1,0 +1,12 @@
+{
+  "menuItemId": "4b96f1bafc9f100ca79231ef",
+  "name": "Chicken Burrito",
+  "quantity": 2,
+  "price": 9.5,
+  "options": [
+    {
+      "name": "string",
+      "price": 0
+    }
+  ]
+}

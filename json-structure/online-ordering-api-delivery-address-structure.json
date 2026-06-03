@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/paytronix/refs/heads/main/json-structure/online-ordering-api-delivery-address-structure.json",
+  "name": "DeliveryAddress",
+  "description": "DeliveryAddress schema from Paytronix Online Ordering API",
+  "type": "object",
+  "properties": {
+    "address1": {
+      "type": "string",
+      "example": "456 Elm St"
+    },
+    "address2": {
+      "type": "string"
+    },
+    "city": {
+      "type": "string",
+      "example": "Boston"
+    },
+    "state": {
+      "type": "string",
+      "example": "MA"
+    },
+    "postalCode": {
+      "type": "string",
+      "example": "02110"
+    }
+  }
+}

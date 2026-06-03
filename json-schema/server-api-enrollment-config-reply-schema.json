@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "EnrollmentConfigReply",
+  "description": "EnrollmentConfigReply schema from Paytronix Server API",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/paytronix/refs/heads/main/json-schema/server-api-enrollment-config-reply-schema.json",
+  "type": "object",
+  "properties": {
+    "result": {
+      "type": "string",
+      "example": "success"
+    },
+    "config": {
+      "type": "object",
+      "properties": {
+        "fields": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "example": "email"
+              },
+              "type": {
+                "type": "string",
+                "example": "string"
+              },
+              "label": {
+                "type": "string",
+                "example": "Email Address"
+              },
+              "required": {
+                "type": "boolean",
+                "example": true
+              },
+              "pattern": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

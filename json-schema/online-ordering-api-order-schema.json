@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Order",
+  "description": "Order schema from Paytronix Online Ordering API",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/paytronix/refs/heads/main/json-schema/online-ordering-api-order-schema.json",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "example": "5f1c2d3e4a5b6c7d8e9f0a1b"
+    },
+    "restaurantId": {
+      "type": "string",
+      "example": "4b96f1bafc9f100ca79231ef"
+    },
+    "items": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/OrderItem"
+      }
+    },
+    "customer": {
+      "$ref": "#/components/schemas/Customer"
+    },
+    "orderMethod": {
+      "type": "string",
+      "example": "online_app"
+    },
+    "tip": {
+      "type": "number",
+      "example": 3.0
+    },
+    "total": {
+      "type": "number",
+      "example": 22.0
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "created",
+        "submitted",
+        "paid",
+        "in_progress",
+        "completed",
+        "cancelled"
+      ],
+      "example": "submitted"
+    },
+    "deliveryAddress": {
+      "$ref": "#/components/schemas/DeliveryAddress"
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

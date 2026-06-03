@@ -1,0 +1,32 @@
+{
+  "restaurantId": "4b96f1bafc9f100ca79231ef",
+  "items": [
+    {
+      "menuItemId": "4b96f1bafc9f100ca79231ef",
+      "name": "Chicken Burrito",
+      "quantity": 2,
+      "price": 9.5,
+      "options": [
+        {
+          "name": "string",
+          "price": 0
+        }
+      ]
+    }
+  ],
+  "customer": {
+    "firstName": "Jane",
+    "lastName": "Doe",
+    "email": "jane@example.com",
+    "phone": "+16175551234"
+  },
+  "orderMethod": "online_app",
+  "tip": 3.0,
+  "deliveryAddress": {
+    "address1": "456 Elm St",
+    "address2": "string",
+    "city": "Boston",
+    "state": "MA",
+    "postalCode": "02110"
+  }
+}

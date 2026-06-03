@@ -1,0 +1,628 @@
+openapi: 3.0.3
+info:
+  title: Paytronix Online Ordering API
+  version: '1.0'
+  description: >-
+    The Paytronix Online Ordering API (Open Dining) powers ordering experiences
+    across in-store, online web, online app, call-in, call-center, and
+    drive-through order methods. It exposes restaurant/location discovery, menu
+    retrieval, fuzzy and geospatial search, and order creation, retrieval, and
+    submission, connecting ordering systems to the broader Paytronix loyalty and
+    guest engagement platform. This specification was generated from the public
+    Open Dining documentation at http://docs.opendining.net and the Online
+    Ordering Resource Center at https://support.opendining.net.
+  contact:
+    name: Kin Lane
+    email: kin@apievangelist.com
+  x-generated-from: documentation
+  x-source-url: http://docs.opendining.net/api/
+  x-last-validated: '2026-06-03'
+servers:
+- url: https://api.opendining.net
+  description: Open Dining Online Ordering API base URL.
+tags:
+- name: Restaurants
+  description: Restaurant and location discovery.
+- name: Menu Items
+  description: Menu item retrieval.
+- name: Orders
+  description: Order creation, retrieval, and submission.
+- name: Search
+  description: Geospatial and full-text search across restaurants and menu items.
+paths:
+  /restaurants/{restaurantId}:
+    get:
+      operationId: getRestaurant
+      summary: Get Restaurant
+      description: Retrieve a single restaurant/location object by its identifier.
+      tags: [Restaurants]
+      parameters:
+      - name: restaurantId
+        in: path
+        required: true
+        description: Restaurant/location identifier.
+        schema: {type: string}
+      responses:
+        '200':
+          description: Restaurant object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Restaurant'
+              examples:
+                GetRestaurant200Example:
+                  summary: Default getRestaurant 200 response
+                  x-microcks-default: true
+                  value:
+                    id: 4b96f1bafc9f100ca79231ef
+                    name: Taqueria Downtown
+                    distance: 1.2
+                    coordinates:
+                      lat: 40.0
+                      lon: -81.0
+                    address: 123 Main St
+                    city: Boston
+                    state: MA
+                    postalCode: '02110'
+                    phone: '+16175551234'
+                    website: 'https://example.com'
+                    organizationId: string
+                    imageUrl: string
+                    description: string
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /menuitems/{menuItemId}:
+    get:
+      operationId: getMenuItem
+      summary: Get Menu Item
+      description: >-
+        Retrieve a single menu item by identifier, including its prices and
+        options. Only GET is supported to serve consumer-facing applications.
+      tags: [Menu Items]
+      parameters:
+      - name: menuItemId
+        in: path
+        required: true
+        description: Menu item identifier.
+        schema: {type: string, example: 4b96f1bafc9f100ca79231ef}
+      responses:
+        '200':
+          description: Menu item object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MenuItem'
+              examples:
+                GetMenuItem200Example:
+                  summary: Default getMenuItem 200 response
+                  x-microcks-default: true
+                  value:
+                    id: 4b96f1bafc9f100ca79231ef
+                    name: Chicken Burrito
+                    description: 'Grilled chicken, rice, beans, salsa'
+                    imageUrl: string
+                    prices:
+                    - name: Regular
+                      price: 9.50
+                    options:
+                    - name: Add Guacamole
+                      price: 1.50
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /search/restaurants:
+    get:
+      operationId: searchRestaurants
+      summary: Search Restaurants
+      description: >-
+        Search restaurants by location and optional full-text query, returning a
+        count, a results array, and applicable facets.
+      tags: [Search]
+      parameters:
+      - name: lat
+        in: query
+        required: true
+        description: Latitude of the search center.
+        schema: {type: number, format: double, example: 40}
+      - name: lon
+        in: query
+        required: true
+        description: Longitude of the search center.
+        schema: {type: number, format: double, example: -81}
+      - name: q
+        in: query
+        required: false
+        description: Fuzzy, weighted full-text search query.
+        schema: {type: string, example: burrito}
+      - name: name
+        in: query
+        required: false
+        description: Trailing-wildcard search on the business name.
+        schema: {type: string}
+      - name: tags
+        in: query
+        required: false
+        description: Space-separated, URL-encoded tags to restrict results by category.
+        schema: {type: string}
+      - name: limit
+        in: query
+        required: false
+        description: Maximum number of results (default 10, max 50).
+        schema: {type: integer, default: 10, maximum: 50}
+      - name: skip
+        in: query
+        required: false
+        description: Offset for pagination.
+        schema: {type: integer, default: 0}
+      - name: sort
+        in: query
+        required: false
+        description: Sort order, by distance (default) or price.
+        schema: {type: string, enum: [distance, price], default: distance}
+      - name: show_closed
+        in: query
+        required: false
+        description: When true, include closed restaurants.
+        schema: {type: boolean, default: false}
+      responses:
+        '200':
+          description: Restaurant search results.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestaurantSearchResults'
+              examples:
+                SearchRestaurants200Example:
+                  summary: Default searchRestaurants 200 response
+                  x-microcks-default: true
+                  value:
+                    count: 12
+                    results:
+                    - id: 4b96f1bafc9f100ca79231ef
+                      name: Taqueria Downtown
+                      distance: 1.2
+                      coordinates:
+                        lat: 40.0
+                        lon: -81.0
+                      address: 123 Main St
+                      city: Boston
+                      state: MA
+                      postalCode: '02110'
+                      phone: '+16175551234'
+                      website: 'https://example.com'
+                      organizationId: string
+                      imageUrl: string
+                      description: string
+                    facets: {}
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /search/menuitems:
+    get:
+      operationId: searchMenuItems
+      summary: Search Menu Items
+      description: >-
+        Search menu items by location and optional full-text query, returning a
+        count, a results array (each with a prices array), and applicable facets.
+      tags: [Search]
+      parameters:
+      - name: lat
+        in: query
+        required: true
+        description: Latitude of the search center.
+        schema: {type: number, format: double, example: 40}
+      - name: lon
+        in: query
+        required: true
+        description: Longitude of the search center.
+        schema: {type: number, format: double, example: -81}
+      - name: q
+        in: query
+        required: false
+        description: Fuzzy, weighted full-text search query.
+        schema: {type: string, example: burrito}
+      - name: name
+        in: query
+        required: false
+        description: Trailing-wildcard search on the item name.
+        schema: {type: string}
+      - name: tags
+        in: query
+        required: false
+        description: Space-separated, URL-encoded tags to restrict results by category.
+        schema: {type: string}
+      - name: limit
+        in: query
+        required: false
+        description: Maximum number of results (default 10, max 50).
+        schema: {type: integer, default: 10, maximum: 50}
+      - name: skip
+        in: query
+        required: false
+        description: Offset for pagination.
+        schema: {type: integer, default: 0}
+      - name: sort
+        in: query
+        required: false
+        description: Sort order, by distance (default) or price.
+        schema: {type: string, enum: [distance, price], default: distance}
+      - name: show_closed
+        in: query
+        required: false
+        description: When true, include unavailable items.
+        schema: {type: boolean, default: false}
+      responses:
+        '200':
+          description: Menu item search results.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MenuItemSearchResults'
+              examples:
+                SearchMenuItems200Example:
+                  summary: Default searchMenuItems 200 response
+                  x-microcks-default: true
+                  value:
+                    count: 34
+                    results:
+                    - id: 4b96f1bafc9f100ca79231ef
+                      name: Chicken Burrito
+                      description: 'Grilled chicken, rice, beans, salsa'
+                      imageUrl: string
+                      prices:
+                      - name: Regular
+                        price: 9.50
+                      options:
+                      - name: Add Guacamole
+                        price: 1.50
+                    facets: {}
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /orders:
+    post:
+      operationId: createOrder
+      summary: Create Order
+      description: >-
+        Create a new order for a restaurant, including line items, the customer,
+        an optional tip, and an optional delivery address.
+      tags: [Orders]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrderInput'
+            examples:
+              CreateOrderRequestExample:
+                summary: Default createOrder request
+                x-microcks-default: true
+                value:
+                  restaurantId: 4b96f1bafc9f100ca79231ef
+                  items:
+                  - menuItemId: 4b96f1bafc9f100ca79231ef
+                    name: Chicken Burrito
+                    quantity: 2
+                    price: 9.50
+                    options:
+                    - name: string
+                      price: 0
+                  customer:
+                    firstName: Jane
+                    lastName: Doe
+                    email: jane@example.com
+                    phone: '+16175551234'
+                  orderMethod: online_app
+                  tip: 3.00
+                  deliveryAddress:
+                    address1: 456 Elm St
+                    address2: string
+                    city: Boston
+                    state: MA
+                    postalCode: '02110'
+      responses:
+        '201':
+          description: Order created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+              examples:
+                CreateOrder201Example:
+                  summary: Default createOrder 201 response
+                  x-microcks-default: true
+                  value:
+                    id: 5f1c2d3e4a5b6c7d8e9f0a1b
+                    restaurantId: 4b96f1bafc9f100ca79231ef
+                    items:
+                    - menuItemId: 4b96f1bafc9f100ca79231ef
+                      name: Chicken Burrito
+                      quantity: 2
+                      price: 9.50
+                      options:
+                      - name: string
+                        price: 0
+                    customer:
+                      firstName: Jane
+                      lastName: Doe
+                      email: jane@example.com
+                      phone: '+16175551234'
+                    orderMethod: online_app
+                    tip: 3.00
+                    total: 22.00
+                    status: submitted
+                    deliveryAddress:
+                      address1: 456 Elm St
+                      address2: string
+                      city: Boston
+                      state: MA
+                      postalCode: '02110'
+                    createdAt: '2026-06-03T12:00:00Z'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /orders/{orderId}:
+    get:
+      operationId: getOrder
+      summary: Get Order
+      description: Retrieve the details and current status of a given order by its identifier.
+      tags: [Orders]
+      parameters:
+      - name: orderId
+        in: path
+        required: true
+        description: Order identifier.
+        schema: {type: string}
+      responses:
+        '200':
+          description: Order object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+              examples:
+                GetOrder200Example:
+                  summary: Default getOrder 200 response
+                  x-microcks-default: true
+                  value:
+                    id: 5f1c2d3e4a5b6c7d8e9f0a1b
+                    restaurantId: 4b96f1bafc9f100ca79231ef
+                    items:
+                    - menuItemId: 4b96f1bafc9f100ca79231ef
+                      name: Chicken Burrito
+                      quantity: 2
+                      price: 9.50
+                      options:
+                      - name: string
+                        price: 0
+                    customer:
+                      firstName: Jane
+                      lastName: Doe
+                      email: jane@example.com
+                      phone: '+16175551234'
+                    orderMethod: online_app
+                    tip: 3.00
+                    total: 22.00
+                    status: submitted
+                    deliveryAddress:
+                      address1: 456 Elm St
+                      address2: string
+                      city: Boston
+                      state: MA
+                      postalCode: '02110'
+                    createdAt: '2026-06-03T12:00:00Z'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    put:
+      operationId: updateOrder
+      summary: Update Order
+      description: Update an existing order, for example to add items or submit it for payment.
+      tags: [Orders]
+      parameters:
+      - name: orderId
+        in: path
+        required: true
+        description: Order identifier.
+        schema: {type: string}
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrderInput'
+            examples:
+              UpdateOrderRequestExample:
+                summary: Default updateOrder request
+                x-microcks-default: true
+                value:
+                  restaurantId: 4b96f1bafc9f100ca79231ef
+                  items:
+                  - menuItemId: 4b96f1bafc9f100ca79231ef
+                    name: Chicken Burrito
+                    quantity: 2
+                    price: 9.50
+                    options:
+                    - name: string
+                      price: 0
+                  customer:
+                    firstName: Jane
+                    lastName: Doe
+                    email: jane@example.com
+                    phone: '+16175551234'
+                  orderMethod: online_app
+                  tip: 3.00
+                  deliveryAddress:
+                    address1: 456 Elm St
+                    address2: string
+                    city: Boston
+                    state: MA
+                    postalCode: '02110'
+      responses:
+        '200':
+          description: Updated order object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+              examples:
+                UpdateOrder200Example:
+                  summary: Default updateOrder 200 response
+                  x-microcks-default: true
+                  value:
+                    id: 5f1c2d3e4a5b6c7d8e9f0a1b
+                    restaurantId: 4b96f1bafc9f100ca79231ef
+                    items:
+                    - menuItemId: 4b96f1bafc9f100ca79231ef
+                      name: Chicken Burrito
+                      quantity: 2
+                      price: 9.50
+                      options:
+                      - name: string
+                        price: 0
+                    customer:
+                      firstName: Jane
+                      lastName: Doe
+                      email: jane@example.com
+                      phone: '+16175551234'
+                    orderMethod: online_app
+                    tip: 3.00
+                    total: 22.00
+                    status: submitted
+                    deliveryAddress:
+                      address1: 456 Elm St
+                      address2: string
+                      city: Boston
+                      state: MA
+                      postalCode: '02110'
+                    createdAt: '2026-06-03T12:00:00Z'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    Coordinates:
+      type: object
+      properties:
+        lat: {type: number, format: double, example: 40.0}
+        lon: {type: number, format: double, example: -81.0}
+    Restaurant:
+      type: object
+      properties:
+        id: {type: string, example: 4b96f1bafc9f100ca79231ef}
+        name: {type: string, example: Taqueria Downtown}
+        distance: {type: number, example: 1.2}
+        coordinates: {$ref: '#/components/schemas/Coordinates'}
+        address: {type: string, example: 123 Main St}
+        city: {type: string, example: Boston}
+        state: {type: string, example: MA}
+        postalCode: {type: string, example: '02110'}
+        phone: {type: string, example: '+16175551234'}
+        website: {type: string, example: 'https://example.com'}
+        organizationId: {type: string}
+        imageUrl: {type: string}
+        description: {type: string}
+    MenuItem:
+      type: object
+      properties:
+        id: {type: string, example: 4b96f1bafc9f100ca79231ef}
+        name: {type: string, example: Chicken Burrito}
+        description: {type: string, example: 'Grilled chicken, rice, beans, salsa'}
+        imageUrl: {type: string}
+        prices:
+          type: array
+          items:
+            type: object
+            properties:
+              name: {type: string, example: Regular}
+              price: {type: number, example: 9.50}
+        options:
+          type: array
+          items:
+            type: object
+            properties:
+              name: {type: string, example: Add Guacamole}
+              price: {type: number, example: 1.50}
+    Facets:
+      type: object
+      description: Applicable search facets such as tags for refining a search.
+      additionalProperties: true
+    RestaurantSearchResults:
+      type: object
+      properties:
+        count: {type: integer, example: 12}
+        results:
+          type: array
+          items: {$ref: '#/components/schemas/Restaurant'}
+        facets: {$ref: '#/components/schemas/Facets'}
+    MenuItemSearchResults:
+      type: object
+      properties:
+        count: {type: integer, example: 34}
+        results:
+          type: array
+          items: {$ref: '#/components/schemas/MenuItem'}
+        facets: {$ref: '#/components/schemas/Facets'}
+    OrderItem:
+      type: object
+      properties:
+        menuItemId: {type: string, example: 4b96f1bafc9f100ca79231ef}
+        name: {type: string, example: Chicken Burrito}
+        quantity: {type: integer, example: 2}
+        price: {type: number, example: 9.50}
+        options:
+          type: array
+          items:
+            type: object
+            properties:
+              name: {type: string}
+              price: {type: number}
+    Customer:
+      type: object
+      properties:
+        firstName: {type: string, example: Jane}
+        lastName: {type: string, example: Doe}
+        email: {type: string, example: jane@example.com}
+        phone: {type: string, example: '+16175551234'}
+    DeliveryAddress:
+      type: object
+      properties:
+        address1: {type: string, example: 456 Elm St}
+        address2: {type: string}
+        city: {type: string, example: Boston}
+        state: {type: string, example: MA}
+        postalCode: {type: string, example: '02110'}
+    OrderInput:
+      type: object
+      required: [restaurantId, items, customer]
+      properties:
+        restaurantId: {type: string, example: 4b96f1bafc9f100ca79231ef}
+        items:
+          type: array
+          items: {$ref: '#/components/schemas/OrderItem'}
+        customer: {$ref: '#/components/schemas/Customer'}
+        orderMethod:
+          type: string
+          enum: [in_store, online_web, online_app, call_in, call_center, drive_through]
+          example: online_app
+        tip: {type: number, example: 3.00}
+        deliveryAddress: {$ref: '#/components/schemas/DeliveryAddress'}
+    Order:
+      type: object
+      properties:
+        id: {type: string, example: 5f1c2d3e4a5b6c7d8e9f0a1b}
+        restaurantId: {type: string, example: 4b96f1bafc9f100ca79231ef}
+        items:
+          type: array
+          items: {$ref: '#/components/schemas/OrderItem'}
+        customer: {$ref: '#/components/schemas/Customer'}
+        orderMethod: {type: string, example: online_app}
+        tip: {type: number, example: 3.00}
+        total: {type: number, example: 22.00}
+        status:
+          type: string
+          enum: [created, submitted, paid, in_progress, completed, cancelled]
+          example: submitted
+        deliveryAddress: {$ref: '#/components/schemas/DeliveryAddress'}
+        createdAt: {type: string, format: date-time}

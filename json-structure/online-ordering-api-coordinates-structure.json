@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/paytronix/refs/heads/main/json-structure/online-ordering-api-coordinates-structure.json",
+  "name": "Coordinates",
+  "description": "Coordinates schema from Paytronix Online Ordering API",
+  "type": "object",
+  "properties": {
+    "lat": {
+      "type": "double",
+      "example": 40.0
+    },
+    "lon": {
+      "type": "double",
+      "example": -81.0
+    }
+  }
+}

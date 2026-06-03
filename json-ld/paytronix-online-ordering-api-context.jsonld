@@ -1,0 +1,164 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "ptx": "https://developers.paytronix.com/schema/",
+    "schema": "https://schema.org/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "Facets": "ptx:Facets",
+    "Order": "ptx:Order",
+    "OrderItem": "ptx:OrderItem",
+    "MenuItemSearchResults": "ptx:MenuItemSearchResults",
+    "Customer": "ptx:Customer",
+    "OrderInput": "ptx:OrderInput",
+    "Coordinates": "ptx:Coordinates",
+    "MenuItem": "ptx:MenuItem",
+    "Restaurant": "ptx:Restaurant",
+    "DeliveryAddress": "ptx:DeliveryAddress",
+    "RestaurantSearchResults": "ptx:RestaurantSearchResults",
+    "id": {
+      "@id": "ptx:id",
+      "@type": "xsd:string"
+    },
+    "restaurantId": {
+      "@id": "ptx:restaurant_id",
+      "@type": "xsd:string"
+    },
+    "items": {
+      "@id": "ptx:items",
+      "@container": "@set",
+      "@type": "@id"
+    },
+    "customer": {
+      "@id": "ptx:customer",
+      "@type": "xsd:string"
+    },
+    "orderMethod": {
+      "@id": "ptx:order_method",
+      "@type": "xsd:string"
+    },
+    "tip": {
+      "@id": "ptx:tip",
+      "@type": "xsd:double"
+    },
+    "total": {
+      "@id": "ptx:total",
+      "@type": "xsd:double"
+    },
+    "status": {
+      "@id": "ptx:status",
+      "@type": "xsd:string"
+    },
+    "deliveryAddress": {
+      "@id": "ptx:delivery_address",
+      "@type": "xsd:string"
+    },
+    "createdAt": {
+      "@id": "schema:dateCreated"
+    },
+    "menuItemId": {
+      "@id": "ptx:menu_item_id",
+      "@type": "xsd:string"
+    },
+    "name": {
+      "@id": "schema:name"
+    },
+    "quantity": {
+      "@id": "ptx:quantity",
+      "@type": "xsd:integer"
+    },
+    "price": {
+      "@id": "ptx:price",
+      "@type": "xsd:double"
+    },
+    "options": {
+      "@id": "ptx:options",
+      "@container": "@set",
+      "@type": "@id"
+    },
+    "count": {
+      "@id": "ptx:count",
+      "@type": "xsd:integer"
+    },
+    "results": {
+      "@id": "ptx:results",
+      "@container": "@set",
+      "@type": "@id"
+    },
+    "facets": {
+      "@id": "ptx:facets",
+      "@type": "xsd:string"
+    },
+    "firstName": {
+      "@id": "ptx:first_name",
+      "@type": "xsd:string"
+    },
+    "lastName": {
+      "@id": "ptx:last_name",
+      "@type": "xsd:string"
+    },
+    "email": {
+      "@id": "schema:email"
+    },
+    "phone": {
+      "@id": "schema:telephone"
+    },
+    "lat": {
+      "@id": "ptx:lat",
+      "@type": "xsd:double"
+    },
+    "lon": {
+      "@id": "ptx:lon",
+      "@type": "xsd:double"
+    },
+    "description": {
+      "@id": "schema:description"
+    },
+    "imageUrl": {
+      "@id": "schema:image"
+    },
+    "prices": {
+      "@id": "ptx:prices",
+      "@container": "@set",
+      "@type": "@id"
+    },
+    "distance": {
+      "@id": "ptx:distance",
+      "@type": "xsd:double"
+    },
+    "coordinates": {
+      "@id": "ptx:coordinates",
+      "@type": "xsd:string"
+    },
+    "address": {
+      "@id": "schema:address"
+    },
+    "city": {
+      "@id": "ptx:city",
+      "@type": "xsd:string"
+    },
+    "state": {
+      "@id": "ptx:state",
+      "@type": "xsd:string"
+    },
+    "postalCode": {
+      "@id": "ptx:postal_code",
+      "@type": "xsd:string"
+    },
+    "website": {
+      "@id": "schema:url"
+    },
+    "organizationId": {
+      "@id": "ptx:organization_id",
+      "@type": "xsd:string"
+    },
+    "address1": {
+      "@id": "ptx:address1",
+      "@type": "xsd:string"
+    },
+    "address2": {
+      "@id": "ptx:address2",
+      "@type": "xsd:string"
+    }
+  }
+}

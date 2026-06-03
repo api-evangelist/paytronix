@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "OrderInput",
+  "description": "OrderInput schema from Paytronix Online Ordering API",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/paytronix/refs/heads/main/json-schema/online-ordering-api-order-input-schema.json",
+  "type": "object",
+  "properties": {
+    "restaurantId": {
+      "type": "string",
+      "example": "4b96f1bafc9f100ca79231ef"
+    },
+    "items": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/OrderItem"
+      }
+    },
+    "customer": {
+      "$ref": "#/components/schemas/Customer"
+    },
+    "orderMethod": {
+      "type": "string",
+      "enum": [
+        "in_store",
+        "online_web",
+        "online_app",
+        "call_in",
+        "call_center",
+        "drive_through"
+      ],
+      "example": "online_app"
+    },
+    "tip": {
+      "type": "number",
+      "example": 3.0
+    },
+    "deliveryAddress": {
+      "$ref": "#/components/schemas/DeliveryAddress"
+    }
+  },
+  "required": [
+    "restaurantId",
+    "items",
+    "customer"
+  ]
+}

@@ -1,0 +1,80 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: "Paytronix Online Ordering API \u2014 Restaurants"
+  description: "Online Ordering \u2014 Restaurants. 1 operations. Lead operation: Get Restaurant. Self-contained Naftiko capability covering one Paytronix business surface."
+  tags:
+  - Paytronix
+  - Online
+  - Restaurants
+  created: '2026-06-03'
+  modified: '2026-06-03'
+binds:
+- namespace: env
+  keys:
+    OPENDINING_API_KEY: OPENDINING_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: online-ordering-api-restaurants
+    baseUri: https://api.opendining.net
+    description: "Paytronix Online Ordering API \u2014 Restaurants. Self-contained, no shared references."
+    authentication:
+      type: apikey
+      key: X-Api-Key
+      value: '{{env.OPENDINING_API_KEY}}'
+      placement: header
+    resources:
+    - name: restaurants-restaurantid
+      path: /restaurants/{restaurantId}
+      operations:
+      - name: getRestaurant
+        method: GET
+        description: Get Restaurant
+        inputParameters:
+        - name: restaurantId
+          in: path
+          type: string
+          required: true
+          description: Restaurant/location identifier.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  exposes:
+  - type: rest
+    namespace: online-ordering-api-restaurants-rest
+    port: 8080
+    description: "REST adapter for Paytronix Online Ordering API \u2014 Restaurants. One Spectral-compliant resource per consumed operation, prefixed with /v1."
+    resources:
+    - path: /v1/restaurants/{restaurantid}
+      name: restaurants-restaurantid
+      description: REST surface for Get Restaurant.
+      operations:
+      - method: GET
+        name: getRestaurant
+        description: Get Restaurant
+        call: online-ordering-api-restaurants.getRestaurant
+        with:
+          restaurantId: rest.restaurantId
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: online-ordering-api-restaurants-mcp
+    port: 9090
+    transport: http
+    description: "MCP adapter for Paytronix Online Ordering API \u2014 Restaurants. One tool per consumed operation, routed inline through this capability's consumes block."
+    tools:
+    - name: get-restaurant
+      description: Get Restaurant
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: online-ordering-api-restaurants.getRestaurant
+      with:
+        restaurantId: tools.restaurantId
+      outputParameters:
+      - type: object
+        mapping: $.

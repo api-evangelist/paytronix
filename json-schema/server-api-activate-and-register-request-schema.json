@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ActivateAndRegisterRequest",
+  "description": "ActivateAndRegisterRequest schema from Paytronix Server API",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/paytronix/refs/heads/main/json-schema/server-api-activate-and-register-request-schema.json",
+  "type": "object",
+  "properties": {
+    "merchantId": {
+      "type": "integer",
+      "example": 1000
+    },
+    "printedCardNumber": {
+      "type": "string",
+      "example": "60490012345678"
+    },
+    "enforceUniqueFields": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "setUserFields": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "setAccountFields": {
+      "type": "object",
+      "additionalProperties": true
+    }
+  },
+  "required": [
+    "merchantId",
+    "printedCardNumber",
+    "setUserFields"
+  ]
+}

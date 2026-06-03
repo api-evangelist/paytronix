@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/paytronix/refs/heads/main/json-structure/server-api-gift-redeem-request-structure.json",
+  "name": "GiftRedeemRequest",
+  "description": "GiftRedeemRequest schema from Paytronix Server API",
+  "allOf": [
+    {
+      "$ref": "#/components/schemas/GiftRequest"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "tip": {
+          "type": "double",
+          "example": 5.0
+        }
+      }
+    }
+  ]
+}

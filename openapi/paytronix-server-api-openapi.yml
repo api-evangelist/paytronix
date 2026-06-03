@@ -1,0 +1,1707 @@
+openapi: 3.0.3
+info:
+  title: Paytronix Server API
+  version: '26.6'
+  description: >-
+    The Paytronix Server (PXS) REST API exposes the guest engagement platform
+    used by 1,800-plus restaurant and convenience-store brands. It spans loyalty
+    and stored-value accounts, enrollment and registration, transactions and
+    point accrual, gift card sales and redemption, stored-value recharge and
+    payment, store/location lookup, and guest authentication. All requests and
+    responses are JSON. Operations authenticate with an integration identifier
+    and secret sent as an HTTP Basic authorization header; guest-scoped
+    operations additionally use an OAuth bearer token issued by the OAuth
+    Service. This specification was generated from the public Paytronix
+    integration documentation at https://developers.paytronix.com.
+  contact:
+    name: Kin Lane
+    email: kin@apievangelist.com
+  x-generated-from: documentation
+  x-source-url: https://developers.paytronix.com/pxs_api_reference/index.html
+  x-last-validated: '2026-06-03'
+servers:
+- url: https://m{merchantId}.api.{server}.com/rest/{release}
+  description: >-
+    Paytronix REST base URL. The hostname embeds the merchant ID (mMID) and
+    the assigned server; the path embeds the release/version (e.g. 26.6).
+  variables:
+    merchantId:
+      default: '1000'
+      description: Paytronix-assigned merchant identifier (mMID).
+    server:
+      default: paytronix
+      description: Assigned Paytronix server name.
+    release:
+      default: '26.6'
+      description: API release/version the request body conforms to.
+tags:
+- name: OAuth
+  description: Guest authentication and token issuance.
+- name: Guest
+  description: Guest account and user information lookup and management.
+- name: Enrollment
+  description: Card creation, activation, registration, and demographic editing.
+- name: Transaction
+  description: Loyalty and stored-value transaction processing at the POS.
+- name: Gift
+  description: Gift card sale, reload, balance, redeem, and exchange.
+- name: Payment
+  description: Stored-value recharge, saved payment methods, and auto recharge.
+- name: Store
+  description: Store and location lookup and management.
+- name: Check
+  description: Check-based point accrual, reward computation, and posting.
+security:
+- basicAuth: []
+paths:
+  /oauth/requestGuestToken.json:
+    post:
+      operationId: requestGuestToken
+      summary: Request Guest Token
+      description: >-
+        Authenticate a guest in a merchant program and issue an OAuth access
+        token. Supports password, one_time_password, authorization_code,
+        refresh_token, and fieldset grant types.
+      tags: [OAuth]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GuestTokenRequest'
+            examples:
+              RequestGuestTokenRequestExample:
+                summary: Default requestGuestToken request
+                x-microcks-default: true
+                value:
+                  merchantId: 1000
+                  grant_type: password
+                  username: jdoe
+                  password: 's3cret'
+                  scope: 'user_read account_read'
+                  refresh_token: string
+      responses:
+        '200':
+          description: Token issued.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GuestTokenResponse'
+              examples:
+                RequestGuestToken200Example:
+                  summary: Default requestGuestToken 200 response
+                  x-microcks-default: true
+                  value:
+                    access_token: 9f8c1a2b3c4d5e6f
+                    token_type: bearer
+                    expires_in: 1800
+                    refresh_token: 1a2b3c4d5e6f7a8b
+                    scope: 'user_read account_read'
+                    username: jdoe
+        '400':
+          description: Invalid grant or credentials.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorReply'
+              examples:
+                RequestGuestToken400Example:
+                  summary: Default requestGuestToken 400 response
+                  x-microcks-default: true
+                  value:
+                    result: failure
+                    errorCode: invalid_grant
+                    errorMessage: The supplied credentials were not valid.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /guest/accountInformation.json:
+    get:
+      operationId: getAccountInformation
+      summary: Get Account Information
+      description: >-
+        Retrieve account status, card template, tier, and wallet balances for
+        an account identified by its printed card number.
+      tags: [Guest]
+      parameters:
+      - name: merchantId
+        in: query
+        required: true
+        description: Paytronix-assigned merchant identifier.
+        schema: {type: integer}
+      - name: printedCardNumber
+        in: query
+        required: true
+        description: Printed card number identifying the account.
+        schema: {type: string}
+      - name: accessFilterStoreGroupCode
+        in: query
+        required: false
+        description: Optional store group code used to filter access.
+        schema: {type: string}
+      responses:
+        '200':
+          description: Account information.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountInformationReply'
+              examples:
+                GetAccountInformation200Example:
+                  summary: Default getAccountInformation 200 response
+                  x-microcks-default: true
+                  value:
+                    result: success
+                    username: jdoe
+                    accountStatus: ACTIVE
+                    queryCardStatus: ACTIVE
+                    registrationStatus: REGISTERED
+                    cardTemplateCode: '1'
+                    tierCode: GOLD
+                    primaryCard: '60490012345678'
+                    additionalCards:
+                    - string
+                    walletBalances:
+                    - walletCode: '1'
+                      name: Points
+                      balance: 1250
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /guest/accountInformationById.json:
+    get:
+      operationId: getAccountInformationById
+      summary: Get Account Information By Account ID
+      description: Retrieve account information for an account identified by its account ID.
+      tags: [Guest]
+      parameters:
+      - name: merchantId
+        in: query
+        required: true
+        description: Paytronix-assigned merchant identifier.
+        schema: {type: integer}
+      - name: accountId
+        in: query
+        required: true
+        description: Paytronix account identifier.
+        schema: {type: integer, format: int64}
+      - name: accessFilterStoreGroupCode
+        in: query
+        required: false
+        description: Optional store group code used to filter access.
+        schema: {type: string}
+      responses:
+        '200':
+          description: Account information.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountInformationReply'
+              examples:
+                GetAccountInformationById200Example:
+                  summary: Default getAccountInformationById 200 response
+                  x-microcks-default: true
+                  value:
+                    result: success
+                    username: jdoe
+                    accountStatus: ACTIVE
+                    queryCardStatus: ACTIVE
+                    registrationStatus: REGISTERED
+                    cardTemplateCode: '1'
+                    tierCode: GOLD
+                    primaryCard: '60490012345678'
+                    additionalCards:
+                    - string
+                    walletBalances:
+                    - walletCode: '1'
+                      name: Points
+                      balance: 1250
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /guest/userInformation.json:
+    get:
+      operationId: getUserInformation
+      summary: Get User Information
+      description: >-
+        Retrieve demographic user fields, primary card numbers, related guests,
+        and account IDs for a registered user identified by username.
+      tags: [Guest]
+      parameters:
+      - name: merchantId
+        in: query
+        required: true
+        description: Paytronix-assigned merchant identifier.
+        schema: {type: integer}
+      - name: username
+        in: query
+        required: true
+        description: Registered guest username.
+        schema: {type: string}
+      responses:
+        '200':
+          description: User information.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserInformationReply'
+              examples:
+                GetUserInformation200Example:
+                  summary: Default getUserInformation 200 response
+                  x-microcks-default: true
+                  value:
+                    result: success
+                    userFields: &id001
+                      firstName: Jane
+                      lastName: Doe
+                      email: jane@example.com
+                    primaryCardNumbers:
+                    - string
+                    accountIds:
+                    - 0
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /guest/transactionHistory.json:
+    get:
+      operationId: getTransactionHistory
+      summary: Get Transaction History
+      description: >-
+        Retrieve wallet balances and a list of transactions (accruals,
+        redemptions, balance changes) for an account by printed card number.
+      tags: [Guest]
+      parameters:
+      - name: merchantId
+        in: query
+        required: true
+        description: Paytronix-assigned merchant identifier.
+        schema: {type: integer}
+      - name: printedCardNumber
+        in: query
+        required: true
+        description: Printed card number identifying the account.
+        schema: {type: string}
+      - name: dateStart
+        in: query
+        required: false
+        description: Inclusive start date for the history window.
+        schema: {type: string, format: date}
+      - name: dateEnd
+        in: query
+        required: false
+        description: Inclusive end date for the history window.
+        schema: {type: string, format: date}
+      - name: maxNumberOfResults
+        in: query
+        required: false
+        description: Maximum number of transactions to return.
+        schema: {type: integer}
+      - name: limitToBalanceAffectingTransactions
+        in: query
+        required: false
+        description: When true, only balance-affecting transactions are returned.
+        schema: {type: boolean}
+      responses:
+        '200':
+          description: Transaction history.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionHistoryReply'
+              examples:
+                GetTransactionHistory200Example:
+                  summary: Default getTransactionHistory 200 response
+                  x-microcks-default: true
+                  value:
+                    result: success
+                    walletInfo:
+                    - walletCode: '1'
+                      name: Points
+                      balance: 1250
+                    transactions:
+                    - transactionId: string
+                      datetime: '2026-06-03T12:00:00Z'
+                      type: ACCRUAL
+                      walletCode: string
+                      amount: 0
+                      balance: 0
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /guest/changeCardStatus.json:
+    post:
+      operationId: changeCardStatus
+      summary: Change Card Status
+      description: Enable or disable a card by setting its status to ACTIVE or DISABLED.
+      tags: [Guest]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChangeCardStatusRequest'
+            examples:
+              ChangeCardStatusRequestExample:
+                summary: Default changeCardStatus request
+                x-microcks-default: true
+                value:
+                  merchantId: 1000
+                  printedCardNumber: '60490012345678'
+                  status: DISABLED
+      responses:
+        '200':
+          description: Status change result.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SimpleReply'
+              examples:
+                ChangeCardStatus200Example:
+                  summary: Default changeCardStatus 200 response
+                  x-microcks-default: true
+                  value:
+                    result: success
+                    errorCode: string
+                    errorMessage: string
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /enrollment/createAndRegister.json:
+    post:
+      operationId: createAndRegister
+      summary: Create And Register Account
+      description: >-
+        Create, activate, and register a virtual card in one operation. Requires
+        a username and password in the user fields; optionally supports SMS
+        verification.
+      tags: [Enrollment]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateAndRegisterRequest'
+            examples:
+              CreateAndRegisterRequestExample:
+                summary: Default createAndRegister request
+                x-microcks-default: true
+                value:
+                  merchantId: 1000
+                  cardTemplateCode: '1'
+                  enforceUniqueFields: &id002 [email]
+                  setUserFields: &id003
+                    username: jdoe
+                    password: s3cret
+                    firstName: Jane
+                    lastName: Doe
+                    email: jane@example.com
+                  setAccountFields: {}
+                  sendSmsVerification: true
+                  smsVerificationCode: string
+      responses:
+        '200':
+          description: Enrollment result with account information.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EnrollmentReply'
+              examples:
+                CreateAndRegister200Example:
+                  summary: Default createAndRegister 200 response
+                  x-microcks-default: true
+                  value:
+                    result: success
+                    printedCardNumber: '60490012345678'
+                    accountId: 998877
+                    username: jdoe
+                    errorCode: string
+                    errorsByField: {}
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /enrollment/activateAndRegister.json:
+    post:
+      operationId: activateAndRegister
+      summary: Activate And Register Card
+      description: >-
+        Activate an existing printed card and register it simultaneously,
+        requiring username and password in the user fields.
+      tags: [Enrollment]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ActivateAndRegisterRequest'
+            examples:
+              ActivateAndRegisterRequestExample:
+                summary: Default activateAndRegister request
+                x-microcks-default: true
+                value:
+                  merchantId: 1000
+                  printedCardNumber: '60490012345678'
+                  enforceUniqueFields:
+                  - string
+                  setUserFields: {}
+                  setAccountFields: {}
+      responses:
+        '200':
+          description: Registration result with account information.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EnrollmentReply'
+              examples:
+                ActivateAndRegister200Example:
+                  summary: Default activateAndRegister 200 response
+                  x-microcks-default: true
+                  value:
+                    result: success
+                    printedCardNumber: '60490012345678'
+                    accountId: 998877
+                    username: jdoe
+                    errorCode: string
+                    errorsByField: {}
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /enrollment/enrollmentConfig.json:
+    get:
+      operationId: getEnrollmentConfig
+      summary: Get Enrollment Configuration
+      description: >-
+        Retrieve the field definitions (type, label, required, validation
+        rules) used to enroll guests in a program.
+      tags: [Enrollment]
+      parameters:
+      - name: merchantId
+        in: query
+        required: true
+        description: Paytronix-assigned merchant identifier.
+        schema: {type: integer}
+      - name: cardTemplateCode
+        in: query
+        required: true
+        description: Card template code identifying the program.
+        schema: {type: string}
+      responses:
+        '200':
+          description: Enrollment configuration.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EnrollmentConfigReply'
+              examples:
+                GetEnrollmentConfig200Example:
+                  summary: Default getEnrollmentConfig 200 response
+                  x-microcks-default: true
+                  value:
+                    result: success
+                    config:
+                      fields:
+                      - name: email
+                        type: string
+                        label: Email Address
+                        required: true
+                        pattern: string
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /transaction/activate.json:
+    post:
+      operationId: activateCard
+      summary: Activate Card
+      description: Activate a loyalty card, returning card details and enrollment date.
+      tags: [Transaction]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TransactionRequest'
+            examples:
+              ActivateCardRequestExample:
+                summary: Default activateCard request
+                x-microcks-default: true
+                value:
+                  headerInfo:
+                    merchantId: 1000
+                    storeCode: '1'
+                    programId: PX
+                    terminal: '1'
+                    operator: '100'
+                    posTransactionId: string
+                  cardInfo:
+                    printedCardNumber: '60490012345678'
+                    magstripe: string
+                    cardTemplateCode: '1'
+                  autoActivateCard: true
+      responses:
+        '200':
+          description: Transaction reply.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionReply'
+              examples:
+                ActivateCard200Example:
+                  summary: Default activateCard 200 response
+                  x-microcks-default: true
+                  value:
+                    result: success
+                    pxTransactionId: 'TXN-12345'
+                    maskedCardNumber: '******5678'
+                    enrollmentDate: '2026-06-03'
+                    walletBalances:
+                    - walletCode: '1'
+                      name: Points
+                      balance: 1250
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /transaction/balanceInquiry.json:
+    post:
+      operationId: balanceInquiry
+      summary: Balance Inquiry
+      description: Retrieve current stored-value balance and loyalty program information for a card.
+      tags: [Transaction]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TransactionRequest'
+            examples:
+              BalanceInquiryRequestExample:
+                summary: Default balanceInquiry request
+                x-microcks-default: true
+                value:
+                  headerInfo:
+                    merchantId: 1000
+                    storeCode: '1'
+                    programId: PX
+                    terminal: '1'
+                    operator: '100'
+                    posTransactionId: string
+                  cardInfo:
+                    printedCardNumber: '60490012345678'
+                    magstripe: string
+                    cardTemplateCode: '1'
+                  autoActivateCard: true
+      responses:
+        '200':
+          description: Transaction reply with balances.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionReply'
+              examples:
+                BalanceInquiry200Example:
+                  summary: Default balanceInquiry 200 response
+                  x-microcks-default: true
+                  value:
+                    result: success
+                    pxTransactionId: 'TXN-12345'
+                    maskedCardNumber: '******5678'
+                    enrollmentDate: '2026-06-03'
+                    walletBalances:
+                    - walletCode: '1'
+                      name: Points
+                      balance: 1250
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /transaction/addRedeem.json:
+    post:
+      operationId: addRedeem
+      summary: Add Or Redeem Wallet Value
+      description: >-
+        Add value to or redeem value from a card account using add and redeem
+        wallet content lists. Use programId SV for gift and LP for loyalty.
+      tags: [Transaction]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddRedeemRequest'
+            examples:
+              AddRedeemRequestExample:
+                summary: Default addRedeem request
+                x-microcks-default: true
+                value:
+                  headerInfo:
+                    merchantId: 1000
+                    storeCode: '1'
+                    programId: PX
+                    terminal: '1'
+                    operator: '100'
+                    posTransactionId: string
+                  cardInfo:
+                    printedCardNumber: '60490012345678'
+                    magstripe: string
+                    cardTemplateCode: '1'
+                  addWalletContents:
+                  - walletCode: '1'
+                    quantity: 10
+                    expiration: '2026-06-03'
+                  redeemWalletContents:
+                  - walletCode: '1'
+                    quantity: 10
+                    expiration: '2026-06-03'
+      responses:
+        '200':
+          description: Add/redeem reply with updated balances.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddRedeemReply'
+              examples:
+                AddRedeem200Example:
+                  summary: Default addRedeem 200 response
+                  x-microcks-default: true
+                  value:
+                    result: success
+                    pxTransactionId: 'TXN-67890'
+                    walletContents:
+                    - walletCode: '1'
+                      name: Points
+                      balance: 1250
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /transaction/accountQuery.json:
+    post:
+      operationId: accountQuery
+      summary: Query Accounts
+      description: >-
+        Search for accounts by phone, name, email, or postal code, returning
+        matching customer records and field values.
+      tags: [Transaction]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AccountQueryRequest'
+            examples:
+              AccountQueryRequestExample:
+                summary: Default accountQuery request
+                x-microcks-default: true
+                value:
+                  headerInfo:
+                    merchantId: 1000
+                    storeCode: '1'
+                    programId: PX
+                    terminal: '1'
+                    operator: '100'
+                    posTransactionId: string
+                  pageSize: 25
+                  accountQueries:
+                  - phone: string
+                    email: string
+                    firstName: string
+                    lastName: string
+                    postalCode: string
+      responses:
+        '200':
+          description: Account query reply.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountQueryReply'
+              examples:
+                AccountQuery200Example:
+                  summary: Default accountQuery 200 response
+                  x-microcks-default: true
+                  value:
+                    result: success
+                    accounts:
+                    - accountId: 0
+                      printedCardNumber: string
+                      fieldValues: {}
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /gift/sell.json:
+    post:
+      operationId: sellGiftCard
+      summary: Sell Gift Card
+      description: Activate a gift card and add the initial value to it.
+      tags: [Gift]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GiftRequest'
+            examples:
+              SellGiftCardRequestExample:
+                summary: Default sellGiftCard request
+                x-microcks-default: true
+                value:
+                  merchantId: 1000
+                  storeCode: '1'
+                  cardInfo:
+                    printedCardNumber: '60490012345678'
+                    magstripe: string
+                    cardTemplateCode: '1'
+                  amount: 25.00
+                  checkNumber: string
+                  cashier: string
+                  terminalId: string
+                  externalTransactionId: string
+      responses:
+        '200':
+          description: Gift transaction reply.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GiftReply'
+              examples:
+                SellGiftCard200Example:
+                  summary: Default sellGiftCard 200 response
+                  x-microcks-default: true
+                  value:
+                    result: success
+                    pxTransactionId: 'GIFT-44556'
+                    printedCardNumber: '70123456789012'
+                    currentBalance: 50.00
+                    errorCode: string
+                    errorMessage: string
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /gift/reload.json:
+    post:
+      operationId: reloadGiftCard
+      summary: Reload Gift Card
+      description: Add value to a gift card that has already been activated.
+      tags: [Gift]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GiftRequest'
+            examples:
+              ReloadGiftCardRequestExample:
+                summary: Default reloadGiftCard request
+                x-microcks-default: true
+                value:
+                  merchantId: 1000
+                  storeCode: '1'
+                  cardInfo:
+                    printedCardNumber: '60490012345678'
+                    magstripe: string
+                    cardTemplateCode: '1'
+                  amount: 25.00
+                  checkNumber: string
+                  cashier: string
+                  terminalId: string
+                  externalTransactionId: string
+      responses:
+        '200':
+          description: Gift transaction reply.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GiftReply'
+              examples:
+                ReloadGiftCard200Example:
+                  summary: Default reloadGiftCard 200 response
+                  x-microcks-default: true
+                  value:
+                    result: success
+                    pxTransactionId: 'GIFT-44556'
+                    printedCardNumber: '70123456789012'
+                    currentBalance: 50.00
+                    errorCode: string
+                    errorMessage: string
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /gift/balance.json:
+    post:
+      operationId: getGiftBalance
+      summary: Get Gift Card Balance
+      description: Retrieve the current balance of a gift card.
+      tags: [Gift]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GiftBalanceRequest'
+            examples:
+              GetGiftBalanceRequestExample:
+                summary: Default getGiftBalance request
+                x-microcks-default: true
+                value:
+                  merchantId: 1000
+                  storeCode: '1'
+                  cardInfo:
+                    printedCardNumber: '60490012345678'
+                    magstripe: string
+                    cardTemplateCode: '1'
+      responses:
+        '200':
+          description: Gift transaction reply with current balance.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GiftReply'
+              examples:
+                GetGiftBalance200Example:
+                  summary: Default getGiftBalance 200 response
+                  x-microcks-default: true
+                  value:
+                    result: success
+                    pxTransactionId: 'GIFT-44556'
+                    printedCardNumber: '70123456789012'
+                    currentBalance: 50.00
+                    errorCode: string
+                    errorMessage: string
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /gift/redeem.json:
+    post:
+      operationId: redeemGiftCard
+      summary: Redeem Gift Card
+      description: Redeem value from a gift card, optionally including a tip.
+      tags: [Gift]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GiftRedeemRequest'
+            examples:
+              RedeemGiftCardRequestExample:
+                summary: Default redeemGiftCard request
+                x-microcks-default: true
+                value:
+                  merchantId: 1000
+                  storeCode: '1'
+                  cardInfo:
+                    printedCardNumber: '60490012345678'
+                    magstripe: string
+                    cardTemplateCode: '1'
+                  amount: 25.00
+                  checkNumber: string
+                  cashier: string
+                  terminalId: string
+                  externalTransactionId: string
+                  tip: 5.00
+      responses:
+        '200':
+          description: Gift transaction reply.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GiftReply'
+              examples:
+                RedeemGiftCard200Example:
+                  summary: Default redeemGiftCard 200 response
+                  x-microcks-default: true
+                  value:
+                    result: success
+                    pxTransactionId: 'GIFT-44556'
+                    printedCardNumber: '70123456789012'
+                    currentBalance: 50.00
+                    errorCode: string
+                    errorMessage: string
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /payment/recharge.json:
+    post:
+      operationId: rechargeStoredValue
+      summary: Recharge Stored Value Card
+      description: >-
+        Recharge a stored-value card with a given amount using a saved or new
+        payment method.
+      tags: [Payment]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RechargeRequest'
+            examples:
+              RechargeStoredValueRequestExample:
+                summary: Default rechargeStoredValue request
+                x-microcks-default: true
+                value:
+                  merchantId: 1000
+                  printedCardNumber: '60490012345678'
+                  amount: 25.00
+                  paymentMethod:
+                    type: CREDIT_CARD
+                    token: string
+                    lastFour: '4242'
+                  address:
+                    address1: string
+                    address2: string
+                    city: string
+                    stateProvince: string
+                    postalCode: string
+                    country: US
+      responses:
+        '200':
+          description: Charge response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChargeResponse'
+              examples:
+                RechargeStoredValue200Example:
+                  summary: Default rechargeStoredValue 200 response
+                  x-microcks-default: true
+                  value:
+                    result: success
+                    amount: 25.00
+                    cardType: VISA
+                    lastFour: '4242'
+                    processorAuthCode: 'AUTH123'
+                    transactionState: APPROVED
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /payment/savedPaymentMethods.json:
+    get:
+      operationId: getSavedPaymentMethods
+      summary: Get Saved Payment Methods
+      description: List the saved payment methods associated with a stored-value card.
+      tags: [Payment]
+      parameters:
+      - name: merchantId
+        in: query
+        required: true
+        description: Paytronix-assigned merchant identifier.
+        schema: {type: integer}
+      - name: printedCardNumber
+        in: query
+        required: true
+        description: Printed card number identifying the account.
+        schema: {type: string}
+      responses:
+        '200':
+          description: Saved payment methods.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SavedPaymentMethodsReply'
+              examples:
+                GetSavedPaymentMethods200Example:
+                  summary: Default getSavedPaymentMethods 200 response
+                  x-microcks-default: true
+                  value:
+                    result: success
+                    paymentMethods:
+                    - type: CREDIT_CARD
+                      cardholderName: Jane Doe
+                      lastFour: '4242'
+                      defaultUsages:
+                      - string
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /store/nearbyLocations.json:
+    get:
+      operationId: getNearbyLocations
+      summary: Get Nearby Locations
+      description: >-
+        Retrieve store locations within a maximum distance of a latitude and
+        longitude, ordered by distance.
+      tags: [Store]
+      parameters:
+      - name: merchantId
+        in: query
+        required: true
+        description: Paytronix-assigned merchant identifier.
+        schema: {type: integer}
+      - name: latitude
+        in: query
+        required: true
+        description: Search center latitude.
+        schema: {type: number, format: double}
+      - name: longitude
+        in: query
+        required: true
+        description: Search center longitude.
+        schema: {type: number, format: double}
+      - name: maxDistance
+        in: query
+        required: true
+        description: Maximum distance in miles.
+        schema: {type: number}
+      - name: maxLocations
+        in: query
+        required: true
+        description: Maximum number of results.
+        schema: {type: integer}
+      - name: storeGroupCode
+        in: query
+        required: false
+        description: Optional store group filter.
+        schema: {type: string}
+      responses:
+        '200':
+          description: Nearby locations.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LocationsReply'
+              examples:
+                GetNearbyLocations200Example:
+                  summary: Default getNearbyLocations 200 response
+                  x-microcks-default: true
+                  value:
+                    result: success
+                    locations:
+                    - code: '1'
+                      name: Downtown
+                      address:
+                        address1: string
+                        address2: string
+                        city: string
+                        stateProvince: string
+                        postalCode: string
+                        country: US
+                      latitude: 42.3601
+                      longitude: -71.0589
+                      hoursOfOperation: string
+                      distance: 1.2
+                      metadata: {}
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /store/stores.json:
+    get:
+      operationId: getStores
+      summary: Get All Stores
+      description: Retrieve the complete list of all store locations for a merchant.
+      tags: [Store]
+      parameters:
+      - name: merchantId
+        in: query
+        required: true
+        description: Paytronix-assigned merchant identifier.
+        schema: {type: integer}
+      responses:
+        '200':
+          description: All store locations.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LocationsReply'
+              examples:
+                GetStores200Example:
+                  summary: Default getStores 200 response
+                  x-microcks-default: true
+                  value:
+                    result: success
+                    locations:
+                    - code: '1'
+                      name: Downtown
+                      address:
+                        address1: string
+                        address2: string
+                        city: string
+                        stateProvince: string
+                        postalCode: string
+                        country: US
+                      latitude: 42.3601
+                      longitude: -71.0589
+                      hoursOfOperation: string
+                      distance: 1.2
+                      metadata: {}
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /check/computeApplicableRewards.json:
+    post:
+      operationId: computeApplicableRewards
+      summary: Compute Applicable Rewards
+      description: >-
+        Determine which rewards and discounts apply to a given POS check for a
+        guest, returning item, multi-item, subtotal, and service-charge
+        discounts plus balances and receipt text.
+      tags: [Check]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ComputeRewardsRequest'
+            examples:
+              ComputeApplicableRewardsRequestExample:
+                summary: Default computeApplicableRewards request
+                x-microcks-default: true
+                value:
+                  merchantId: 1000
+                  storeCode: '1'
+                  check:
+                    number: '4501'
+                    openTime: '2026-06-03T12:00:00Z'
+                    subtotal: 42.50
+                    items:
+                    - itemCode: string
+                      name: string
+                      quantity: 0
+                      price: 0
+                  cardInfo:
+                    printedCardNumber: '60490012345678'
+                    magstripe: string
+                    cardTemplateCode: '1'
+                  terminal: string
+                  operator: string
+                  rewardSelectionMode:
+                    mode: AUTOMATIC
+      responses:
+        '200':
+          description: Applicable rewards reply.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ComputeRewardsReply'
+              examples:
+                ComputeApplicableRewards200Example:
+                  summary: Default computeApplicableRewards 200 response
+                  x-microcks-default: true
+                  value:
+                    result: success
+                    customerName: Jane Doe
+                    tierCode: GOLD
+                    printedCardNumber: '60490012345678'
+                    itemDiscounts:
+                    - itemCode: string
+                      discountAmount: 0
+                      rewardName: string
+                    subtotalDiscounts:
+                    - discountAmount: 0
+                      rewardName: string
+                    walletBalances:
+                    - walletCode: '1'
+                      name: Points
+                      balance: 1250
+                    receiptText: string
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /check/postAndAccruePoints.json:
+    post:
+      operationId: postAndAccruePoints
+      summary: Post And Accrue Points
+      description: >-
+        Post a check and accrue points in one step, returning the add/redeem
+        result, customer details, balances, and receipt text.
+      tags: [Check]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostAndAccrueRequest'
+            examples:
+              PostAndAccruePointsRequestExample:
+                summary: Default postAndAccruePoints request
+                x-microcks-default: true
+                value:
+                  merchantId: 1000
+                  storeCode: '1'
+                  check:
+                    number: '4501'
+                    openTime: '2026-06-03T12:00:00Z'
+                    subtotal: 42.50
+                    items:
+                    - itemCode: string
+                      name: string
+                      quantity: 0
+                      price: 0
+                  cardInfo:
+                    printedCardNumber: '60490012345678'
+                    magstripe: string
+                    cardTemplateCode: '1'
+                  autoActivateCard: true
+                  terminal: string
+                  operator: string
+                  receiptSettings: {}
+      responses:
+        '200':
+          description: Post and accrue reply.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ComputeRewardsReply'
+              examples:
+                PostAndAccruePoints200Example:
+                  summary: Default postAndAccruePoints 200 response
+                  x-microcks-default: true
+                  value:
+                    result: success
+                    customerName: Jane Doe
+                    tierCode: GOLD
+                    printedCardNumber: '60490012345678'
+                    itemDiscounts:
+                    - itemCode: string
+                      discountAmount: 0
+                      rewardName: string
+                    subtotalDiscounts:
+                    - discountAmount: 0
+                      rewardName: string
+                    walletBalances:
+                    - walletCode: '1'
+                      name: Points
+                      balance: 1250
+                    receiptText: string
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: >-
+        HTTP Basic authentication with the base64-encoded integration
+        identifier and secret (identifier:secret).
+    guestBearer:
+      type: http
+      scheme: bearer
+      bearerFormat: OAuth
+      description: OAuth bearer token issued by the OAuth Service for guest-scoped operations.
+  schemas:
+    ErrorReply:
+      type: object
+      description: Standard failure envelope returned across PXS services.
+      properties:
+        result:
+          type: string
+          example: failure
+        errorCode:
+          type: string
+          example: invalid_grant
+        errorMessage:
+          type: string
+          example: The supplied credentials were not valid.
+    SimpleReply:
+      type: object
+      description: Standard success/failure envelope.
+      properties:
+        result:
+          type: string
+          example: success
+        errorCode: {type: string}
+        errorMessage: {type: string}
+    CardInfo:
+      type: object
+      description: Identifies a card for transaction operations.
+      properties:
+        printedCardNumber: {type: string, example: '60490012345678'}
+        magstripe: {type: string}
+        cardTemplateCode: {type: string, example: '1'}
+    WalletContent:
+      type: object
+      description: A wallet code and quantity used in add/redeem operations.
+      properties:
+        walletCode: {type: string, example: '1'}
+        quantity: {type: number, example: 10}
+        expiration: {type: string, format: date}
+    HeaderInfo:
+      type: object
+      description: Common transaction header. programId is PX, SV, or LP.
+      properties:
+        merchantId: {type: integer, example: 1000}
+        storeCode: {type: string, example: '1'}
+        programId: {type: string, example: PX}
+        terminal: {type: string, example: '1'}
+        operator: {type: string, example: '100'}
+        posTransactionId: {type: string}
+    GuestTokenRequest:
+      type: object
+      required: [merchantId, grant_type]
+      properties:
+        merchantId: {type: integer, example: 1000}
+        grant_type:
+          type: string
+          example: password
+          enum: [password, one_time_password, authorization_code, refresh_token, 'http://paytronix.com/oauth/fieldset']
+        username: {type: string, example: jdoe}
+        password: {type: string, example: 's3cret'}
+        scope: {type: string, example: 'user_read account_read'}
+        refresh_token: {type: string}
+    GuestTokenResponse:
+      type: object
+      properties:
+        access_token: {type: string, example: 9f8c1a2b3c4d5e6f}
+        token_type: {type: string, example: bearer}
+        expires_in: {type: integer, example: 1800}
+        refresh_token: {type: string, example: 1a2b3c4d5e6f7a8b}
+        scope: {type: string, example: 'user_read account_read'}
+        username: {type: string, example: jdoe}
+    AccountInformationReply:
+      type: object
+      properties:
+        result: {type: string, example: success}
+        username: {type: string, example: jdoe}
+        accountStatus: {type: string, example: ACTIVE}
+        queryCardStatus: {type: string, example: ACTIVE}
+        registrationStatus: {type: string, example: REGISTERED}
+        cardTemplateCode: {type: string, example: '1'}
+        tierCode: {type: string, example: GOLD}
+        primaryCard: {type: string, example: '60490012345678'}
+        additionalCards:
+          type: array
+          items: {type: string}
+        walletBalances:
+          type: array
+          items: {$ref: '#/components/schemas/WalletBalance'}
+    WalletBalance:
+      type: object
+      properties:
+        walletCode: {type: string, example: '1'}
+        name: {type: string, example: Points}
+        balance: {type: number, example: 1250}
+    UserInformationReply:
+      type: object
+      properties:
+        result: {type: string, example: success}
+        userFields:
+          type: object
+          additionalProperties: true
+          example: *id001
+        primaryCardNumbers:
+          type: array
+          items: {type: string}
+        accountIds:
+          type: array
+          items: {type: integer, format: int64}
+    TransactionHistoryReply:
+      type: object
+      properties:
+        result: {type: string, example: success}
+        walletInfo:
+          type: array
+          items: {$ref: '#/components/schemas/WalletBalance'}
+        transactions:
+          type: array
+          items:
+            type: object
+            properties:
+              transactionId: {type: string}
+              datetime: {type: string, format: date-time}
+              type: {type: string, example: ACCRUAL}
+              walletCode: {type: string}
+              amount: {type: number}
+              balance: {type: number}
+    ChangeCardStatusRequest:
+      type: object
+      required: [merchantId, printedCardNumber, status]
+      properties:
+        merchantId: {type: integer, example: 1000}
+        printedCardNumber: {type: string, example: '60490012345678'}
+        status: {type: string, enum: [ACTIVE, DISABLED], example: DISABLED}
+    CreateAndRegisterRequest:
+      type: object
+      required: [merchantId, cardTemplateCode, setUserFields]
+      properties:
+        merchantId: {type: integer, example: 1000}
+        cardTemplateCode: {type: string, example: '1'}
+        enforceUniqueFields:
+          type: array
+          items: {type: string}
+          example: *id002
+        setUserFields:
+          type: object
+          additionalProperties: true
+          example: *id003
+        setAccountFields:
+          type: object
+          additionalProperties: true
+        sendSmsVerification: {type: boolean}
+        smsVerificationCode: {type: string}
+    ActivateAndRegisterRequest:
+      type: object
+      required: [merchantId, printedCardNumber, setUserFields]
+      properties:
+        merchantId: {type: integer, example: 1000}
+        printedCardNumber: {type: string, example: '60490012345678'}
+        enforceUniqueFields:
+          type: array
+          items: {type: string}
+        setUserFields:
+          type: object
+          additionalProperties: true
+        setAccountFields:
+          type: object
+          additionalProperties: true
+    EnrollmentReply:
+      type: object
+      properties:
+        result: {type: string, example: success}
+        printedCardNumber: {type: string, example: '60490012345678'}
+        accountId: {type: integer, format: int64, example: 998877}
+        username: {type: string, example: jdoe}
+        errorCode: {type: string}
+        errorsByField:
+          type: object
+          additionalProperties: {type: string}
+    EnrollmentConfigReply:
+      type: object
+      properties:
+        result: {type: string, example: success}
+        config:
+          type: object
+          properties:
+            fields:
+              type: array
+              items:
+                type: object
+                properties:
+                  name: {type: string, example: email}
+                  type: {type: string, example: string}
+                  label: {type: string, example: Email Address}
+                  required: {type: boolean, example: true}
+                  pattern: {type: string}
+    TransactionRequest:
+      type: object
+      required: [headerInfo, cardInfo]
+      properties:
+        headerInfo: {$ref: '#/components/schemas/HeaderInfo'}
+        cardInfo: {$ref: '#/components/schemas/CardInfo'}
+        autoActivateCard: {type: boolean}
+    TransactionReply:
+      type: object
+      properties:
+        result: {type: string, example: success}
+        pxTransactionId: {type: string, example: 'TXN-12345'}
+        maskedCardNumber: {type: string, example: '******5678'}
+        enrollmentDate: {type: string, format: date}
+        walletBalances:
+          type: array
+          items: {$ref: '#/components/schemas/WalletBalance'}
+    AddRedeemRequest:
+      type: object
+      required: [headerInfo, cardInfo]
+      properties:
+        headerInfo: {$ref: '#/components/schemas/HeaderInfo'}
+        cardInfo: {$ref: '#/components/schemas/CardInfo'}
+        addWalletContents:
+          type: array
+          items: {$ref: '#/components/schemas/WalletContent'}
+        redeemWalletContents:
+          type: array
+          items: {$ref: '#/components/schemas/WalletContent'}
+    AddRedeemReply:
+      type: object
+      properties:
+        result: {type: string, example: success}
+        pxTransactionId: {type: string, example: 'TXN-67890'}
+        walletContents:
+          type: array
+          items: {$ref: '#/components/schemas/WalletBalance'}
+    AccountQueryRequest:
+      type: object
+      required: [headerInfo, accountQueries]
+      properties:
+        headerInfo: {$ref: '#/components/schemas/HeaderInfo'}
+        pageSize: {type: integer, example: 25}
+        accountQueries:
+          type: array
+          items:
+            type: object
+            properties:
+              phone: {type: string}
+              email: {type: string}
+              firstName: {type: string}
+              lastName: {type: string}
+              postalCode: {type: string}
+    AccountQueryReply:
+      type: object
+      properties:
+        result: {type: string, example: success}
+        accounts:
+          type: array
+          items:
+            type: object
+            properties:
+              accountId: {type: integer, format: int64}
+              printedCardNumber: {type: string}
+              fieldValues:
+                type: object
+                additionalProperties: true
+    GiftRequest:
+      type: object
+      required: [merchantId, storeCode, cardInfo, amount]
+      properties:
+        merchantId: {type: integer, example: 1000}
+        storeCode: {type: string, example: '1'}
+        cardInfo: {$ref: '#/components/schemas/CardInfo'}
+        amount: {type: number, example: 25.00}
+        checkNumber: {type: string}
+        cashier: {type: string}
+        terminalId: {type: string}
+        externalTransactionId: {type: string}
+    GiftBalanceRequest:
+      type: object
+      required: [merchantId, storeCode, cardInfo]
+      properties:
+        merchantId: {type: integer, example: 1000}
+        storeCode: {type: string, example: '1'}
+        cardInfo: {$ref: '#/components/schemas/CardInfo'}
+    GiftRedeemRequest:
+      allOf:
+      - $ref: '#/components/schemas/GiftRequest'
+      - type: object
+        properties:
+          tip: {type: number, example: 5.00}
+    GiftReply:
+      type: object
+      properties:
+        result: {type: string, example: success}
+        pxTransactionId: {type: string, example: 'GIFT-44556'}
+        printedCardNumber: {type: string, example: '70123456789012'}
+        currentBalance: {type: number, example: 50.00}
+        errorCode: {type: string}
+        errorMessage: {type: string}
+    RechargeRequest:
+      type: object
+      required: [merchantId, printedCardNumber, amount, paymentMethod]
+      properties:
+        merchantId: {type: integer, example: 1000}
+        printedCardNumber: {type: string, example: '60490012345678'}
+        amount: {type: number, example: 25.00}
+        paymentMethod:
+          type: object
+          properties:
+            type: {type: string, example: CREDIT_CARD}
+            token: {type: string}
+            lastFour: {type: string, example: '4242'}
+        address:
+          $ref: '#/components/schemas/Address'
+    ChargeResponse:
+      type: object
+      properties:
+        result: {type: string, example: success}
+        amount: {type: number, example: 25.00}
+        cardType: {type: string, example: VISA}
+        lastFour: {type: string, example: '4242'}
+        processorAuthCode: {type: string, example: 'AUTH123'}
+        transactionState: {type: string, example: APPROVED}
+    SavedPaymentMethodsReply:
+      type: object
+      properties:
+        result: {type: string, example: success}
+        paymentMethods:
+          type: array
+          items:
+            type: object
+            properties:
+              type: {type: string, example: CREDIT_CARD}
+              cardholderName: {type: string, example: Jane Doe}
+              lastFour: {type: string, example: '4242'}
+              defaultUsages:
+                type: array
+                items: {type: string}
+    Address:
+      type: object
+      properties:
+        address1: {type: string}
+        address2: {type: string}
+        city: {type: string}
+        stateProvince: {type: string}
+        postalCode: {type: string}
+        country: {type: string, example: US}
+    Location:
+      type: object
+      properties:
+        code: {type: string, example: '1'}
+        name: {type: string, example: Downtown}
+        address: {$ref: '#/components/schemas/Address'}
+        latitude: {type: number, format: double, example: 42.3601}
+        longitude: {type: number, format: double, example: -71.0589}
+        hoursOfOperation: {type: string}
+        distance: {type: number, example: 1.2}
+        metadata:
+          type: object
+          additionalProperties: true
+    LocationsReply:
+      type: object
+      properties:
+        result: {type: string, example: success}
+        locations:
+          type: array
+          items: {$ref: '#/components/schemas/Location'}
+    Check:
+      type: object
+      description: A POS check with line items used in reward computation and posting.
+      properties:
+        number: {type: string, example: '4501'}
+        openTime: {type: string, format: date-time}
+        subtotal: {type: number, example: 42.50}
+        items:
+          type: array
+          items:
+            type: object
+            properties:
+              itemCode: {type: string}
+              name: {type: string}
+              quantity: {type: number}
+              price: {type: number}
+    ComputeRewardsRequest:
+      type: object
+      required: [merchantId, storeCode, check, cardInfo]
+      properties:
+        merchantId: {type: integer, example: 1000}
+        storeCode: {type: string, example: '1'}
+        check: {$ref: '#/components/schemas/Check'}
+        cardInfo: {$ref: '#/components/schemas/CardInfo'}
+        terminal: {type: string}
+        operator: {type: string}
+        rewardSelectionMode:
+          type: object
+          properties:
+            mode: {type: string, example: AUTOMATIC}
+    PostAndAccrueRequest:
+      type: object
+      required: [merchantId, storeCode, check, cardInfo]
+      properties:
+        merchantId: {type: integer, example: 1000}
+        storeCode: {type: string, example: '1'}
+        check: {$ref: '#/components/schemas/Check'}
+        cardInfo: {$ref: '#/components/schemas/CardInfo'}
+        autoActivateCard: {type: boolean}
+        terminal: {type: string}
+        operator: {type: string}
+        receiptSettings:
+          type: object
+          additionalProperties: true
+    ComputeRewardsReply:
+      type: object
+      properties:
+        result: {type: string, example: success}
+        customerName: {type: string, example: Jane Doe}
+        tierCode: {type: string, example: GOLD}
+        printedCardNumber: {type: string, example: '60490012345678'}
+        itemDiscounts:
+          type: array
+          items:
+            type: object
+            properties:
+              itemCode: {type: string}
+              discountAmount: {type: number}
+              rewardName: {type: string}
+        subtotalDiscounts:
+          type: array
+          items:
+            type: object
+            properties:
+              discountAmount: {type: number}
+              rewardName: {type: string}
+        walletBalances:
+          type: array
+          items: {$ref: '#/components/schemas/WalletBalance'}
+        receiptText: {type: string}

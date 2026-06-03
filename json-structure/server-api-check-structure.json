@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/paytronix/refs/heads/main/json-structure/server-api-check-structure.json",
+  "name": "Check",
+  "description": "A POS check with line items used in reward computation and posting.",
+  "type": "object",
+  "properties": {
+    "number": {
+      "type": "string",
+      "example": "4501"
+    },
+    "openTime": {
+      "type": "datetime"
+    },
+    "subtotal": {
+      "type": "double",
+      "example": 42.5
+    },
+    "items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "itemCode": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "quantity": {
+            "type": "double"
+          },
+          "price": {
+            "type": "double"
+          }
+        }
+      }
+    }
+  }
+}

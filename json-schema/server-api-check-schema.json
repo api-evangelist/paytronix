@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Check",
+  "description": "A POS check with line items used in reward computation and posting.",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/paytronix/refs/heads/main/json-schema/server-api-check-schema.json",
+  "type": "object",
+  "properties": {
+    "number": {
+      "type": "string",
+      "example": "4501"
+    },
+    "openTime": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "subtotal": {
+      "type": "number",
+      "example": 42.5
+    },
+    "items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "itemCode": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "quantity": {
+            "type": "number"
+          },
+          "price": {
+            "type": "number"
+          }
+        }
+      }
+    }
+  }
+}

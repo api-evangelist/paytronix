@@ -1,0 +1,234 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: "Paytronix Online Ordering API \u2014 Search"
+  description: "Online Ordering \u2014 Search. 2 operations. Lead operation: Search Restaurants. Self-contained Naftiko capability covering one Paytronix business surface."
+  tags:
+  - Paytronix
+  - Online
+  - Search
+  created: '2026-06-03'
+  modified: '2026-06-03'
+binds:
+- namespace: env
+  keys:
+    OPENDINING_API_KEY: OPENDINING_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: online-ordering-api-search
+    baseUri: https://api.opendining.net
+    description: "Paytronix Online Ordering API \u2014 Search. Self-contained, no shared references."
+    authentication:
+      type: apikey
+      key: X-Api-Key
+      value: '{{env.OPENDINING_API_KEY}}'
+      placement: header
+    resources:
+    - name: search-restaurants
+      path: /search/restaurants
+      operations:
+      - name: searchRestaurants
+        method: GET
+        description: Search Restaurants
+        inputParameters:
+        - name: lat
+          in: query
+          type: number
+          required: true
+          description: Latitude of the search center.
+        - name: lon
+          in: query
+          type: number
+          required: true
+          description: Longitude of the search center.
+        - name: q
+          in: query
+          type: string
+          required: false
+          description: Fuzzy, weighted full-text search query.
+        - name: name
+          in: query
+          type: string
+          required: false
+          description: Trailing-wildcard search on the business name.
+        - name: tags
+          in: query
+          type: string
+          required: false
+          description: Space-separated, URL-encoded tags to restrict results by category.
+        - name: limit
+          in: query
+          type: integer
+          required: false
+          description: Maximum number of results (default 10, max 50).
+        - name: skip
+          in: query
+          type: integer
+          required: false
+          description: Offset for pagination.
+        - name: sort
+          in: query
+          type: string
+          required: false
+          description: Sort order, by distance (default) or price.
+        - name: show_closed
+          in: query
+          type: boolean
+          required: false
+          description: When true, include closed restaurants.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: search-menuitems
+      path: /search/menuitems
+      operations:
+      - name: searchMenuItems
+        method: GET
+        description: Search Menu Items
+        inputParameters:
+        - name: lat
+          in: query
+          type: number
+          required: true
+          description: Latitude of the search center.
+        - name: lon
+          in: query
+          type: number
+          required: true
+          description: Longitude of the search center.
+        - name: q
+          in: query
+          type: string
+          required: false
+          description: Fuzzy, weighted full-text search query.
+        - name: name
+          in: query
+          type: string
+          required: false
+          description: Trailing-wildcard search on the item name.
+        - name: tags
+          in: query
+          type: string
+          required: false
+          description: Space-separated, URL-encoded tags to restrict results by category.
+        - name: limit
+          in: query
+          type: integer
+          required: false
+          description: Maximum number of results (default 10, max 50).
+        - name: skip
+          in: query
+          type: integer
+          required: false
+          description: Offset for pagination.
+        - name: sort
+          in: query
+          type: string
+          required: false
+          description: Sort order, by distance (default) or price.
+        - name: show_closed
+          in: query
+          type: boolean
+          required: false
+          description: When true, include unavailable items.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  exposes:
+  - type: rest
+    namespace: online-ordering-api-search-rest
+    port: 8080
+    description: "REST adapter for Paytronix Online Ordering API \u2014 Search. One Spectral-compliant resource per consumed operation, prefixed with /v1."
+    resources:
+    - path: /v1/search/restaurants
+      name: search-restaurants
+      description: REST surface for Search Restaurants.
+      operations:
+      - method: GET
+        name: searchRestaurants
+        description: Search Restaurants
+        call: online-ordering-api-search.searchRestaurants
+        with:
+          lat: rest.lat
+          lon: rest.lon
+          q: rest.q
+          name: rest.name
+          tags: rest.tags
+          limit: rest.limit
+          skip: rest.skip
+          sort: rest.sort
+          show_closed: rest.show_closed
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/search/menuitems
+      name: search-menuitems
+      description: REST surface for Search Menu Items.
+      operations:
+      - method: GET
+        name: searchMenuItems
+        description: Search Menu Items
+        call: online-ordering-api-search.searchMenuItems
+        with:
+          lat: rest.lat
+          lon: rest.lon
+          q: rest.q
+          name: rest.name
+          tags: rest.tags
+          limit: rest.limit
+          skip: rest.skip
+          sort: rest.sort
+          show_closed: rest.show_closed
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: online-ordering-api-search-mcp
+    port: 9090
+    transport: http
+    description: "MCP adapter for Paytronix Online Ordering API \u2014 Search. One tool per consumed operation, routed inline through this capability's consumes block."
+    tools:
+    - name: search-restaurants
+      description: Search Restaurants
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: online-ordering-api-search.searchRestaurants
+      with:
+        lat: tools.lat
+        lon: tools.lon
+        q: tools.q
+        name: tools.name
+        tags: tools.tags
+        limit: tools.limit
+        skip: tools.skip
+        sort: tools.sort
+        show_closed: tools.show_closed
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: search-menu-items
+      description: Search Menu Items
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: online-ordering-api-search.searchMenuItems
+      with:
+        lat: tools.lat
+        lon: tools.lon
+        q: tools.q
+        name: tools.name
+        tags: tools.tags
+        limit: tools.limit
+        skip: tools.skip
+        sort: tools.sort
+        show_closed: tools.show_closed
+      outputParameters:
+      - type: object
+        mapping: $.

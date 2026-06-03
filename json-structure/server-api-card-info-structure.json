@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/paytronix/refs/heads/main/json-structure/server-api-card-info-structure.json",
+  "name": "CardInfo",
+  "description": "Identifies a card for transaction operations.",
+  "type": "object",
+  "properties": {
+    "printedCardNumber": {
+      "type": "string",
+      "example": "60490012345678"
+    },
+    "magstripe": {
+      "type": "string"
+    },
+    "cardTemplateCode": {
+      "type": "string",
+      "example": "1"
+    }
+  }
+}

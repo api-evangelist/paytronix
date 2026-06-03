@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/paytronix/refs/heads/main/json-structure/online-ordering-api-menu-item-search-results-structure.json",
+  "name": "MenuItemSearchResults",
+  "description": "MenuItemSearchResults schema from Paytronix Online Ordering API",
+  "type": "object",
+  "properties": {
+    "count": {
+      "type": "int32",
+      "example": 34
+    },
+    "results": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/MenuItem"
+      }
+    },
+    "facets": {
+      "$ref": "#/components/schemas/Facets"
+    }
+  }
+}

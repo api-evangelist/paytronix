@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/paytronix/refs/heads/main/json-structure/online-ordering-api-restaurant-search-results-structure.json",
+  "name": "RestaurantSearchResults",
+  "description": "RestaurantSearchResults schema from Paytronix Online Ordering API",
+  "type": "object",
+  "properties": {
+    "count": {
+      "type": "int32",
+      "example": 12
+    },
+    "results": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/Restaurant"
+      }
+    },
+    "facets": {
+      "$ref": "#/components/schemas/Facets"
+    }
+  }
+}

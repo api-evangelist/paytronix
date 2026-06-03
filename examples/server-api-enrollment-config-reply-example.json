@@ -1,0 +1,14 @@
+{
+  "result": "success",
+  "config": {
+    "fields": [
+      {
+        "name": "email",
+        "type": "string",
+        "label": "Email Address",
+        "required": true,
+        "pattern": "string"
+      }
+    ]
+  }
+}

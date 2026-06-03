@@ -1,0 +1,171 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: "Paytronix Server API \u2014 Enrollment"
+  description: "Guest Engagement \u2014 Enrollment. 3 operations. Lead operation: Create And Register Account. Self-contained Naftiko capability covering one Paytronix business surface."
+  tags:
+  - Paytronix
+  - Guest
+  - Enrollment
+  created: '2026-06-03'
+  modified: '2026-06-03'
+binds:
+- namespace: env
+  keys:
+    PAYTRONIX_INTEGRATION_ID: PAYTRONIX_INTEGRATION_ID
+    PAYTRONIX_INTEGRATION_SECRET: PAYTRONIX_INTEGRATION_SECRET
+capability:
+  consumes:
+  - type: http
+    namespace: server-api-enrollment
+    baseUri: https://m{merchantId}.api.paytronix.com/rest/26.6
+    description: "Paytronix Server API \u2014 Enrollment. Self-contained, no shared references."
+    authentication:
+      type: basic
+      username: '{{env.PAYTRONIX_INTEGRATION_ID}}'
+      password: '{{env.PAYTRONIX_INTEGRATION_SECRET}}'
+    resources:
+    - name: enrollment-createandregister-json
+      path: /enrollment/createAndRegister.json
+      operations:
+      - name: createAndRegister
+        method: POST
+        description: Create And Register Account
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: Request body payload.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: enrollment-activateandregister-json
+      path: /enrollment/activateAndRegister.json
+      operations:
+      - name: activateAndRegister
+        method: POST
+        description: Activate And Register Card
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: Request body payload.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: enrollment-enrollmentconfig-json
+      path: /enrollment/enrollmentConfig.json
+      operations:
+      - name: getEnrollmentConfig
+        method: GET
+        description: Get Enrollment Configuration
+        inputParameters:
+        - name: merchantId
+          in: query
+          type: integer
+          required: true
+          description: Paytronix-assigned merchant identifier.
+        - name: cardTemplateCode
+          in: query
+          type: string
+          required: true
+          description: Card template code identifying the program.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  exposes:
+  - type: rest
+    namespace: server-api-enrollment-rest
+    port: 8080
+    description: "REST adapter for Paytronix Server API \u2014 Enrollment. One Spectral-compliant resource per consumed operation, prefixed with /v1."
+    resources:
+    - path: /v1/enrollment/createandregister
+      name: enrollment-createandregister
+      description: REST surface for Create And Register Account.
+      operations:
+      - method: POST
+        name: createAndRegister
+        description: Create And Register Account
+        call: server-api-enrollment.createAndRegister
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/enrollment/activateandregister
+      name: enrollment-activateandregister
+      description: REST surface for Activate And Register Card.
+      operations:
+      - method: POST
+        name: activateAndRegister
+        description: Activate And Register Card
+        call: server-api-enrollment.activateAndRegister
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/enrollment/enrollmentconfig
+      name: enrollment-enrollmentconfig
+      description: REST surface for Get Enrollment Configuration.
+      operations:
+      - method: GET
+        name: getEnrollmentConfig
+        description: Get Enrollment Configuration
+        call: server-api-enrollment.getEnrollmentConfig
+        with:
+          merchantId: rest.merchantId
+          cardTemplateCode: rest.cardTemplateCode
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: server-api-enrollment-mcp
+    port: 9090
+    transport: http
+    description: "MCP adapter for Paytronix Server API \u2014 Enrollment. One tool per consumed operation, routed inline through this capability's consumes block."
+    tools:
+    - name: create-register-account
+      description: Create And Register Account
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: server-api-enrollment.createAndRegister
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: activate-register-card
+      description: Activate And Register Card
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: server-api-enrollment.activateAndRegister
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-enrollment-configuration
+      description: Get Enrollment Configuration
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: server-api-enrollment.getEnrollmentConfig
+      with:
+        merchantId: tools.merchantId
+        cardTemplateCode: tools.cardTemplateCode
+      outputParameters:
+      - type: object
+        mapping: $.

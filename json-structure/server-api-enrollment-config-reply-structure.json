@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/paytronix/refs/heads/main/json-structure/server-api-enrollment-config-reply-structure.json",
+  "name": "EnrollmentConfigReply",
+  "description": "EnrollmentConfigReply schema from Paytronix Server API",
+  "type": "object",
+  "properties": {
+    "result": {
+      "type": "string",
+      "example": "success"
+    },
+    "config": {
+      "type": "object",
+      "properties": {
+        "fields": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "example": "email"
+              },
+              "type": {
+                "type": "string",
+                "example": "string"
+              },
+              "label": {
+                "type": "string",
+                "example": "Email Address"
+              },
+              "required": {
+                "type": "boolean",
+                "example": true
+              },
+              "pattern": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

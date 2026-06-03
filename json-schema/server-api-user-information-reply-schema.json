@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "UserInformationReply",
+  "description": "UserInformationReply schema from Paytronix Server API",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/paytronix/refs/heads/main/json-schema/server-api-user-information-reply-schema.json",
+  "type": "object",
+  "properties": {
+    "result": {
+      "type": "string",
+      "example": "success"
+    },
+    "userFields": {
+      "type": "object",
+      "additionalProperties": true,
+      "example": {
+        "firstName": "Jane",
+        "lastName": "Doe",
+        "email": "jane@example.com"
+      }
+    },
+    "primaryCardNumbers": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "accountIds": {
+      "type": "array",
+      "items": {
+        "type": "integer",
+        "format": "int64"
+      }
+    }
+  }
+}

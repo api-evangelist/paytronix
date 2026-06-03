@@ -1,0 +1,15 @@
+{
+  "merchantId": 1000,
+  "storeCode": "1",
+  "cardInfo": {
+    "printedCardNumber": "60490012345678",
+    "magstripe": "string",
+    "cardTemplateCode": "1"
+  },
+  "amount": 25.0,
+  "checkNumber": "string",
+  "cashier": "string",
+  "terminalId": "string",
+  "externalTransactionId": "string",
+  "tip": 5.0
+}

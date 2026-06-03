@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "TransactionReply",
+  "description": "TransactionReply schema from Paytronix Server API",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/paytronix/refs/heads/main/json-schema/server-api-transaction-reply-schema.json",
+  "type": "object",
+  "properties": {
+    "result": {
+      "type": "string",
+      "example": "success"
+    },
+    "pxTransactionId": {
+      "type": "string",
+      "example": "TXN-12345"
+    },
+    "maskedCardNumber": {
+      "type": "string",
+      "example": "******5678"
+    },
+    "enrollmentDate": {
+      "type": "string",
+      "format": "date"
+    },
+    "walletBalances": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/WalletBalance"
+      }
+    }
+  }
+}

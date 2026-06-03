@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AddRedeemReply",
+  "description": "AddRedeemReply schema from Paytronix Server API",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/paytronix/refs/heads/main/json-schema/server-api-add-redeem-reply-schema.json",
+  "type": "object",
+  "properties": {
+    "result": {
+      "type": "string",
+      "example": "success"
+    },
+    "pxTransactionId": {
+      "type": "string",
+      "example": "TXN-67890"
+    },
+    "walletContents": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/WalletBalance"
+      }
+    }
+  }
+}

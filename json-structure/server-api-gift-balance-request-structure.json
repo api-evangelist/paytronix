@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/paytronix/refs/heads/main/json-structure/server-api-gift-balance-request-structure.json",
+  "name": "GiftBalanceRequest",
+  "description": "GiftBalanceRequest schema from Paytronix Server API",
+  "type": "object",
+  "properties": {
+    "merchantId": {
+      "type": "int32",
+      "example": 1000
+    },
+    "storeCode": {
+      "type": "string",
+      "example": "1"
+    },
+    "cardInfo": {
+      "$ref": "#/components/schemas/CardInfo"
+    }
+  },
+  "required": [
+    "merchantId",
+    "storeCode",
+    "cardInfo"
+  ]
+}

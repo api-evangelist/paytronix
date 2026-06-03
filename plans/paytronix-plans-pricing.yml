@@ -1,0 +1,86 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: Paytronix
+providerId: paytronix
+created: '2026-06-03'
+modified: '2026-06-03'
+reconciled: true
+tags:
+  - Loyalty
+  - Gift Cards
+  - Online Ordering
+  - Payments
+  - Guest Engagement
+description: >-
+  Paytronix prices its guest engagement platform on a fully custom,
+  quote-based model. The public pricing page lists no set prices or
+  self-service tiers; prospective customers complete a form and a program
+  design expert builds a one-of-a-kind program across the products they need
+  (loyalty, online ordering, payments, messaging, subscriptions, gift,
+  employee dining, catering, kiosks). The only published tiering is the set
+  of Customer Success Plans (CSPs) — service offerings ranging from
+  self-guided to hands-on partnership. Pricing is therefore modeled here as a
+  single enterprise plan plus the CSP service tier; no per-unit prices are
+  publicly disclosed.
+sources:
+  - https://www.paytronix.com/pricing/
+  - https://www.paytronix.com/platform/
+plans:
+  - id: paytronix-platform-enterprise
+    name: Paytronix Platform
+    type: enterprise
+    description: >-
+      Custom, quote-based platform agreement covering the selected product
+      mix across loyalty, ordering, payments, and messaging.
+    entries:
+      - label: Platform Agreement
+        name: platform_agreement
+        type: subscription
+        metric: varies
+        limit: -1
+        timeFrame: year
+        geo: global
+        unit: '1'
+        price: 'custom — contact sales via https://www.paytronix.com/pricing/'
+        userMultiplied: false
+      - label: Locations Onboarded
+        name: locations
+        type: tiered
+        metric: varies
+        limit: -1
+        timeFrame: month
+        geo: global
+        unit: '1'
+        price: 'custom'
+        userMultiplied: false
+    elements:
+      - name: Loyalty Programs
+      - name: Online Ordering
+      - name: Gift And Stored Value
+      - name: Payments
+      - name: Messaging And Campaigns
+      - name: Subscriptions
+      - name: Server (PXS) REST API Access
+      - name: Online Ordering API Access
+  - id: paytronix-customer-success-plan
+    name: Customer Success Plan
+    type: tiered
+    description: >-
+      Tiered service offering that layers onto the platform agreement,
+      ranging from self-guided to hands-on partnership support.
+    entries:
+      - label: Customer Success Tier
+        name: customer_success_tier
+        type: subscription
+        metric: varies
+        limit: -1
+        timeFrame: year
+        geo: global
+        unit: '1'
+        price: 'custom'
+        userMultiplied: false
+    elements:
+      - name: Self-Guided Support
+      - name: Guided Support
+      - name: Hands-On Partnership

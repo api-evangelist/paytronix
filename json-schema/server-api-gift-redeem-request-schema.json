@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "GiftRedeemRequest",
+  "description": "GiftRedeemRequest schema from Paytronix Server API",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/paytronix/refs/heads/main/json-schema/server-api-gift-redeem-request-schema.json",
+  "allOf": [
+    {
+      "$ref": "#/components/schemas/GiftRequest"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "tip": {
+          "type": "number",
+          "example": 5.0
+        }
+      }
+    }
+  ]
+}

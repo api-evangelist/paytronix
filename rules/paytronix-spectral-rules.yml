@@ -1,0 +1,288 @@
+# Paytronix Spectral Ruleset
+# Generated from the Paytronix Server (PXS) API and Online Ordering (Open Dining) API
+# OpenAPI specifications. Enforces the conventions observed across these specs:
+#   - Title prefix "Paytronix ..."
+#   - Title Case operation summaries
+#   - camelCase operationIds with verb prefixes (get/create/update/delete/...)
+#   - Title Case tag names
+#   - HTTP Basic / OAuth bearer security
+#   - JSON request/response bodies with a result envelope
+extends: [[spectral:oas, off]]
+rules:
+
+  # ── INFO / METADATA ─────────────────────────────────────────────
+  info-title-paytronix-prefix:
+    description: API title should begin with "Paytronix".
+    severity: warn
+    given: $.info.title
+    then:
+      function: pattern
+      functionOptions:
+        match: '^Paytronix'
+  info-description-required:
+    description: Info object must have a non-trivial description.
+    severity: warn
+    given: $.info
+    then:
+      field: description
+      function: defined
+  info-version-required:
+    description: Info object must declare a version.
+    severity: error
+    given: $.info
+    then:
+      field: version
+      function: defined
+  info-contact-required:
+    description: Info object should declare a contact.
+    severity: info
+    given: $.info
+    then:
+      field: contact
+      function: defined
+
+  # ── OPENAPI VERSION ─────────────────────────────────────────────
+  openapi-version-3:
+    description: Specs should target OpenAPI 3.0.x.
+    severity: warn
+    given: $.openapi
+    then:
+      function: pattern
+      functionOptions:
+        match: '^3\.0\.'
+
+  # ── SERVERS ─────────────────────────────────────────────────────
+  servers-defined:
+    description: At least one server must be defined.
+    severity: error
+    given: $
+    then:
+      field: servers
+      function: defined
+  server-https:
+    description: Server URLs must use HTTPS.
+    severity: warn
+    given: $.servers[*].url
+    then:
+      function: pattern
+      functionOptions:
+        match: '^https://'
+  server-description:
+    description: Each server should have a description.
+    severity: info
+    given: $.servers[*]
+    then:
+      field: description
+      function: defined
+
+  # ── OPERATIONS ──────────────────────────────────────────────────
+  operation-summary-required:
+    description: Every operation must have a summary.
+    severity: warn
+    given: $.paths[*][get,post,put,delete,patch]
+    then:
+      field: summary
+      function: defined
+  operation-summary-title-case:
+    description: Operation summaries must use Title Case (each word capitalized).
+    severity: warn
+    given: $.paths[*][get,post,put,delete,patch].summary
+    then:
+      function: pattern
+      functionOptions:
+        match: '^([A-Z0-9][A-Za-z0-9]*)(\s+(?:[A-Z0-9][A-Za-z0-9]*|And|Or|By|For|To|In|Of|The|A|An))*$'
+  operation-description-required:
+    description: Every operation must have a description.
+    severity: warn
+    given: $.paths[*][get,post,put,delete,patch]
+    then:
+      field: description
+      function: defined
+  operation-operationid-required:
+    description: Every operation must have an operationId.
+    severity: error
+    given: $.paths[*][get,post,put,delete,patch]
+    then:
+      field: operationId
+      function: defined
+  operation-operationid-camelcase:
+    description: operationId must be camelCase.
+    severity: warn
+    given: $.paths[*][get,post,put,delete,patch].operationId
+    then:
+      function: pattern
+      functionOptions:
+        match: '^[a-z][a-zA-Z0-9]*$'
+  operation-operationid-verb-prefix:
+    description: operationId should start with a known verb prefix.
+    severity: info
+    given: $.paths[*][get,post,put,delete,patch].operationId
+    then:
+      function: pattern
+      functionOptions:
+        match: '^(get|list|create|update|delete|add|redeem|sell|reload|recharge|activate|register|request|search|compute|post|change|query|balance|reverse|exchange|cash)'
+  operation-tags-required:
+    description: Every operation must declare at least one tag.
+    severity: warn
+    given: $.paths[*][get,post,put,delete,patch]
+    then:
+      field: tags
+      function: truthy
+  operation-microcks-extension:
+    description: Each operation should carry an x-microcks-operation extension for mock compatibility.
+    severity: info
+    given: $.paths[*][get,post,put,delete,patch]
+    then:
+      field: x-microcks-operation
+      function: defined
+
+  # ── TAGS ────────────────────────────────────────────────────────
+  tags-global-defined:
+    description: A global tags array must be defined.
+    severity: warn
+    given: $
+    then:
+      field: tags
+      function: truthy
+  tag-description:
+    description: Each global tag should have a description.
+    severity: info
+    given: $.tags[*]
+    then:
+      field: description
+      function: defined
+  tag-title-case:
+    description: Tag names must use Title Case.
+    severity: warn
+    given: $.tags[*].name
+    then:
+      function: pattern
+      functionOptions:
+        match: '^[A-Z][A-Za-z0-9]*(\s+[A-Z][A-Za-z0-9]*)*$'
+
+  # ── PARAMETERS ──────────────────────────────────────────────────
+  parameter-description-required:
+    description: Every parameter must have a description.
+    severity: warn
+    given: $.paths[*][get,post,put,delete,patch].parameters[*]
+    then:
+      field: description
+      function: defined
+  parameter-schema-typed:
+    description: Every parameter schema must declare a type.
+    severity: warn
+    given: $.paths[*][get,post,put,delete,patch].parameters[*].schema
+    then:
+      field: type
+      function: defined
+  parameter-camelcase:
+    description: Query and path parameter names should be camelCase (PXS) or snake_case (Open Dining search).
+    severity: info
+    given: $.paths[*][get,post,put,delete,patch].parameters[*].name
+    then:
+      function: pattern
+      functionOptions:
+        match: '^[a-z][a-zA-Z0-9_]*$'
+
+  # ── REQUEST BODIES ──────────────────────────────────────────────
+  request-body-json:
+    description: Request bodies should provide an application/json media type.
+    severity: warn
+    given: $.paths[*][post,put,patch].requestBody.content
+    then:
+      field: application/json
+      function: defined
+  request-body-schema:
+    description: Request body JSON media type must reference a schema.
+    severity: warn
+    given: $.paths[*][post,put,patch].requestBody.content.application/json
+    then:
+      field: schema
+      function: truthy
+
+  # ── RESPONSES ───────────────────────────────────────────────────
+  response-2xx-required:
+    description: Every operation must define a 2xx success response.
+    severity: error
+    given: $.paths[*][get,post,put,delete,patch].responses
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          type: object
+          anyOf:
+            - required: ['200']
+            - required: ['201']
+            - required: ['204']
+  response-description-required:
+    description: Every response must have a description.
+    severity: warn
+    given: $.paths[*][get,post,put,delete,patch].responses[*]
+    then:
+      field: description
+      function: defined
+  response-json-content:
+    description: 2xx responses should provide application/json content.
+    severity: info
+    given: $.paths[*][get,post,put,delete,patch].responses[200,201].content
+    then:
+      field: application/json
+      function: defined
+
+  # ── SCHEMAS — PROPERTY NAMING ───────────────────────────────────
+  schema-property-typed:
+    description: Schema properties should declare a type, $ref, or composition.
+    severity: info
+    given: $.components.schemas[*].properties[*]
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          type: object
+          anyOf:
+            - required: [type]
+            - required: ['$ref']
+            - required: [allOf]
+            - required: [oneOf]
+            - required: [anyOf]
+            - required: [additionalProperties]
+  schema-property-camelcase:
+    description: Schema property names should be camelCase (PXS convention).
+    severity: info
+    given: $.components.schemas[*].properties.*~
+    then:
+      function: pattern
+      functionOptions:
+        match: '^[a-z][a-zA-Z0-9_]*$'
+
+  # ── SECURITY ────────────────────────────────────────────────────
+  security-schemes-defined:
+    description: components.securitySchemes should be defined where the API requires auth.
+    severity: info
+    given: $.components
+    then:
+      field: securitySchemes
+      function: defined
+  security-scheme-described:
+    description: Each security scheme should have a description.
+    severity: info
+    given: $.components.securitySchemes[*]
+    then:
+      field: description
+      function: defined
+
+  # ── HTTP METHOD CONVENTIONS ─────────────────────────────────────
+  get-no-request-body:
+    description: GET operations must not declare a request body.
+    severity: error
+    given: $.paths[*].get
+    then:
+      field: requestBody
+      function: undefined
+  delete-no-request-body:
+    description: DELETE operations should not declare a request body.
+    severity: warn
+    given: $.paths[*].delete
+    then:
+      field: requestBody
+      function: undefined

@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "GiftRequest",
+  "description": "GiftRequest schema from Paytronix Server API",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/paytronix/refs/heads/main/json-schema/server-api-gift-request-schema.json",
+  "type": "object",
+  "properties": {
+    "merchantId": {
+      "type": "integer",
+      "example": 1000
+    },
+    "storeCode": {
+      "type": "string",
+      "example": "1"
+    },
+    "cardInfo": {
+      "$ref": "#/components/schemas/CardInfo"
+    },
+    "amount": {
+      "type": "number",
+      "example": 25.0
+    },
+    "checkNumber": {
+      "type": "string"
+    },
+    "cashier": {
+      "type": "string"
+    },
+    "terminalId": {
+      "type": "string"
+    },
+    "externalTransactionId": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "merchantId",
+    "storeCode",
+    "cardInfo",
+    "amount"
+  ]
+}

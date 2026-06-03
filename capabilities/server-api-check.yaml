@@ -1,0 +1,122 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: "Paytronix Server API \u2014 Check"
+  description: "Guest Engagement \u2014 Check. 2 operations. Lead operation: Compute Applicable Rewards. Self-contained Naftiko capability covering one Paytronix business surface."
+  tags:
+  - Paytronix
+  - Guest
+  - Check
+  created: '2026-06-03'
+  modified: '2026-06-03'
+binds:
+- namespace: env
+  keys:
+    PAYTRONIX_INTEGRATION_ID: PAYTRONIX_INTEGRATION_ID
+    PAYTRONIX_INTEGRATION_SECRET: PAYTRONIX_INTEGRATION_SECRET
+capability:
+  consumes:
+  - type: http
+    namespace: server-api-check
+    baseUri: https://m{merchantId}.api.paytronix.com/rest/26.6
+    description: "Paytronix Server API \u2014 Check. Self-contained, no shared references."
+    authentication:
+      type: basic
+      username: '{{env.PAYTRONIX_INTEGRATION_ID}}'
+      password: '{{env.PAYTRONIX_INTEGRATION_SECRET}}'
+    resources:
+    - name: check-computeapplicablerewards-json
+      path: /check/computeApplicableRewards.json
+      operations:
+      - name: computeApplicableRewards
+        method: POST
+        description: Compute Applicable Rewards
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: Request body payload.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: check-postandaccruepoints-json
+      path: /check/postAndAccruePoints.json
+      operations:
+      - name: postAndAccruePoints
+        method: POST
+        description: Post And Accrue Points
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: Request body payload.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  exposes:
+  - type: rest
+    namespace: server-api-check-rest
+    port: 8080
+    description: "REST adapter for Paytronix Server API \u2014 Check. One Spectral-compliant resource per consumed operation, prefixed with /v1."
+    resources:
+    - path: /v1/check/computeapplicablerewards
+      name: check-computeapplicablerewards
+      description: REST surface for Compute Applicable Rewards.
+      operations:
+      - method: POST
+        name: computeApplicableRewards
+        description: Compute Applicable Rewards
+        call: server-api-check.computeApplicableRewards
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/check/postandaccruepoints
+      name: check-postandaccruepoints
+      description: REST surface for Post And Accrue Points.
+      operations:
+      - method: POST
+        name: postAndAccruePoints
+        description: Post And Accrue Points
+        call: server-api-check.postAndAccruePoints
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: server-api-check-mcp
+    port: 9090
+    transport: http
+    description: "MCP adapter for Paytronix Server API \u2014 Check. One tool per consumed operation, routed inline through this capability's consumes block."
+    tools:
+    - name: compute-applicable-rewards
+      description: Compute Applicable Rewards
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: server-api-check.computeApplicableRewards
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: post-accrue-points
+      description: Post And Accrue Points
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: server-api-check.postAndAccruePoints
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

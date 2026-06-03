@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AccountInformationReply",
+  "description": "AccountInformationReply schema from Paytronix Server API",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/paytronix/refs/heads/main/json-schema/server-api-account-information-reply-schema.json",
+  "type": "object",
+  "properties": {
+    "result": {
+      "type": "string",
+      "example": "success"
+    },
+    "username": {
+      "type": "string",
+      "example": "jdoe"
+    },
+    "accountStatus": {
+      "type": "string",
+      "example": "ACTIVE"
+    },
+    "queryCardStatus": {
+      "type": "string",
+      "example": "ACTIVE"
+    },
+    "registrationStatus": {
+      "type": "string",
+      "example": "REGISTERED"
+    },
+    "cardTemplateCode": {
+      "type": "string",
+      "example": "1"
+    },
+    "tierCode": {
+      "type": "string",
+      "example": "GOLD"
+    },
+    "primaryCard": {
+      "type": "string",
+      "example": "60490012345678"
+    },
+    "additionalCards": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "walletBalances": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/WalletBalance"
+      }
+    }
+  }
+}

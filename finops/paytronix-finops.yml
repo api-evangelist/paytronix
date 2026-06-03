@@ -1,0 +1,105 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: Paytronix
+providerId: paytronix
+created: '2026-06-03'
+modified: '2026-06-03'
+reconciled: false
+tags:
+  - FinOps
+  - FOCUS
+  - Loyalty
+  - Online Ordering
+  - Payments
+description: >-
+  FOCUS-aligned FinOps for Paytronix: a custom, quote-based SaaS platform
+  agreement (typically scoped by product mix and locations) layered with a
+  Customer Success Plan service tier and per-transaction payment processing.
+  Because pricing is not public, meters model the likely invoice lines rather
+  than published unit prices.
+sources:
+  - https://www.paytronix.com/pricing/
+  - https://www.paytronix.com/platform/
+  - https://www.paytronix.com/platform/payments/
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+publisherName: Paytronix Systems, Inc.
+serviceCategory: Guest Engagement + Loyalty
+billingModel:
+  pricingCategory: Subscription + Take Rate
+  billingFrequency: Monthly
+  billingCurrency: USD
+  chargeCategories:
+    - Purchase
+    - Usage
+    - Tax
+    - Adjustment
+focusColumns:
+  ServiceName: Paytronix Platform
+  ServiceCategory: Guest Engagement + Loyalty
+  ProviderName: Paytronix
+  PublisherName: Paytronix Systems, Inc.
+  InvoiceIssuerName: Paytronix Systems, Inc.
+  BillingCurrency: USD
+  ChargeCategory: Purchase
+meters:
+  - name: platform_subscription
+    unit: month
+    aggregation: sum
+    dimensions:
+      - product
+      - location
+  - name: locations_active
+    unit: location
+    aggregation: max
+    dimensions:
+      - region
+  - name: customer_success_plan
+    unit: month
+    aggregation: sum
+    dimensions:
+      - tier
+  - name: payment_transactions
+    unit: transaction
+    aggregation: count
+    dimensions:
+      - card_brand
+      - location
+  - name: online_orders
+    unit: order
+    aggregation: count
+    dimensions:
+      - order_method
+      - location
+  - name: messages_sent
+    unit: message
+    aggregation: sum
+    dimensions:
+      - channel
+principles:
+  - name: Visibility
+    description: >-
+      Paytronix does not expose a public billing/usage API; consumption
+      visibility comes from platform reporting/analytics and the transaction
+      history available via the Server API (guest/transactionHistory.json,
+      transaction history endpoints) plus invoices from the account team.
+  - name: Allocation
+    description: >-
+      Attribute spend by product line (loyalty, ordering, payments, messaging)
+      and by location/store code, the natural dimensions of a multi-brand,
+      multi-location restaurant or c-store deployment.
+  - name: Optimization
+    description: >-
+      Right-size the product mix and Customer Success Plan tier to actual
+      usage, consolidate messaging volume, and negotiate per-location and
+      per-transaction terms at renewal given the custom quote model.
+  - name: Accountability
+    description: >-
+      Marketing/loyalty program owners own program spend and ROI; finance
+      owns the platform agreement and payment processing take rate. Review
+      against redemption, order volume, and visit-frequency outcomes.

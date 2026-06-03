@@ -1,0 +1,8 @@
+{
+  "merchantId": 1000,
+  "storeCode": "1",
+  "programId": "PX",
+  "terminal": "1",
+  "operator": "100",
+  "posTransactionId": "string"
+}

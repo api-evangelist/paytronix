@@ -1,0 +1,13 @@
+{
+  "result": "success",
+  "pxTransactionId": "TXN-12345",
+  "maskedCardNumber": "******5678",
+  "enrollmentDate": "2026-06-03",
+  "walletBalances": [
+    {
+      "walletCode": "1",
+      "name": "Points",
+      "balance": 1250
+    }
+  ]
+}

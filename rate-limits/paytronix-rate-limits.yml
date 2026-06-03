@@ -1,0 +1,62 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: Paytronix
+providerId: paytronix
+created: '2026-06-03'
+modified: '2026-06-03'
+reconciled: false
+tags:
+  - Rate Limiting
+  - Loyalty
+  - Online Ordering
+description: >-
+  Paytronix does not publish numeric request-rate, concurrency, or quota
+  limits in its public integration documentation (the API Primer and PXS API
+  Reference describe authentication, formatting, versioning, and service-level
+  error codes, but no rate-limit numbers or rate-limit headers). Access is
+  provisioned per integration via an integration identifier and secret, so any
+  applied throttling is governed by the integration agreement rather than a
+  public tier. The limits below are therefore descriptive placeholders with
+  string values pointing at the documentation; reconciled is false because no
+  numeric limits could be verified. Confirm specific limits with Paytronix
+  during integration onboarding.
+sources:
+  - https://developers.paytronix.com/paytronix_api_primer/index.html
+  - https://developers.paytronix.com/pxs_api_reference/index.html
+responseCodes:
+  badRequest: 400
+  unauthorized: 401
+  forbidden: 403
+  notFound: 404
+limits:
+  - name: Server (PXS) API requests
+    scope: integration
+    metric: varies
+    limit: 'not publicly documented — governed by the integration agreement'
+    notes: >-
+      No per-second or per-minute numbers are published; the PXS API Reference
+      documents service-specific error codes but not throttling thresholds.
+  - name: Online Ordering API requests
+    scope: integration
+    metric: varies
+    limit: 'not publicly documented — see docs.opendining.net'
+    notes: >-
+      The Open Dining documentation does not publish request-rate or
+      concurrency limits for the ordering endpoints.
+policies:
+  - name: Per-integration scoping
+    description: >-
+      Requests are authenticated with a per-integration identifier and secret
+      (HTTP Basic); any applied limits are scoped to the integration and
+      negotiated during onboarding rather than published as public tiers.
+  - name: Confirm during onboarding
+    description: >-
+      Because no public numeric limits exist, integrators should confirm
+      acceptable request rates, batch sizes, and concurrency with Paytronix
+      before launch, especially for high-volume POS and batch operations.
+  - name: Backoff and retry
+    description: >-
+      No Retry-After header is documented; clients should implement
+      conservative exponential backoff on 4xx/5xx responses and idempotent
+      retries keyed on externalTransactionId where supported.

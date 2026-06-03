@@ -1,0 +1,27 @@
+{
+  "result": "success",
+  "customerName": "Jane Doe",
+  "tierCode": "GOLD",
+  "printedCardNumber": "60490012345678",
+  "itemDiscounts": [
+    {
+      "itemCode": "string",
+      "discountAmount": 0,
+      "rewardName": "string"
+    }
+  ],
+  "subtotalDiscounts": [
+    {
+      "discountAmount": 0,
+      "rewardName": "string"
+    }
+  ],
+  "walletBalances": [
+    {
+      "walletCode": "1",
+      "name": "Points",
+      "balance": 1250
+    }
+  ],
+  "receiptText": "string"
+}

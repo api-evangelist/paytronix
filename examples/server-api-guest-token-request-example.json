@@ -1,0 +1,8 @@
+{
+  "merchantId": 1000,
+  "grant_type": "password",
+  "username": "jdoe",
+  "password": "s3cret",
+  "scope": "user_read account_read",
+  "refresh_token": "string"
+}

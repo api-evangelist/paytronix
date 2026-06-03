@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/paytronix/refs/heads/main/json-structure/server-api-location-structure.json",
+  "name": "Location",
+  "description": "Location schema from Paytronix Server API",
+  "type": "object",
+  "properties": {
+    "code": {
+      "type": "string",
+      "example": "1"
+    },
+    "name": {
+      "type": "string",
+      "example": "Downtown"
+    },
+    "address": {
+      "$ref": "#/components/schemas/Address"
+    },
+    "latitude": {
+      "type": "double",
+      "example": 42.3601
+    },
+    "longitude": {
+      "type": "double",
+      "example": -71.0589
+    },
+    "hoursOfOperation": {
+      "type": "string"
+    },
+    "distance": {
+      "type": "double",
+      "example": 1.2
+    },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": true
+    }
+  }
+}

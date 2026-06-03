@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/paytronix/refs/heads/main/json-structure/online-ordering-api-menu-item-structure.json",
+  "name": "MenuItem",
+  "description": "MenuItem schema from Paytronix Online Ordering API",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "example": "4b96f1bafc9f100ca79231ef"
+    },
+    "name": {
+      "type": "string",
+      "example": "Chicken Burrito"
+    },
+    "description": {
+      "type": "string",
+      "example": "Grilled chicken, rice, beans, salsa"
+    },
+    "imageUrl": {
+      "type": "string"
+    },
+    "prices": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "Regular"
+          },
+          "price": {
+            "type": "double",
+            "example": 9.5
+          }
+        }
+      }
+    },
+    "options": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "Add Guacamole"
+          },
+          "price": {
+            "type": "double",
+            "example": 1.5
+          }
+        }
+      }
+    }
+  }
+}

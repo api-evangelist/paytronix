@@ -1,0 +1,24 @@
+{
+  "count": 34,
+  "results": [
+    {
+      "id": "4b96f1bafc9f100ca79231ef",
+      "name": "Chicken Burrito",
+      "description": "Grilled chicken, rice, beans, salsa",
+      "imageUrl": "string",
+      "prices": [
+        {
+          "name": "Regular",
+          "price": 9.5
+        }
+      ],
+      "options": [
+        {
+          "name": "Add Guacamole",
+          "price": 1.5
+        }
+      ]
+    }
+  ],
+  "facets": {}
+}

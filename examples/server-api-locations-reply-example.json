@@ -1,0 +1,22 @@
+{
+  "result": "success",
+  "locations": [
+    {
+      "code": "1",
+      "name": "Downtown",
+      "address": {
+        "address1": "string",
+        "address2": "string",
+        "city": "string",
+        "stateProvince": "string",
+        "postalCode": "string",
+        "country": "US"
+      },
+      "latitude": 42.3601,
+      "longitude": -71.0589,
+      "hoursOfOperation": "string",
+      "distance": 1.2,
+      "metadata": {}
+    }
+  ]
+}

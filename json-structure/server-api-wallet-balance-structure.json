@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/paytronix/refs/heads/main/json-structure/server-api-wallet-balance-structure.json",
+  "name": "WalletBalance",
+  "description": "WalletBalance schema from Paytronix Server API",
+  "type": "object",
+  "properties": {
+    "walletCode": {
+      "type": "string",
+      "example": "1"
+    },
+    "name": {
+      "type": "string",
+      "example": "Points"
+    },
+    "balance": {
+      "type": "double",
+      "example": 1250
+    }
+  }
+}

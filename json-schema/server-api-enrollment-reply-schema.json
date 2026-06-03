@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "EnrollmentReply",
+  "description": "EnrollmentReply schema from Paytronix Server API",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/paytronix/refs/heads/main/json-schema/server-api-enrollment-reply-schema.json",
+  "type": "object",
+  "properties": {
+    "result": {
+      "type": "string",
+      "example": "success"
+    },
+    "printedCardNumber": {
+      "type": "string",
+      "example": "60490012345678"
+    },
+    "accountId": {
+      "type": "integer",
+      "format": "int64",
+      "example": 998877
+    },
+    "username": {
+      "type": "string",
+      "example": "jdoe"
+    },
+    "errorCode": {
+      "type": "string"
+    },
+    "errorsByField": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      }
+    }
+  }
+}

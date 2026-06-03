@@ -1,0 +1,80 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: "Paytronix Online Ordering API \u2014 Menu Items"
+  description: "Online Ordering \u2014 Menu Items. 1 operations. Lead operation: Get Menu Item. Self-contained Naftiko capability covering one Paytronix business surface."
+  tags:
+  - Paytronix
+  - Online
+  - Menu Items
+  created: '2026-06-03'
+  modified: '2026-06-03'
+binds:
+- namespace: env
+  keys:
+    OPENDINING_API_KEY: OPENDINING_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: online-ordering-api-menu-items
+    baseUri: https://api.opendining.net
+    description: "Paytronix Online Ordering API \u2014 Menu Items. Self-contained, no shared references."
+    authentication:
+      type: apikey
+      key: X-Api-Key
+      value: '{{env.OPENDINING_API_KEY}}'
+      placement: header
+    resources:
+    - name: menuitems-menuitemid
+      path: /menuitems/{menuItemId}
+      operations:
+      - name: getMenuItem
+        method: GET
+        description: Get Menu Item
+        inputParameters:
+        - name: menuItemId
+          in: path
+          type: string
+          required: true
+          description: Menu item identifier.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  exposes:
+  - type: rest
+    namespace: online-ordering-api-menu-items-rest
+    port: 8080
+    description: "REST adapter for Paytronix Online Ordering API \u2014 Menu Items. One Spectral-compliant resource per consumed operation, prefixed with /v1."
+    resources:
+    - path: /v1/menuitems/{menuitemid}
+      name: menuitems-menuitemid
+      description: REST surface for Get Menu Item.
+      operations:
+      - method: GET
+        name: getMenuItem
+        description: Get Menu Item
+        call: online-ordering-api-menu-items.getMenuItem
+        with:
+          menuItemId: rest.menuItemId
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: online-ordering-api-menu-items-mcp
+    port: 9090
+    transport: http
+    description: "MCP adapter for Paytronix Online Ordering API \u2014 Menu Items. One tool per consumed operation, routed inline through this capability's consumes block."
+    tools:
+    - name: get-menu-item
+      description: Get Menu Item
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: online-ordering-api-menu-items.getMenuItem
+      with:
+        menuItemId: tools.menuItemId
+      outputParameters:
+      - type: object
+        mapping: $.

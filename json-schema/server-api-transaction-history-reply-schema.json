@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "TransactionHistoryReply",
+  "description": "TransactionHistoryReply schema from Paytronix Server API",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/paytronix/refs/heads/main/json-schema/server-api-transaction-history-reply-schema.json",
+  "type": "object",
+  "properties": {
+    "result": {
+      "type": "string",
+      "example": "success"
+    },
+    "walletInfo": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/WalletBalance"
+      }
+    },
+    "transactions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "transactionId": {
+            "type": "string"
+          },
+          "datetime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "type": {
+            "type": "string",
+            "example": "ACCRUAL"
+          },
+          "walletCode": {
+            "type": "string"
+          },
+          "amount": {
+            "type": "number"
+          },
+          "balance": {
+            "type": "number"
+          }
+        }
+      }
+    }
+  }
+}

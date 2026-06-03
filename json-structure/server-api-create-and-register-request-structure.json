@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/paytronix/refs/heads/main/json-structure/server-api-create-and-register-request-structure.json",
+  "name": "CreateAndRegisterRequest",
+  "description": "CreateAndRegisterRequest schema from Paytronix Server API",
+  "type": "object",
+  "properties": {
+    "merchantId": {
+      "type": "int32",
+      "example": 1000
+    },
+    "cardTemplateCode": {
+      "type": "string",
+      "example": "1"
+    },
+    "enforceUniqueFields": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "example": [
+        "email"
+      ]
+    },
+    "setUserFields": {
+      "type": "object",
+      "additionalProperties": true,
+      "example": {
+        "username": "jdoe",
+        "password": "s3cret",
+        "firstName": "Jane",
+        "lastName": "Doe",
+        "email": "jane@example.com"
+      }
+    },
+    "setAccountFields": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "sendSmsVerification": {
+      "type": "boolean"
+    },
+    "smsVerificationCode": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "merchantId",
+    "cardTemplateCode",
+    "setUserFields"
+  ]
+}

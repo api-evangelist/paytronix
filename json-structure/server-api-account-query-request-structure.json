@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/paytronix/refs/heads/main/json-structure/server-api-account-query-request-structure.json",
+  "name": "AccountQueryRequest",
+  "description": "AccountQueryRequest schema from Paytronix Server API",
+  "type": "object",
+  "properties": {
+    "headerInfo": {
+      "$ref": "#/components/schemas/HeaderInfo"
+    },
+    "pageSize": {
+      "type": "int32",
+      "example": 25
+    },
+    "accountQueries": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "phone": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "postalCode": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "required": [
+    "headerInfo",
+    "accountQueries"
+  ]
+}

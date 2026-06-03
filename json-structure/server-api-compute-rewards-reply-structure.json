@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/paytronix/refs/heads/main/json-structure/server-api-compute-rewards-reply-structure.json",
+  "name": "ComputeRewardsReply",
+  "description": "ComputeRewardsReply schema from Paytronix Server API",
+  "type": "object",
+  "properties": {
+    "result": {
+      "type": "string",
+      "example": "success"
+    },
+    "customerName": {
+      "type": "string",
+      "example": "Jane Doe"
+    },
+    "tierCode": {
+      "type": "string",
+      "example": "GOLD"
+    },
+    "printedCardNumber": {
+      "type": "string",
+      "example": "60490012345678"
+    },
+    "itemDiscounts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "itemCode": {
+            "type": "string"
+          },
+          "discountAmount": {
+            "type": "double"
+          },
+          "rewardName": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "subtotalDiscounts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "discountAmount": {
+            "type": "double"
+          },
+          "rewardName": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "walletBalances": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/WalletBalance"
+      }
+    },
+    "receiptText": {
+      "type": "string"
+    }
+  }
+}

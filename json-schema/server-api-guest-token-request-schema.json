@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "GuestTokenRequest",
+  "description": "GuestTokenRequest schema from Paytronix Server API",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/paytronix/refs/heads/main/json-schema/server-api-guest-token-request-schema.json",
+  "type": "object",
+  "properties": {
+    "merchantId": {
+      "type": "integer",
+      "example": 1000
+    },
+    "grant_type": {
+      "type": "string",
+      "example": "password",
+      "enum": [
+        "password",
+        "one_time_password",
+        "authorization_code",
+        "refresh_token",
+        "http://paytronix.com/oauth/fieldset"
+      ]
+    },
+    "username": {
+      "type": "string",
+      "example": "jdoe"
+    },
+    "password": {
+      "type": "string",
+      "example": "s3cret"
+    },
+    "scope": {
+      "type": "string",
+      "example": "user_read account_read"
+    },
+    "refresh_token": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "merchantId",
+    "grant_type"
+  ]
+}

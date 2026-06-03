@@ -23,7 +23,7 @@ tags:
   - Messaging
 url: https://raw.githubusercontent.com/api-evangelist/paytronix/refs/heads/main/apis.yml
 created: '2026-06-02'
-modified: '2026-06-02'
+modified: '2026-06-03'
 specificationVersion: '0.19'
 apis:
   - aid: paytronix:rest-api
@@ -37,6 +37,7 @@ apis:
       options. Start with the API Primer covering authentication, formatting,
       and versioning.
     humanURL: https://developers.paytronix.com/pxs_api_reference/index.html
+    baseURL: https://m{merchantId}.api.paytronix.com/rest/26.6
     tags:
       - Loyalty
       - Transactions
@@ -50,6 +51,35 @@ apis:
         url: https://developers.paytronix.com/pxs_api_reference/oauth.html
       - type: GettingStarted
         url: https://developers.paytronix.com/welcome/index.html
+      - type: OpenAPI
+        url: openapi/paytronix-server-api-openapi.yml
+      - type: JSONSchema
+        url: json-schema/server-api-account-information-reply-schema.json
+        title: Account Information Reply Schema
+      - type: JSONStructure
+        url: json-structure/server-api-account-information-reply-structure.json
+        title: Account Information Reply Structure
+      - type: Example
+        url: examples/server-api-account-information-reply-example.json
+        title: Account Information Reply Example
+      - type: JSON-LD
+        url: json-ld/paytronix-server-api-context.jsonld
+      - type: NaftikoCapability
+        url: capabilities/server-api-oauth.yaml
+      - type: NaftikoCapability
+        url: capabilities/server-api-guest.yaml
+      - type: NaftikoCapability
+        url: capabilities/server-api-enrollment.yaml
+      - type: NaftikoCapability
+        url: capabilities/server-api-transaction.yaml
+      - type: NaftikoCapability
+        url: capabilities/server-api-gift.yaml
+      - type: NaftikoCapability
+        url: capabilities/server-api-payment.yaml
+      - type: NaftikoCapability
+        url: capabilities/server-api-store.yaml
+      - type: NaftikoCapability
+        url: capabilities/server-api-check.yaml
   - aid: paytronix:online-ordering-api
     name: Paytronix Online Ordering API
     description: >-
@@ -58,12 +88,34 @@ apis:
       online app, call in, call center, and drive through. It connects ordering
       systems with the broader Paytronix loyalty and guest engagement platform.
     humanURL: http://docs.opendining.net/
+    baseURL: https://api.opendining.net
     tags:
       - Online Ordering
       - Restaurant
     properties:
       - type: Documentation
         url: http://docs.opendining.net/
+      - type: OpenAPI
+        url: openapi/paytronix-online-ordering-api-openapi.yml
+      - type: JSONSchema
+        url: json-schema/online-ordering-api-order-schema.json
+        title: Order Schema
+      - type: JSONStructure
+        url: json-structure/online-ordering-api-order-structure.json
+        title: Order Structure
+      - type: Example
+        url: examples/online-ordering-api-order-example.json
+        title: Order Example
+      - type: JSON-LD
+        url: json-ld/paytronix-online-ordering-api-context.jsonld
+      - type: NaftikoCapability
+        url: capabilities/online-ordering-api-restaurants.yaml
+      - type: NaftikoCapability
+        url: capabilities/online-ordering-api-menu-items.yaml
+      - type: NaftikoCapability
+        url: capabilities/online-ordering-api-search.yaml
+      - type: NaftikoCapability
+        url: capabilities/online-ordering-api-orders.yaml
 common:
   - type: Website
     url: https://www.paytronix.com/
@@ -72,13 +124,81 @@ common:
   - type: APIReference
     url: https://developers.paytronix.com/pxs_api_reference/index.html
   - type: Pricing
-    url: https://www.paytronix.com/platform/
+    url: https://www.paytronix.com/pricing/
   - type: Support
     url: https://www.paytronix.com/support/
   - type: Blog
     url: https://www.paytronix.com/blog
   - type: LinkedIn
     url: https://www.linkedin.com/company/paytronix-systems
+  - type: GitHubOrganization
+    url: https://github.com/paytronix
+  - type: SpectralRules
+    url: rules/paytronix-spectral-rules.yml
+  - type: Vocabulary
+    url: vocabulary/paytronix-vocabulary.yml
+  - type: Plans
+    url: plans/paytronix-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/paytronix-rate-limits.yml
+  - type: FinOps
+    url: finops/paytronix-finops.yml
+  - type: Features
+    data:
+      - name: Loyalty Programs
+        description: >-
+          Points, tiers, rewards, challenges, and referrals managed through the
+          Server API Guest, Transaction, and Check services.
+      - name: Gift And Stored Value
+        description: >-
+          Sell, reload, redeem, balance, and exchange gift and stored-value
+          cards via the Gift and Transaction services.
+      - name: Online Ordering
+        description: >-
+          Restaurant and menu discovery, search, and order creation and
+          submission across six order methods via the Online Ordering API.
+      - name: Payments
+        description: >-
+          Stored-value recharge, saved payment methods, auto recharge, and
+          Stripe/Apple Pay/Spreedly integration via the Payment service.
+      - name: Guest Enrollment
+        description: >-
+          Create, activate, and register virtual and physical cards with
+          configurable enrollment fields via the Enrollment service.
+      - name: Messaging And Campaigns
+        description: >-
+          Guest messaging, campaign feedback, and message-frequency preferences
+          managed through the messaging services.
+  - type: UseCases
+    data:
+      - name: Branded Loyalty Mobile App
+        description: >-
+          Authenticate guests with the OAuth Service and surface balances,
+          tiers, and transaction history from the Guest service.
+      - name: Point-Of-Sale Loyalty Integration
+        description: >-
+          Activate cards, accrue points, and redeem rewards at the register
+          using the Transaction and Check services.
+      - name: Gift Card Program
+        description: >-
+          Sell and redeem gift cards online and in store with the Gift service
+          and stored-value recharge via the Payment service.
+      - name: Online And Mobile Ordering
+        description: >-
+          Build ordering experiences with restaurant/menu search and order
+          submission through the Online Ordering API.
+  - type: Integrations
+    data:
+      - name: Stripe
+        description: Payment processing via checkout sessions and payment intents in the Payment service.
+      - name: Apple Pay
+        description: Apple Pay merchant validation and domain registration in the Payment service.
+      - name: Spreedly
+        description: Card tokenization via Spreedly iframe parameters in the Payment service.
+      - name: Apple Wallet
+        description: Mobile wallet passes via the Apple Passbook service.
+      - name: Google Wallet
+        description: Mobile wallet passes via the Google Wallet (Android Pay) service.
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com

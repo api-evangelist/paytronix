@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Customer",
+  "description": "Customer schema from Paytronix Online Ordering API",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/paytronix/refs/heads/main/json-schema/online-ordering-api-customer-schema.json",
+  "type": "object",
+  "properties": {
+    "firstName": {
+      "type": "string",
+      "example": "Jane"
+    },
+    "lastName": {
+      "type": "string",
+      "example": "Doe"
+    },
+    "email": {
+      "type": "string",
+      "example": "jane@example.com"
+    },
+    "phone": {
+      "type": "string",
+      "example": "+16175551234"
+    }
+  }
+}

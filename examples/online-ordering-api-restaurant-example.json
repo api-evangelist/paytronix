@@ -1,0 +1,18 @@
+{
+  "id": "4b96f1bafc9f100ca79231ef",
+  "name": "Taqueria Downtown",
+  "distance": 1.2,
+  "coordinates": {
+    "lat": 40.0,
+    "lon": -81.0
+  },
+  "address": "123 Main St",
+  "city": "Boston",
+  "state": "MA",
+  "postalCode": "02110",
+  "phone": "+16175551234",
+  "website": "https://example.com",
+  "organizationId": "string",
+  "imageUrl": "string",
+  "description": "string"
+}
