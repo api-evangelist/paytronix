@@ -1,16 +1,13 @@
 aid: paytronix
 name: Paytronix
 description: >-
-  Paytronix is a cloud-based digital guest engagement platform for restaurants
-  and convenience stores, providing loyalty programs, gift and stored-value
-  cards, online ordering, branded mobile apps, messaging, and analytics to more
-  than 1,800 brands. Paytronix publishes extensive public integration
-  documentation describing a REST-based Server API with 40-plus services
-  spanning guests, enrollment, transactions, checks, payments, gift, messaging,
-  campaigns, stores, and mobile wallet passes. Authentication supports OAuth,
-  client credentials (integration identifier and secret via HTTP Basic), and
-  B2B flows. A separate Online Ordering API is documented for ordering
-  integrations, making Paytronix a developer-friendly guest engagement provider.
+  Paytronix is a cloud-based digital guest engagement platform for restaurants and convenience stores, providing loyalty
+  programs, gift and stored-value cards, online ordering, branded mobile apps, messaging, and analytics to more than
+  1,800 brands. Paytronix publishes extensive public integration documentation describing a REST-based Server API with
+  40-plus services spanning guests, enrollment, transactions, checks, payments, gift, messaging, campaigns, stores, and
+  mobile wallet passes. Authentication supports OAuth, client credentials (integration identifier and secret via HTTP
+  Basic), and B2B flows. A separate Online Ordering API is documented for ordering integrations, making Paytronix a
+  developer-friendly guest engagement provider.
 type: Index
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
@@ -29,13 +26,10 @@ apis:
   - aid: paytronix:rest-api
     name: Paytronix Server API
     description: >-
-      The Paytronix Server (PXS) REST API exposes 40-plus services for guest
-      engagement, including Guest, Enrollment, Transaction, Check, Sale,
-      Payment, Gift, Message, Campaign Feedback, Store, and mobile wallet
-      services. Authentication is handled through the OAuth Service, with client
-      credentials supplied via HTTP Basic, plus email and B2B authentication
-      options. Start with the API Primer covering authentication, formatting,
-      and versioning.
+      The Paytronix Server (PXS) REST API exposes 40-plus services for guest engagement, including Guest, Enrollment,
+      Transaction, Check, Sale, Payment, Gift, Message, Campaign Feedback, Store, and mobile wallet services.
+      Authentication is handled through the OAuth Service, with client credentials supplied via HTTP Basic, plus email
+      and B2B authentication options. Start with the API Primer covering authentication, formatting, and versioning.
     humanURL: https://developers.paytronix.com/pxs_api_reference/index.html
     baseURL: https://m{merchantId}.api.paytronix.com/rest/26.6
     tags:
@@ -64,29 +58,12 @@ apis:
         title: Account Information Reply Example
       - type: JSON-LD
         url: json-ld/paytronix-server-api-context.jsonld
-      - type: NaftikoCapability
-        url: capabilities/server-api-oauth.yaml
-      - type: NaftikoCapability
-        url: capabilities/server-api-guest.yaml
-      - type: NaftikoCapability
-        url: capabilities/server-api-enrollment.yaml
-      - type: NaftikoCapability
-        url: capabilities/server-api-transaction.yaml
-      - type: NaftikoCapability
-        url: capabilities/server-api-gift.yaml
-      - type: NaftikoCapability
-        url: capabilities/server-api-payment.yaml
-      - type: NaftikoCapability
-        url: capabilities/server-api-store.yaml
-      - type: NaftikoCapability
-        url: capabilities/server-api-check.yaml
   - aid: paytronix:online-ordering-api
     name: Paytronix Online Ordering API
     description: >-
-      The Paytronix Online Ordering API supports building and integrating
-      ordering experiences across order methods including in store, online web,
-      online app, call in, call center, and drive through. It connects ordering
-      systems with the broader Paytronix loyalty and guest engagement platform.
+      The Paytronix Online Ordering API supports building and integrating ordering experiences across order methods
+      including in store, online web, online app, call in, call center, and drive through. It connects ordering systems
+      with the broader Paytronix loyalty and guest engagement platform.
     humanURL: http://docs.opendining.net/
     baseURL: https://api.opendining.net
     tags:
@@ -108,14 +85,6 @@ apis:
         title: Order Example
       - type: JSON-LD
         url: json-ld/paytronix-online-ordering-api-context.jsonld
-      - type: NaftikoCapability
-        url: capabilities/online-ordering-api-restaurants.yaml
-      - type: NaftikoCapability
-        url: capabilities/online-ordering-api-menu-items.yaml
-      - type: NaftikoCapability
-        url: capabilities/online-ordering-api-search.yaml
-      - type: NaftikoCapability
-        url: capabilities/online-ordering-api-orders.yaml
 common:
   - type: Website
     url: https://www.paytronix.com/
@@ -147,46 +116,38 @@ common:
     data:
       - name: Loyalty Programs
         description: >-
-          Points, tiers, rewards, challenges, and referrals managed through the
-          Server API Guest, Transaction, and Check services.
+          Points, tiers, rewards, challenges, and referrals managed through the Server API Guest, Transaction, and Check
+          services.
       - name: Gift And Stored Value
-        description: >-
-          Sell, reload, redeem, balance, and exchange gift and stored-value
-          cards via the Gift and Transaction services.
+        description: Sell, reload, redeem, balance, and exchange gift and stored-value cards via the Gift and Transaction services.
       - name: Online Ordering
         description: >-
-          Restaurant and menu discovery, search, and order creation and
-          submission across six order methods via the Online Ordering API.
+          Restaurant and menu discovery, search, and order creation and submission across six order methods via the
+          Online Ordering API.
       - name: Payments
         description: >-
-          Stored-value recharge, saved payment methods, auto recharge, and
-          Stripe/Apple Pay/Spreedly integration via the Payment service.
+          Stored-value recharge, saved payment methods, auto recharge, and Stripe/Apple Pay/Spreedly integration via the
+          Payment service.
       - name: Guest Enrollment
         description: >-
-          Create, activate, and register virtual and physical cards with
-          configurable enrollment fields via the Enrollment service.
+          Create, activate, and register virtual and physical cards with configurable enrollment fields via the
+          Enrollment service.
       - name: Messaging And Campaigns
-        description: >-
-          Guest messaging, campaign feedback, and message-frequency preferences
-          managed through the messaging services.
+        description: Guest messaging, campaign feedback, and message-frequency preferences managed through the messaging services.
   - type: UseCases
     data:
       - name: Branded Loyalty Mobile App
         description: >-
-          Authenticate guests with the OAuth Service and surface balances,
-          tiers, and transaction history from the Guest service.
+          Authenticate guests with the OAuth Service and surface balances, tiers, and transaction history from the Guest
+          service.
       - name: Point-Of-Sale Loyalty Integration
-        description: >-
-          Activate cards, accrue points, and redeem rewards at the register
-          using the Transaction and Check services.
+        description: Activate cards, accrue points, and redeem rewards at the register using the Transaction and Check services.
       - name: Gift Card Program
         description: >-
-          Sell and redeem gift cards online and in store with the Gift service
-          and stored-value recharge via the Payment service.
+          Sell and redeem gift cards online and in store with the Gift service and stored-value recharge via the Payment
+          service.
       - name: Online And Mobile Ordering
-        description: >-
-          Build ordering experiences with restaurant/menu search and order
-          submission through the Online Ordering API.
+        description: Build ordering experiences with restaurant/menu search and order submission through the Online Ordering API.
   - type: Integrations
     data:
       - name: Stripe

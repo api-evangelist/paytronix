@@ -1,0 +1,857 @@
+{
+  "item": [
+    {
+      "id": "28e034e8-717d-4b75-b192-f22813533e43",
+      "name": "Restaurants",
+      "description": {
+        "content": "Restaurant and location discovery.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "0752e0c5-403a-4158-a16f-f1a79357a7a8",
+          "name": "Get Restaurant",
+          "request": {
+            "name": "Get Restaurant",
+            "description": {
+              "content": "Retrieve a single restaurant/location object by its identifier.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "restaurants",
+                ":restaurantId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "restaurantId",
+                  "description": "(Required) Restaurant/location identifier."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "feeb4ddf-8f2d-4694-9e07-37a30506e2be",
+              "name": "Restaurant object.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "restaurants",
+                    ":restaurantId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "restaurantId",
+                      "description": "(Required) Restaurant/location identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"4b96f1bafc9f100ca79231ef\",\n  \"name\": \"Taqueria Downtown\",\n  \"distance\": 1.2,\n  \"coordinates\": {\n    \"lat\": 40,\n    \"lon\": -81\n  },\n  \"address\": \"123 Main St\",\n  \"city\": \"Boston\",\n  \"state\": \"MA\",\n  \"postalCode\": \"02110\",\n  \"phone\": \"+16175551234\",\n  \"website\": \"https://example.com\",\n  \"organizationId\": \"string\",\n  \"imageUrl\": \"string\",\n  \"description\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "94111a70-b554-433d-8e36-e29c17dcf775",
+      "name": "Menu Items",
+      "description": {
+        "content": "Menu item retrieval.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "3618e6f0-0bcc-4f25-a062-1b877f5ab239",
+          "name": "Get Menu Item",
+          "request": {
+            "name": "Get Menu Item",
+            "description": {
+              "content": "Retrieve a single menu item by identifier, including its prices and options. Only GET is supported to serve consumer-facing applications.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "menuitems",
+                ":menuItemId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "menuItemId",
+                  "description": "(Required) Menu item identifier."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c3f16ea6-b8a0-464b-abe5-99e474a44bf1",
+              "name": "Menu item object.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "menuitems",
+                    ":menuItemId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "menuItemId",
+                      "description": "(Required) Menu item identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"4b96f1bafc9f100ca79231ef\",\n  \"name\": \"Chicken Burrito\",\n  \"description\": \"Grilled chicken, rice, beans, salsa\",\n  \"imageUrl\": \"string\",\n  \"prices\": [\n    {\n      \"name\": \"Regular\",\n      \"price\": 9.5\n    }\n  ],\n  \"options\": [\n    {\n      \"name\": \"Add Guacamole\",\n      \"price\": 1.5\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "208beb28-3593-4df1-9a8f-cbbab0b8123c",
+      "name": "Orders",
+      "description": {
+        "content": "Order creation, retrieval, and submission.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "fed91bf5-df35-4603-ae5f-769f20003e37",
+          "name": "Create Order",
+          "request": {
+            "name": "Create Order",
+            "description": {
+              "content": "Create a new order for a restaurant, including line items, the customer, an optional tip, and an optional delivery address.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "orders"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"restaurantId\": \"<string>\",\n  \"items\": [\n    {\n      \"menuItemId\": \"<string>\",\n      \"name\": \"<string>\",\n      \"quantity\": \"<integer>\",\n      \"price\": \"<number>\",\n      \"options\": [\n        {\n          \"name\": \"<string>\",\n          \"price\": \"<number>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"price\": \"<number>\"\n        }\n      ]\n    },\n    {\n      \"menuItemId\": \"<string>\",\n      \"name\": \"<string>\",\n      \"quantity\": \"<integer>\",\n      \"price\": \"<number>\",\n      \"options\": [\n        {\n          \"name\": \"<string>\",\n          \"price\": \"<number>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"price\": \"<number>\"\n        }\n      ]\n    }\n  ],\n  \"customer\": {\n    \"firstName\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"email\": \"<string>\",\n    \"phone\": \"<string>\"\n  },\n  \"orderMethod\": \"<string>\",\n  \"tip\": \"<number>\",\n  \"deliveryAddress\": {\n    \"address1\": \"<string>\",\n    \"address2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"postalCode\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8d0839d9-c270-43bc-b7bb-82b672abb556",
+              "name": "Order created.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"restaurantId\": \"4b96f1bafc9f100ca79231ef\",\n  \"items\": [\n    {\n      \"menuItemId\": \"4b96f1bafc9f100ca79231ef\",\n      \"name\": \"Chicken Burrito\",\n      \"quantity\": 2,\n      \"price\": 9.5,\n      \"options\": [\n        {\n          \"name\": \"string\",\n          \"price\": 0\n        }\n      ]\n    }\n  ],\n  \"customer\": {\n    \"firstName\": \"Jane\",\n    \"lastName\": \"Doe\",\n    \"email\": \"jane@example.com\",\n    \"phone\": \"+16175551234\"\n  },\n  \"orderMethod\": \"online_app\",\n  \"tip\": 3,\n  \"deliveryAddress\": {\n    \"address1\": \"456 Elm St\",\n    \"address2\": \"string\",\n    \"city\": \"Boston\",\n    \"state\": \"MA\",\n    \"postalCode\": \"02110\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"5f1c2d3e4a5b6c7d8e9f0a1b\",\n  \"restaurantId\": \"4b96f1bafc9f100ca79231ef\",\n  \"items\": [\n    {\n      \"menuItemId\": \"4b96f1bafc9f100ca79231ef\",\n      \"name\": \"Chicken Burrito\",\n      \"quantity\": 2,\n      \"price\": 9.5,\n      \"options\": [\n        {\n          \"name\": \"string\",\n          \"price\": 0\n        }\n      ]\n    }\n  ],\n  \"customer\": {\n    \"firstName\": \"Jane\",\n    \"lastName\": \"Doe\",\n    \"email\": \"jane@example.com\",\n    \"phone\": \"+16175551234\"\n  },\n  \"orderMethod\": \"online_app\",\n  \"tip\": 3,\n  \"total\": 22,\n  \"status\": \"submitted\",\n  \"deliveryAddress\": {\n    \"address1\": \"456 Elm St\",\n    \"address2\": \"string\",\n    \"city\": \"Boston\",\n    \"state\": \"MA\",\n    \"postalCode\": \"02110\"\n  },\n  \"createdAt\": \"2026-06-03T12:00:00Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "868b9396-9b32-4975-b703-17e07f1c1a94",
+          "name": "Get Order",
+          "request": {
+            "name": "Get Order",
+            "description": {
+              "content": "Retrieve the details and current status of a given order by its identifier.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "orders",
+                ":orderId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "orderId",
+                  "description": "(Required) Order identifier."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "310922c9-c7f7-49ce-ba51-66763bde32c8",
+              "name": "Order object.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders",
+                    ":orderId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orderId",
+                      "description": "(Required) Order identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"5f1c2d3e4a5b6c7d8e9f0a1b\",\n  \"restaurantId\": \"4b96f1bafc9f100ca79231ef\",\n  \"items\": [\n    {\n      \"menuItemId\": \"4b96f1bafc9f100ca79231ef\",\n      \"name\": \"Chicken Burrito\",\n      \"quantity\": 2,\n      \"price\": 9.5,\n      \"options\": [\n        {\n          \"name\": \"string\",\n          \"price\": 0\n        }\n      ]\n    }\n  ],\n  \"customer\": {\n    \"firstName\": \"Jane\",\n    \"lastName\": \"Doe\",\n    \"email\": \"jane@example.com\",\n    \"phone\": \"+16175551234\"\n  },\n  \"orderMethod\": \"online_app\",\n  \"tip\": 3,\n  \"total\": 22,\n  \"status\": \"submitted\",\n  \"deliveryAddress\": {\n    \"address1\": \"456 Elm St\",\n    \"address2\": \"string\",\n    \"city\": \"Boston\",\n    \"state\": \"MA\",\n    \"postalCode\": \"02110\"\n  },\n  \"createdAt\": \"2026-06-03T12:00:00Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1008c507-1ca0-4844-9a48-c837a3ae8e4e",
+          "name": "Update Order",
+          "request": {
+            "name": "Update Order",
+            "description": {
+              "content": "Update an existing order, for example to add items or submit it for payment.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "orders",
+                ":orderId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "orderId",
+                  "description": "(Required) Order identifier."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"restaurantId\": \"<string>\",\n  \"items\": [\n    {\n      \"menuItemId\": \"<string>\",\n      \"name\": \"<string>\",\n      \"quantity\": \"<integer>\",\n      \"price\": \"<number>\",\n      \"options\": [\n        {\n          \"name\": \"<string>\",\n          \"price\": \"<number>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"price\": \"<number>\"\n        }\n      ]\n    },\n    {\n      \"menuItemId\": \"<string>\",\n      \"name\": \"<string>\",\n      \"quantity\": \"<integer>\",\n      \"price\": \"<number>\",\n      \"options\": [\n        {\n          \"name\": \"<string>\",\n          \"price\": \"<number>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"price\": \"<number>\"\n        }\n      ]\n    }\n  ],\n  \"customer\": {\n    \"firstName\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"email\": \"<string>\",\n    \"phone\": \"<string>\"\n  },\n  \"orderMethod\": \"<string>\",\n  \"tip\": \"<number>\",\n  \"deliveryAddress\": {\n    \"address1\": \"<string>\",\n    \"address2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"postalCode\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "bf9bc4dd-57d4-4e4b-a23b-aa198b9b0c9b",
+              "name": "Updated order object.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders",
+                    ":orderId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orderId",
+                      "description": "(Required) Order identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"restaurantId\": \"4b96f1bafc9f100ca79231ef\",\n  \"items\": [\n    {\n      \"menuItemId\": \"4b96f1bafc9f100ca79231ef\",\n      \"name\": \"Chicken Burrito\",\n      \"quantity\": 2,\n      \"price\": 9.5,\n      \"options\": [\n        {\n          \"name\": \"string\",\n          \"price\": 0\n        }\n      ]\n    }\n  ],\n  \"customer\": {\n    \"firstName\": \"Jane\",\n    \"lastName\": \"Doe\",\n    \"email\": \"jane@example.com\",\n    \"phone\": \"+16175551234\"\n  },\n  \"orderMethod\": \"online_app\",\n  \"tip\": 3,\n  \"deliveryAddress\": {\n    \"address1\": \"456 Elm St\",\n    \"address2\": \"string\",\n    \"city\": \"Boston\",\n    \"state\": \"MA\",\n    \"postalCode\": \"02110\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"5f1c2d3e4a5b6c7d8e9f0a1b\",\n  \"restaurantId\": \"4b96f1bafc9f100ca79231ef\",\n  \"items\": [\n    {\n      \"menuItemId\": \"4b96f1bafc9f100ca79231ef\",\n      \"name\": \"Chicken Burrito\",\n      \"quantity\": 2,\n      \"price\": 9.5,\n      \"options\": [\n        {\n          \"name\": \"string\",\n          \"price\": 0\n        }\n      ]\n    }\n  ],\n  \"customer\": {\n    \"firstName\": \"Jane\",\n    \"lastName\": \"Doe\",\n    \"email\": \"jane@example.com\",\n    \"phone\": \"+16175551234\"\n  },\n  \"orderMethod\": \"online_app\",\n  \"tip\": 3,\n  \"total\": 22,\n  \"status\": \"submitted\",\n  \"deliveryAddress\": {\n    \"address1\": \"456 Elm St\",\n    \"address2\": \"string\",\n    \"city\": \"Boston\",\n    \"state\": \"MA\",\n    \"postalCode\": \"02110\"\n  },\n  \"createdAt\": \"2026-06-03T12:00:00Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "021178ad-43da-4235-8454-af77c2d733a9",
+      "name": "Search",
+      "description": {
+        "content": "Geospatial and full-text search across restaurants and menu items.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "84cac837-f3ae-4feb-9b24-d2e66e4d1374",
+          "name": "Search Restaurants",
+          "request": {
+            "name": "Search Restaurants",
+            "description": {
+              "content": "Search restaurants by location and optional full-text query, returning a count, a results array, and applicable facets.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "search",
+                "restaurants"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "lat",
+                  "value": "<double>",
+                  "description": "(Required) Latitude of the search center."
+                },
+                {
+                  "disabled": false,
+                  "key": "lon",
+                  "value": "<double>",
+                  "description": "(Required) Longitude of the search center."
+                },
+                {
+                  "disabled": false,
+                  "key": "q",
+                  "value": "<string>",
+                  "description": "Fuzzy, weighted full-text search query."
+                },
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "Trailing-wildcard search on the business name."
+                },
+                {
+                  "disabled": false,
+                  "key": "tags",
+                  "value": "<string>",
+                  "description": "Space-separated, URL-encoded tags to restrict results by category."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "10",
+                  "description": "Maximum number of results (default 10, max 50)."
+                },
+                {
+                  "disabled": false,
+                  "key": "skip",
+                  "value": "0",
+                  "description": "Offset for pagination."
+                },
+                {
+                  "disabled": false,
+                  "key": "sort",
+                  "value": "distance",
+                  "description": "Sort order, by distance (default) or price."
+                },
+                {
+                  "disabled": false,
+                  "key": "show_closed",
+                  "value": "false",
+                  "description": "When true, include closed restaurants."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "11d6a410-acdf-457c-88db-a15c40cf5965",
+              "name": "Restaurant search results.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "search",
+                    "restaurants"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "lat",
+                      "value": "40"
+                    },
+                    {
+                      "key": "lon",
+                      "value": "-81"
+                    },
+                    {
+                      "key": "q",
+                      "value": "burrito"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tags",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "skip",
+                      "value": "0"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "distance"
+                    },
+                    {
+                      "key": "show_closed",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 12,\n  \"results\": [\n    {\n      \"id\": \"4b96f1bafc9f100ca79231ef\",\n      \"name\": \"Taqueria Downtown\",\n      \"distance\": 1.2,\n      \"coordinates\": {\n        \"lat\": 40,\n        \"lon\": -81\n      },\n      \"address\": \"123 Main St\",\n      \"city\": \"Boston\",\n      \"state\": \"MA\",\n      \"postalCode\": \"02110\",\n      \"phone\": \"+16175551234\",\n      \"website\": \"https://example.com\",\n      \"organizationId\": \"string\",\n      \"imageUrl\": \"string\",\n      \"description\": \"string\"\n    }\n  ],\n  \"facets\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0d6542e6-e332-4ae3-811b-4b3f919d4ab1",
+          "name": "Search Menu Items",
+          "request": {
+            "name": "Search Menu Items",
+            "description": {
+              "content": "Search menu items by location and optional full-text query, returning a count, a results array (each with a prices array), and applicable facets.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "search",
+                "menuitems"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "lat",
+                  "value": "<double>",
+                  "description": "(Required) Latitude of the search center."
+                },
+                {
+                  "disabled": false,
+                  "key": "lon",
+                  "value": "<double>",
+                  "description": "(Required) Longitude of the search center."
+                },
+                {
+                  "disabled": false,
+                  "key": "q",
+                  "value": "<string>",
+                  "description": "Fuzzy, weighted full-text search query."
+                },
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "Trailing-wildcard search on the item name."
+                },
+                {
+                  "disabled": false,
+                  "key": "tags",
+                  "value": "<string>",
+                  "description": "Space-separated, URL-encoded tags to restrict results by category."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "10",
+                  "description": "Maximum number of results (default 10, max 50)."
+                },
+                {
+                  "disabled": false,
+                  "key": "skip",
+                  "value": "0",
+                  "description": "Offset for pagination."
+                },
+                {
+                  "disabled": false,
+                  "key": "sort",
+                  "value": "distance",
+                  "description": "Sort order, by distance (default) or price."
+                },
+                {
+                  "disabled": false,
+                  "key": "show_closed",
+                  "value": "false",
+                  "description": "When true, include unavailable items."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "16665f5b-af83-4f5f-8ee0-b9912f4f0e18",
+              "name": "Menu item search results.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "search",
+                    "menuitems"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "lat",
+                      "value": "40"
+                    },
+                    {
+                      "key": "lon",
+                      "value": "-81"
+                    },
+                    {
+                      "key": "q",
+                      "value": "burrito"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tags",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "skip",
+                      "value": "0"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "distance"
+                    },
+                    {
+                      "key": "show_closed",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 34,\n  \"results\": [\n    {\n      \"id\": \"4b96f1bafc9f100ca79231ef\",\n      \"name\": \"Chicken Burrito\",\n      \"description\": \"Grilled chicken, rice, beans, salsa\",\n      \"imageUrl\": \"string\",\n      \"prices\": [\n        {\n          \"name\": \"Regular\",\n          \"price\": 9.5\n        }\n      ],\n      \"options\": [\n        {\n          \"name\": \"Add Guacamole\",\n          \"price\": 1.5\n        }\n      ]\n    }\n  ],\n  \"facets\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.opendining.net",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "1c211fee-30dd-4164-8f2f-3b508b884681",
+    "name": "Paytronix Online Ordering API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Paytronix Online Ordering API (Open Dining) powers ordering experiences across in-store, online web, online app, call-in, call-center, and drive-through order methods. It exposes restaurant/location discovery, menu retrieval, fuzzy and geospatial search, and order creation, retrieval, and submission, connecting ordering systems to the broader Paytronix loyalty and guest engagement platform. This specification was generated from the public Open Dining documentation at http://docs.opendining.net and the Online Ordering Resource Center at https://support.opendining.net.\n\nContact Support:\n Name: Kin Lane\n Email: kin@apievangelist.com",
+      "type": "text/plain"
+    }
+  }
+}

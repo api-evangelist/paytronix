@@ -1,0 +1,3515 @@
+{
+  "item": [
+    {
+      "id": "4efa0fe6-3f40-4a7e-9e7d-937c34f68956",
+      "name": "OAuth",
+      "description": {
+        "content": "Guest authentication and token issuance.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "d2061db8-930c-45b0-8701-633f1586c62c",
+          "name": "Request Guest Token",
+          "request": {
+            "name": "Request Guest Token",
+            "description": {
+              "content": "Authenticate a guest in a merchant program and issue an OAuth access token. Supports password, one_time_password, authorization_code, refresh_token, and fieldset grant types.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "oauth",
+                "requestGuestToken.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Paytronix-assigned merchant identifier (mMID).",
+                  "type": "any",
+                  "value": "{{merchantId}}",
+                  "key": "merchantId"
+                },
+                {
+                  "description": "Assigned Paytronix server name.",
+                  "type": "any",
+                  "value": "{{server}}",
+                  "key": "server"
+                },
+                {
+                  "description": "API release/version the request body conforms to.",
+                  "type": "any",
+                  "value": "{{release}}",
+                  "key": "release"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"merchantId\": \"<integer>\",\n  \"grant_type\": \"<string>\",\n  \"username\": \"<string>\",\n  \"password\": \"<string>\",\n  \"scope\": \"<string>\",\n  \"refresh_token\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "5d863437-5345-4595-a9fe-51128a7a1191",
+              "name": "Token issued.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "oauth",
+                    "requestGuestToken.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Paytronix-assigned merchant identifier (mMID).",
+                      "type": "any",
+                      "value": "{{merchantId}}",
+                      "key": "merchantId"
+                    },
+                    {
+                      "description": "Assigned Paytronix server name.",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    },
+                    {
+                      "description": "API release/version the request body conforms to.",
+                      "type": "any",
+                      "value": "{{release}}",
+                      "key": "release"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"merchantId\": 1000,\n  \"grant_type\": \"password\",\n  \"username\": \"jdoe\",\n  \"password\": \"s3cret\",\n  \"scope\": \"user_read account_read\",\n  \"refresh_token\": \"string\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"access_token\": \"9f8c1a2b3c4d5e6f\",\n  \"token_type\": \"bearer\",\n  \"expires_in\": 1800,\n  \"refresh_token\": \"1a2b3c4d5e6f7a8b\",\n  \"scope\": \"user_read account_read\",\n  \"username\": \"jdoe\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6a9cd841-c8b8-4557-8c44-65172de902c4",
+              "name": "Invalid grant or credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "oauth",
+                    "requestGuestToken.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Paytronix-assigned merchant identifier (mMID).",
+                      "type": "any",
+                      "value": "{{merchantId}}",
+                      "key": "merchantId"
+                    },
+                    {
+                      "description": "Assigned Paytronix server name.",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    },
+                    {
+                      "description": "API release/version the request body conforms to.",
+                      "type": "any",
+                      "value": "{{release}}",
+                      "key": "release"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"merchantId\": 1000,\n  \"grant_type\": \"password\",\n  \"username\": \"jdoe\",\n  \"password\": \"s3cret\",\n  \"scope\": \"user_read account_read\",\n  \"refresh_token\": \"string\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"result\": \"failure\",\n  \"errorCode\": \"invalid_grant\",\n  \"errorMessage\": \"The supplied credentials were not valid.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "84307fb0-adfc-47a4-9d64-5c6dc13c8328",
+      "name": "Guest",
+      "description": {
+        "content": "Guest account and user information lookup and management.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8fe268d0-fd76-42f1-bb41-467636796430",
+          "name": "Get Account Information",
+          "request": {
+            "name": "Get Account Information",
+            "description": {
+              "content": "Retrieve account status, card template, tier, and wallet balances for an account identified by its printed card number.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "guest",
+                "accountInformation.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "merchantId",
+                  "value": "<integer>",
+                  "description": "(Required) Paytronix-assigned merchant identifier."
+                },
+                {
+                  "disabled": false,
+                  "key": "printedCardNumber",
+                  "value": "<string>",
+                  "description": "(Required) Printed card number identifying the account."
+                },
+                {
+                  "disabled": false,
+                  "key": "accessFilterStoreGroupCode",
+                  "value": "<string>",
+                  "description": "Optional store group code used to filter access."
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Paytronix-assigned merchant identifier (mMID).",
+                  "type": "any",
+                  "value": "{{merchantId}}",
+                  "key": "merchantId"
+                },
+                {
+                  "description": "Assigned Paytronix server name.",
+                  "type": "any",
+                  "value": "{{server}}",
+                  "key": "server"
+                },
+                {
+                  "description": "API release/version the request body conforms to.",
+                  "type": "any",
+                  "value": "{{release}}",
+                  "key": "release"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "bdcee962-127b-4996-a280-9c2e30d1a412",
+              "name": "Account information.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "guest",
+                    "accountInformation.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "merchantId",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "printedCardNumber",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "accessFilterStoreGroupCode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Paytronix-assigned merchant identifier (mMID).",
+                      "type": "any",
+                      "value": "{{merchantId}}",
+                      "key": "merchantId"
+                    },
+                    {
+                      "description": "Assigned Paytronix server name.",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    },
+                    {
+                      "description": "API release/version the request body conforms to.",
+                      "type": "any",
+                      "value": "{{release}}",
+                      "key": "release"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"result\": \"success\",\n  \"username\": \"jdoe\",\n  \"accountStatus\": \"ACTIVE\",\n  \"queryCardStatus\": \"ACTIVE\",\n  \"registrationStatus\": \"REGISTERED\",\n  \"cardTemplateCode\": \"1\",\n  \"tierCode\": \"GOLD\",\n  \"primaryCard\": \"60490012345678\",\n  \"additionalCards\": [\n    \"string\"\n  ],\n  \"walletBalances\": [\n    {\n      \"walletCode\": \"1\",\n      \"name\": \"Points\",\n      \"balance\": 1250\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f222ff8f-2e78-4ada-a53c-1c5d82c4af38",
+          "name": "Get Account Information By Account ID",
+          "request": {
+            "name": "Get Account Information By Account ID",
+            "description": {
+              "content": "Retrieve account information for an account identified by its account ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "guest",
+                "accountInformationById.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "merchantId",
+                  "value": "<integer>",
+                  "description": "(Required) Paytronix-assigned merchant identifier."
+                },
+                {
+                  "disabled": false,
+                  "key": "accountId",
+                  "value": "<long>",
+                  "description": "(Required) Paytronix account identifier."
+                },
+                {
+                  "disabled": false,
+                  "key": "accessFilterStoreGroupCode",
+                  "value": "<string>",
+                  "description": "Optional store group code used to filter access."
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Paytronix-assigned merchant identifier (mMID).",
+                  "type": "any",
+                  "value": "{{merchantId}}",
+                  "key": "merchantId"
+                },
+                {
+                  "description": "Assigned Paytronix server name.",
+                  "type": "any",
+                  "value": "{{server}}",
+                  "key": "server"
+                },
+                {
+                  "description": "API release/version the request body conforms to.",
+                  "type": "any",
+                  "value": "{{release}}",
+                  "key": "release"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "21ac579a-cf7f-42ea-82b3-9171635a5c31",
+              "name": "Account information.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "guest",
+                    "accountInformationById.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "merchantId",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "accountId",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "accessFilterStoreGroupCode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Paytronix-assigned merchant identifier (mMID).",
+                      "type": "any",
+                      "value": "{{merchantId}}",
+                      "key": "merchantId"
+                    },
+                    {
+                      "description": "Assigned Paytronix server name.",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    },
+                    {
+                      "description": "API release/version the request body conforms to.",
+                      "type": "any",
+                      "value": "{{release}}",
+                      "key": "release"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"result\": \"success\",\n  \"username\": \"jdoe\",\n  \"accountStatus\": \"ACTIVE\",\n  \"queryCardStatus\": \"ACTIVE\",\n  \"registrationStatus\": \"REGISTERED\",\n  \"cardTemplateCode\": \"1\",\n  \"tierCode\": \"GOLD\",\n  \"primaryCard\": \"60490012345678\",\n  \"additionalCards\": [\n    \"string\"\n  ],\n  \"walletBalances\": [\n    {\n      \"walletCode\": \"1\",\n      \"name\": \"Points\",\n      \"balance\": 1250\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "16e183d4-02bc-41c9-8154-ff028aa65263",
+          "name": "Get User Information",
+          "request": {
+            "name": "Get User Information",
+            "description": {
+              "content": "Retrieve demographic user fields, primary card numbers, related guests, and account IDs for a registered user identified by username.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "guest",
+                "userInformation.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "merchantId",
+                  "value": "<integer>",
+                  "description": "(Required) Paytronix-assigned merchant identifier."
+                },
+                {
+                  "disabled": false,
+                  "key": "username",
+                  "value": "<string>",
+                  "description": "(Required) Registered guest username."
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Paytronix-assigned merchant identifier (mMID).",
+                  "type": "any",
+                  "value": "{{merchantId}}",
+                  "key": "merchantId"
+                },
+                {
+                  "description": "Assigned Paytronix server name.",
+                  "type": "any",
+                  "value": "{{server}}",
+                  "key": "server"
+                },
+                {
+                  "description": "API release/version the request body conforms to.",
+                  "type": "any",
+                  "value": "{{release}}",
+                  "key": "release"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0b7a3e28-ad38-4f2b-97bb-8e7389d92c69",
+              "name": "User information.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "guest",
+                    "userInformation.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "merchantId",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "username",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Paytronix-assigned merchant identifier (mMID).",
+                      "type": "any",
+                      "value": "{{merchantId}}",
+                      "key": "merchantId"
+                    },
+                    {
+                      "description": "Assigned Paytronix server name.",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    },
+                    {
+                      "description": "API release/version the request body conforms to.",
+                      "type": "any",
+                      "value": "{{release}}",
+                      "key": "release"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"result\": \"success\",\n  \"userFields\": {\n    \"firstName\": \"Jane\",\n    \"lastName\": \"Doe\",\n    \"email\": \"jane@example.com\"\n  },\n  \"primaryCardNumbers\": [\n    \"string\"\n  ],\n  \"accountIds\": [\n    0\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5c80852c-ef8d-40d5-9dd1-f33eba8c9f06",
+          "name": "Get Transaction History",
+          "request": {
+            "name": "Get Transaction History",
+            "description": {
+              "content": "Retrieve wallet balances and a list of transactions (accruals, redemptions, balance changes) for an account by printed card number.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "guest",
+                "transactionHistory.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "merchantId",
+                  "value": "<integer>",
+                  "description": "(Required) Paytronix-assigned merchant identifier."
+                },
+                {
+                  "disabled": false,
+                  "key": "printedCardNumber",
+                  "value": "<string>",
+                  "description": "(Required) Printed card number identifying the account."
+                },
+                {
+                  "disabled": false,
+                  "key": "dateStart",
+                  "value": "<date>",
+                  "description": "Inclusive start date for the history window."
+                },
+                {
+                  "disabled": false,
+                  "key": "dateEnd",
+                  "value": "<date>",
+                  "description": "Inclusive end date for the history window."
+                },
+                {
+                  "disabled": false,
+                  "key": "maxNumberOfResults",
+                  "value": "<integer>",
+                  "description": "Maximum number of transactions to return."
+                },
+                {
+                  "disabled": false,
+                  "key": "limitToBalanceAffectingTransactions",
+                  "value": "<boolean>",
+                  "description": "When true, only balance-affecting transactions are returned."
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Paytronix-assigned merchant identifier (mMID).",
+                  "type": "any",
+                  "value": "{{merchantId}}",
+                  "key": "merchantId"
+                },
+                {
+                  "description": "Assigned Paytronix server name.",
+                  "type": "any",
+                  "value": "{{server}}",
+                  "key": "server"
+                },
+                {
+                  "description": "API release/version the request body conforms to.",
+                  "type": "any",
+                  "value": "{{release}}",
+                  "key": "release"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4efc7bd4-b34e-4b89-b6c2-7ad98902fe72",
+              "name": "Transaction history.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "guest",
+                    "transactionHistory.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "merchantId",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "printedCardNumber",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dateStart",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "dateEnd",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "maxNumberOfResults",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limitToBalanceAffectingTransactions",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Paytronix-assigned merchant identifier (mMID).",
+                      "type": "any",
+                      "value": "{{merchantId}}",
+                      "key": "merchantId"
+                    },
+                    {
+                      "description": "Assigned Paytronix server name.",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    },
+                    {
+                      "description": "API release/version the request body conforms to.",
+                      "type": "any",
+                      "value": "{{release}}",
+                      "key": "release"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"result\": \"success\",\n  \"walletInfo\": [\n    {\n      \"walletCode\": \"1\",\n      \"name\": \"Points\",\n      \"balance\": 1250\n    }\n  ],\n  \"transactions\": [\n    {\n      \"transactionId\": \"string\",\n      \"datetime\": \"2026-06-03T12:00:00Z\",\n      \"type\": \"ACCRUAL\",\n      \"walletCode\": \"string\",\n      \"amount\": 0,\n      \"balance\": 0\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ffab22d9-e32d-4a50-ae2b-ae6259cfa438",
+          "name": "Change Card Status",
+          "request": {
+            "name": "Change Card Status",
+            "description": {
+              "content": "Enable or disable a card by setting its status to ACTIVE or DISABLED.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "guest",
+                "changeCardStatus.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Paytronix-assigned merchant identifier (mMID).",
+                  "type": "any",
+                  "value": "{{merchantId}}",
+                  "key": "merchantId"
+                },
+                {
+                  "description": "Assigned Paytronix server name.",
+                  "type": "any",
+                  "value": "{{server}}",
+                  "key": "server"
+                },
+                {
+                  "description": "API release/version the request body conforms to.",
+                  "type": "any",
+                  "value": "{{release}}",
+                  "key": "release"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"merchantId\": \"<integer>\",\n  \"printedCardNumber\": \"<string>\",\n  \"status\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "efda354f-2d5b-4c2a-8a40-66b2f5b0d37f",
+              "name": "Status change result.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "guest",
+                    "changeCardStatus.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Paytronix-assigned merchant identifier (mMID).",
+                      "type": "any",
+                      "value": "{{merchantId}}",
+                      "key": "merchantId"
+                    },
+                    {
+                      "description": "Assigned Paytronix server name.",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    },
+                    {
+                      "description": "API release/version the request body conforms to.",
+                      "type": "any",
+                      "value": "{{release}}",
+                      "key": "release"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"merchantId\": 1000,\n  \"printedCardNumber\": \"60490012345678\",\n  \"status\": \"DISABLED\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"result\": \"success\",\n  \"errorCode\": \"string\",\n  \"errorMessage\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "cc2b1a9a-37ff-4202-bea9-7b841c772409",
+      "name": "Enrollment",
+      "description": {
+        "content": "Card creation, activation, registration, and demographic editing.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "589f8836-643f-407b-a9df-49b1882073b3",
+          "name": "Create And Register Account",
+          "request": {
+            "name": "Create And Register Account",
+            "description": {
+              "content": "Create, activate, and register a virtual card in one operation. Requires a username and password in the user fields; optionally supports SMS verification.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "enrollment",
+                "createAndRegister.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Paytronix-assigned merchant identifier (mMID).",
+                  "type": "any",
+                  "value": "{{merchantId}}",
+                  "key": "merchantId"
+                },
+                {
+                  "description": "Assigned Paytronix server name.",
+                  "type": "any",
+                  "value": "{{server}}",
+                  "key": "server"
+                },
+                {
+                  "description": "API release/version the request body conforms to.",
+                  "type": "any",
+                  "value": "{{release}}",
+                  "key": "release"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"merchantId\": \"<integer>\",\n  \"cardTemplateCode\": \"<string>\",\n  \"setUserFields\": {\n    \"key_0\": 3891\n  },\n  \"enforceUniqueFields\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"setAccountFields\": {\n    \"key_0\": 3062,\n    \"key_1\": 9976\n  },\n  \"sendSmsVerification\": \"<boolean>\",\n  \"smsVerificationCode\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c9294ac3-65ec-4a58-8024-81e90f9635be",
+              "name": "Enrollment result with account information.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "enrollment",
+                    "createAndRegister.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Paytronix-assigned merchant identifier (mMID).",
+                      "type": "any",
+                      "value": "{{merchantId}}",
+                      "key": "merchantId"
+                    },
+                    {
+                      "description": "Assigned Paytronix server name.",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    },
+                    {
+                      "description": "API release/version the request body conforms to.",
+                      "type": "any",
+                      "value": "{{release}}",
+                      "key": "release"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"merchantId\": 1000,\n  \"cardTemplateCode\": \"1\",\n  \"enforceUniqueFields\": [\n    \"email\"\n  ],\n  \"setUserFields\": {\n    \"username\": \"jdoe\",\n    \"password\": \"s3cret\",\n    \"firstName\": \"Jane\",\n    \"lastName\": \"Doe\",\n    \"email\": \"jane@example.com\"\n  },\n  \"setAccountFields\": {},\n  \"sendSmsVerification\": true,\n  \"smsVerificationCode\": \"string\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"result\": \"success\",\n  \"printedCardNumber\": \"60490012345678\",\n  \"accountId\": 998877,\n  \"username\": \"jdoe\",\n  \"errorCode\": \"string\",\n  \"errorsByField\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "aa494520-8a21-4ee1-9785-c7397e843ebf",
+          "name": "Activate And Register Card",
+          "request": {
+            "name": "Activate And Register Card",
+            "description": {
+              "content": "Activate an existing printed card and register it simultaneously, requiring username and password in the user fields.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "enrollment",
+                "activateAndRegister.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Paytronix-assigned merchant identifier (mMID).",
+                  "type": "any",
+                  "value": "{{merchantId}}",
+                  "key": "merchantId"
+                },
+                {
+                  "description": "Assigned Paytronix server name.",
+                  "type": "any",
+                  "value": "{{server}}",
+                  "key": "server"
+                },
+                {
+                  "description": "API release/version the request body conforms to.",
+                  "type": "any",
+                  "value": "{{release}}",
+                  "key": "release"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"merchantId\": \"<integer>\",\n  \"printedCardNumber\": \"<string>\",\n  \"setUserFields\": {\n    \"key_0\": \"string\",\n    \"key_1\": 1824\n  },\n  \"enforceUniqueFields\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"setAccountFields\": {\n    \"key_0\": \"string\",\n    \"key_1\": 3575.321877919977\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "161b683e-de46-4399-a211-691fde4ae51a",
+              "name": "Registration result with account information.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "enrollment",
+                    "activateAndRegister.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Paytronix-assigned merchant identifier (mMID).",
+                      "type": "any",
+                      "value": "{{merchantId}}",
+                      "key": "merchantId"
+                    },
+                    {
+                      "description": "Assigned Paytronix server name.",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    },
+                    {
+                      "description": "API release/version the request body conforms to.",
+                      "type": "any",
+                      "value": "{{release}}",
+                      "key": "release"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"merchantId\": 1000,\n  \"printedCardNumber\": \"60490012345678\",\n  \"enforceUniqueFields\": [\n    \"string\"\n  ],\n  \"setUserFields\": {},\n  \"setAccountFields\": {}\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"result\": \"success\",\n  \"printedCardNumber\": \"60490012345678\",\n  \"accountId\": 998877,\n  \"username\": \"jdoe\",\n  \"errorCode\": \"string\",\n  \"errorsByField\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0b20a4a2-c85d-4fef-8496-8a1f8b2828a3",
+          "name": "Get Enrollment Configuration",
+          "request": {
+            "name": "Get Enrollment Configuration",
+            "description": {
+              "content": "Retrieve the field definitions (type, label, required, validation rules) used to enroll guests in a program.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "enrollment",
+                "enrollmentConfig.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "merchantId",
+                  "value": "<integer>",
+                  "description": "(Required) Paytronix-assigned merchant identifier."
+                },
+                {
+                  "disabled": false,
+                  "key": "cardTemplateCode",
+                  "value": "<string>",
+                  "description": "(Required) Card template code identifying the program."
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Paytronix-assigned merchant identifier (mMID).",
+                  "type": "any",
+                  "value": "{{merchantId}}",
+                  "key": "merchantId"
+                },
+                {
+                  "description": "Assigned Paytronix server name.",
+                  "type": "any",
+                  "value": "{{server}}",
+                  "key": "server"
+                },
+                {
+                  "description": "API release/version the request body conforms to.",
+                  "type": "any",
+                  "value": "{{release}}",
+                  "key": "release"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9dd0f889-4e79-4856-ab8c-1d09477c2879",
+              "name": "Enrollment configuration.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "enrollment",
+                    "enrollmentConfig.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "merchantId",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "cardTemplateCode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Paytronix-assigned merchant identifier (mMID).",
+                      "type": "any",
+                      "value": "{{merchantId}}",
+                      "key": "merchantId"
+                    },
+                    {
+                      "description": "Assigned Paytronix server name.",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    },
+                    {
+                      "description": "API release/version the request body conforms to.",
+                      "type": "any",
+                      "value": "{{release}}",
+                      "key": "release"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"result\": \"success\",\n  \"config\": {\n    \"fields\": [\n      {\n        \"name\": \"email\",\n        \"type\": \"string\",\n        \"label\": \"Email Address\",\n        \"required\": true,\n        \"pattern\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "e39ecbff-1f87-410f-8137-a15035cf8865",
+      "name": "Transaction",
+      "description": {
+        "content": "Loyalty and stored-value transaction processing at the POS.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8ca6670e-9e1c-4fbe-af2b-8d170270018d",
+          "name": "Activate Card",
+          "request": {
+            "name": "Activate Card",
+            "description": {
+              "content": "Activate a loyalty card, returning card details and enrollment date.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "transaction",
+                "activate.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Paytronix-assigned merchant identifier (mMID).",
+                  "type": "any",
+                  "value": "{{merchantId}}",
+                  "key": "merchantId"
+                },
+                {
+                  "description": "Assigned Paytronix server name.",
+                  "type": "any",
+                  "value": "{{server}}",
+                  "key": "server"
+                },
+                {
+                  "description": "API release/version the request body conforms to.",
+                  "type": "any",
+                  "value": "{{release}}",
+                  "key": "release"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"headerInfo\": {\n    \"merchantId\": \"<integer>\",\n    \"storeCode\": \"<string>\",\n    \"programId\": \"<string>\",\n    \"terminal\": \"<string>\",\n    \"operator\": \"<string>\",\n    \"posTransactionId\": \"<string>\"\n  },\n  \"cardInfo\": {\n    \"printedCardNumber\": \"<string>\",\n    \"magstripe\": \"<string>\",\n    \"cardTemplateCode\": \"<string>\"\n  },\n  \"autoActivateCard\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "400648c0-2226-4d7f-8691-4b8caa382a64",
+              "name": "Transaction reply.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transaction",
+                    "activate.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Paytronix-assigned merchant identifier (mMID).",
+                      "type": "any",
+                      "value": "{{merchantId}}",
+                      "key": "merchantId"
+                    },
+                    {
+                      "description": "Assigned Paytronix server name.",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    },
+                    {
+                      "description": "API release/version the request body conforms to.",
+                      "type": "any",
+                      "value": "{{release}}",
+                      "key": "release"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"headerInfo\": {\n    \"merchantId\": 1000,\n    \"storeCode\": \"1\",\n    \"programId\": \"PX\",\n    \"terminal\": \"1\",\n    \"operator\": \"100\",\n    \"posTransactionId\": \"string\"\n  },\n  \"cardInfo\": {\n    \"printedCardNumber\": \"60490012345678\",\n    \"magstripe\": \"string\",\n    \"cardTemplateCode\": \"1\"\n  },\n  \"autoActivateCard\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"result\": \"success\",\n  \"pxTransactionId\": \"TXN-12345\",\n  \"maskedCardNumber\": \"******5678\",\n  \"enrollmentDate\": \"2026-06-03\",\n  \"walletBalances\": [\n    {\n      \"walletCode\": \"1\",\n      \"name\": \"Points\",\n      \"balance\": 1250\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0fdd3747-beb7-4450-867c-85534231ed63",
+          "name": "Balance Inquiry",
+          "request": {
+            "name": "Balance Inquiry",
+            "description": {
+              "content": "Retrieve current stored-value balance and loyalty program information for a card.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "transaction",
+                "balanceInquiry.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Paytronix-assigned merchant identifier (mMID).",
+                  "type": "any",
+                  "value": "{{merchantId}}",
+                  "key": "merchantId"
+                },
+                {
+                  "description": "Assigned Paytronix server name.",
+                  "type": "any",
+                  "value": "{{server}}",
+                  "key": "server"
+                },
+                {
+                  "description": "API release/version the request body conforms to.",
+                  "type": "any",
+                  "value": "{{release}}",
+                  "key": "release"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"headerInfo\": {\n    \"merchantId\": \"<integer>\",\n    \"storeCode\": \"<string>\",\n    \"programId\": \"<string>\",\n    \"terminal\": \"<string>\",\n    \"operator\": \"<string>\",\n    \"posTransactionId\": \"<string>\"\n  },\n  \"cardInfo\": {\n    \"printedCardNumber\": \"<string>\",\n    \"magstripe\": \"<string>\",\n    \"cardTemplateCode\": \"<string>\"\n  },\n  \"autoActivateCard\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d94c2693-7ca1-4287-9060-6932acb2a9a2",
+              "name": "Transaction reply with balances.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transaction",
+                    "balanceInquiry.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Paytronix-assigned merchant identifier (mMID).",
+                      "type": "any",
+                      "value": "{{merchantId}}",
+                      "key": "merchantId"
+                    },
+                    {
+                      "description": "Assigned Paytronix server name.",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    },
+                    {
+                      "description": "API release/version the request body conforms to.",
+                      "type": "any",
+                      "value": "{{release}}",
+                      "key": "release"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"headerInfo\": {\n    \"merchantId\": 1000,\n    \"storeCode\": \"1\",\n    \"programId\": \"PX\",\n    \"terminal\": \"1\",\n    \"operator\": \"100\",\n    \"posTransactionId\": \"string\"\n  },\n  \"cardInfo\": {\n    \"printedCardNumber\": \"60490012345678\",\n    \"magstripe\": \"string\",\n    \"cardTemplateCode\": \"1\"\n  },\n  \"autoActivateCard\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"result\": \"success\",\n  \"pxTransactionId\": \"TXN-12345\",\n  \"maskedCardNumber\": \"******5678\",\n  \"enrollmentDate\": \"2026-06-03\",\n  \"walletBalances\": [\n    {\n      \"walletCode\": \"1\",\n      \"name\": \"Points\",\n      \"balance\": 1250\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8916ff94-8ac9-4bce-b7a3-4bd0087c8725",
+          "name": "Add Or Redeem Wallet Value",
+          "request": {
+            "name": "Add Or Redeem Wallet Value",
+            "description": {
+              "content": "Add value to or redeem value from a card account using add and redeem wallet content lists. Use programId SV for gift and LP for loyalty.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "transaction",
+                "addRedeem.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Paytronix-assigned merchant identifier (mMID).",
+                  "type": "any",
+                  "value": "{{merchantId}}",
+                  "key": "merchantId"
+                },
+                {
+                  "description": "Assigned Paytronix server name.",
+                  "type": "any",
+                  "value": "{{server}}",
+                  "key": "server"
+                },
+                {
+                  "description": "API release/version the request body conforms to.",
+                  "type": "any",
+                  "value": "{{release}}",
+                  "key": "release"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"headerInfo\": {\n    \"merchantId\": \"<integer>\",\n    \"storeCode\": \"<string>\",\n    \"programId\": \"<string>\",\n    \"terminal\": \"<string>\",\n    \"operator\": \"<string>\",\n    \"posTransactionId\": \"<string>\"\n  },\n  \"cardInfo\": {\n    \"printedCardNumber\": \"<string>\",\n    \"magstripe\": \"<string>\",\n    \"cardTemplateCode\": \"<string>\"\n  },\n  \"addWalletContents\": [\n    {\n      \"walletCode\": \"<string>\",\n      \"quantity\": \"<number>\",\n      \"expiration\": \"<date>\"\n    },\n    {\n      \"walletCode\": \"<string>\",\n      \"quantity\": \"<number>\",\n      \"expiration\": \"<date>\"\n    }\n  ],\n  \"redeemWalletContents\": [\n    {\n      \"walletCode\": \"<string>\",\n      \"quantity\": \"<number>\",\n      \"expiration\": \"<date>\"\n    },\n    {\n      \"walletCode\": \"<string>\",\n      \"quantity\": \"<number>\",\n      \"expiration\": \"<date>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "5cb06a62-ef2c-4502-9b5d-acaf0f8ac1f7",
+              "name": "Add/redeem reply with updated balances.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transaction",
+                    "addRedeem.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Paytronix-assigned merchant identifier (mMID).",
+                      "type": "any",
+                      "value": "{{merchantId}}",
+                      "key": "merchantId"
+                    },
+                    {
+                      "description": "Assigned Paytronix server name.",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    },
+                    {
+                      "description": "API release/version the request body conforms to.",
+                      "type": "any",
+                      "value": "{{release}}",
+                      "key": "release"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"headerInfo\": {\n    \"merchantId\": 1000,\n    \"storeCode\": \"1\",\n    \"programId\": \"PX\",\n    \"terminal\": \"1\",\n    \"operator\": \"100\",\n    \"posTransactionId\": \"string\"\n  },\n  \"cardInfo\": {\n    \"printedCardNumber\": \"60490012345678\",\n    \"magstripe\": \"string\",\n    \"cardTemplateCode\": \"1\"\n  },\n  \"addWalletContents\": [\n    {\n      \"walletCode\": \"1\",\n      \"quantity\": 10,\n      \"expiration\": \"2026-06-03\"\n    }\n  ],\n  \"redeemWalletContents\": [\n    {\n      \"walletCode\": \"1\",\n      \"quantity\": 10,\n      \"expiration\": \"2026-06-03\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"result\": \"success\",\n  \"pxTransactionId\": \"TXN-67890\",\n  \"walletContents\": [\n    {\n      \"walletCode\": \"1\",\n      \"name\": \"Points\",\n      \"balance\": 1250\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b41359cb-95e6-4456-85da-dc4cd2093991",
+          "name": "Query Accounts",
+          "request": {
+            "name": "Query Accounts",
+            "description": {
+              "content": "Search for accounts by phone, name, email, or postal code, returning matching customer records and field values.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "transaction",
+                "accountQuery.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Paytronix-assigned merchant identifier (mMID).",
+                  "type": "any",
+                  "value": "{{merchantId}}",
+                  "key": "merchantId"
+                },
+                {
+                  "description": "Assigned Paytronix server name.",
+                  "type": "any",
+                  "value": "{{server}}",
+                  "key": "server"
+                },
+                {
+                  "description": "API release/version the request body conforms to.",
+                  "type": "any",
+                  "value": "{{release}}",
+                  "key": "release"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"headerInfo\": {\n    \"merchantId\": \"<integer>\",\n    \"storeCode\": \"<string>\",\n    \"programId\": \"<string>\",\n    \"terminal\": \"<string>\",\n    \"operator\": \"<string>\",\n    \"posTransactionId\": \"<string>\"\n  },\n  \"accountQueries\": [\n    {\n      \"phone\": \"<string>\",\n      \"email\": \"<string>\",\n      \"firstName\": \"<string>\",\n      \"lastName\": \"<string>\",\n      \"postalCode\": \"<string>\"\n    },\n    {\n      \"phone\": \"<string>\",\n      \"email\": \"<string>\",\n      \"firstName\": \"<string>\",\n      \"lastName\": \"<string>\",\n      \"postalCode\": \"<string>\"\n    }\n  ],\n  \"pageSize\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0f293fd6-7356-49d9-983a-f9edbefc1106",
+              "name": "Account query reply.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transaction",
+                    "accountQuery.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Paytronix-assigned merchant identifier (mMID).",
+                      "type": "any",
+                      "value": "{{merchantId}}",
+                      "key": "merchantId"
+                    },
+                    {
+                      "description": "Assigned Paytronix server name.",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    },
+                    {
+                      "description": "API release/version the request body conforms to.",
+                      "type": "any",
+                      "value": "{{release}}",
+                      "key": "release"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"headerInfo\": {\n    \"merchantId\": 1000,\n    \"storeCode\": \"1\",\n    \"programId\": \"PX\",\n    \"terminal\": \"1\",\n    \"operator\": \"100\",\n    \"posTransactionId\": \"string\"\n  },\n  \"pageSize\": 25,\n  \"accountQueries\": [\n    {\n      \"phone\": \"string\",\n      \"email\": \"string\",\n      \"firstName\": \"string\",\n      \"lastName\": \"string\",\n      \"postalCode\": \"string\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"result\": \"success\",\n  \"accounts\": [\n    {\n      \"accountId\": 0,\n      \"printedCardNumber\": \"string\",\n      \"fieldValues\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "c2e1fdfc-e169-4a6a-a9da-0ed09f824eee",
+      "name": "Gift",
+      "description": {
+        "content": "Gift card sale, reload, balance, redeem, and exchange.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4d074e24-beb5-4c80-bbe7-d6802818a9e5",
+          "name": "Sell Gift Card",
+          "request": {
+            "name": "Sell Gift Card",
+            "description": {
+              "content": "Activate a gift card and add the initial value to it.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "gift",
+                "sell.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Paytronix-assigned merchant identifier (mMID).",
+                  "type": "any",
+                  "value": "{{merchantId}}",
+                  "key": "merchantId"
+                },
+                {
+                  "description": "Assigned Paytronix server name.",
+                  "type": "any",
+                  "value": "{{server}}",
+                  "key": "server"
+                },
+                {
+                  "description": "API release/version the request body conforms to.",
+                  "type": "any",
+                  "value": "{{release}}",
+                  "key": "release"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"merchantId\": \"<integer>\",\n  \"storeCode\": \"<string>\",\n  \"cardInfo\": {\n    \"printedCardNumber\": \"<string>\",\n    \"magstripe\": \"<string>\",\n    \"cardTemplateCode\": \"<string>\"\n  },\n  \"amount\": \"<number>\",\n  \"checkNumber\": \"<string>\",\n  \"cashier\": \"<string>\",\n  \"terminalId\": \"<string>\",\n  \"externalTransactionId\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7240972c-485e-48d8-a44f-a64c7e865bfd",
+              "name": "Gift transaction reply.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "gift",
+                    "sell.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Paytronix-assigned merchant identifier (mMID).",
+                      "type": "any",
+                      "value": "{{merchantId}}",
+                      "key": "merchantId"
+                    },
+                    {
+                      "description": "Assigned Paytronix server name.",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    },
+                    {
+                      "description": "API release/version the request body conforms to.",
+                      "type": "any",
+                      "value": "{{release}}",
+                      "key": "release"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"merchantId\": 1000,\n  \"storeCode\": \"1\",\n  \"cardInfo\": {\n    \"printedCardNumber\": \"60490012345678\",\n    \"magstripe\": \"string\",\n    \"cardTemplateCode\": \"1\"\n  },\n  \"amount\": 25,\n  \"checkNumber\": \"string\",\n  \"cashier\": \"string\",\n  \"terminalId\": \"string\",\n  \"externalTransactionId\": \"string\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"result\": \"success\",\n  \"pxTransactionId\": \"GIFT-44556\",\n  \"printedCardNumber\": \"70123456789012\",\n  \"currentBalance\": 50,\n  \"errorCode\": \"string\",\n  \"errorMessage\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8601eb2b-9164-4927-a5cb-68351591a287",
+          "name": "Reload Gift Card",
+          "request": {
+            "name": "Reload Gift Card",
+            "description": {
+              "content": "Add value to a gift card that has already been activated.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "gift",
+                "reload.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Paytronix-assigned merchant identifier (mMID).",
+                  "type": "any",
+                  "value": "{{merchantId}}",
+                  "key": "merchantId"
+                },
+                {
+                  "description": "Assigned Paytronix server name.",
+                  "type": "any",
+                  "value": "{{server}}",
+                  "key": "server"
+                },
+                {
+                  "description": "API release/version the request body conforms to.",
+                  "type": "any",
+                  "value": "{{release}}",
+                  "key": "release"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"merchantId\": \"<integer>\",\n  \"storeCode\": \"<string>\",\n  \"cardInfo\": {\n    \"printedCardNumber\": \"<string>\",\n    \"magstripe\": \"<string>\",\n    \"cardTemplateCode\": \"<string>\"\n  },\n  \"amount\": \"<number>\",\n  \"checkNumber\": \"<string>\",\n  \"cashier\": \"<string>\",\n  \"terminalId\": \"<string>\",\n  \"externalTransactionId\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3e3470fb-72bd-4149-a8b4-abd6ee354a9c",
+              "name": "Gift transaction reply.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "gift",
+                    "reload.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Paytronix-assigned merchant identifier (mMID).",
+                      "type": "any",
+                      "value": "{{merchantId}}",
+                      "key": "merchantId"
+                    },
+                    {
+                      "description": "Assigned Paytronix server name.",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    },
+                    {
+                      "description": "API release/version the request body conforms to.",
+                      "type": "any",
+                      "value": "{{release}}",
+                      "key": "release"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"merchantId\": 1000,\n  \"storeCode\": \"1\",\n  \"cardInfo\": {\n    \"printedCardNumber\": \"60490012345678\",\n    \"magstripe\": \"string\",\n    \"cardTemplateCode\": \"1\"\n  },\n  \"amount\": 25,\n  \"checkNumber\": \"string\",\n  \"cashier\": \"string\",\n  \"terminalId\": \"string\",\n  \"externalTransactionId\": \"string\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"result\": \"success\",\n  \"pxTransactionId\": \"GIFT-44556\",\n  \"printedCardNumber\": \"70123456789012\",\n  \"currentBalance\": 50,\n  \"errorCode\": \"string\",\n  \"errorMessage\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "84222e3d-92fa-4f91-9e95-d7b1f579c5e8",
+          "name": "Get Gift Card Balance",
+          "request": {
+            "name": "Get Gift Card Balance",
+            "description": {
+              "content": "Retrieve the current balance of a gift card.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "gift",
+                "balance.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Paytronix-assigned merchant identifier (mMID).",
+                  "type": "any",
+                  "value": "{{merchantId}}",
+                  "key": "merchantId"
+                },
+                {
+                  "description": "Assigned Paytronix server name.",
+                  "type": "any",
+                  "value": "{{server}}",
+                  "key": "server"
+                },
+                {
+                  "description": "API release/version the request body conforms to.",
+                  "type": "any",
+                  "value": "{{release}}",
+                  "key": "release"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"merchantId\": \"<integer>\",\n  \"storeCode\": \"<string>\",\n  \"cardInfo\": {\n    \"printedCardNumber\": \"<string>\",\n    \"magstripe\": \"<string>\",\n    \"cardTemplateCode\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "41eccd2f-530c-4070-93a0-7ce2dd275667",
+              "name": "Gift transaction reply with current balance.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "gift",
+                    "balance.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Paytronix-assigned merchant identifier (mMID).",
+                      "type": "any",
+                      "value": "{{merchantId}}",
+                      "key": "merchantId"
+                    },
+                    {
+                      "description": "Assigned Paytronix server name.",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    },
+                    {
+                      "description": "API release/version the request body conforms to.",
+                      "type": "any",
+                      "value": "{{release}}",
+                      "key": "release"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"merchantId\": 1000,\n  \"storeCode\": \"1\",\n  \"cardInfo\": {\n    \"printedCardNumber\": \"60490012345678\",\n    \"magstripe\": \"string\",\n    \"cardTemplateCode\": \"1\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"result\": \"success\",\n  \"pxTransactionId\": \"GIFT-44556\",\n  \"printedCardNumber\": \"70123456789012\",\n  \"currentBalance\": 50,\n  \"errorCode\": \"string\",\n  \"errorMessage\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "77c9734f-9802-44b7-be14-e2d519b83b23",
+          "name": "Redeem Gift Card",
+          "request": {
+            "name": "Redeem Gift Card",
+            "description": {
+              "content": "Redeem value from a gift card, optionally including a tip.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "gift",
+                "redeem.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Paytronix-assigned merchant identifier (mMID).",
+                  "type": "any",
+                  "value": "{{merchantId}}",
+                  "key": "merchantId"
+                },
+                {
+                  "description": "Assigned Paytronix server name.",
+                  "type": "any",
+                  "value": "{{server}}",
+                  "key": "server"
+                },
+                {
+                  "description": "API release/version the request body conforms to.",
+                  "type": "any",
+                  "value": "{{release}}",
+                  "key": "release"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"merchantId\": \"<integer>\",\n  \"storeCode\": \"<string>\",\n  \"cardInfo\": {\n    \"printedCardNumber\": \"<string>\",\n    \"magstripe\": \"<string>\",\n    \"cardTemplateCode\": \"<string>\"\n  },\n  \"amount\": \"<number>\",\n  \"checkNumber\": \"<string>\",\n  \"cashier\": \"<string>\",\n  \"terminalId\": \"<string>\",\n  \"externalTransactionId\": \"<string>\",\n  \"tip\": \"<number>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "6f71b0ef-e29e-403c-87dd-b2aee51e248e",
+              "name": "Gift transaction reply.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "gift",
+                    "redeem.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Paytronix-assigned merchant identifier (mMID).",
+                      "type": "any",
+                      "value": "{{merchantId}}",
+                      "key": "merchantId"
+                    },
+                    {
+                      "description": "Assigned Paytronix server name.",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    },
+                    {
+                      "description": "API release/version the request body conforms to.",
+                      "type": "any",
+                      "value": "{{release}}",
+                      "key": "release"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"merchantId\": 1000,\n  \"storeCode\": \"1\",\n  \"cardInfo\": {\n    \"printedCardNumber\": \"60490012345678\",\n    \"magstripe\": \"string\",\n    \"cardTemplateCode\": \"1\"\n  },\n  \"amount\": 25,\n  \"checkNumber\": \"string\",\n  \"cashier\": \"string\",\n  \"terminalId\": \"string\",\n  \"externalTransactionId\": \"string\",\n  \"tip\": 5\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"result\": \"success\",\n  \"pxTransactionId\": \"GIFT-44556\",\n  \"printedCardNumber\": \"70123456789012\",\n  \"currentBalance\": 50,\n  \"errorCode\": \"string\",\n  \"errorMessage\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "d89c54c6-c6ae-4fa5-8537-3af0be74b653",
+      "name": "Payment",
+      "description": {
+        "content": "Stored-value recharge, saved payment methods, and auto recharge.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "64ab3807-9203-4c66-8d60-fe9838dc454a",
+          "name": "Recharge Stored Value Card",
+          "request": {
+            "name": "Recharge Stored Value Card",
+            "description": {
+              "content": "Recharge a stored-value card with a given amount using a saved or new payment method.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "payment",
+                "recharge.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Paytronix-assigned merchant identifier (mMID).",
+                  "type": "any",
+                  "value": "{{merchantId}}",
+                  "key": "merchantId"
+                },
+                {
+                  "description": "Assigned Paytronix server name.",
+                  "type": "any",
+                  "value": "{{server}}",
+                  "key": "server"
+                },
+                {
+                  "description": "API release/version the request body conforms to.",
+                  "type": "any",
+                  "value": "{{release}}",
+                  "key": "release"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"merchantId\": \"<integer>\",\n  \"printedCardNumber\": \"<string>\",\n  \"amount\": \"<number>\",\n  \"paymentMethod\": {\n    \"type\": \"<string>\",\n    \"token\": \"<string>\",\n    \"lastFour\": \"<string>\"\n  },\n  \"address\": {\n    \"address1\": \"<string>\",\n    \"address2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"stateProvince\": \"<string>\",\n    \"postalCode\": \"<string>\",\n    \"country\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "89a2d598-9873-44af-9692-702b9d1a3d2a",
+              "name": "Charge response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payment",
+                    "recharge.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Paytronix-assigned merchant identifier (mMID).",
+                      "type": "any",
+                      "value": "{{merchantId}}",
+                      "key": "merchantId"
+                    },
+                    {
+                      "description": "Assigned Paytronix server name.",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    },
+                    {
+                      "description": "API release/version the request body conforms to.",
+                      "type": "any",
+                      "value": "{{release}}",
+                      "key": "release"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"merchantId\": 1000,\n  \"printedCardNumber\": \"60490012345678\",\n  \"amount\": 25,\n  \"paymentMethod\": {\n    \"type\": \"CREDIT_CARD\",\n    \"token\": \"string\",\n    \"lastFour\": \"4242\"\n  },\n  \"address\": {\n    \"address1\": \"string\",\n    \"address2\": \"string\",\n    \"city\": \"string\",\n    \"stateProvince\": \"string\",\n    \"postalCode\": \"string\",\n    \"country\": \"US\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"result\": \"success\",\n  \"amount\": 25,\n  \"cardType\": \"VISA\",\n  \"lastFour\": \"4242\",\n  \"processorAuthCode\": \"AUTH123\",\n  \"transactionState\": \"APPROVED\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5c48c749-e51f-4d80-a91c-ced08d7ddda4",
+          "name": "Get Saved Payment Methods",
+          "request": {
+            "name": "Get Saved Payment Methods",
+            "description": {
+              "content": "List the saved payment methods associated with a stored-value card.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "payment",
+                "savedPaymentMethods.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "merchantId",
+                  "value": "<integer>",
+                  "description": "(Required) Paytronix-assigned merchant identifier."
+                },
+                {
+                  "disabled": false,
+                  "key": "printedCardNumber",
+                  "value": "<string>",
+                  "description": "(Required) Printed card number identifying the account."
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Paytronix-assigned merchant identifier (mMID).",
+                  "type": "any",
+                  "value": "{{merchantId}}",
+                  "key": "merchantId"
+                },
+                {
+                  "description": "Assigned Paytronix server name.",
+                  "type": "any",
+                  "value": "{{server}}",
+                  "key": "server"
+                },
+                {
+                  "description": "API release/version the request body conforms to.",
+                  "type": "any",
+                  "value": "{{release}}",
+                  "key": "release"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "854776f3-e768-4e6a-ba2c-3b7f26671f03",
+              "name": "Saved payment methods.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payment",
+                    "savedPaymentMethods.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "merchantId",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "printedCardNumber",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Paytronix-assigned merchant identifier (mMID).",
+                      "type": "any",
+                      "value": "{{merchantId}}",
+                      "key": "merchantId"
+                    },
+                    {
+                      "description": "Assigned Paytronix server name.",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    },
+                    {
+                      "description": "API release/version the request body conforms to.",
+                      "type": "any",
+                      "value": "{{release}}",
+                      "key": "release"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"result\": \"success\",\n  \"paymentMethods\": [\n    {\n      \"type\": \"CREDIT_CARD\",\n      \"cardholderName\": \"Jane Doe\",\n      \"lastFour\": \"4242\",\n      \"defaultUsages\": [\n        \"string\"\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "e73a128d-5259-4307-8c5b-9ec7812e2f4c",
+      "name": "Store",
+      "description": {
+        "content": "Store and location lookup and management.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "2c48c5c3-e322-4c97-8113-8231f31766e4",
+          "name": "Get Nearby Locations",
+          "request": {
+            "name": "Get Nearby Locations",
+            "description": {
+              "content": "Retrieve store locations within a maximum distance of a latitude and longitude, ordered by distance.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "store",
+                "nearbyLocations.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "merchantId",
+                  "value": "<integer>",
+                  "description": "(Required) Paytronix-assigned merchant identifier."
+                },
+                {
+                  "disabled": false,
+                  "key": "latitude",
+                  "value": "<double>",
+                  "description": "(Required) Search center latitude."
+                },
+                {
+                  "disabled": false,
+                  "key": "longitude",
+                  "value": "<double>",
+                  "description": "(Required) Search center longitude."
+                },
+                {
+                  "disabled": false,
+                  "key": "maxDistance",
+                  "value": "<number>",
+                  "description": "(Required) Maximum distance in miles."
+                },
+                {
+                  "disabled": false,
+                  "key": "maxLocations",
+                  "value": "<integer>",
+                  "description": "(Required) Maximum number of results."
+                },
+                {
+                  "disabled": false,
+                  "key": "storeGroupCode",
+                  "value": "<string>",
+                  "description": "Optional store group filter."
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Paytronix-assigned merchant identifier (mMID).",
+                  "type": "any",
+                  "value": "{{merchantId}}",
+                  "key": "merchantId"
+                },
+                {
+                  "description": "Assigned Paytronix server name.",
+                  "type": "any",
+                  "value": "{{server}}",
+                  "key": "server"
+                },
+                {
+                  "description": "API release/version the request body conforms to.",
+                  "type": "any",
+                  "value": "{{release}}",
+                  "key": "release"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c8d692af-2a1e-4460-80ab-7d3522b382d0",
+              "name": "Nearby locations.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "store",
+                    "nearbyLocations.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "merchantId",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "latitude",
+                      "value": "<double>"
+                    },
+                    {
+                      "key": "longitude",
+                      "value": "<double>"
+                    },
+                    {
+                      "key": "maxDistance",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "maxLocations",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "storeGroupCode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Paytronix-assigned merchant identifier (mMID).",
+                      "type": "any",
+                      "value": "{{merchantId}}",
+                      "key": "merchantId"
+                    },
+                    {
+                      "description": "Assigned Paytronix server name.",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    },
+                    {
+                      "description": "API release/version the request body conforms to.",
+                      "type": "any",
+                      "value": "{{release}}",
+                      "key": "release"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"result\": \"success\",\n  \"locations\": [\n    {\n      \"code\": \"1\",\n      \"name\": \"Downtown\",\n      \"address\": {\n        \"address1\": \"string\",\n        \"address2\": \"string\",\n        \"city\": \"string\",\n        \"stateProvince\": \"string\",\n        \"postalCode\": \"string\",\n        \"country\": \"US\"\n      },\n      \"latitude\": 42.3601,\n      \"longitude\": -71.0589,\n      \"hoursOfOperation\": \"string\",\n      \"distance\": 1.2,\n      \"metadata\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "21fce8ce-c094-4686-8667-0bf418e85c91",
+          "name": "Get All Stores",
+          "request": {
+            "name": "Get All Stores",
+            "description": {
+              "content": "Retrieve the complete list of all store locations for a merchant.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "store",
+                "stores.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "merchantId",
+                  "value": "<integer>",
+                  "description": "(Required) Paytronix-assigned merchant identifier."
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Paytronix-assigned merchant identifier (mMID).",
+                  "type": "any",
+                  "value": "{{merchantId}}",
+                  "key": "merchantId"
+                },
+                {
+                  "description": "Assigned Paytronix server name.",
+                  "type": "any",
+                  "value": "{{server}}",
+                  "key": "server"
+                },
+                {
+                  "description": "API release/version the request body conforms to.",
+                  "type": "any",
+                  "value": "{{release}}",
+                  "key": "release"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9d3d5915-cf48-4bc8-90ea-d4f165385898",
+              "name": "All store locations.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "store",
+                    "stores.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "merchantId",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Paytronix-assigned merchant identifier (mMID).",
+                      "type": "any",
+                      "value": "{{merchantId}}",
+                      "key": "merchantId"
+                    },
+                    {
+                      "description": "Assigned Paytronix server name.",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    },
+                    {
+                      "description": "API release/version the request body conforms to.",
+                      "type": "any",
+                      "value": "{{release}}",
+                      "key": "release"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"result\": \"success\",\n  \"locations\": [\n    {\n      \"code\": \"1\",\n      \"name\": \"Downtown\",\n      \"address\": {\n        \"address1\": \"string\",\n        \"address2\": \"string\",\n        \"city\": \"string\",\n        \"stateProvince\": \"string\",\n        \"postalCode\": \"string\",\n        \"country\": \"US\"\n      },\n      \"latitude\": 42.3601,\n      \"longitude\": -71.0589,\n      \"hoursOfOperation\": \"string\",\n      \"distance\": 1.2,\n      \"metadata\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "e723ad09-eb93-4c80-a429-36e02d05a2ef",
+      "name": "Check",
+      "description": {
+        "content": "Check-based point accrual, reward computation, and posting.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7af20289-cfa1-475d-9fd4-dc6034e4dca1",
+          "name": "Compute Applicable Rewards",
+          "request": {
+            "name": "Compute Applicable Rewards",
+            "description": {
+              "content": "Determine which rewards and discounts apply to a given POS check for a guest, returning item, multi-item, subtotal, and service-charge discounts plus balances and receipt text.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "check",
+                "computeApplicableRewards.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Paytronix-assigned merchant identifier (mMID).",
+                  "type": "any",
+                  "value": "{{merchantId}}",
+                  "key": "merchantId"
+                },
+                {
+                  "description": "Assigned Paytronix server name.",
+                  "type": "any",
+                  "value": "{{server}}",
+                  "key": "server"
+                },
+                {
+                  "description": "API release/version the request body conforms to.",
+                  "type": "any",
+                  "value": "{{release}}",
+                  "key": "release"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"merchantId\": \"<integer>\",\n  \"storeCode\": \"<string>\",\n  \"check\": {\n    \"number\": \"<string>\",\n    \"openTime\": \"<dateTime>\",\n    \"subtotal\": \"<number>\",\n    \"items\": [\n      {\n        \"itemCode\": \"<string>\",\n        \"name\": \"<string>\",\n        \"quantity\": \"<number>\",\n        \"price\": \"<number>\"\n      },\n      {\n        \"itemCode\": \"<string>\",\n        \"name\": \"<string>\",\n        \"quantity\": \"<number>\",\n        \"price\": \"<number>\"\n      }\n    ]\n  },\n  \"cardInfo\": {\n    \"printedCardNumber\": \"<string>\",\n    \"magstripe\": \"<string>\",\n    \"cardTemplateCode\": \"<string>\"\n  },\n  \"terminal\": \"<string>\",\n  \"operator\": \"<string>\",\n  \"rewardSelectionMode\": {\n    \"mode\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7b954d9d-885f-4fd3-a6be-66ba416e305c",
+              "name": "Applicable rewards reply.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "check",
+                    "computeApplicableRewards.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Paytronix-assigned merchant identifier (mMID).",
+                      "type": "any",
+                      "value": "{{merchantId}}",
+                      "key": "merchantId"
+                    },
+                    {
+                      "description": "Assigned Paytronix server name.",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    },
+                    {
+                      "description": "API release/version the request body conforms to.",
+                      "type": "any",
+                      "value": "{{release}}",
+                      "key": "release"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"merchantId\": 1000,\n  \"storeCode\": \"1\",\n  \"check\": {\n    \"number\": \"4501\",\n    \"openTime\": \"2026-06-03T12:00:00Z\",\n    \"subtotal\": 42.5,\n    \"items\": [\n      {\n        \"itemCode\": \"string\",\n        \"name\": \"string\",\n        \"quantity\": 0,\n        \"price\": 0\n      }\n    ]\n  },\n  \"cardInfo\": {\n    \"printedCardNumber\": \"60490012345678\",\n    \"magstripe\": \"string\",\n    \"cardTemplateCode\": \"1\"\n  },\n  \"terminal\": \"string\",\n  \"operator\": \"string\",\n  \"rewardSelectionMode\": {\n    \"mode\": \"AUTOMATIC\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"result\": \"success\",\n  \"customerName\": \"Jane Doe\",\n  \"tierCode\": \"GOLD\",\n  \"printedCardNumber\": \"60490012345678\",\n  \"itemDiscounts\": [\n    {\n      \"itemCode\": \"string\",\n      \"discountAmount\": 0,\n      \"rewardName\": \"string\"\n    }\n  ],\n  \"subtotalDiscounts\": [\n    {\n      \"discountAmount\": 0,\n      \"rewardName\": \"string\"\n    }\n  ],\n  \"walletBalances\": [\n    {\n      \"walletCode\": \"1\",\n      \"name\": \"Points\",\n      \"balance\": 1250\n    }\n  ],\n  \"receiptText\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f95c8bd0-c22b-4f38-920b-f788e3757df5",
+          "name": "Post And Accrue Points",
+          "request": {
+            "name": "Post And Accrue Points",
+            "description": {
+              "content": "Post a check and accrue points in one step, returning the add/redeem result, customer details, balances, and receipt text.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "check",
+                "postAndAccruePoints.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Paytronix-assigned merchant identifier (mMID).",
+                  "type": "any",
+                  "value": "{{merchantId}}",
+                  "key": "merchantId"
+                },
+                {
+                  "description": "Assigned Paytronix server name.",
+                  "type": "any",
+                  "value": "{{server}}",
+                  "key": "server"
+                },
+                {
+                  "description": "API release/version the request body conforms to.",
+                  "type": "any",
+                  "value": "{{release}}",
+                  "key": "release"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"merchantId\": \"<integer>\",\n  \"storeCode\": \"<string>\",\n  \"check\": {\n    \"number\": \"<string>\",\n    \"openTime\": \"<dateTime>\",\n    \"subtotal\": \"<number>\",\n    \"items\": [\n      {\n        \"itemCode\": \"<string>\",\n        \"name\": \"<string>\",\n        \"quantity\": \"<number>\",\n        \"price\": \"<number>\"\n      },\n      {\n        \"itemCode\": \"<string>\",\n        \"name\": \"<string>\",\n        \"quantity\": \"<number>\",\n        \"price\": \"<number>\"\n      }\n    ]\n  },\n  \"cardInfo\": {\n    \"printedCardNumber\": \"<string>\",\n    \"magstripe\": \"<string>\",\n    \"cardTemplateCode\": \"<string>\"\n  },\n  \"autoActivateCard\": \"<boolean>\",\n  \"terminal\": \"<string>\",\n  \"operator\": \"<string>\",\n  \"receiptSettings\": {\n    \"key_0\": true,\n    \"key_1\": 5215.320748535438\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "78c3d517-db4b-47c1-b951-5a4eb384ef29",
+              "name": "Post and accrue reply.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "check",
+                    "postAndAccruePoints.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Paytronix-assigned merchant identifier (mMID).",
+                      "type": "any",
+                      "value": "{{merchantId}}",
+                      "key": "merchantId"
+                    },
+                    {
+                      "description": "Assigned Paytronix server name.",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    },
+                    {
+                      "description": "API release/version the request body conforms to.",
+                      "type": "any",
+                      "value": "{{release}}",
+                      "key": "release"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"merchantId\": 1000,\n  \"storeCode\": \"1\",\n  \"check\": {\n    \"number\": \"4501\",\n    \"openTime\": \"2026-06-03T12:00:00Z\",\n    \"subtotal\": 42.5,\n    \"items\": [\n      {\n        \"itemCode\": \"string\",\n        \"name\": \"string\",\n        \"quantity\": 0,\n        \"price\": 0\n      }\n    ]\n  },\n  \"cardInfo\": {\n    \"printedCardNumber\": \"60490012345678\",\n    \"magstripe\": \"string\",\n    \"cardTemplateCode\": \"1\"\n  },\n  \"autoActivateCard\": true,\n  \"terminal\": \"string\",\n  \"operator\": \"string\",\n  \"receiptSettings\": {}\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"result\": \"success\",\n  \"customerName\": \"Jane Doe\",\n  \"tierCode\": \"GOLD\",\n  \"printedCardNumber\": \"60490012345678\",\n  \"itemDiscounts\": [\n    {\n      \"itemCode\": \"string\",\n      \"discountAmount\": 0,\n      \"rewardName\": \"string\"\n    }\n  ],\n  \"subtotalDiscounts\": [\n    {\n      \"discountAmount\": 0,\n      \"rewardName\": \"string\"\n    }\n  ],\n  \"walletBalances\": [\n    {\n      \"walletCode\": \"1\",\n      \"name\": \"Points\",\n      \"balance\": 1250\n    }\n  ],\n  \"receiptText\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Paytronix-assigned merchant identifier (mMID).",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "1000",
+      "key": "merchantId"
+    },
+    {
+      "description": {
+        "content": "Assigned Paytronix server name.",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "paytronix",
+      "key": "server"
+    },
+    {
+      "description": {
+        "content": "API release/version the request body conforms to.",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "26.6",
+      "key": "release"
+    },
+    {
+      "type": "string",
+      "value": "https://m{{merchantId}}.api.{{server}}.com/rest/{{release}}",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "d3311ed9-2d6f-4cad-921c-f5162f9667c3",
+    "name": "Paytronix Server API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Paytronix Server (PXS) REST API exposes the guest engagement platform used by 1,800-plus restaurant and convenience-store brands. It spans loyalty and stored-value accounts, enrollment and registration, transactions and point accrual, gift card sales and redemption, stored-value recharge and payment, store/location lookup, and guest authentication. All requests and responses are JSON. Operations authenticate with an integration identifier and secret sent as an HTTP Basic authorization header; guest-scoped operations additionally use an OAuth bearer token issued by the OAuth Service. This specification was generated from the public Paytronix integration documentation at https://developers.paytronix.com.\n\nContact Support:\n Name: Kin Lane\n Email: kin@apievangelist.com",
+      "type": "text/plain"
+    }
+  }
+}

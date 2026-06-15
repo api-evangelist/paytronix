@@ -1,0 +1,271 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Paytronix Online Ordering API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Restaurants",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Restaurant",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.opendining.net/restaurants/:restaurantId",
+            "params": [
+              {
+                "name": "restaurantId",
+                "value": "",
+                "type": "path",
+                "description": "Restaurant/location identifier."
+              }
+            ]
+          },
+          "docs": "Retrieve a single restaurant/location object by its identifier."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Menu Items",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Menu Item",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.opendining.net/menuitems/:menuItemId",
+            "params": [
+              {
+                "name": "menuItemId",
+                "value": "",
+                "type": "path",
+                "description": "Menu item identifier."
+              }
+            ]
+          },
+          "docs": "Retrieve a single menu item by identifier, including its prices and options. Only GET is supported to serve consumer-facing applications."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Search",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search Restaurants",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.opendining.net/search/restaurants",
+            "params": [
+              {
+                "name": "lat",
+                "value": "",
+                "type": "query",
+                "description": "Latitude of the search center."
+              },
+              {
+                "name": "lon",
+                "value": "",
+                "type": "query",
+                "description": "Longitude of the search center."
+              },
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "Fuzzy, weighted full-text search query."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Trailing-wildcard search on the business name."
+              },
+              {
+                "name": "tags",
+                "value": "",
+                "type": "query",
+                "description": "Space-separated, URL-encoded tags to restrict results by category."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results (default 10, max 50)."
+              },
+              {
+                "name": "skip",
+                "value": "",
+                "type": "query",
+                "description": "Offset for pagination."
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Sort order, by distance (default) or price."
+              },
+              {
+                "name": "show_closed",
+                "value": "",
+                "type": "query",
+                "description": "When true, include closed restaurants."
+              }
+            ]
+          },
+          "docs": "Search restaurants by location and optional full-text query, returning a count, a results array, and applicable facets."
+        },
+        {
+          "info": {
+            "name": "Search Menu Items",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.opendining.net/search/menuitems",
+            "params": [
+              {
+                "name": "lat",
+                "value": "",
+                "type": "query",
+                "description": "Latitude of the search center."
+              },
+              {
+                "name": "lon",
+                "value": "",
+                "type": "query",
+                "description": "Longitude of the search center."
+              },
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "Fuzzy, weighted full-text search query."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Trailing-wildcard search on the item name."
+              },
+              {
+                "name": "tags",
+                "value": "",
+                "type": "query",
+                "description": "Space-separated, URL-encoded tags to restrict results by category."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results (default 10, max 50)."
+              },
+              {
+                "name": "skip",
+                "value": "",
+                "type": "query",
+                "description": "Offset for pagination."
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Sort order, by distance (default) or price."
+              },
+              {
+                "name": "show_closed",
+                "value": "",
+                "type": "query",
+                "description": "When true, include unavailable items."
+              }
+            ]
+          },
+          "docs": "Search menu items by location and optional full-text query, returning a count, a results array (each with a prices array), and applicable facets."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Orders",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.opendining.net/orders",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new order for a restaurant, including line items, the customer, an optional tip, and an optional delivery address."
+        },
+        {
+          "info": {
+            "name": "Get Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.opendining.net/orders/:orderId",
+            "params": [
+              {
+                "name": "orderId",
+                "value": "",
+                "type": "path",
+                "description": "Order identifier."
+              }
+            ]
+          },
+          "docs": "Retrieve the details and current status of a given order by its identifier."
+        },
+        {
+          "info": {
+            "name": "Update Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.opendining.net/orders/:orderId",
+            "params": [
+              {
+                "name": "orderId",
+                "value": "",
+                "type": "path",
+                "description": "Order identifier."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update an existing order, for example to add items or submit it for payment."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

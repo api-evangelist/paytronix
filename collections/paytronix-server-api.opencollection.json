@@ -1,0 +1,560 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Paytronix Server API",
+    "version": "26.6"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "OAuth",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Request Guest Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://m{merchantId}.api.{server}.com/rest/{release}/oauth/requestGuestToken.json",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Authenticate a guest in a merchant program and issue an OAuth access token. Supports password, one_time_password, authorization_code, refresh_token, and fieldset grant types."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Guest",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Account Information",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://m{merchantId}.api.{server}.com/rest/{release}/guest/accountInformation.json",
+            "params": [
+              {
+                "name": "merchantId",
+                "value": "",
+                "type": "query",
+                "description": "Paytronix-assigned merchant identifier."
+              },
+              {
+                "name": "printedCardNumber",
+                "value": "",
+                "type": "query",
+                "description": "Printed card number identifying the account."
+              },
+              {
+                "name": "accessFilterStoreGroupCode",
+                "value": "",
+                "type": "query",
+                "description": "Optional store group code used to filter access."
+              }
+            ]
+          },
+          "docs": "Retrieve account status, card template, tier, and wallet balances for an account identified by its printed card number."
+        },
+        {
+          "info": {
+            "name": "Get Account Information By Account ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://m{merchantId}.api.{server}.com/rest/{release}/guest/accountInformationById.json",
+            "params": [
+              {
+                "name": "merchantId",
+                "value": "",
+                "type": "query",
+                "description": "Paytronix-assigned merchant identifier."
+              },
+              {
+                "name": "accountId",
+                "value": "",
+                "type": "query",
+                "description": "Paytronix account identifier."
+              },
+              {
+                "name": "accessFilterStoreGroupCode",
+                "value": "",
+                "type": "query",
+                "description": "Optional store group code used to filter access."
+              }
+            ]
+          },
+          "docs": "Retrieve account information for an account identified by its account ID."
+        },
+        {
+          "info": {
+            "name": "Get User Information",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://m{merchantId}.api.{server}.com/rest/{release}/guest/userInformation.json",
+            "params": [
+              {
+                "name": "merchantId",
+                "value": "",
+                "type": "query",
+                "description": "Paytronix-assigned merchant identifier."
+              },
+              {
+                "name": "username",
+                "value": "",
+                "type": "query",
+                "description": "Registered guest username."
+              }
+            ]
+          },
+          "docs": "Retrieve demographic user fields, primary card numbers, related guests, and account IDs for a registered user identified by username."
+        },
+        {
+          "info": {
+            "name": "Get Transaction History",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://m{merchantId}.api.{server}.com/rest/{release}/guest/transactionHistory.json",
+            "params": [
+              {
+                "name": "merchantId",
+                "value": "",
+                "type": "query",
+                "description": "Paytronix-assigned merchant identifier."
+              },
+              {
+                "name": "printedCardNumber",
+                "value": "",
+                "type": "query",
+                "description": "Printed card number identifying the account."
+              },
+              {
+                "name": "dateStart",
+                "value": "",
+                "type": "query",
+                "description": "Inclusive start date for the history window."
+              },
+              {
+                "name": "dateEnd",
+                "value": "",
+                "type": "query",
+                "description": "Inclusive end date for the history window."
+              },
+              {
+                "name": "maxNumberOfResults",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of transactions to return."
+              },
+              {
+                "name": "limitToBalanceAffectingTransactions",
+                "value": "",
+                "type": "query",
+                "description": "When true, only balance-affecting transactions are returned."
+              }
+            ]
+          },
+          "docs": "Retrieve wallet balances and a list of transactions (accruals, redemptions, balance changes) for an account by printed card number."
+        },
+        {
+          "info": {
+            "name": "Change Card Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://m{merchantId}.api.{server}.com/rest/{release}/guest/changeCardStatus.json",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Enable or disable a card by setting its status to ACTIVE or DISABLED."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Enrollment",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create And Register Account",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://m{merchantId}.api.{server}.com/rest/{release}/enrollment/createAndRegister.json",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create, activate, and register a virtual card in one operation. Requires a username and password in the user fields; optionally supports SMS verification."
+        },
+        {
+          "info": {
+            "name": "Activate And Register Card",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://m{merchantId}.api.{server}.com/rest/{release}/enrollment/activateAndRegister.json",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Activate an existing printed card and register it simultaneously, requiring username and password in the user fields."
+        },
+        {
+          "info": {
+            "name": "Get Enrollment Configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://m{merchantId}.api.{server}.com/rest/{release}/enrollment/enrollmentConfig.json",
+            "params": [
+              {
+                "name": "merchantId",
+                "value": "",
+                "type": "query",
+                "description": "Paytronix-assigned merchant identifier."
+              },
+              {
+                "name": "cardTemplateCode",
+                "value": "",
+                "type": "query",
+                "description": "Card template code identifying the program."
+              }
+            ]
+          },
+          "docs": "Retrieve the field definitions (type, label, required, validation rules) used to enroll guests in a program."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Transaction",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Activate Card",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://m{merchantId}.api.{server}.com/rest/{release}/transaction/activate.json",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Activate a loyalty card, returning card details and enrollment date."
+        },
+        {
+          "info": {
+            "name": "Balance Inquiry",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://m{merchantId}.api.{server}.com/rest/{release}/transaction/balanceInquiry.json",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieve current stored-value balance and loyalty program information for a card."
+        },
+        {
+          "info": {
+            "name": "Add Or Redeem Wallet Value",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://m{merchantId}.api.{server}.com/rest/{release}/transaction/addRedeem.json",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add value to or redeem value from a card account using add and redeem wallet content lists. Use programId SV for gift and LP for loyalty."
+        },
+        {
+          "info": {
+            "name": "Query Accounts",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://m{merchantId}.api.{server}.com/rest/{release}/transaction/accountQuery.json",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Search for accounts by phone, name, email, or postal code, returning matching customer records and field values."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Gift",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Sell Gift Card",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://m{merchantId}.api.{server}.com/rest/{release}/gift/sell.json",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Activate a gift card and add the initial value to it."
+        },
+        {
+          "info": {
+            "name": "Reload Gift Card",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://m{merchantId}.api.{server}.com/rest/{release}/gift/reload.json",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add value to a gift card that has already been activated."
+        },
+        {
+          "info": {
+            "name": "Get Gift Card Balance",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://m{merchantId}.api.{server}.com/rest/{release}/gift/balance.json",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieve the current balance of a gift card."
+        },
+        {
+          "info": {
+            "name": "Redeem Gift Card",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://m{merchantId}.api.{server}.com/rest/{release}/gift/redeem.json",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Redeem value from a gift card, optionally including a tip."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Payment",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Recharge Stored Value Card",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://m{merchantId}.api.{server}.com/rest/{release}/payment/recharge.json",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Recharge a stored-value card with a given amount using a saved or new payment method."
+        },
+        {
+          "info": {
+            "name": "Get Saved Payment Methods",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://m{merchantId}.api.{server}.com/rest/{release}/payment/savedPaymentMethods.json",
+            "params": [
+              {
+                "name": "merchantId",
+                "value": "",
+                "type": "query",
+                "description": "Paytronix-assigned merchant identifier."
+              },
+              {
+                "name": "printedCardNumber",
+                "value": "",
+                "type": "query",
+                "description": "Printed card number identifying the account."
+              }
+            ]
+          },
+          "docs": "List the saved payment methods associated with a stored-value card."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Store",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Nearby Locations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://m{merchantId}.api.{server}.com/rest/{release}/store/nearbyLocations.json",
+            "params": [
+              {
+                "name": "merchantId",
+                "value": "",
+                "type": "query",
+                "description": "Paytronix-assigned merchant identifier."
+              },
+              {
+                "name": "latitude",
+                "value": "",
+                "type": "query",
+                "description": "Search center latitude."
+              },
+              {
+                "name": "longitude",
+                "value": "",
+                "type": "query",
+                "description": "Search center longitude."
+              },
+              {
+                "name": "maxDistance",
+                "value": "",
+                "type": "query",
+                "description": "Maximum distance in miles."
+              },
+              {
+                "name": "maxLocations",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results."
+              },
+              {
+                "name": "storeGroupCode",
+                "value": "",
+                "type": "query",
+                "description": "Optional store group filter."
+              }
+            ]
+          },
+          "docs": "Retrieve store locations within a maximum distance of a latitude and longitude, ordered by distance."
+        },
+        {
+          "info": {
+            "name": "Get All Stores",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://m{merchantId}.api.{server}.com/rest/{release}/store/stores.json",
+            "params": [
+              {
+                "name": "merchantId",
+                "value": "",
+                "type": "query",
+                "description": "Paytronix-assigned merchant identifier."
+              }
+            ]
+          },
+          "docs": "Retrieve the complete list of all store locations for a merchant."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Check",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Compute Applicable Rewards",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://m{merchantId}.api.{server}.com/rest/{release}/check/computeApplicableRewards.json",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Determine which rewards and discounts apply to a given POS check for a guest, returning item, multi-item, subtotal, and service-charge discounts plus balances and receipt text."
+        },
+        {
+          "info": {
+            "name": "Post And Accrue Points",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://m{merchantId}.api.{server}.com/rest/{release}/check/postAndAccruePoints.json",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Post a check and accrue points in one step, returning the add/redeem result, customer details, balances, and receipt text."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
