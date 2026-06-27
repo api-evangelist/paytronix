@@ -53,10 +53,10 @@ apis:
       - type: JSONStructure
         url: json-structure/server-api-account-information-reply-structure.json
         title: Account Information Reply Structure
-      - type: Example
+      - type: Examples
         url: examples/server-api-account-information-reply-example.json
         title: Account Information Reply Example
-      - type: JSON-LD
+      - type: JSONLD
         url: json-ld/paytronix-server-api-context.jsonld
   - aid: paytronix:online-ordering-api
     name: Paytronix Online Ordering API
@@ -80,10 +80,10 @@ apis:
       - type: JSONStructure
         url: json-structure/online-ordering-api-order-structure.json
         title: Order Structure
-      - type: Example
+      - type: Examples
         url: examples/online-ordering-api-order-example.json
         title: Order Example
-      - type: JSON-LD
+      - type: JSONLD
         url: json-ld/paytronix-online-ordering-api-context.jsonld
 common:
   - type: Website
