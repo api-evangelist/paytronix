@@ -86,6 +86,10 @@ apis:
       - type: JSONLD
         url: json-ld/paytronix-online-ordering-api-context.jsonld
 common:
+  - type: DomainSecurity
+    url: security/paytronix-domain-security.yml
+  - type: Authentication
+    url: authentication/paytronix-authentication.yml
   - type: Website
     url: https://www.paytronix.com/
   - type: Documentation

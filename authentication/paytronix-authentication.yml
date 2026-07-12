@@ -1,0 +1,21 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/paytronix-server-api-openapi.yml
+summary:
+  types:
+  - http
+schemes:
+- name: basicAuth
+  type: http
+  scheme: basic
+  description: HTTP Basic authentication with the base64-encoded integration identifier and
+    secret (identifier:secret).
+  sources:
+  - openapi/paytronix-server-api-openapi.yml
+- name: guestBearer
+  type: http
+  scheme: bearer
+  bearerFormat: OAuth
+  description: OAuth bearer token issued by the OAuth Service for guest-scoped operations.
+  sources:
+  - openapi/paytronix-server-api-openapi.yml
