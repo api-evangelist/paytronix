@@ -1,16 +1,23 @@
-# Paytronix Spectral Ruleset
-# Generated from the Paytronix Server (PXS) API and Online Ordering (Open Dining) API
-# OpenAPI specifications. Enforces the conventions observed across these specs:
-#   - Title prefix "Paytronix ..."
-#   - Title Case operation summaries
-#   - camelCase operationIds with verb prefixes (get/create/update/delete/...)
-#   - Title Case tag names
-#   - HTTP Basic / OAuth bearer security
-#   - JSON request/response bodies with a result envelope
-extends: [[spectral:oas, off]]
+# paytronix — Spectral ruleset (strengthened)
+# Plain Spectral. Existing hand-authored rules preserved; measured rules added
+# from this provider's own OpenAPI conventions by strengthen_ruleset.py,
+# then self-validated against the spec.
+#
+# Provenance:
+#   - servers-https-only: 100% of servers already https (error)
+#   - path-params-casing: camel @ 100% (n=4)
+#   - query-params-casing: camel @ 51% (n=43)
+#   - operationid-casing: camel @ 100% (n=30)
+#   - schema-names-casing: pascal @ 100% (n=47)
+#   - schema-properties-casing: camel @ 52% (n=223)
+#   - security: global (root) — NOT emitting operation-security-required
+#   - error-schema-defined: ErrorReply
+#   - pagination params observed: ['limit']
+#   - merge: kept 33 existing, added 6 measured, upgraded 0
+#   - added: path-params-casing, query-params-casing, schema-names-casing, schema-properties-casing, error-schema-defined, no-empty-descriptions
+extends:
+  - spectral:oas
 rules:
-
-  # ── INFO / METADATA ─────────────────────────────────────────────
   info-title-paytronix-prefix:
     description: API title should begin with "Paytronix".
     severity: warn
@@ -18,7 +25,7 @@ rules:
     then:
       function: pattern
       functionOptions:
-        match: '^Paytronix'
+        match: ^Paytronix
   info-description-required:
     description: Info object must have a non-trivial description.
     severity: warn
@@ -40,8 +47,6 @@ rules:
     then:
       field: contact
       function: defined
-
-  # ── OPENAPI VERSION ─────────────────────────────────────────────
   openapi-version-3:
     description: Specs should target OpenAPI 3.0.x.
     severity: warn
@@ -49,9 +54,7 @@ rules:
     then:
       function: pattern
       functionOptions:
-        match: '^3\.0\.'
-
-  # ── SERVERS ─────────────────────────────────────────────────────
+        match: ^3\.0\.
   servers-defined:
     description: At least one server must be defined.
     severity: error
@@ -66,7 +69,7 @@ rules:
     then:
       function: pattern
       functionOptions:
-        match: '^https://'
+        match: ^https://
   server-description:
     description: Each server should have a description.
     severity: info
@@ -74,8 +77,6 @@ rules:
     then:
       field: description
       function: defined
-
-  # ── OPERATIONS ──────────────────────────────────────────────────
   operation-summary-required:
     description: Every operation must have a summary.
     severity: warn
@@ -90,7 +91,7 @@ rules:
     then:
       function: pattern
       functionOptions:
-        match: '^([A-Z0-9][A-Za-z0-9]*)(\s+(?:[A-Z0-9][A-Za-z0-9]*|And|Or|By|For|To|In|Of|The|A|An))*$'
+        match: ^([A-Z0-9][A-Za-z0-9]*)(\s+(?:[A-Z0-9][A-Za-z0-9]*|And|Or|By|For|To|In|Of|The|A|An))*$
   operation-description-required:
     description: Every operation must have a description.
     severity: warn
@@ -112,7 +113,7 @@ rules:
     then:
       function: pattern
       functionOptions:
-        match: '^[a-z][a-zA-Z0-9]*$'
+        match: ^[a-z][a-zA-Z0-9]*$
   operation-operationid-verb-prefix:
     description: operationId should start with a known verb prefix.
     severity: info
@@ -120,7 +121,7 @@ rules:
     then:
       function: pattern
       functionOptions:
-        match: '^(get|list|create|update|delete|add|redeem|sell|reload|recharge|activate|register|request|search|compute|post|change|query|balance|reverse|exchange|cash)'
+        match: ^(get|list|create|update|delete|add|redeem|sell|reload|recharge|activate|register|request|search|compute|post|change|query|balance|reverse|exchange|cash)
   operation-tags-required:
     description: Every operation must declare at least one tag.
     severity: warn
@@ -135,8 +136,6 @@ rules:
     then:
       field: x-microcks-operation
       function: defined
-
-  # ── TAGS ────────────────────────────────────────────────────────
   tags-global-defined:
     description: A global tags array must be defined.
     severity: warn
@@ -158,9 +157,7 @@ rules:
     then:
       function: pattern
       functionOptions:
-        match: '^[A-Z][A-Za-z0-9]*(\s+[A-Z][A-Za-z0-9]*)*$'
-
-  # ── PARAMETERS ──────────────────────────────────────────────────
+        match: ^[A-Z][A-Za-z0-9]*(\s+[A-Z][A-Za-z0-9]*)*$
   parameter-description-required:
     description: Every parameter must have a description.
     severity: warn
@@ -182,9 +179,7 @@ rules:
     then:
       function: pattern
       functionOptions:
-        match: '^[a-z][a-zA-Z0-9_]*$'
-
-  # ── REQUEST BODIES ──────────────────────────────────────────────
+        match: ^[a-z][a-zA-Z0-9_]*$
   request-body-json:
     description: Request bodies should provide an application/json media type.
     severity: warn
@@ -199,8 +194,6 @@ rules:
     then:
       field: schema
       function: truthy
-
-  # ── RESPONSES ───────────────────────────────────────────────────
   response-2xx-required:
     description: Every operation must define a 2xx success response.
     severity: error
@@ -211,9 +204,12 @@ rules:
         schema:
           type: object
           anyOf:
-            - required: ['200']
-            - required: ['201']
-            - required: ['204']
+          - required:
+            - '200'
+          - required:
+            - '201'
+          - required:
+            - '204'
   response-description-required:
     description: Every response must have a description.
     severity: warn
@@ -228,8 +224,6 @@ rules:
     then:
       field: application/json
       function: defined
-
-  # ── SCHEMAS — PROPERTY NAMING ───────────────────────────────────
   schema-property-typed:
     description: Schema properties should declare a type, $ref, or composition.
     severity: info
@@ -240,12 +234,18 @@ rules:
         schema:
           type: object
           anyOf:
-            - required: [type]
-            - required: ['$ref']
-            - required: [allOf]
-            - required: [oneOf]
-            - required: [anyOf]
-            - required: [additionalProperties]
+          - required:
+            - type
+          - required:
+            - $ref
+          - required:
+            - allOf
+          - required:
+            - oneOf
+          - required:
+            - anyOf
+          - required:
+            - additionalProperties
   schema-property-camelcase:
     description: Schema property names should be camelCase (PXS convention).
     severity: info
@@ -253,9 +253,7 @@ rules:
     then:
       function: pattern
       functionOptions:
-        match: '^[a-z][a-zA-Z0-9_]*$'
-
-  # ── SECURITY ────────────────────────────────────────────────────
+        match: ^[a-z][a-zA-Z0-9_]*$
   security-schemes-defined:
     description: components.securitySchemes should be defined where the API requires auth.
     severity: info
@@ -270,8 +268,6 @@ rules:
     then:
       field: description
       function: defined
-
-  # ── HTTP METHOD CONVENTIONS ─────────────────────────────────────
   get-no-request-body:
     description: GET operations must not declare a request body.
     severity: error
@@ -286,3 +282,51 @@ rules:
     then:
       field: requestBody
       function: undefined
+  path-params-casing:
+    description: Path parameters should be camelCase (the dominant convention in this API).
+    severity: warn
+    given: $.paths[*].parameters[?(@.in=='path')].name
+    then:
+      function: casing
+      functionOptions:
+        type: camel
+  query-params-casing:
+    description: Query parameters should be camelCase (the dominant convention in this API).
+    severity: info
+    given: $.paths[*][get,post,put,patch,delete].parameters[?(@.in=='query')]
+    then:
+      field: name
+      function: casing
+      functionOptions:
+        type: camel
+  schema-names-casing:
+    description: Component schema names should be PascalCase (the dominant convention in this API).
+    severity: warn
+    given: $.components.schemas
+    then:
+      field: '@key'
+      function: casing
+      functionOptions:
+        type: pascal
+  schema-properties-casing:
+    description: Schema properties should be camelCase (the dominant convention in this API).
+    severity: info
+    given: $.components.schemas[*].properties
+    then:
+      field: '@key'
+      function: casing
+      functionOptions:
+        type: camel
+  error-schema-defined:
+    description: A shared error schema (ErrorReply) should be defined for error payloads.
+    severity: warn
+    given: $.components.schemas
+    then:
+      field: ErrorReply
+      function: truthy
+  no-empty-descriptions:
+    description: Descriptions must not be empty strings.
+    severity: warn
+    given: $..description
+    then:
+      function: truthy
