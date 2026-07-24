@@ -1,0 +1,415 @@
+openapi: 3.0.3
+info:
+  title: Paytronix Online Ordering Check Guest API
+  version: '1.0'
+  description: The Paytronix Online Ordering API (Open Dining) powers ordering experiences across in-store, online web, online app, call-in, call-center, and drive-through order methods. It exposes restaurant/location discovery, menu retrieval, fuzzy and geospatial search, and order creation, retrieval, and submission, connecting ordering systems to the broader Paytronix loyalty and guest engagement platform. This specification was generated from the public Open Dining documentation at http://docs.opendining.net and the Online Ordering Resource Center at https://support.opendining.net.
+  contact:
+    name: Kin Lane
+    email: kin@apievangelist.com
+  x-generated-from: documentation
+  x-source-url: http://docs.opendining.net/api/
+  x-last-validated: '2026-06-03'
+servers:
+- url: https://api.opendining.net
+  description: Open Dining Online Ordering API base URL.
+tags:
+- name: Guest
+  description: Guest account and user information lookup and management.
+paths:
+  /guest/accountInformation.json:
+    get:
+      operationId: getAccountInformation
+      summary: Get Account Information
+      description: Retrieve account status, card template, tier, and wallet balances for an account identified by its printed card number.
+      tags:
+      - Guest
+      parameters:
+      - name: merchantId
+        in: query
+        required: true
+        description: Paytronix-assigned merchant identifier.
+        schema:
+          type: integer
+      - name: printedCardNumber
+        in: query
+        required: true
+        description: Printed card number identifying the account.
+        schema:
+          type: string
+      - name: accessFilterStoreGroupCode
+        in: query
+        required: false
+        description: Optional store group code used to filter access.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Account information.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountInformationReply'
+              examples:
+                GetAccountInformation200Example:
+                  summary: Default getAccountInformation 200 response
+                  x-microcks-default: true
+                  value:
+                    result: success
+                    username: jdoe
+                    accountStatus: ACTIVE
+                    queryCardStatus: ACTIVE
+                    registrationStatus: REGISTERED
+                    cardTemplateCode: '1'
+                    tierCode: GOLD
+                    primaryCard: '60490012345678'
+                    additionalCards:
+                    - string
+                    walletBalances:
+                    - walletCode: '1'
+                      name: Points
+                      balance: 1250
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /guest/accountInformationById.json:
+    get:
+      operationId: getAccountInformationById
+      summary: Get Account Information By Account ID
+      description: Retrieve account information for an account identified by its account ID.
+      tags:
+      - Guest
+      parameters:
+      - name: merchantId
+        in: query
+        required: true
+        description: Paytronix-assigned merchant identifier.
+        schema:
+          type: integer
+      - name: accountId
+        in: query
+        required: true
+        description: Paytronix account identifier.
+        schema:
+          type: integer
+          format: int64
+      - name: accessFilterStoreGroupCode
+        in: query
+        required: false
+        description: Optional store group code used to filter access.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Account information.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountInformationReply'
+              examples:
+                GetAccountInformationById200Example:
+                  summary: Default getAccountInformationById 200 response
+                  x-microcks-default: true
+                  value:
+                    result: success
+                    username: jdoe
+                    accountStatus: ACTIVE
+                    queryCardStatus: ACTIVE
+                    registrationStatus: REGISTERED
+                    cardTemplateCode: '1'
+                    tierCode: GOLD
+                    primaryCard: '60490012345678'
+                    additionalCards:
+                    - string
+                    walletBalances:
+                    - walletCode: '1'
+                      name: Points
+                      balance: 1250
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /guest/userInformation.json:
+    get:
+      operationId: getUserInformation
+      summary: Get User Information
+      description: Retrieve demographic user fields, primary card numbers, related guests, and account IDs for a registered user identified by username.
+      tags:
+      - Guest
+      parameters:
+      - name: merchantId
+        in: query
+        required: true
+        description: Paytronix-assigned merchant identifier.
+        schema:
+          type: integer
+      - name: username
+        in: query
+        required: true
+        description: Registered guest username.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: User information.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserInformationReply'
+              examples:
+                GetUserInformation200Example:
+                  summary: Default getUserInformation 200 response
+                  x-microcks-default: true
+                  value:
+                    result: success
+                    userFields:
+                      firstName: Jane
+                      lastName: Doe
+                      email: jane@example.com
+                    primaryCardNumbers:
+                    - string
+                    accountIds:
+                    - 0
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /guest/transactionHistory.json:
+    get:
+      operationId: getTransactionHistory
+      summary: Get Transaction History
+      description: Retrieve wallet balances and a list of transactions (accruals, redemptions, balance changes) for an account by printed card number.
+      tags:
+      - Guest
+      parameters:
+      - name: merchantId
+        in: query
+        required: true
+        description: Paytronix-assigned merchant identifier.
+        schema:
+          type: integer
+      - name: printedCardNumber
+        in: query
+        required: true
+        description: Printed card number identifying the account.
+        schema:
+          type: string
+      - name: dateStart
+        in: query
+        required: false
+        description: Inclusive start date for the history window.
+        schema:
+          type: string
+          format: date
+      - name: dateEnd
+        in: query
+        required: false
+        description: Inclusive end date for the history window.
+        schema:
+          type: string
+          format: date
+      - name: maxNumberOfResults
+        in: query
+        required: false
+        description: Maximum number of transactions to return.
+        schema:
+          type: integer
+      - name: limitToBalanceAffectingTransactions
+        in: query
+        required: false
+        description: When true, only balance-affecting transactions are returned.
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: Transaction history.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionHistoryReply'
+              examples:
+                GetTransactionHistory200Example:
+                  summary: Default getTransactionHistory 200 response
+                  x-microcks-default: true
+                  value:
+                    result: success
+                    walletInfo:
+                    - walletCode: '1'
+                      name: Points
+                      balance: 1250
+                    transactions:
+                    - transactionId: string
+                      datetime: '2026-06-03T12:00:00Z'
+                      type: ACCRUAL
+                      walletCode: string
+                      amount: 0
+                      balance: 0
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /guest/changeCardStatus.json:
+    post:
+      operationId: changeCardStatus
+      summary: Change Card Status
+      description: Enable or disable a card by setting its status to ACTIVE or DISABLED.
+      tags:
+      - Guest
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChangeCardStatusRequest'
+            examples:
+              ChangeCardStatusRequestExample:
+                summary: Default changeCardStatus request
+                x-microcks-default: true
+                value:
+                  merchantId: 1000
+                  printedCardNumber: '60490012345678'
+                  status: DISABLED
+      responses:
+        '200':
+          description: Status change result.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SimpleReply'
+              examples:
+                ChangeCardStatus200Example:
+                  summary: Default changeCardStatus 200 response
+                  x-microcks-default: true
+                  value:
+                    result: success
+                    errorCode: string
+                    errorMessage: string
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    WalletBalance:
+      type: object
+      properties:
+        walletCode:
+          type: string
+          example: '1'
+        name:
+          type: string
+          example: Points
+        balance:
+          type: number
+          example: 1250
+    UserInformationReply:
+      type: object
+      properties:
+        result:
+          type: string
+          example: success
+        userFields:
+          type: object
+          additionalProperties: true
+          example:
+            firstName: Jane
+            lastName: Doe
+            email: jane@example.com
+        primaryCardNumbers:
+          type: array
+          items:
+            type: string
+        accountIds:
+          type: array
+          items:
+            type: integer
+            format: int64
+    ChangeCardStatusRequest:
+      type: object
+      required:
+      - merchantId
+      - printedCardNumber
+      - status
+      properties:
+        merchantId:
+          type: integer
+          example: 1000
+        printedCardNumber:
+          type: string
+          example: '60490012345678'
+        status:
+          type: string
+          enum:
+          - ACTIVE
+          - DISABLED
+          example: DISABLED
+    TransactionHistoryReply:
+      type: object
+      properties:
+        result:
+          type: string
+          example: success
+        walletInfo:
+          type: array
+          items:
+            $ref: '#/components/schemas/WalletBalance'
+        transactions:
+          type: array
+          items:
+            type: object
+            properties:
+              transactionId:
+                type: string
+              datetime:
+                type: string
+                format: date-time
+              type:
+                type: string
+                example: ACCRUAL
+              walletCode:
+                type: string
+              amount:
+                type: number
+              balance:
+                type: number
+    AccountInformationReply:
+      type: object
+      properties:
+        result:
+          type: string
+          example: success
+        username:
+          type: string
+          example: jdoe
+        accountStatus:
+          type: string
+          example: ACTIVE
+        queryCardStatus:
+          type: string
+          example: ACTIVE
+        registrationStatus:
+          type: string
+          example: REGISTERED
+        cardTemplateCode:
+          type: string
+          example: '1'
+        tierCode:
+          type: string
+          example: GOLD
+        primaryCard:
+          type: string
+          example: '60490012345678'
+        additionalCards:
+          type: array
+          items:
+            type: string
+        walletBalances:
+          type: array
+          items:
+            $ref: '#/components/schemas/WalletBalance'
+    SimpleReply:
+      type: object
+      description: Standard success/failure envelope.
+      properties:
+        result:
+          type: string
+          example: success
+        errorCode:
+          type: string
+        errorMessage:
+          type: string

@@ -1,0 +1,96 @@
+openapi: 3.0.3
+info:
+  title: Paytronix Online Ordering Check Menu Items API
+  version: '1.0'
+  description: The Paytronix Online Ordering API (Open Dining) powers ordering experiences across in-store, online web, online app, call-in, call-center, and drive-through order methods. It exposes restaurant/location discovery, menu retrieval, fuzzy and geospatial search, and order creation, retrieval, and submission, connecting ordering systems to the broader Paytronix loyalty and guest engagement platform. This specification was generated from the public Open Dining documentation at http://docs.opendining.net and the Online Ordering Resource Center at https://support.opendining.net.
+  contact:
+    name: Kin Lane
+    email: kin@apievangelist.com
+  x-generated-from: documentation
+  x-source-url: http://docs.opendining.net/api/
+  x-last-validated: '2026-06-03'
+servers:
+- url: https://api.opendining.net
+  description: Open Dining Online Ordering API base URL.
+tags:
+- name: Menu Items
+  description: Menu item retrieval.
+paths:
+  /menuitems/{menuItemId}:
+    get:
+      operationId: getMenuItem
+      summary: Get Menu Item
+      description: Retrieve a single menu item by identifier, including its prices and options. Only GET is supported to serve consumer-facing applications.
+      tags:
+      - Menu Items
+      parameters:
+      - name: menuItemId
+        in: path
+        required: true
+        description: Menu item identifier.
+        schema:
+          type: string
+          example: 4b96f1bafc9f100ca79231ef
+      responses:
+        '200':
+          description: Menu item object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MenuItem'
+              examples:
+                GetMenuItem200Example:
+                  summary: Default getMenuItem 200 response
+                  x-microcks-default: true
+                  value:
+                    id: 4b96f1bafc9f100ca79231ef
+                    name: Chicken Burrito
+                    description: Grilled chicken, rice, beans, salsa
+                    imageUrl: string
+                    prices:
+                    - name: Regular
+                      price: 9.5
+                    options:
+                    - name: Add Guacamole
+                      price: 1.5
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    MenuItem:
+      type: object
+      properties:
+        id:
+          type: string
+          example: 4b96f1bafc9f100ca79231ef
+        name:
+          type: string
+          example: Chicken Burrito
+        description:
+          type: string
+          example: Grilled chicken, rice, beans, salsa
+        imageUrl:
+          type: string
+        prices:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+                example: Regular
+              price:
+                type: number
+                example: 9.5
+        options:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+                example: Add Guacamole
+              price:
+                type: number
+                example: 1.5

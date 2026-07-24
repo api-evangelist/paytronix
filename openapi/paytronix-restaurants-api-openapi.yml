@@ -1,0 +1,113 @@
+openapi: 3.0.3
+info:
+  title: Paytronix Online Ordering Check Restaurants API
+  version: '1.0'
+  description: The Paytronix Online Ordering API (Open Dining) powers ordering experiences across in-store, online web, online app, call-in, call-center, and drive-through order methods. It exposes restaurant/location discovery, menu retrieval, fuzzy and geospatial search, and order creation, retrieval, and submission, connecting ordering systems to the broader Paytronix loyalty and guest engagement platform. This specification was generated from the public Open Dining documentation at http://docs.opendining.net and the Online Ordering Resource Center at https://support.opendining.net.
+  contact:
+    name: Kin Lane
+    email: kin@apievangelist.com
+  x-generated-from: documentation
+  x-source-url: http://docs.opendining.net/api/
+  x-last-validated: '2026-06-03'
+servers:
+- url: https://api.opendining.net
+  description: Open Dining Online Ordering API base URL.
+tags:
+- name: Restaurants
+  description: Restaurant and location discovery.
+paths:
+  /restaurants/{restaurantId}:
+    get:
+      operationId: getRestaurant
+      summary: Get Restaurant
+      description: Retrieve a single restaurant/location object by its identifier.
+      tags:
+      - Restaurants
+      parameters:
+      - name: restaurantId
+        in: path
+        required: true
+        description: Restaurant/location identifier.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Restaurant object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Restaurant'
+              examples:
+                GetRestaurant200Example:
+                  summary: Default getRestaurant 200 response
+                  x-microcks-default: true
+                  value:
+                    id: 4b96f1bafc9f100ca79231ef
+                    name: Taqueria Downtown
+                    distance: 1.2
+                    coordinates:
+                      lat: 40.0
+                      lon: -81.0
+                    address: 123 Main St
+                    city: Boston
+                    state: MA
+                    postalCode: '02110'
+                    phone: '+16175551234'
+                    website: https://example.com
+                    organizationId: string
+                    imageUrl: string
+                    description: string
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    Coordinates:
+      type: object
+      properties:
+        lat:
+          type: number
+          format: double
+          example: 40.0
+        lon:
+          type: number
+          format: double
+          example: -81.0
+    Restaurant:
+      type: object
+      properties:
+        id:
+          type: string
+          example: 4b96f1bafc9f100ca79231ef
+        name:
+          type: string
+          example: Taqueria Downtown
+        distance:
+          type: number
+          example: 1.2
+        coordinates:
+          $ref: '#/components/schemas/Coordinates'
+        address:
+          type: string
+          example: 123 Main St
+        city:
+          type: string
+          example: Boston
+        state:
+          type: string
+          example: MA
+        postalCode:
+          type: string
+          example: '02110'
+        phone:
+          type: string
+          example: '+16175551234'
+        website:
+          type: string
+          example: https://example.com
+        organizationId:
+          type: string
+        imageUrl:
+          type: string
+        description:
+          type: string

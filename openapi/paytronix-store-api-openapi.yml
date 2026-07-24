@@ -1,0 +1,195 @@
+openapi: 3.0.3
+info:
+  title: Paytronix Online Ordering Check Store API
+  version: '1.0'
+  description: The Paytronix Online Ordering API (Open Dining) powers ordering experiences across in-store, online web, online app, call-in, call-center, and drive-through order methods. It exposes restaurant/location discovery, menu retrieval, fuzzy and geospatial search, and order creation, retrieval, and submission, connecting ordering systems to the broader Paytronix loyalty and guest engagement platform. This specification was generated from the public Open Dining documentation at http://docs.opendining.net and the Online Ordering Resource Center at https://support.opendining.net.
+  contact:
+    name: Kin Lane
+    email: kin@apievangelist.com
+  x-generated-from: documentation
+  x-source-url: http://docs.opendining.net/api/
+  x-last-validated: '2026-06-03'
+servers:
+- url: https://api.opendining.net
+  description: Open Dining Online Ordering API base URL.
+tags:
+- name: Store
+  description: Store and location lookup and management.
+paths:
+  /store/nearbyLocations.json:
+    get:
+      operationId: getNearbyLocations
+      summary: Get Nearby Locations
+      description: Retrieve store locations within a maximum distance of a latitude and longitude, ordered by distance.
+      tags:
+      - Store
+      parameters:
+      - name: merchantId
+        in: query
+        required: true
+        description: Paytronix-assigned merchant identifier.
+        schema:
+          type: integer
+      - name: latitude
+        in: query
+        required: true
+        description: Search center latitude.
+        schema:
+          type: number
+          format: double
+      - name: longitude
+        in: query
+        required: true
+        description: Search center longitude.
+        schema:
+          type: number
+          format: double
+      - name: maxDistance
+        in: query
+        required: true
+        description: Maximum distance in miles.
+        schema:
+          type: number
+      - name: maxLocations
+        in: query
+        required: true
+        description: Maximum number of results.
+        schema:
+          type: integer
+      - name: storeGroupCode
+        in: query
+        required: false
+        description: Optional store group filter.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Nearby locations.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LocationsReply'
+              examples:
+                GetNearbyLocations200Example:
+                  summary: Default getNearbyLocations 200 response
+                  x-microcks-default: true
+                  value:
+                    result: success
+                    locations:
+                    - code: '1'
+                      name: Downtown
+                      address:
+                        address1: string
+                        address2: string
+                        city: string
+                        stateProvince: string
+                        postalCode: string
+                        country: US
+                      latitude: 42.3601
+                      longitude: -71.0589
+                      hoursOfOperation: string
+                      distance: 1.2
+                      metadata: {}
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /store/stores.json:
+    get:
+      operationId: getStores
+      summary: Get All Stores
+      description: Retrieve the complete list of all store locations for a merchant.
+      tags:
+      - Store
+      parameters:
+      - name: merchantId
+        in: query
+        required: true
+        description: Paytronix-assigned merchant identifier.
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: All store locations.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LocationsReply'
+              examples:
+                GetStores200Example:
+                  summary: Default getStores 200 response
+                  x-microcks-default: true
+                  value:
+                    result: success
+                    locations:
+                    - code: '1'
+                      name: Downtown
+                      address:
+                        address1: string
+                        address2: string
+                        city: string
+                        stateProvince: string
+                        postalCode: string
+                        country: US
+                      latitude: 42.3601
+                      longitude: -71.0589
+                      hoursOfOperation: string
+                      distance: 1.2
+                      metadata: {}
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    Address:
+      type: object
+      properties:
+        address1:
+          type: string
+        address2:
+          type: string
+        city:
+          type: string
+        stateProvince:
+          type: string
+        postalCode:
+          type: string
+        country:
+          type: string
+          example: US
+    LocationsReply:
+      type: object
+      properties:
+        result:
+          type: string
+          example: success
+        locations:
+          type: array
+          items:
+            $ref: '#/components/schemas/Location'
+    Location:
+      type: object
+      properties:
+        code:
+          type: string
+          example: '1'
+        name:
+          type: string
+          example: Downtown
+        address:
+          $ref: '#/components/schemas/Address'
+        latitude:
+          type: number
+          format: double
+          example: 42.3601
+        longitude:
+          type: number
+          format: double
+          example: -71.0589
+        hoursOfOperation:
+          type: string
+        distance:
+          type: number
+          example: 1.2
+        metadata:
+          type: object
+          additionalProperties: true

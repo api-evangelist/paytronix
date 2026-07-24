@@ -1,0 +1,401 @@
+openapi: 3.0.3
+info:
+  title: Paytronix Online Ordering Check Transaction API
+  version: '1.0'
+  description: The Paytronix Online Ordering API (Open Dining) powers ordering experiences across in-store, online web, online app, call-in, call-center, and drive-through order methods. It exposes restaurant/location discovery, menu retrieval, fuzzy and geospatial search, and order creation, retrieval, and submission, connecting ordering systems to the broader Paytronix loyalty and guest engagement platform. This specification was generated from the public Open Dining documentation at http://docs.opendining.net and the Online Ordering Resource Center at https://support.opendining.net.
+  contact:
+    name: Kin Lane
+    email: kin@apievangelist.com
+  x-generated-from: documentation
+  x-source-url: http://docs.opendining.net/api/
+  x-last-validated: '2026-06-03'
+servers:
+- url: https://api.opendining.net
+  description: Open Dining Online Ordering API base URL.
+tags:
+- name: Transaction
+  description: Loyalty and stored-value transaction processing at the POS.
+paths:
+  /transaction/activate.json:
+    post:
+      operationId: activateCard
+      summary: Activate Card
+      description: Activate a loyalty card, returning card details and enrollment date.
+      tags:
+      - Transaction
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TransactionRequest'
+            examples:
+              ActivateCardRequestExample:
+                summary: Default activateCard request
+                x-microcks-default: true
+                value:
+                  headerInfo:
+                    merchantId: 1000
+                    storeCode: '1'
+                    programId: PX
+                    terminal: '1'
+                    operator: '100'
+                    posTransactionId: string
+                  cardInfo:
+                    printedCardNumber: '60490012345678'
+                    magstripe: string
+                    cardTemplateCode: '1'
+                  autoActivateCard: true
+      responses:
+        '200':
+          description: Transaction reply.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionReply'
+              examples:
+                ActivateCard200Example:
+                  summary: Default activateCard 200 response
+                  x-microcks-default: true
+                  value:
+                    result: success
+                    pxTransactionId: TXN-12345
+                    maskedCardNumber: '******5678'
+                    enrollmentDate: '2026-06-03'
+                    walletBalances:
+                    - walletCode: '1'
+                      name: Points
+                      balance: 1250
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /transaction/balanceInquiry.json:
+    post:
+      operationId: balanceInquiry
+      summary: Balance Inquiry
+      description: Retrieve current stored-value balance and loyalty program information for a card.
+      tags:
+      - Transaction
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TransactionRequest'
+            examples:
+              BalanceInquiryRequestExample:
+                summary: Default balanceInquiry request
+                x-microcks-default: true
+                value:
+                  headerInfo:
+                    merchantId: 1000
+                    storeCode: '1'
+                    programId: PX
+                    terminal: '1'
+                    operator: '100'
+                    posTransactionId: string
+                  cardInfo:
+                    printedCardNumber: '60490012345678'
+                    magstripe: string
+                    cardTemplateCode: '1'
+                  autoActivateCard: true
+      responses:
+        '200':
+          description: Transaction reply with balances.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionReply'
+              examples:
+                BalanceInquiry200Example:
+                  summary: Default balanceInquiry 200 response
+                  x-microcks-default: true
+                  value:
+                    result: success
+                    pxTransactionId: TXN-12345
+                    maskedCardNumber: '******5678'
+                    enrollmentDate: '2026-06-03'
+                    walletBalances:
+                    - walletCode: '1'
+                      name: Points
+                      balance: 1250
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /transaction/addRedeem.json:
+    post:
+      operationId: addRedeem
+      summary: Add Or Redeem Wallet Value
+      description: Add value to or redeem value from a card account using add and redeem wallet content lists. Use programId SV for gift and LP for loyalty.
+      tags:
+      - Transaction
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddRedeemRequest'
+            examples:
+              AddRedeemRequestExample:
+                summary: Default addRedeem request
+                x-microcks-default: true
+                value:
+                  headerInfo:
+                    merchantId: 1000
+                    storeCode: '1'
+                    programId: PX
+                    terminal: '1'
+                    operator: '100'
+                    posTransactionId: string
+                  cardInfo:
+                    printedCardNumber: '60490012345678'
+                    magstripe: string
+                    cardTemplateCode: '1'
+                  addWalletContents:
+                  - walletCode: '1'
+                    quantity: 10
+                    expiration: '2026-06-03'
+                  redeemWalletContents:
+                  - walletCode: '1'
+                    quantity: 10
+                    expiration: '2026-06-03'
+      responses:
+        '200':
+          description: Add/redeem reply with updated balances.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddRedeemReply'
+              examples:
+                AddRedeem200Example:
+                  summary: Default addRedeem 200 response
+                  x-microcks-default: true
+                  value:
+                    result: success
+                    pxTransactionId: TXN-67890
+                    walletContents:
+                    - walletCode: '1'
+                      name: Points
+                      balance: 1250
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /transaction/accountQuery.json:
+    post:
+      operationId: accountQuery
+      summary: Query Accounts
+      description: Search for accounts by phone, name, email, or postal code, returning matching customer records and field values.
+      tags:
+      - Transaction
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AccountQueryRequest'
+            examples:
+              AccountQueryRequestExample:
+                summary: Default accountQuery request
+                x-microcks-default: true
+                value:
+                  headerInfo:
+                    merchantId: 1000
+                    storeCode: '1'
+                    programId: PX
+                    terminal: '1'
+                    operator: '100'
+                    posTransactionId: string
+                  pageSize: 25
+                  accountQueries:
+                  - phone: string
+                    email: string
+                    firstName: string
+                    lastName: string
+                    postalCode: string
+      responses:
+        '200':
+          description: Account query reply.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountQueryReply'
+              examples:
+                AccountQuery200Example:
+                  summary: Default accountQuery 200 response
+                  x-microcks-default: true
+                  value:
+                    result: success
+                    accounts:
+                    - accountId: 0
+                      printedCardNumber: string
+                      fieldValues: {}
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    WalletBalance:
+      type: object
+      properties:
+        walletCode:
+          type: string
+          example: '1'
+        name:
+          type: string
+          example: Points
+        balance:
+          type: number
+          example: 1250
+    TransactionReply:
+      type: object
+      properties:
+        result:
+          type: string
+          example: success
+        pxTransactionId:
+          type: string
+          example: TXN-12345
+        maskedCardNumber:
+          type: string
+          example: '******5678'
+        enrollmentDate:
+          type: string
+          format: date
+        walletBalances:
+          type: array
+          items:
+            $ref: '#/components/schemas/WalletBalance'
+    AddRedeemReply:
+      type: object
+      properties:
+        result:
+          type: string
+          example: success
+        pxTransactionId:
+          type: string
+          example: TXN-67890
+        walletContents:
+          type: array
+          items:
+            $ref: '#/components/schemas/WalletBalance'
+    AccountQueryReply:
+      type: object
+      properties:
+        result:
+          type: string
+          example: success
+        accounts:
+          type: array
+          items:
+            type: object
+            properties:
+              accountId:
+                type: integer
+                format: int64
+              printedCardNumber:
+                type: string
+              fieldValues:
+                type: object
+                additionalProperties: true
+    TransactionRequest:
+      type: object
+      required:
+      - headerInfo
+      - cardInfo
+      properties:
+        headerInfo:
+          $ref: '#/components/schemas/HeaderInfo'
+        cardInfo:
+          $ref: '#/components/schemas/CardInfo'
+        autoActivateCard:
+          type: boolean
+    HeaderInfo:
+      type: object
+      description: Common transaction header. programId is PX, SV, or LP.
+      properties:
+        merchantId:
+          type: integer
+          example: 1000
+        storeCode:
+          type: string
+          example: '1'
+        programId:
+          type: string
+          example: PX
+        terminal:
+          type: string
+          example: '1'
+        operator:
+          type: string
+          example: '100'
+        posTransactionId:
+          type: string
+    CardInfo:
+      type: object
+      description: Identifies a card for transaction operations.
+      properties:
+        printedCardNumber:
+          type: string
+          example: '60490012345678'
+        magstripe:
+          type: string
+        cardTemplateCode:
+          type: string
+          example: '1'
+    WalletContent:
+      type: object
+      description: A wallet code and quantity used in add/redeem operations.
+      properties:
+        walletCode:
+          type: string
+          example: '1'
+        quantity:
+          type: number
+          example: 10
+        expiration:
+          type: string
+          format: date
+    AddRedeemRequest:
+      type: object
+      required:
+      - headerInfo
+      - cardInfo
+      properties:
+        headerInfo:
+          $ref: '#/components/schemas/HeaderInfo'
+        cardInfo:
+          $ref: '#/components/schemas/CardInfo'
+        addWalletContents:
+          type: array
+          items:
+            $ref: '#/components/schemas/WalletContent'
+        redeemWalletContents:
+          type: array
+          items:
+            $ref: '#/components/schemas/WalletContent'
+    AccountQueryRequest:
+      type: object
+      required:
+      - headerInfo
+      - accountQueries
+      properties:
+        headerInfo:
+          $ref: '#/components/schemas/HeaderInfo'
+        pageSize:
+          type: integer
+          example: 25
+        accountQueries:
+          type: array
+          items:
+            type: object
+            properties:
+              phone:
+                type: string
+              email:
+                type: string
+              firstName:
+                type: string
+              lastName:
+                type: string
+              postalCode:
+                type: string

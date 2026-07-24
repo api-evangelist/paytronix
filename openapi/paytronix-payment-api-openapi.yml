@@ -1,0 +1,206 @@
+openapi: 3.0.3
+info:
+  title: Paytronix Online Ordering Check Payment API
+  version: '1.0'
+  description: The Paytronix Online Ordering API (Open Dining) powers ordering experiences across in-store, online web, online app, call-in, call-center, and drive-through order methods. It exposes restaurant/location discovery, menu retrieval, fuzzy and geospatial search, and order creation, retrieval, and submission, connecting ordering systems to the broader Paytronix loyalty and guest engagement platform. This specification was generated from the public Open Dining documentation at http://docs.opendining.net and the Online Ordering Resource Center at https://support.opendining.net.
+  contact:
+    name: Kin Lane
+    email: kin@apievangelist.com
+  x-generated-from: documentation
+  x-source-url: http://docs.opendining.net/api/
+  x-last-validated: '2026-06-03'
+servers:
+- url: https://api.opendining.net
+  description: Open Dining Online Ordering API base URL.
+tags:
+- name: Payment
+  description: Stored-value recharge, saved payment methods, and auto recharge.
+paths:
+  /payment/recharge.json:
+    post:
+      operationId: rechargeStoredValue
+      summary: Recharge Stored Value Card
+      description: Recharge a stored-value card with a given amount using a saved or new payment method.
+      tags:
+      - Payment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RechargeRequest'
+            examples:
+              RechargeStoredValueRequestExample:
+                summary: Default rechargeStoredValue request
+                x-microcks-default: true
+                value:
+                  merchantId: 1000
+                  printedCardNumber: '60490012345678'
+                  amount: 25.0
+                  paymentMethod:
+                    type: CREDIT_CARD
+                    token: string
+                    lastFour: '4242'
+                  address:
+                    address1: string
+                    address2: string
+                    city: string
+                    stateProvince: string
+                    postalCode: string
+                    country: US
+      responses:
+        '200':
+          description: Charge response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChargeResponse'
+              examples:
+                RechargeStoredValue200Example:
+                  summary: Default rechargeStoredValue 200 response
+                  x-microcks-default: true
+                  value:
+                    result: success
+                    amount: 25.0
+                    cardType: VISA
+                    lastFour: '4242'
+                    processorAuthCode: AUTH123
+                    transactionState: APPROVED
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /payment/savedPaymentMethods.json:
+    get:
+      operationId: getSavedPaymentMethods
+      summary: Get Saved Payment Methods
+      description: List the saved payment methods associated with a stored-value card.
+      tags:
+      - Payment
+      parameters:
+      - name: merchantId
+        in: query
+        required: true
+        description: Paytronix-assigned merchant identifier.
+        schema:
+          type: integer
+      - name: printedCardNumber
+        in: query
+        required: true
+        description: Printed card number identifying the account.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Saved payment methods.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SavedPaymentMethodsReply'
+              examples:
+                GetSavedPaymentMethods200Example:
+                  summary: Default getSavedPaymentMethods 200 response
+                  x-microcks-default: true
+                  value:
+                    result: success
+                    paymentMethods:
+                    - type: CREDIT_CARD
+                      cardholderName: Jane Doe
+                      lastFour: '4242'
+                      defaultUsages:
+                      - string
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    Address:
+      type: object
+      properties:
+        address1:
+          type: string
+        address2:
+          type: string
+        city:
+          type: string
+        stateProvince:
+          type: string
+        postalCode:
+          type: string
+        country:
+          type: string
+          example: US
+    RechargeRequest:
+      type: object
+      required:
+      - merchantId
+      - printedCardNumber
+      - amount
+      - paymentMethod
+      properties:
+        merchantId:
+          type: integer
+          example: 1000
+        printedCardNumber:
+          type: string
+          example: '60490012345678'
+        amount:
+          type: number
+          example: 25.0
+        paymentMethod:
+          type: object
+          properties:
+            type:
+              type: string
+              example: CREDIT_CARD
+            token:
+              type: string
+            lastFour:
+              type: string
+              example: '4242'
+        address:
+          $ref: '#/components/schemas/Address'
+    ChargeResponse:
+      type: object
+      properties:
+        result:
+          type: string
+          example: success
+        amount:
+          type: number
+          example: 25.0
+        cardType:
+          type: string
+          example: VISA
+        lastFour:
+          type: string
+          example: '4242'
+        processorAuthCode:
+          type: string
+          example: AUTH123
+        transactionState:
+          type: string
+          example: APPROVED
+    SavedPaymentMethodsReply:
+      type: object
+      properties:
+        result:
+          type: string
+          example: success
+        paymentMethods:
+          type: array
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+                example: CREDIT_CARD
+              cardholderName:
+                type: string
+                example: Jane Doe
+              lastFour:
+                type: string
+                example: '4242'
+              defaultUsages:
+                type: array
+                items:
+                  type: string

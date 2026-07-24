@@ -1,0 +1,297 @@
+openapi: 3.0.3
+info:
+  title: Paytronix Online Ordering Check Gift API
+  version: '1.0'
+  description: The Paytronix Online Ordering API (Open Dining) powers ordering experiences across in-store, online web, online app, call-in, call-center, and drive-through order methods. It exposes restaurant/location discovery, menu retrieval, fuzzy and geospatial search, and order creation, retrieval, and submission, connecting ordering systems to the broader Paytronix loyalty and guest engagement platform. This specification was generated from the public Open Dining documentation at http://docs.opendining.net and the Online Ordering Resource Center at https://support.opendining.net.
+  contact:
+    name: Kin Lane
+    email: kin@apievangelist.com
+  x-generated-from: documentation
+  x-source-url: http://docs.opendining.net/api/
+  x-last-validated: '2026-06-03'
+servers:
+- url: https://api.opendining.net
+  description: Open Dining Online Ordering API base URL.
+tags:
+- name: Gift
+  description: Gift card sale, reload, balance, redeem, and exchange.
+paths:
+  /gift/sell.json:
+    post:
+      operationId: sellGiftCard
+      summary: Sell Gift Card
+      description: Activate a gift card and add the initial value to it.
+      tags:
+      - Gift
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GiftRequest'
+            examples:
+              SellGiftCardRequestExample:
+                summary: Default sellGiftCard request
+                x-microcks-default: true
+                value:
+                  merchantId: 1000
+                  storeCode: '1'
+                  cardInfo:
+                    printedCardNumber: '60490012345678'
+                    magstripe: string
+                    cardTemplateCode: '1'
+                  amount: 25.0
+                  checkNumber: string
+                  cashier: string
+                  terminalId: string
+                  externalTransactionId: string
+      responses:
+        '200':
+          description: Gift transaction reply.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GiftReply'
+              examples:
+                SellGiftCard200Example:
+                  summary: Default sellGiftCard 200 response
+                  x-microcks-default: true
+                  value:
+                    result: success
+                    pxTransactionId: GIFT-44556
+                    printedCardNumber: '70123456789012'
+                    currentBalance: 50.0
+                    errorCode: string
+                    errorMessage: string
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /gift/reload.json:
+    post:
+      operationId: reloadGiftCard
+      summary: Reload Gift Card
+      description: Add value to a gift card that has already been activated.
+      tags:
+      - Gift
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GiftRequest'
+            examples:
+              ReloadGiftCardRequestExample:
+                summary: Default reloadGiftCard request
+                x-microcks-default: true
+                value:
+                  merchantId: 1000
+                  storeCode: '1'
+                  cardInfo:
+                    printedCardNumber: '60490012345678'
+                    magstripe: string
+                    cardTemplateCode: '1'
+                  amount: 25.0
+                  checkNumber: string
+                  cashier: string
+                  terminalId: string
+                  externalTransactionId: string
+      responses:
+        '200':
+          description: Gift transaction reply.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GiftReply'
+              examples:
+                ReloadGiftCard200Example:
+                  summary: Default reloadGiftCard 200 response
+                  x-microcks-default: true
+                  value:
+                    result: success
+                    pxTransactionId: GIFT-44556
+                    printedCardNumber: '70123456789012'
+                    currentBalance: 50.0
+                    errorCode: string
+                    errorMessage: string
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /gift/balance.json:
+    post:
+      operationId: getGiftBalance
+      summary: Get Gift Card Balance
+      description: Retrieve the current balance of a gift card.
+      tags:
+      - Gift
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GiftBalanceRequest'
+            examples:
+              GetGiftBalanceRequestExample:
+                summary: Default getGiftBalance request
+                x-microcks-default: true
+                value:
+                  merchantId: 1000
+                  storeCode: '1'
+                  cardInfo:
+                    printedCardNumber: '60490012345678'
+                    magstripe: string
+                    cardTemplateCode: '1'
+      responses:
+        '200':
+          description: Gift transaction reply with current balance.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GiftReply'
+              examples:
+                GetGiftBalance200Example:
+                  summary: Default getGiftBalance 200 response
+                  x-microcks-default: true
+                  value:
+                    result: success
+                    pxTransactionId: GIFT-44556
+                    printedCardNumber: '70123456789012'
+                    currentBalance: 50.0
+                    errorCode: string
+                    errorMessage: string
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /gift/redeem.json:
+    post:
+      operationId: redeemGiftCard
+      summary: Redeem Gift Card
+      description: Redeem value from a gift card, optionally including a tip.
+      tags:
+      - Gift
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GiftRedeemRequest'
+            examples:
+              RedeemGiftCardRequestExample:
+                summary: Default redeemGiftCard request
+                x-microcks-default: true
+                value:
+                  merchantId: 1000
+                  storeCode: '1'
+                  cardInfo:
+                    printedCardNumber: '60490012345678'
+                    magstripe: string
+                    cardTemplateCode: '1'
+                  amount: 25.0
+                  checkNumber: string
+                  cashier: string
+                  terminalId: string
+                  externalTransactionId: string
+                  tip: 5.0
+      responses:
+        '200':
+          description: Gift transaction reply.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GiftReply'
+              examples:
+                RedeemGiftCard200Example:
+                  summary: Default redeemGiftCard 200 response
+                  x-microcks-default: true
+                  value:
+                    result: success
+                    pxTransactionId: GIFT-44556
+                    printedCardNumber: '70123456789012'
+                    currentBalance: 50.0
+                    errorCode: string
+                    errorMessage: string
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    GiftRequest:
+      type: object
+      required:
+      - merchantId
+      - storeCode
+      - cardInfo
+      - amount
+      properties:
+        merchantId:
+          type: integer
+          example: 1000
+        storeCode:
+          type: string
+          example: '1'
+        cardInfo:
+          $ref: '#/components/schemas/CardInfo'
+        amount:
+          type: number
+          example: 25.0
+        checkNumber:
+          type: string
+        cashier:
+          type: string
+        terminalId:
+          type: string
+        externalTransactionId:
+          type: string
+    CardInfo:
+      type: object
+      description: Identifies a card for transaction operations.
+      properties:
+        printedCardNumber:
+          type: string
+          example: '60490012345678'
+        magstripe:
+          type: string
+        cardTemplateCode:
+          type: string
+          example: '1'
+    GiftBalanceRequest:
+      type: object
+      required:
+      - merchantId
+      - storeCode
+      - cardInfo
+      properties:
+        merchantId:
+          type: integer
+          example: 1000
+        storeCode:
+          type: string
+          example: '1'
+        cardInfo:
+          $ref: '#/components/schemas/CardInfo'
+    GiftReply:
+      type: object
+      properties:
+        result:
+          type: string
+          example: success
+        pxTransactionId:
+          type: string
+          example: GIFT-44556
+        printedCardNumber:
+          type: string
+          example: '70123456789012'
+        currentBalance:
+          type: number
+          example: 50.0
+        errorCode:
+          type: string
+        errorMessage:
+          type: string
+    GiftRedeemRequest:
+      allOf:
+      - $ref: '#/components/schemas/GiftRequest'
+      - type: object
+        properties:
+          tip:
+            type: number
+            example: 5.0

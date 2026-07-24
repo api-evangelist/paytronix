@@ -1,0 +1,302 @@
+openapi: 3.0.3
+info:
+  title: Paytronix Online Ordering Check API
+  version: '1.0'
+  description: The Paytronix Online Ordering API (Open Dining) powers ordering experiences across in-store, online web, online app, call-in, call-center, and drive-through order methods. It exposes restaurant/location discovery, menu retrieval, fuzzy and geospatial search, and order creation, retrieval, and submission, connecting ordering systems to the broader Paytronix loyalty and guest engagement platform. This specification was generated from the public Open Dining documentation at http://docs.opendining.net and the Online Ordering Resource Center at https://support.opendining.net.
+  contact:
+    name: Kin Lane
+    email: kin@apievangelist.com
+  x-generated-from: documentation
+  x-source-url: http://docs.opendining.net/api/
+  x-last-validated: '2026-06-03'
+servers:
+- url: https://api.opendining.net
+  description: Open Dining Online Ordering API base URL.
+tags:
+- name: Check
+  description: Check-based point accrual, reward computation, and posting.
+paths:
+  /check/computeApplicableRewards.json:
+    post:
+      operationId: computeApplicableRewards
+      summary: Compute Applicable Rewards
+      description: Determine which rewards and discounts apply to a given POS check for a guest, returning item, multi-item, subtotal, and service-charge discounts plus balances and receipt text.
+      tags:
+      - Check
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ComputeRewardsRequest'
+            examples:
+              ComputeApplicableRewardsRequestExample:
+                summary: Default computeApplicableRewards request
+                x-microcks-default: true
+                value:
+                  merchantId: 1000
+                  storeCode: '1'
+                  check:
+                    number: '4501'
+                    openTime: '2026-06-03T12:00:00Z'
+                    subtotal: 42.5
+                    items:
+                    - itemCode: string
+                      name: string
+                      quantity: 0
+                      price: 0
+                  cardInfo:
+                    printedCardNumber: '60490012345678'
+                    magstripe: string
+                    cardTemplateCode: '1'
+                  terminal: string
+                  operator: string
+                  rewardSelectionMode:
+                    mode: AUTOMATIC
+      responses:
+        '200':
+          description: Applicable rewards reply.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ComputeRewardsReply'
+              examples:
+                ComputeApplicableRewards200Example:
+                  summary: Default computeApplicableRewards 200 response
+                  x-microcks-default: true
+                  value:
+                    result: success
+                    customerName: Jane Doe
+                    tierCode: GOLD
+                    printedCardNumber: '60490012345678'
+                    itemDiscounts:
+                    - itemCode: string
+                      discountAmount: 0
+                      rewardName: string
+                    subtotalDiscounts:
+                    - discountAmount: 0
+                      rewardName: string
+                    walletBalances:
+                    - walletCode: '1'
+                      name: Points
+                      balance: 1250
+                    receiptText: string
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /check/postAndAccruePoints.json:
+    post:
+      operationId: postAndAccruePoints
+      summary: Post And Accrue Points
+      description: Post a check and accrue points in one step, returning the add/redeem result, customer details, balances, and receipt text.
+      tags:
+      - Check
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostAndAccrueRequest'
+            examples:
+              PostAndAccruePointsRequestExample:
+                summary: Default postAndAccruePoints request
+                x-microcks-default: true
+                value:
+                  merchantId: 1000
+                  storeCode: '1'
+                  check:
+                    number: '4501'
+                    openTime: '2026-06-03T12:00:00Z'
+                    subtotal: 42.5
+                    items:
+                    - itemCode: string
+                      name: string
+                      quantity: 0
+                      price: 0
+                  cardInfo:
+                    printedCardNumber: '60490012345678'
+                    magstripe: string
+                    cardTemplateCode: '1'
+                  autoActivateCard: true
+                  terminal: string
+                  operator: string
+                  receiptSettings: {}
+      responses:
+        '200':
+          description: Post and accrue reply.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ComputeRewardsReply'
+              examples:
+                PostAndAccruePoints200Example:
+                  summary: Default postAndAccruePoints 200 response
+                  x-microcks-default: true
+                  value:
+                    result: success
+                    customerName: Jane Doe
+                    tierCode: GOLD
+                    printedCardNumber: '60490012345678'
+                    itemDiscounts:
+                    - itemCode: string
+                      discountAmount: 0
+                      rewardName: string
+                    subtotalDiscounts:
+                    - discountAmount: 0
+                      rewardName: string
+                    walletBalances:
+                    - walletCode: '1'
+                      name: Points
+                      balance: 1250
+                    receiptText: string
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    WalletBalance:
+      type: object
+      properties:
+        walletCode:
+          type: string
+          example: '1'
+        name:
+          type: string
+          example: Points
+        balance:
+          type: number
+          example: 1250
+    ComputeRewardsRequest:
+      type: object
+      required:
+      - merchantId
+      - storeCode
+      - check
+      - cardInfo
+      properties:
+        merchantId:
+          type: integer
+          example: 1000
+        storeCode:
+          type: string
+          example: '1'
+        check:
+          $ref: '#/components/schemas/Check'
+        cardInfo:
+          $ref: '#/components/schemas/CardInfo'
+        terminal:
+          type: string
+        operator:
+          type: string
+        rewardSelectionMode:
+          type: object
+          properties:
+            mode:
+              type: string
+              example: AUTOMATIC
+    PostAndAccrueRequest:
+      type: object
+      required:
+      - merchantId
+      - storeCode
+      - check
+      - cardInfo
+      properties:
+        merchantId:
+          type: integer
+          example: 1000
+        storeCode:
+          type: string
+          example: '1'
+        check:
+          $ref: '#/components/schemas/Check'
+        cardInfo:
+          $ref: '#/components/schemas/CardInfo'
+        autoActivateCard:
+          type: boolean
+        terminal:
+          type: string
+        operator:
+          type: string
+        receiptSettings:
+          type: object
+          additionalProperties: true
+    CardInfo:
+      type: object
+      description: Identifies a card for transaction operations.
+      properties:
+        printedCardNumber:
+          type: string
+          example: '60490012345678'
+        magstripe:
+          type: string
+        cardTemplateCode:
+          type: string
+          example: '1'
+    Check:
+      type: object
+      description: A POS check with line items used in reward computation and posting.
+      properties:
+        number:
+          type: string
+          example: '4501'
+        openTime:
+          type: string
+          format: date-time
+        subtotal:
+          type: number
+          example: 42.5
+        items:
+          type: array
+          items:
+            type: object
+            properties:
+              itemCode:
+                type: string
+              name:
+                type: string
+              quantity:
+                type: number
+              price:
+                type: number
+    ComputeRewardsReply:
+      type: object
+      properties:
+        result:
+          type: string
+          example: success
+        customerName:
+          type: string
+          example: Jane Doe
+        tierCode:
+          type: string
+          example: GOLD
+        printedCardNumber:
+          type: string
+          example: '60490012345678'
+        itemDiscounts:
+          type: array
+          items:
+            type: object
+            properties:
+              itemCode:
+                type: string
+              discountAmount:
+                type: number
+              rewardName:
+                type: string
+        subtotalDiscounts:
+          type: array
+          items:
+            type: object
+            properties:
+              discountAmount:
+                type: number
+              rewardName:
+                type: string
+        walletBalances:
+          type: array
+          items:
+            $ref: '#/components/schemas/WalletBalance'
+        receiptText:
+          type: string

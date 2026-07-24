@@ -1,0 +1,268 @@
+openapi: 3.0.3
+info:
+  title: Paytronix Online Ordering Check Enrollment API
+  version: '1.0'
+  description: The Paytronix Online Ordering API (Open Dining) powers ordering experiences across in-store, online web, online app, call-in, call-center, and drive-through order methods. It exposes restaurant/location discovery, menu retrieval, fuzzy and geospatial search, and order creation, retrieval, and submission, connecting ordering systems to the broader Paytronix loyalty and guest engagement platform. This specification was generated from the public Open Dining documentation at http://docs.opendining.net and the Online Ordering Resource Center at https://support.opendining.net.
+  contact:
+    name: Kin Lane
+    email: kin@apievangelist.com
+  x-generated-from: documentation
+  x-source-url: http://docs.opendining.net/api/
+  x-last-validated: '2026-06-03'
+servers:
+- url: https://api.opendining.net
+  description: Open Dining Online Ordering API base URL.
+tags:
+- name: Enrollment
+  description: Card creation, activation, registration, and demographic editing.
+paths:
+  /enrollment/createAndRegister.json:
+    post:
+      operationId: createAndRegister
+      summary: Create And Register Account
+      description: Create, activate, and register a virtual card in one operation. Requires a username and password in the user fields; optionally supports SMS verification.
+      tags:
+      - Enrollment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateAndRegisterRequest'
+            examples:
+              CreateAndRegisterRequestExample:
+                summary: Default createAndRegister request
+                x-microcks-default: true
+                value:
+                  merchantId: 1000
+                  cardTemplateCode: '1'
+                  enforceUniqueFields:
+                  - email
+                  setUserFields:
+                    username: jdoe
+                    password: s3cret
+                    firstName: Jane
+                    lastName: Doe
+                    email: jane@example.com
+                  setAccountFields: {}
+                  sendSmsVerification: true
+                  smsVerificationCode: string
+      responses:
+        '200':
+          description: Enrollment result with account information.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EnrollmentReply'
+              examples:
+                CreateAndRegister200Example:
+                  summary: Default createAndRegister 200 response
+                  x-microcks-default: true
+                  value:
+                    result: success
+                    printedCardNumber: '60490012345678'
+                    accountId: 998877
+                    username: jdoe
+                    errorCode: string
+                    errorsByField: {}
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /enrollment/activateAndRegister.json:
+    post:
+      operationId: activateAndRegister
+      summary: Activate And Register Card
+      description: Activate an existing printed card and register it simultaneously, requiring username and password in the user fields.
+      tags:
+      - Enrollment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ActivateAndRegisterRequest'
+            examples:
+              ActivateAndRegisterRequestExample:
+                summary: Default activateAndRegister request
+                x-microcks-default: true
+                value:
+                  merchantId: 1000
+                  printedCardNumber: '60490012345678'
+                  enforceUniqueFields:
+                  - string
+                  setUserFields: {}
+                  setAccountFields: {}
+      responses:
+        '200':
+          description: Registration result with account information.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EnrollmentReply'
+              examples:
+                ActivateAndRegister200Example:
+                  summary: Default activateAndRegister 200 response
+                  x-microcks-default: true
+                  value:
+                    result: success
+                    printedCardNumber: '60490012345678'
+                    accountId: 998877
+                    username: jdoe
+                    errorCode: string
+                    errorsByField: {}
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /enrollment/enrollmentConfig.json:
+    get:
+      operationId: getEnrollmentConfig
+      summary: Get Enrollment Configuration
+      description: Retrieve the field definitions (type, label, required, validation rules) used to enroll guests in a program.
+      tags:
+      - Enrollment
+      parameters:
+      - name: merchantId
+        in: query
+        required: true
+        description: Paytronix-assigned merchant identifier.
+        schema:
+          type: integer
+      - name: cardTemplateCode
+        in: query
+        required: true
+        description: Card template code identifying the program.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Enrollment configuration.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EnrollmentConfigReply'
+              examples:
+                GetEnrollmentConfig200Example:
+                  summary: Default getEnrollmentConfig 200 response
+                  x-microcks-default: true
+                  value:
+                    result: success
+                    config:
+                      fields:
+                      - name: email
+                        type: string
+                        label: Email Address
+                        required: true
+                        pattern: string
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    CreateAndRegisterRequest:
+      type: object
+      required:
+      - merchantId
+      - cardTemplateCode
+      - setUserFields
+      properties:
+        merchantId:
+          type: integer
+          example: 1000
+        cardTemplateCode:
+          type: string
+          example: '1'
+        enforceUniqueFields:
+          type: array
+          items:
+            type: string
+          example:
+          - email
+        setUserFields:
+          type: object
+          additionalProperties: true
+          example:
+            username: jdoe
+            password: s3cret
+            firstName: Jane
+            lastName: Doe
+            email: jane@example.com
+        setAccountFields:
+          type: object
+          additionalProperties: true
+        sendSmsVerification:
+          type: boolean
+        smsVerificationCode:
+          type: string
+    ActivateAndRegisterRequest:
+      type: object
+      required:
+      - merchantId
+      - printedCardNumber
+      - setUserFields
+      properties:
+        merchantId:
+          type: integer
+          example: 1000
+        printedCardNumber:
+          type: string
+          example: '60490012345678'
+        enforceUniqueFields:
+          type: array
+          items:
+            type: string
+        setUserFields:
+          type: object
+          additionalProperties: true
+        setAccountFields:
+          type: object
+          additionalProperties: true
+    EnrollmentReply:
+      type: object
+      properties:
+        result:
+          type: string
+          example: success
+        printedCardNumber:
+          type: string
+          example: '60490012345678'
+        accountId:
+          type: integer
+          format: int64
+          example: 998877
+        username:
+          type: string
+          example: jdoe
+        errorCode:
+          type: string
+        errorsByField:
+          type: object
+          additionalProperties:
+            type: string
+    EnrollmentConfigReply:
+      type: object
+      properties:
+        result:
+          type: string
+          example: success
+        config:
+          type: object
+          properties:
+            fields:
+              type: array
+              items:
+                type: object
+                properties:
+                  name:
+                    type: string
+                    example: email
+                  type:
+                    type: string
+                    example: string
+                  label:
+                    type: string
+                    example: Email Address
+                  required:
+                    type: boolean
+                    example: true
+                  pattern:
+                    type: string

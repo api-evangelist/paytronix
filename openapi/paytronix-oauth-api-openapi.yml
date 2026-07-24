@@ -1,0 +1,142 @@
+openapi: 3.0.3
+info:
+  title: Paytronix Online Ordering Check OAuth API
+  version: '1.0'
+  description: The Paytronix Online Ordering API (Open Dining) powers ordering experiences across in-store, online web, online app, call-in, call-center, and drive-through order methods. It exposes restaurant/location discovery, menu retrieval, fuzzy and geospatial search, and order creation, retrieval, and submission, connecting ordering systems to the broader Paytronix loyalty and guest engagement platform. This specification was generated from the public Open Dining documentation at http://docs.opendining.net and the Online Ordering Resource Center at https://support.opendining.net.
+  contact:
+    name: Kin Lane
+    email: kin@apievangelist.com
+  x-generated-from: documentation
+  x-source-url: http://docs.opendining.net/api/
+  x-last-validated: '2026-06-03'
+servers:
+- url: https://api.opendining.net
+  description: Open Dining Online Ordering API base URL.
+tags:
+- name: OAuth
+  description: Guest authentication and token issuance.
+paths:
+  /oauth/requestGuestToken.json:
+    post:
+      operationId: requestGuestToken
+      summary: Request Guest Token
+      description: Authenticate a guest in a merchant program and issue an OAuth access token. Supports password, one_time_password, authorization_code, refresh_token, and fieldset grant types.
+      tags:
+      - OAuth
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GuestTokenRequest'
+            examples:
+              RequestGuestTokenRequestExample:
+                summary: Default requestGuestToken request
+                x-microcks-default: true
+                value:
+                  merchantId: 1000
+                  grant_type: password
+                  username: jdoe
+                  password: s3cret
+                  scope: user_read account_read
+                  refresh_token: string
+      responses:
+        '200':
+          description: Token issued.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GuestTokenResponse'
+              examples:
+                RequestGuestToken200Example:
+                  summary: Default requestGuestToken 200 response
+                  x-microcks-default: true
+                  value:
+                    access_token: 9f8c1a2b3c4d5e6f
+                    token_type: bearer
+                    expires_in: 1800
+                    refresh_token: 1a2b3c4d5e6f7a8b
+                    scope: user_read account_read
+                    username: jdoe
+        '400':
+          description: Invalid grant or credentials.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorReply'
+              examples:
+                RequestGuestToken400Example:
+                  summary: Default requestGuestToken 400 response
+                  x-microcks-default: true
+                  value:
+                    result: failure
+                    errorCode: invalid_grant
+                    errorMessage: The supplied credentials were not valid.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    GuestTokenRequest:
+      type: object
+      required:
+      - merchantId
+      - grant_type
+      properties:
+        merchantId:
+          type: integer
+          example: 1000
+        grant_type:
+          type: string
+          example: password
+          enum:
+          - password
+          - one_time_password
+          - authorization_code
+          - refresh_token
+          - http://paytronix.com/oauth/fieldset
+        username:
+          type: string
+          example: jdoe
+        password:
+          type: string
+          example: s3cret
+        scope:
+          type: string
+          example: user_read account_read
+        refresh_token:
+          type: string
+    ErrorReply:
+      type: object
+      description: Standard failure envelope returned across PXS services.
+      properties:
+        result:
+          type: string
+          example: failure
+        errorCode:
+          type: string
+          example: invalid_grant
+        errorMessage:
+          type: string
+          example: The supplied credentials were not valid.
+    GuestTokenResponse:
+      type: object
+      properties:
+        access_token:
+          type: string
+          example: 9f8c1a2b3c4d5e6f
+        token_type:
+          type: string
+          example: bearer
+        expires_in:
+          type: integer
+          example: 1800
+        refresh_token:
+          type: string
+          example: 1a2b3c4d5e6f7a8b
+        scope:
+          type: string
+          example: user_read account_read
+        username:
+          type: string
+          example: jdoe
