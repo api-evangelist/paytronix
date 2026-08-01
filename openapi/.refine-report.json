@@ -1,0 +1,36 @@
+{
+  "provider": "paytronix",
+  "sources": [
+    "paytronix-check-api-openapi.yml",
+    "paytronix-enrollment-api-openapi.yml",
+    "paytronix-gift-api-openapi.yml",
+    "paytronix-guest-api-openapi.yml",
+    "paytronix-menu-items-api-openapi.yml",
+    "paytronix-oauth-api-openapi.yml",
+    "paytronix-orders-api-openapi.yml",
+    "paytronix-payment-api-openapi.yml",
+    "paytronix-restaurants-api-openapi.yml",
+    "paytronix-search-api-openapi.yml",
+    "paytronix-store-api-openapi.yml",
+    "paytronix-transaction-api-openapi.yml"
+  ],
+  "outputs": [
+    "paytronix-check-api-openapi.yml",
+    "paytronix-enrollment-api-openapi.yml",
+    "paytronix-gift-api-openapi.yml",
+    "paytronix-guest-api-openapi.yml",
+    "paytronix-menu-items-api-openapi.yml",
+    "paytronix-oauth-api-openapi.yml",
+    "paytronix-orders-api-openapi.yml",
+    "paytronix-payment-api-openapi.yml",
+    "paytronix-restaurants-api-openapi.yml",
+    "paytronix-search-api-openapi.yml",
+    "paytronix-store-api-openapi.yml",
+    "paytronix-transaction-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
