@@ -1,0 +1,78 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Paytronix Online Ordering Check Gift API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Gift",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Sell Gift Card",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.opendining.net/gift/sell.json",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Activate a gift card and add the initial value to it."
+        },
+        {
+          "info": {
+            "name": "Reload Gift Card",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.opendining.net/gift/reload.json",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add value to a gift card that has already been activated."
+        },
+        {
+          "info": {
+            "name": "Get Gift Card Balance",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.opendining.net/gift/balance.json",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieve the current balance of a gift card."
+        },
+        {
+          "info": {
+            "name": "Redeem Gift Card",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.opendining.net/gift/redeem.json",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Redeem value from a gift card, optionally including a tip."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

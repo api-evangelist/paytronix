@@ -1,0 +1,152 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Paytronix Online Ordering Check Search API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Search",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search Restaurants",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.opendining.net/search/restaurants",
+            "params": [
+              {
+                "name": "lat",
+                "value": "",
+                "type": "query",
+                "description": "Latitude of the search center."
+              },
+              {
+                "name": "lon",
+                "value": "",
+                "type": "query",
+                "description": "Longitude of the search center."
+              },
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "Fuzzy, weighted full-text search query."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Trailing-wildcard search on the business name."
+              },
+              {
+                "name": "tags",
+                "value": "",
+                "type": "query",
+                "description": "Space-separated, URL-encoded tags to restrict results by category."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results (default 10, max 50)."
+              },
+              {
+                "name": "skip",
+                "value": "",
+                "type": "query",
+                "description": "Offset for pagination."
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Sort order, by distance (default) or price."
+              },
+              {
+                "name": "show_closed",
+                "value": "",
+                "type": "query",
+                "description": "When true, include closed restaurants."
+              }
+            ]
+          },
+          "docs": "Search restaurants by location and optional full-text query, returning a count, a results array, and applicable facets."
+        },
+        {
+          "info": {
+            "name": "Search Menu Items",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.opendining.net/search/menuitems",
+            "params": [
+              {
+                "name": "lat",
+                "value": "",
+                "type": "query",
+                "description": "Latitude of the search center."
+              },
+              {
+                "name": "lon",
+                "value": "",
+                "type": "query",
+                "description": "Longitude of the search center."
+              },
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "Fuzzy, weighted full-text search query."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Trailing-wildcard search on the item name."
+              },
+              {
+                "name": "tags",
+                "value": "",
+                "type": "query",
+                "description": "Space-separated, URL-encoded tags to restrict results by category."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results (default 10, max 50)."
+              },
+              {
+                "name": "skip",
+                "value": "",
+                "type": "query",
+                "description": "Offset for pagination."
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Sort order, by distance (default) or price."
+              },
+              {
+                "name": "show_closed",
+                "value": "",
+                "type": "query",
+                "description": "When true, include unavailable items."
+              }
+            ]
+          },
+          "docs": "Search menu items by location and optional full-text query, returning a count, a results array (each with a prices array), and applicable facets."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

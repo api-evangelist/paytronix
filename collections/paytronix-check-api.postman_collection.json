@@ -1,0 +1,218 @@
+{
+  "item": [
+    {
+      "id": "1cee2405-c6ef-410f-bfeb-5066f36f6d73",
+      "name": "Check",
+      "description": {
+        "content": "Check-based point accrual, reward computation, and posting.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "06e5916b-7899-4d4b-bc1c-38da5dd775d1",
+          "name": "Compute Applicable Rewards",
+          "request": {
+            "name": "Compute Applicable Rewards",
+            "description": {
+              "content": "Determine which rewards and discounts apply to a given POS check for a guest, returning item, multi-item, subtotal, and service-charge discounts plus balances and receipt text.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "check",
+                "computeApplicableRewards.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"merchantId\": \"<integer>\",\n  \"storeCode\": \"<string>\",\n  \"check\": {\n    \"number\": \"<string>\",\n    \"openTime\": \"<dateTime>\",\n    \"subtotal\": \"<number>\",\n    \"items\": [\n      {\n        \"itemCode\": \"<string>\",\n        \"name\": \"<string>\",\n        \"quantity\": \"<number>\",\n        \"price\": \"<number>\"\n      },\n      {\n        \"itemCode\": \"<string>\",\n        \"name\": \"<string>\",\n        \"quantity\": \"<number>\",\n        \"price\": \"<number>\"\n      }\n    ]\n  },\n  \"cardInfo\": {\n    \"printedCardNumber\": \"<string>\",\n    \"magstripe\": \"<string>\",\n    \"cardTemplateCode\": \"<string>\"\n  },\n  \"terminal\": \"<string>\",\n  \"operator\": \"<string>\",\n  \"rewardSelectionMode\": {\n    \"mode\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "6c09d888-99a3-4cc4-9411-ffc7ee78f630",
+              "name": "Applicable rewards reply.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "check",
+                    "computeApplicableRewards.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"merchantId\": 1000,\n  \"storeCode\": \"1\",\n  \"check\": {\n    \"number\": \"4501\",\n    \"openTime\": \"2026-06-03T12:00:00Z\",\n    \"subtotal\": 42.5,\n    \"items\": [\n      {\n        \"itemCode\": \"string\",\n        \"name\": \"string\",\n        \"quantity\": 0,\n        \"price\": 0\n      }\n    ]\n  },\n  \"cardInfo\": {\n    \"printedCardNumber\": \"60490012345678\",\n    \"magstripe\": \"string\",\n    \"cardTemplateCode\": \"1\"\n  },\n  \"terminal\": \"string\",\n  \"operator\": \"string\",\n  \"rewardSelectionMode\": {\n    \"mode\": \"AUTOMATIC\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"result\": \"success\",\n  \"customerName\": \"Jane Doe\",\n  \"tierCode\": \"GOLD\",\n  \"printedCardNumber\": \"60490012345678\",\n  \"itemDiscounts\": [\n    {\n      \"itemCode\": \"string\",\n      \"discountAmount\": 0,\n      \"rewardName\": \"string\"\n    }\n  ],\n  \"subtotalDiscounts\": [\n    {\n      \"discountAmount\": 0,\n      \"rewardName\": \"string\"\n    }\n  ],\n  \"walletBalances\": [\n    {\n      \"walletCode\": \"1\",\n      \"name\": \"Points\",\n      \"balance\": 1250\n    }\n  ],\n  \"receiptText\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2f1b10ba-87e8-4871-a07e-4811cfd9abbb",
+          "name": "Post And Accrue Points",
+          "request": {
+            "name": "Post And Accrue Points",
+            "description": {
+              "content": "Post a check and accrue points in one step, returning the add/redeem result, customer details, balances, and receipt text.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "check",
+                "postAndAccruePoints.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"merchantId\": \"<integer>\",\n  \"storeCode\": \"<string>\",\n  \"check\": {\n    \"number\": \"<string>\",\n    \"openTime\": \"<dateTime>\",\n    \"subtotal\": \"<number>\",\n    \"items\": [\n      {\n        \"itemCode\": \"<string>\",\n        \"name\": \"<string>\",\n        \"quantity\": \"<number>\",\n        \"price\": \"<number>\"\n      },\n      {\n        \"itemCode\": \"<string>\",\n        \"name\": \"<string>\",\n        \"quantity\": \"<number>\",\n        \"price\": \"<number>\"\n      }\n    ]\n  },\n  \"cardInfo\": {\n    \"printedCardNumber\": \"<string>\",\n    \"magstripe\": \"<string>\",\n    \"cardTemplateCode\": \"<string>\"\n  },\n  \"autoActivateCard\": \"<boolean>\",\n  \"terminal\": \"<string>\",\n  \"operator\": \"<string>\",\n  \"receiptSettings\": {\n    \"key_0\": \"string\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "96769c7a-5300-43b2-a387-c1f0fba52aec",
+              "name": "Post and accrue reply.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "check",
+                    "postAndAccruePoints.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"merchantId\": 1000,\n  \"storeCode\": \"1\",\n  \"check\": {\n    \"number\": \"4501\",\n    \"openTime\": \"2026-06-03T12:00:00Z\",\n    \"subtotal\": 42.5,\n    \"items\": [\n      {\n        \"itemCode\": \"string\",\n        \"name\": \"string\",\n        \"quantity\": 0,\n        \"price\": 0\n      }\n    ]\n  },\n  \"cardInfo\": {\n    \"printedCardNumber\": \"60490012345678\",\n    \"magstripe\": \"string\",\n    \"cardTemplateCode\": \"1\"\n  },\n  \"autoActivateCard\": true,\n  \"terminal\": \"string\",\n  \"operator\": \"string\",\n  \"receiptSettings\": {}\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"result\": \"success\",\n  \"customerName\": \"Jane Doe\",\n  \"tierCode\": \"GOLD\",\n  \"printedCardNumber\": \"60490012345678\",\n  \"itemDiscounts\": [\n    {\n      \"itemCode\": \"string\",\n      \"discountAmount\": 0,\n      \"rewardName\": \"string\"\n    }\n  ],\n  \"subtotalDiscounts\": [\n    {\n      \"discountAmount\": 0,\n      \"rewardName\": \"string\"\n    }\n  ],\n  \"walletBalances\": [\n    {\n      \"walletCode\": \"1\",\n      \"name\": \"Points\",\n      \"balance\": 1250\n    }\n  ],\n  \"receiptText\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.opendining.net",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "a6f12214-5401-4b22-8508-94d8e9826e55",
+    "name": "Paytronix Online Ordering Check API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Paytronix Online Ordering API (Open Dining) powers ordering experiences across in-store, online web, online app, call-in, call-center, and drive-through order methods. It exposes restaurant/location discovery, menu retrieval, fuzzy and geospatial search, and order creation, retrieval, and submission, connecting ordering systems to the broader Paytronix loyalty and guest engagement platform. This specification was generated from the public Open Dining documentation at http://docs.opendining.net and the Online Ordering Resource Center at https://support.opendining.net.\n\nContact Support:\n Name: Kin Lane\n Email: kin@apievangelist.com",
+      "type": "text/plain"
+    }
+  }
+}

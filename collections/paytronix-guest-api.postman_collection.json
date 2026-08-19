@@ -1,0 +1,561 @@
+{
+  "item": [
+    {
+      "id": "2634a7cd-8f21-4ee4-b2f4-912cc732ea5e",
+      "name": "Guest",
+      "description": {
+        "content": "Guest account and user information lookup and management.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e91e0a7f-6ead-4de9-90a1-2216ef2cd818",
+          "name": "Get Account Information",
+          "request": {
+            "name": "Get Account Information",
+            "description": {
+              "content": "Retrieve account status, card template, tier, and wallet balances for an account identified by its printed card number.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "guest",
+                "accountInformation.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "merchantId",
+                  "value": "<integer>",
+                  "description": "(Required) Paytronix-assigned merchant identifier."
+                },
+                {
+                  "disabled": false,
+                  "key": "printedCardNumber",
+                  "value": "<string>",
+                  "description": "(Required) Printed card number identifying the account."
+                },
+                {
+                  "disabled": false,
+                  "key": "accessFilterStoreGroupCode",
+                  "value": "<string>",
+                  "description": "Optional store group code used to filter access."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "42682428-735c-489f-8a2d-c98d309b12cc",
+              "name": "Account information.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "guest",
+                    "accountInformation.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "merchantId",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "printedCardNumber",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "accessFilterStoreGroupCode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"result\": \"success\",\n  \"username\": \"jdoe\",\n  \"accountStatus\": \"ACTIVE\",\n  \"queryCardStatus\": \"ACTIVE\",\n  \"registrationStatus\": \"REGISTERED\",\n  \"cardTemplateCode\": \"1\",\n  \"tierCode\": \"GOLD\",\n  \"primaryCard\": \"60490012345678\",\n  \"additionalCards\": [\n    \"string\"\n  ],\n  \"walletBalances\": [\n    {\n      \"walletCode\": \"1\",\n      \"name\": \"Points\",\n      \"balance\": 1250\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "586b0907-c629-40e7-80fb-ffd6d39009e3",
+          "name": "Get Account Information By Account ID",
+          "request": {
+            "name": "Get Account Information By Account ID",
+            "description": {
+              "content": "Retrieve account information for an account identified by its account ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "guest",
+                "accountInformationById.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "merchantId",
+                  "value": "<integer>",
+                  "description": "(Required) Paytronix-assigned merchant identifier."
+                },
+                {
+                  "disabled": false,
+                  "key": "accountId",
+                  "value": "<long>",
+                  "description": "(Required) Paytronix account identifier."
+                },
+                {
+                  "disabled": false,
+                  "key": "accessFilterStoreGroupCode",
+                  "value": "<string>",
+                  "description": "Optional store group code used to filter access."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "af03efbb-0c49-4279-9e26-9ffdab65ef9b",
+              "name": "Account information.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "guest",
+                    "accountInformationById.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "merchantId",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "accountId",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "accessFilterStoreGroupCode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"result\": \"success\",\n  \"username\": \"jdoe\",\n  \"accountStatus\": \"ACTIVE\",\n  \"queryCardStatus\": \"ACTIVE\",\n  \"registrationStatus\": \"REGISTERED\",\n  \"cardTemplateCode\": \"1\",\n  \"tierCode\": \"GOLD\",\n  \"primaryCard\": \"60490012345678\",\n  \"additionalCards\": [\n    \"string\"\n  ],\n  \"walletBalances\": [\n    {\n      \"walletCode\": \"1\",\n      \"name\": \"Points\",\n      \"balance\": 1250\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "20d32ecb-939b-4c34-8f51-edf9d631f0ce",
+          "name": "Get User Information",
+          "request": {
+            "name": "Get User Information",
+            "description": {
+              "content": "Retrieve demographic user fields, primary card numbers, related guests, and account IDs for a registered user identified by username.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "guest",
+                "userInformation.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "merchantId",
+                  "value": "<integer>",
+                  "description": "(Required) Paytronix-assigned merchant identifier."
+                },
+                {
+                  "disabled": false,
+                  "key": "username",
+                  "value": "<string>",
+                  "description": "(Required) Registered guest username."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "75a09aa4-e516-4d51-8808-8d6130057b2f",
+              "name": "User information.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "guest",
+                    "userInformation.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "merchantId",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "username",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"result\": \"success\",\n  \"userFields\": {\n    \"firstName\": \"Jane\",\n    \"lastName\": \"Doe\",\n    \"email\": \"jane@example.com\"\n  },\n  \"primaryCardNumbers\": [\n    \"string\"\n  ],\n  \"accountIds\": [\n    0\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "935652b7-9994-43b5-a7c8-fef0ad592fad",
+          "name": "Get Transaction History",
+          "request": {
+            "name": "Get Transaction History",
+            "description": {
+              "content": "Retrieve wallet balances and a list of transactions (accruals, redemptions, balance changes) for an account by printed card number.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "guest",
+                "transactionHistory.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "merchantId",
+                  "value": "<integer>",
+                  "description": "(Required) Paytronix-assigned merchant identifier."
+                },
+                {
+                  "disabled": false,
+                  "key": "printedCardNumber",
+                  "value": "<string>",
+                  "description": "(Required) Printed card number identifying the account."
+                },
+                {
+                  "disabled": false,
+                  "key": "dateStart",
+                  "value": "<date>",
+                  "description": "Inclusive start date for the history window."
+                },
+                {
+                  "disabled": false,
+                  "key": "dateEnd",
+                  "value": "<date>",
+                  "description": "Inclusive end date for the history window."
+                },
+                {
+                  "disabled": false,
+                  "key": "maxNumberOfResults",
+                  "value": "<integer>",
+                  "description": "Maximum number of transactions to return."
+                },
+                {
+                  "disabled": false,
+                  "key": "limitToBalanceAffectingTransactions",
+                  "value": "<boolean>",
+                  "description": "When true, only balance-affecting transactions are returned."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5dfdae88-72e9-4d1d-b393-fbfe540f441c",
+              "name": "Transaction history.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "guest",
+                    "transactionHistory.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "merchantId",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "printedCardNumber",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dateStart",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "dateEnd",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "maxNumberOfResults",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limitToBalanceAffectingTransactions",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"result\": \"success\",\n  \"walletInfo\": [\n    {\n      \"walletCode\": \"1\",\n      \"name\": \"Points\",\n      \"balance\": 1250\n    }\n  ],\n  \"transactions\": [\n    {\n      \"transactionId\": \"string\",\n      \"datetime\": \"2026-06-03T12:00:00Z\",\n      \"type\": \"ACCRUAL\",\n      \"walletCode\": \"string\",\n      \"amount\": 0,\n      \"balance\": 0\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "222b0b6d-83d3-40ea-a407-3b149610409c",
+          "name": "Change Card Status",
+          "request": {
+            "name": "Change Card Status",
+            "description": {
+              "content": "Enable or disable a card by setting its status to ACTIVE or DISABLED.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "guest",
+                "changeCardStatus.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"merchantId\": \"<integer>\",\n  \"printedCardNumber\": \"<string>\",\n  \"status\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "bb51b2eb-da47-423a-9db7-6e60dbd2aa99",
+              "name": "Status change result.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "guest",
+                    "changeCardStatus.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"merchantId\": 1000,\n  \"printedCardNumber\": \"60490012345678\",\n  \"status\": \"DISABLED\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"result\": \"success\",\n  \"errorCode\": \"string\",\n  \"errorMessage\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.opendining.net",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "886ba78e-32a8-46a2-8d8a-5ab2c53dc662",
+    "name": "Paytronix Online Ordering Check Guest API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Paytronix Online Ordering API (Open Dining) powers ordering experiences across in-store, online web, online app, call-in, call-center, and drive-through order methods. It exposes restaurant/location discovery, menu retrieval, fuzzy and geospatial search, and order creation, retrieval, and submission, connecting ordering systems to the broader Paytronix loyalty and guest engagement platform. This specification was generated from the public Open Dining documentation at http://docs.opendining.net and the Online Ordering Resource Center at https://support.opendining.net.\n\nContact Support:\n Name: Kin Lane\n Email: kin@apievangelist.com",
+      "type": "text/plain"
+    }
+  }
+}

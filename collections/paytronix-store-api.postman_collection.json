@@ -1,0 +1,250 @@
+{
+  "item": [
+    {
+      "id": "9b2098a5-336b-440e-96b1-7515d8b8d22b",
+      "name": "Store",
+      "description": {
+        "content": "Store and location lookup and management.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "0590a506-571d-4d46-ba9c-3af6d16a9511",
+          "name": "Get Nearby Locations",
+          "request": {
+            "name": "Get Nearby Locations",
+            "description": {
+              "content": "Retrieve store locations within a maximum distance of a latitude and longitude, ordered by distance.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "store",
+                "nearbyLocations.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "merchantId",
+                  "value": "<integer>",
+                  "description": "(Required) Paytronix-assigned merchant identifier."
+                },
+                {
+                  "disabled": false,
+                  "key": "latitude",
+                  "value": "<double>",
+                  "description": "(Required) Search center latitude."
+                },
+                {
+                  "disabled": false,
+                  "key": "longitude",
+                  "value": "<double>",
+                  "description": "(Required) Search center longitude."
+                },
+                {
+                  "disabled": false,
+                  "key": "maxDistance",
+                  "value": "<number>",
+                  "description": "(Required) Maximum distance in miles."
+                },
+                {
+                  "disabled": false,
+                  "key": "maxLocations",
+                  "value": "<integer>",
+                  "description": "(Required) Maximum number of results."
+                },
+                {
+                  "disabled": false,
+                  "key": "storeGroupCode",
+                  "value": "<string>",
+                  "description": "Optional store group filter."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a0117986-e920-418a-963a-c35dd41111b1",
+              "name": "Nearby locations.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "store",
+                    "nearbyLocations.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "merchantId",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "latitude",
+                      "value": "<double>"
+                    },
+                    {
+                      "key": "longitude",
+                      "value": "<double>"
+                    },
+                    {
+                      "key": "maxDistance",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "maxLocations",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "storeGroupCode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"result\": \"success\",\n  \"locations\": [\n    {\n      \"code\": \"1\",\n      \"name\": \"Downtown\",\n      \"address\": {\n        \"address1\": \"string\",\n        \"address2\": \"string\",\n        \"city\": \"string\",\n        \"stateProvince\": \"string\",\n        \"postalCode\": \"string\",\n        \"country\": \"US\"\n      },\n      \"latitude\": 42.3601,\n      \"longitude\": -71.0589,\n      \"hoursOfOperation\": \"string\",\n      \"distance\": 1.2,\n      \"metadata\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "11543df0-6c1c-44a1-a958-1fcaff811e11",
+          "name": "Get All Stores",
+          "request": {
+            "name": "Get All Stores",
+            "description": {
+              "content": "Retrieve the complete list of all store locations for a merchant.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "store",
+                "stores.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "merchantId",
+                  "value": "<integer>",
+                  "description": "(Required) Paytronix-assigned merchant identifier."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7d1482d3-f251-45b2-9c9c-0a7dee438648",
+              "name": "All store locations.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "store",
+                    "stores.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "merchantId",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"result\": \"success\",\n  \"locations\": [\n    {\n      \"code\": \"1\",\n      \"name\": \"Downtown\",\n      \"address\": {\n        \"address1\": \"string\",\n        \"address2\": \"string\",\n        \"city\": \"string\",\n        \"stateProvince\": \"string\",\n        \"postalCode\": \"string\",\n        \"country\": \"US\"\n      },\n      \"latitude\": 42.3601,\n      \"longitude\": -71.0589,\n      \"hoursOfOperation\": \"string\",\n      \"distance\": 1.2,\n      \"metadata\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.opendining.net",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "e76e6290-59b0-4c5a-9891-2a4a5095ca3b",
+    "name": "Paytronix Online Ordering Check Store API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Paytronix Online Ordering API (Open Dining) powers ordering experiences across in-store, online web, online app, call-in, call-center, and drive-through order methods. It exposes restaurant/location discovery, menu retrieval, fuzzy and geospatial search, and order creation, retrieval, and submission, connecting ordering systems to the broader Paytronix loyalty and guest engagement platform. This specification was generated from the public Open Dining documentation at http://docs.opendining.net and the Online Ordering Resource Center at https://support.opendining.net.\n\nContact Support:\n Name: Kin Lane\n Email: kin@apievangelist.com",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,73 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Paytronix Online Ordering Check Enrollment API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Enrollment",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create And Register Account",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.opendining.net/enrollment/createAndRegister.json",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create, activate, and register a virtual card in one operation. Requires a username and password in the user fields; optionally supports SMS verification."
+        },
+        {
+          "info": {
+            "name": "Activate And Register Card",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.opendining.net/enrollment/activateAndRegister.json",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Activate an existing printed card and register it simultaneously, requiring username and password in the user fields."
+        },
+        {
+          "info": {
+            "name": "Get Enrollment Configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.opendining.net/enrollment/enrollmentConfig.json",
+            "params": [
+              {
+                "name": "merchantId",
+                "value": "",
+                "type": "query",
+                "description": "Paytronix-assigned merchant identifier."
+              },
+              {
+                "name": "cardTemplateCode",
+                "value": "",
+                "type": "query",
+                "description": "Card template code identifying the program."
+              }
+            ]
+          },
+          "docs": "Retrieve the field definitions (type, label, required, validation rules) used to enroll guests in a program."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,37 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Paytronix Online Ordering Check Restaurants API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Restaurants",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Restaurant",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.opendining.net/restaurants/:restaurantId",
+            "params": [
+              {
+                "name": "restaurantId",
+                "value": "",
+                "type": "path",
+                "description": "Restaurant/location identifier."
+              }
+            ]
+          },
+          "docs": "Retrieve a single restaurant/location object by its identifier."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

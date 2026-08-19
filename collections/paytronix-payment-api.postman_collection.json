@@ -1,0 +1,219 @@
+{
+  "item": [
+    {
+      "id": "d760cae7-cab0-4df9-9f73-409f94af902f",
+      "name": "Payment",
+      "description": {
+        "content": "Stored-value recharge, saved payment methods, and auto recharge.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "76ff9f12-2085-43bb-b908-4f0ef97fe802",
+          "name": "Recharge Stored Value Card",
+          "request": {
+            "name": "Recharge Stored Value Card",
+            "description": {
+              "content": "Recharge a stored-value card with a given amount using a saved or new payment method.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "payment",
+                "recharge.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"merchantId\": \"<integer>\",\n  \"printedCardNumber\": \"<string>\",\n  \"amount\": \"<number>\",\n  \"paymentMethod\": {\n    \"type\": \"<string>\",\n    \"token\": \"<string>\",\n    \"lastFour\": \"<string>\"\n  },\n  \"address\": {\n    \"address1\": \"<string>\",\n    \"address2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"stateProvince\": \"<string>\",\n    \"postalCode\": \"<string>\",\n    \"country\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4b34e9c8-9cde-4717-84db-2a4a8b3a8012",
+              "name": "Charge response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payment",
+                    "recharge.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"merchantId\": 1000,\n  \"printedCardNumber\": \"60490012345678\",\n  \"amount\": 25,\n  \"paymentMethod\": {\n    \"type\": \"CREDIT_CARD\",\n    \"token\": \"string\",\n    \"lastFour\": \"4242\"\n  },\n  \"address\": {\n    \"address1\": \"string\",\n    \"address2\": \"string\",\n    \"city\": \"string\",\n    \"stateProvince\": \"string\",\n    \"postalCode\": \"string\",\n    \"country\": \"US\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"result\": \"success\",\n  \"amount\": 25,\n  \"cardType\": \"VISA\",\n  \"lastFour\": \"4242\",\n  \"processorAuthCode\": \"AUTH123\",\n  \"transactionState\": \"APPROVED\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "94a74306-c3b6-49de-945e-1860a7eeccd8",
+          "name": "Get Saved Payment Methods",
+          "request": {
+            "name": "Get Saved Payment Methods",
+            "description": {
+              "content": "List the saved payment methods associated with a stored-value card.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "payment",
+                "savedPaymentMethods.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "merchantId",
+                  "value": "<integer>",
+                  "description": "(Required) Paytronix-assigned merchant identifier."
+                },
+                {
+                  "disabled": false,
+                  "key": "printedCardNumber",
+                  "value": "<string>",
+                  "description": "(Required) Printed card number identifying the account."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a9f8510f-0eec-4abf-9114-5f0223b69547",
+              "name": "Saved payment methods.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payment",
+                    "savedPaymentMethods.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "merchantId",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "printedCardNumber",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"result\": \"success\",\n  \"paymentMethods\": [\n    {\n      \"type\": \"CREDIT_CARD\",\n      \"cardholderName\": \"Jane Doe\",\n      \"lastFour\": \"4242\",\n      \"defaultUsages\": [\n        \"string\"\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.opendining.net",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "1fa82d8c-dfdb-4eef-ab66-046d08b7b250",
+    "name": "Paytronix Online Ordering Check Payment API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Paytronix Online Ordering API (Open Dining) powers ordering experiences across in-store, online web, online app, call-in, call-center, and drive-through order methods. It exposes restaurant/location discovery, menu retrieval, fuzzy and geospatial search, and order creation, retrieval, and submission, connecting ordering systems to the broader Paytronix loyalty and guest engagement platform. This specification was generated from the public Open Dining documentation at http://docs.opendining.net and the Online Ordering Resource Center at https://support.opendining.net.\n\nContact Support:\n Name: Kin Lane\n Email: kin@apievangelist.com",
+      "type": "text/plain"
+    }
+  }
+}

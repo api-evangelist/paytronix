@@ -1,0 +1,312 @@
+{
+  "item": [
+    {
+      "id": "ea8b538b-b2bd-4b0a-bd84-f920e7433540",
+      "name": "Enrollment",
+      "description": {
+        "content": "Card creation, activation, registration, and demographic editing.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "393ab200-640c-48de-bdc0-ec584a07ca7f",
+          "name": "Create And Register Account",
+          "request": {
+            "name": "Create And Register Account",
+            "description": {
+              "content": "Create, activate, and register a virtual card in one operation. Requires a username and password in the user fields; optionally supports SMS verification.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "enrollment",
+                "createAndRegister.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"merchantId\": \"<integer>\",\n  \"cardTemplateCode\": \"<string>\",\n  \"setUserFields\": {\n    \"key_0\": 7024.641096060611,\n    \"key_1\": 3697.303032555115\n  },\n  \"enforceUniqueFields\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"setAccountFields\": {\n    \"key_0\": false,\n    \"key_1\": \"string\"\n  },\n  \"sendSmsVerification\": \"<boolean>\",\n  \"smsVerificationCode\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "5182e32c-5950-4ac3-a479-a1a4abe85260",
+              "name": "Enrollment result with account information.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "enrollment",
+                    "createAndRegister.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"merchantId\": 1000,\n  \"cardTemplateCode\": \"1\",\n  \"enforceUniqueFields\": [\n    \"email\"\n  ],\n  \"setUserFields\": {\n    \"username\": \"jdoe\",\n    \"password\": \"s3cret\",\n    \"firstName\": \"Jane\",\n    \"lastName\": \"Doe\",\n    \"email\": \"jane@example.com\"\n  },\n  \"setAccountFields\": {},\n  \"sendSmsVerification\": true,\n  \"smsVerificationCode\": \"string\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"result\": \"success\",\n  \"printedCardNumber\": \"60490012345678\",\n  \"accountId\": 998877,\n  \"username\": \"jdoe\",\n  \"errorCode\": \"string\",\n  \"errorsByField\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "099929a2-d420-4a61-a6db-6792a102e9c7",
+          "name": "Activate And Register Card",
+          "request": {
+            "name": "Activate And Register Card",
+            "description": {
+              "content": "Activate an existing printed card and register it simultaneously, requiring username and password in the user fields.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "enrollment",
+                "activateAndRegister.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"merchantId\": \"<integer>\",\n  \"printedCardNumber\": \"<string>\",\n  \"setUserFields\": {\n    \"key_0\": 5005,\n    \"key_1\": 2707.0538694563675\n  },\n  \"enforceUniqueFields\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"setAccountFields\": {\n    \"key_0\": \"string\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "39469f61-c3f6-4a7f-aebf-f6c735776ab2",
+              "name": "Registration result with account information.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "enrollment",
+                    "activateAndRegister.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"merchantId\": 1000,\n  \"printedCardNumber\": \"60490012345678\",\n  \"enforceUniqueFields\": [\n    \"string\"\n  ],\n  \"setUserFields\": {},\n  \"setAccountFields\": {}\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"result\": \"success\",\n  \"printedCardNumber\": \"60490012345678\",\n  \"accountId\": 998877,\n  \"username\": \"jdoe\",\n  \"errorCode\": \"string\",\n  \"errorsByField\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8adfb69f-8d8b-4faa-84bd-381fac6d158c",
+          "name": "Get Enrollment Configuration",
+          "request": {
+            "name": "Get Enrollment Configuration",
+            "description": {
+              "content": "Retrieve the field definitions (type, label, required, validation rules) used to enroll guests in a program.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "enrollment",
+                "enrollmentConfig.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "merchantId",
+                  "value": "<integer>",
+                  "description": "(Required) Paytronix-assigned merchant identifier."
+                },
+                {
+                  "disabled": false,
+                  "key": "cardTemplateCode",
+                  "value": "<string>",
+                  "description": "(Required) Card template code identifying the program."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1983453d-20dd-4e83-899c-342a425e381a",
+              "name": "Enrollment configuration.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "enrollment",
+                    "enrollmentConfig.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "merchantId",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "cardTemplateCode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"result\": \"success\",\n  \"config\": {\n    \"fields\": [\n      {\n        \"name\": \"email\",\n        \"type\": \"string\",\n        \"label\": \"Email Address\",\n        \"required\": true,\n        \"pattern\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.opendining.net",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "d6dfdade-24a7-48b9-9cba-0f11227f707e",
+    "name": "Paytronix Online Ordering Check Enrollment API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Paytronix Online Ordering API (Open Dining) powers ordering experiences across in-store, online web, online app, call-in, call-center, and drive-through order methods. It exposes restaurant/location discovery, menu retrieval, fuzzy and geospatial search, and order creation, retrieval, and submission, connecting ordering systems to the broader Paytronix loyalty and guest engagement platform. This specification was generated from the public Open Dining documentation at http://docs.opendining.net and the Online Ordering Resource Center at https://support.opendining.net.\n\nContact Support:\n Name: Kin Lane\n Email: kin@apievangelist.com",
+      "type": "text/plain"
+    }
+  }
+}

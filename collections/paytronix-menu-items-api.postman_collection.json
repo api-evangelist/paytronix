@@ -1,0 +1,120 @@
+{
+  "item": [
+    {
+      "id": "fe761de6-67b5-4ec7-84f6-a5184c0b50f1",
+      "name": "Menu Items",
+      "description": {
+        "content": "Menu item retrieval.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8b18d984-cc72-4fbc-8999-bca5ab18cb28",
+          "name": "Get Menu Item",
+          "request": {
+            "name": "Get Menu Item",
+            "description": {
+              "content": "Retrieve a single menu item by identifier, including its prices and options. Only GET is supported to serve consumer-facing applications.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "menuitems",
+                ":menuItemId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "menuItemId",
+                  "description": "(Required) Menu item identifier."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1dc172d5-7216-40e2-8756-93f9772d851f",
+              "name": "Menu item object.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "menuitems",
+                    ":menuItemId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "menuItemId",
+                      "description": "(Required) Menu item identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"4b96f1bafc9f100ca79231ef\",\n  \"name\": \"Chicken Burrito\",\n  \"description\": \"Grilled chicken, rice, beans, salsa\",\n  \"imageUrl\": \"string\",\n  \"prices\": [\n    {\n      \"name\": \"Regular\",\n      \"price\": 9.5\n    }\n  ],\n  \"options\": [\n    {\n      \"name\": \"Add Guacamole\",\n      \"price\": 1.5\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.opendining.net",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "97de7088-9e27-4f55-995f-897f5183113c",
+    "name": "Paytronix Online Ordering Check Menu Items API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Paytronix Online Ordering API (Open Dining) powers ordering experiences across in-store, online web, online app, call-in, call-center, and drive-through order methods. It exposes restaurant/location discovery, menu retrieval, fuzzy and geospatial search, and order creation, retrieval, and submission, connecting ordering systems to the broader Paytronix loyalty and guest engagement platform. This specification was generated from the public Open Dining documentation at http://docs.opendining.net and the Online Ordering Resource Center at https://support.opendining.net.\n\nContact Support:\n Name: Kin Lane\n Email: kin@apievangelist.com",
+      "type": "text/plain"
+    }
+  }
+}

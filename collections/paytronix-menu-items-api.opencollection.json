@@ -1,0 +1,37 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Paytronix Online Ordering Check Menu Items API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Menu Items",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Menu Item",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.opendining.net/menuitems/:menuItemId",
+            "params": [
+              {
+                "name": "menuItemId",
+                "value": "",
+                "type": "path",
+                "description": "Menu item identifier."
+              }
+            ]
+          },
+          "docs": "Retrieve a single menu item by identifier, including its prices and options. Only GET is supported to serve consumer-facing applications."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,169 @@
+{
+  "item": [
+    {
+      "id": "3e93f723-9f70-4336-8bc5-bc0ee43ee378",
+      "name": "OAuth",
+      "description": {
+        "content": "Guest authentication and token issuance.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ce95a33b-fdf1-454f-b99d-a45360622f68",
+          "name": "Request Guest Token",
+          "request": {
+            "name": "Request Guest Token",
+            "description": {
+              "content": "Authenticate a guest in a merchant program and issue an OAuth access token. Supports password, one_time_password, authorization_code, refresh_token, and fieldset grant types.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "oauth",
+                "requestGuestToken.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"merchantId\": \"<integer>\",\n  \"grant_type\": \"<string>\",\n  \"username\": \"<string>\",\n  \"password\": \"<string>\",\n  \"scope\": \"<string>\",\n  \"refresh_token\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "eec87329-fc23-4d3e-af97-0f5677cdf483",
+              "name": "Token issued.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "oauth",
+                    "requestGuestToken.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"merchantId\": 1000,\n  \"grant_type\": \"password\",\n  \"username\": \"jdoe\",\n  \"password\": \"s3cret\",\n  \"scope\": \"user_read account_read\",\n  \"refresh_token\": \"string\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"access_token\": \"9f8c1a2b3c4d5e6f\",\n  \"token_type\": \"bearer\",\n  \"expires_in\": 1800,\n  \"refresh_token\": \"1a2b3c4d5e6f7a8b\",\n  \"scope\": \"user_read account_read\",\n  \"username\": \"jdoe\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "68718627-a816-451d-b00f-0a5c63b5a157",
+              "name": "Invalid grant or credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "oauth",
+                    "requestGuestToken.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"merchantId\": 1000,\n  \"grant_type\": \"password\",\n  \"username\": \"jdoe\",\n  \"password\": \"s3cret\",\n  \"scope\": \"user_read account_read\",\n  \"refresh_token\": \"string\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"result\": \"failure\",\n  \"errorCode\": \"invalid_grant\",\n  \"errorMessage\": \"The supplied credentials were not valid.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.opendining.net",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "85c2f887-5b66-4081-a4e4-7ee311b8bfc7",
+    "name": "Paytronix Online Ordering Check OAuth API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Paytronix Online Ordering API (Open Dining) powers ordering experiences across in-store, online web, online app, call-in, call-center, and drive-through order methods. It exposes restaurant/location discovery, menu retrieval, fuzzy and geospatial search, and order creation, retrieval, and submission, connecting ordering systems to the broader Paytronix loyalty and guest engagement platform. This specification was generated from the public Open Dining documentation at http://docs.opendining.net and the Online Ordering Resource Center at https://support.opendining.net.\n\nContact Support:\n Name: Kin Lane\n Email: kin@apievangelist.com",
+      "type": "text/plain"
+    }
+  }
+}

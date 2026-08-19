@@ -1,0 +1,360 @@
+{
+  "item": [
+    {
+      "id": "cfc27861-a893-4044-90ca-0d515d375046",
+      "name": "Search",
+      "description": {
+        "content": "Geospatial and full-text search across restaurants and menu items.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "bf01a848-cd16-4385-93c2-8efe73c8dd12",
+          "name": "Search Restaurants",
+          "request": {
+            "name": "Search Restaurants",
+            "description": {
+              "content": "Search restaurants by location and optional full-text query, returning a count, a results array, and applicable facets.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "search",
+                "restaurants"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "lat",
+                  "value": "<double>",
+                  "description": "(Required) Latitude of the search center."
+                },
+                {
+                  "disabled": false,
+                  "key": "lon",
+                  "value": "<double>",
+                  "description": "(Required) Longitude of the search center."
+                },
+                {
+                  "disabled": false,
+                  "key": "q",
+                  "value": "<string>",
+                  "description": "Fuzzy, weighted full-text search query."
+                },
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "Trailing-wildcard search on the business name."
+                },
+                {
+                  "disabled": false,
+                  "key": "tags",
+                  "value": "<string>",
+                  "description": "Space-separated, URL-encoded tags to restrict results by category."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "10",
+                  "description": "Maximum number of results (default 10, max 50)."
+                },
+                {
+                  "disabled": false,
+                  "key": "skip",
+                  "value": "0",
+                  "description": "Offset for pagination."
+                },
+                {
+                  "disabled": false,
+                  "key": "sort",
+                  "value": "distance",
+                  "description": "Sort order, by distance (default) or price."
+                },
+                {
+                  "disabled": false,
+                  "key": "show_closed",
+                  "value": "false",
+                  "description": "When true, include closed restaurants."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a8d377bc-a634-4ddd-8d9b-7822e320daec",
+              "name": "Restaurant search results.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "search",
+                    "restaurants"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "lat",
+                      "value": "40"
+                    },
+                    {
+                      "key": "lon",
+                      "value": "-81"
+                    },
+                    {
+                      "key": "q",
+                      "value": "burrito"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tags",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "skip",
+                      "value": "0"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "distance"
+                    },
+                    {
+                      "key": "show_closed",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 12,\n  \"results\": [\n    {\n      \"id\": \"4b96f1bafc9f100ca79231ef\",\n      \"name\": \"Taqueria Downtown\",\n      \"distance\": 1.2,\n      \"coordinates\": {\n        \"lat\": 40,\n        \"lon\": -81\n      },\n      \"address\": \"123 Main St\",\n      \"city\": \"Boston\",\n      \"state\": \"MA\",\n      \"postalCode\": \"02110\",\n      \"phone\": \"+16175551234\",\n      \"website\": \"https://example.com\",\n      \"organizationId\": \"string\",\n      \"imageUrl\": \"string\",\n      \"description\": \"string\"\n    }\n  ],\n  \"facets\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8c5e67b2-7071-465c-ac08-18b749a683e8",
+          "name": "Search Menu Items",
+          "request": {
+            "name": "Search Menu Items",
+            "description": {
+              "content": "Search menu items by location and optional full-text query, returning a count, a results array (each with a prices array), and applicable facets.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "search",
+                "menuitems"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "lat",
+                  "value": "<double>",
+                  "description": "(Required) Latitude of the search center."
+                },
+                {
+                  "disabled": false,
+                  "key": "lon",
+                  "value": "<double>",
+                  "description": "(Required) Longitude of the search center."
+                },
+                {
+                  "disabled": false,
+                  "key": "q",
+                  "value": "<string>",
+                  "description": "Fuzzy, weighted full-text search query."
+                },
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "Trailing-wildcard search on the item name."
+                },
+                {
+                  "disabled": false,
+                  "key": "tags",
+                  "value": "<string>",
+                  "description": "Space-separated, URL-encoded tags to restrict results by category."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "10",
+                  "description": "Maximum number of results (default 10, max 50)."
+                },
+                {
+                  "disabled": false,
+                  "key": "skip",
+                  "value": "0",
+                  "description": "Offset for pagination."
+                },
+                {
+                  "disabled": false,
+                  "key": "sort",
+                  "value": "distance",
+                  "description": "Sort order, by distance (default) or price."
+                },
+                {
+                  "disabled": false,
+                  "key": "show_closed",
+                  "value": "false",
+                  "description": "When true, include unavailable items."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8319c667-b77a-4f08-bf65-ee0c4d6f8460",
+              "name": "Menu item search results.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "search",
+                    "menuitems"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "lat",
+                      "value": "40"
+                    },
+                    {
+                      "key": "lon",
+                      "value": "-81"
+                    },
+                    {
+                      "key": "q",
+                      "value": "burrito"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tags",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "skip",
+                      "value": "0"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "distance"
+                    },
+                    {
+                      "key": "show_closed",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 34,\n  \"results\": [\n    {\n      \"id\": \"4b96f1bafc9f100ca79231ef\",\n      \"name\": \"Chicken Burrito\",\n      \"description\": \"Grilled chicken, rice, beans, salsa\",\n      \"imageUrl\": \"string\",\n      \"prices\": [\n        {\n          \"name\": \"Regular\",\n          \"price\": 9.5\n        }\n      ],\n      \"options\": [\n        {\n          \"name\": \"Add Guacamole\",\n          \"price\": 1.5\n        }\n      ]\n    }\n  ],\n  \"facets\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.opendining.net",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "8863361f-270c-40fe-a6f7-2363c97c31da",
+    "name": "Paytronix Online Ordering Check Search API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Paytronix Online Ordering API (Open Dining) powers ordering experiences across in-store, online web, online app, call-in, call-center, and drive-through order methods. It exposes restaurant/location discovery, menu retrieval, fuzzy and geospatial search, and order creation, retrieval, and submission, connecting ordering systems to the broader Paytronix loyalty and guest engagement platform. This specification was generated from the public Open Dining documentation at http://docs.opendining.net and the Online Ordering Resource Center at https://support.opendining.net.\n\nContact Support:\n Name: Kin Lane\n Email: kin@apievangelist.com",
+      "type": "text/plain"
+    }
+  }
+}

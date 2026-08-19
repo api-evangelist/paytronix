@@ -1,0 +1,48 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Paytronix Online Ordering Check API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Check",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Compute Applicable Rewards",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.opendining.net/check/computeApplicableRewards.json",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Determine which rewards and discounts apply to a given POS check for a guest, returning item, multi-item, subtotal, and service-charge discounts plus balances and receipt text."
+        },
+        {
+          "info": {
+            "name": "Post And Accrue Points",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.opendining.net/check/postAndAccruePoints.json",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Post a check and accrue points in one step, returning the add/redeem result, customer details, balances, and receipt text."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

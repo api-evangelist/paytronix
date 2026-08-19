@@ -1,0 +1,404 @@
+{
+  "item": [
+    {
+      "id": "bd0dba71-a62e-4a90-842d-f142a4508927",
+      "name": "Gift",
+      "description": {
+        "content": "Gift card sale, reload, balance, redeem, and exchange.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "74a71683-2fd9-4dc3-ba11-f2d8921c0856",
+          "name": "Sell Gift Card",
+          "request": {
+            "name": "Sell Gift Card",
+            "description": {
+              "content": "Activate a gift card and add the initial value to it.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "gift",
+                "sell.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"merchantId\": \"<integer>\",\n  \"storeCode\": \"<string>\",\n  \"cardInfo\": {\n    \"printedCardNumber\": \"<string>\",\n    \"magstripe\": \"<string>\",\n    \"cardTemplateCode\": \"<string>\"\n  },\n  \"amount\": \"<number>\",\n  \"checkNumber\": \"<string>\",\n  \"cashier\": \"<string>\",\n  \"terminalId\": \"<string>\",\n  \"externalTransactionId\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "6165deb3-b9f2-476e-97c3-9121ea062fea",
+              "name": "Gift transaction reply.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "gift",
+                    "sell.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"merchantId\": 1000,\n  \"storeCode\": \"1\",\n  \"cardInfo\": {\n    \"printedCardNumber\": \"60490012345678\",\n    \"magstripe\": \"string\",\n    \"cardTemplateCode\": \"1\"\n  },\n  \"amount\": 25,\n  \"checkNumber\": \"string\",\n  \"cashier\": \"string\",\n  \"terminalId\": \"string\",\n  \"externalTransactionId\": \"string\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"result\": \"success\",\n  \"pxTransactionId\": \"GIFT-44556\",\n  \"printedCardNumber\": \"70123456789012\",\n  \"currentBalance\": 50,\n  \"errorCode\": \"string\",\n  \"errorMessage\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4ed27f0f-b1f5-48a7-9eed-9d6aa8623eb7",
+          "name": "Reload Gift Card",
+          "request": {
+            "name": "Reload Gift Card",
+            "description": {
+              "content": "Add value to a gift card that has already been activated.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "gift",
+                "reload.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"merchantId\": \"<integer>\",\n  \"storeCode\": \"<string>\",\n  \"cardInfo\": {\n    \"printedCardNumber\": \"<string>\",\n    \"magstripe\": \"<string>\",\n    \"cardTemplateCode\": \"<string>\"\n  },\n  \"amount\": \"<number>\",\n  \"checkNumber\": \"<string>\",\n  \"cashier\": \"<string>\",\n  \"terminalId\": \"<string>\",\n  \"externalTransactionId\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b12de2c9-9d06-4137-838f-9330dede38fa",
+              "name": "Gift transaction reply.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "gift",
+                    "reload.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"merchantId\": 1000,\n  \"storeCode\": \"1\",\n  \"cardInfo\": {\n    \"printedCardNumber\": \"60490012345678\",\n    \"magstripe\": \"string\",\n    \"cardTemplateCode\": \"1\"\n  },\n  \"amount\": 25,\n  \"checkNumber\": \"string\",\n  \"cashier\": \"string\",\n  \"terminalId\": \"string\",\n  \"externalTransactionId\": \"string\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"result\": \"success\",\n  \"pxTransactionId\": \"GIFT-44556\",\n  \"printedCardNumber\": \"70123456789012\",\n  \"currentBalance\": 50,\n  \"errorCode\": \"string\",\n  \"errorMessage\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "43a9b0b7-8045-42c5-9ca9-9dbf298f58fd",
+          "name": "Get Gift Card Balance",
+          "request": {
+            "name": "Get Gift Card Balance",
+            "description": {
+              "content": "Retrieve the current balance of a gift card.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "gift",
+                "balance.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"merchantId\": \"<integer>\",\n  \"storeCode\": \"<string>\",\n  \"cardInfo\": {\n    \"printedCardNumber\": \"<string>\",\n    \"magstripe\": \"<string>\",\n    \"cardTemplateCode\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "657f18b7-b9a2-49dc-b2cc-4e1afa78ec73",
+              "name": "Gift transaction reply with current balance.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "gift",
+                    "balance.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"merchantId\": 1000,\n  \"storeCode\": \"1\",\n  \"cardInfo\": {\n    \"printedCardNumber\": \"60490012345678\",\n    \"magstripe\": \"string\",\n    \"cardTemplateCode\": \"1\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"result\": \"success\",\n  \"pxTransactionId\": \"GIFT-44556\",\n  \"printedCardNumber\": \"70123456789012\",\n  \"currentBalance\": 50,\n  \"errorCode\": \"string\",\n  \"errorMessage\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3ed4773c-021b-48f3-9192-86d71d8b9393",
+          "name": "Redeem Gift Card",
+          "request": {
+            "name": "Redeem Gift Card",
+            "description": {
+              "content": "Redeem value from a gift card, optionally including a tip.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "gift",
+                "redeem.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"merchantId\": \"<integer>\",\n  \"storeCode\": \"<string>\",\n  \"cardInfo\": {\n    \"printedCardNumber\": \"<string>\",\n    \"magstripe\": \"<string>\",\n    \"cardTemplateCode\": \"<string>\"\n  },\n  \"amount\": \"<number>\",\n  \"checkNumber\": \"<string>\",\n  \"cashier\": \"<string>\",\n  \"terminalId\": \"<string>\",\n  \"externalTransactionId\": \"<string>\",\n  \"tip\": \"<number>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7d898f94-c3e5-4304-ba7f-b0d548204c9e",
+              "name": "Gift transaction reply.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "gift",
+                    "redeem.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"merchantId\": 1000,\n  \"storeCode\": \"1\",\n  \"cardInfo\": {\n    \"printedCardNumber\": \"60490012345678\",\n    \"magstripe\": \"string\",\n    \"cardTemplateCode\": \"1\"\n  },\n  \"amount\": 25,\n  \"checkNumber\": \"string\",\n  \"cashier\": \"string\",\n  \"terminalId\": \"string\",\n  \"externalTransactionId\": \"string\",\n  \"tip\": 5\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"result\": \"success\",\n  \"pxTransactionId\": \"GIFT-44556\",\n  \"printedCardNumber\": \"70123456789012\",\n  \"currentBalance\": 50,\n  \"errorCode\": \"string\",\n  \"errorMessage\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.opendining.net",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "776a8ebc-6902-4126-8694-11cf6a5e2aa7",
+    "name": "Paytronix Online Ordering Check Gift API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Paytronix Online Ordering API (Open Dining) powers ordering experiences across in-store, online web, online app, call-in, call-center, and drive-through order methods. It exposes restaurant/location discovery, menu retrieval, fuzzy and geospatial search, and order creation, retrieval, and submission, connecting ordering systems to the broader Paytronix loyalty and guest engagement platform. This specification was generated from the public Open Dining documentation at http://docs.opendining.net and the Online Ordering Resource Center at https://support.opendining.net.\n\nContact Support:\n Name: Kin Lane\n Email: kin@apievangelist.com",
+      "type": "text/plain"
+    }
+  }
+}

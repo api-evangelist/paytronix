@@ -1,0 +1,169 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Paytronix Online Ordering Check Guest API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Guest",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Account Information",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.opendining.net/guest/accountInformation.json",
+            "params": [
+              {
+                "name": "merchantId",
+                "value": "",
+                "type": "query",
+                "description": "Paytronix-assigned merchant identifier."
+              },
+              {
+                "name": "printedCardNumber",
+                "value": "",
+                "type": "query",
+                "description": "Printed card number identifying the account."
+              },
+              {
+                "name": "accessFilterStoreGroupCode",
+                "value": "",
+                "type": "query",
+                "description": "Optional store group code used to filter access."
+              }
+            ]
+          },
+          "docs": "Retrieve account status, card template, tier, and wallet balances for an account identified by its printed card number."
+        },
+        {
+          "info": {
+            "name": "Get Account Information By Account ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.opendining.net/guest/accountInformationById.json",
+            "params": [
+              {
+                "name": "merchantId",
+                "value": "",
+                "type": "query",
+                "description": "Paytronix-assigned merchant identifier."
+              },
+              {
+                "name": "accountId",
+                "value": "",
+                "type": "query",
+                "description": "Paytronix account identifier."
+              },
+              {
+                "name": "accessFilterStoreGroupCode",
+                "value": "",
+                "type": "query",
+                "description": "Optional store group code used to filter access."
+              }
+            ]
+          },
+          "docs": "Retrieve account information for an account identified by its account ID."
+        },
+        {
+          "info": {
+            "name": "Get User Information",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.opendining.net/guest/userInformation.json",
+            "params": [
+              {
+                "name": "merchantId",
+                "value": "",
+                "type": "query",
+                "description": "Paytronix-assigned merchant identifier."
+              },
+              {
+                "name": "username",
+                "value": "",
+                "type": "query",
+                "description": "Registered guest username."
+              }
+            ]
+          },
+          "docs": "Retrieve demographic user fields, primary card numbers, related guests, and account IDs for a registered user identified by username."
+        },
+        {
+          "info": {
+            "name": "Get Transaction History",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.opendining.net/guest/transactionHistory.json",
+            "params": [
+              {
+                "name": "merchantId",
+                "value": "",
+                "type": "query",
+                "description": "Paytronix-assigned merchant identifier."
+              },
+              {
+                "name": "printedCardNumber",
+                "value": "",
+                "type": "query",
+                "description": "Printed card number identifying the account."
+              },
+              {
+                "name": "dateStart",
+                "value": "",
+                "type": "query",
+                "description": "Inclusive start date for the history window."
+              },
+              {
+                "name": "dateEnd",
+                "value": "",
+                "type": "query",
+                "description": "Inclusive end date for the history window."
+              },
+              {
+                "name": "maxNumberOfResults",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of transactions to return."
+              },
+              {
+                "name": "limitToBalanceAffectingTransactions",
+                "value": "",
+                "type": "query",
+                "description": "When true, only balance-affecting transactions are returned."
+              }
+            ]
+          },
+          "docs": "Retrieve wallet balances and a list of transactions (accruals, redemptions, balance changes) for an account by printed card number."
+        },
+        {
+          "info": {
+            "name": "Change Card Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.opendining.net/guest/changeCardStatus.json",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Enable or disable a card by setting its status to ACTIVE or DISABLED."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

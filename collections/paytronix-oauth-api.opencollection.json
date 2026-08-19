@@ -1,0 +1,33 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Paytronix Online Ordering Check OAuth API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "OAuth",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Request Guest Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.opendining.net/oauth/requestGuestToken.json",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Authenticate a guest in a merchant program and issue an OAuth access token. Supports password, one_time_password, authorization_code, refresh_token, and fieldset grant types."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,404 @@
+{
+  "item": [
+    {
+      "id": "22de09c3-7030-4732-8256-e303c3db5f10",
+      "name": "Transaction",
+      "description": {
+        "content": "Loyalty and stored-value transaction processing at the POS.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8aabbe09-31e7-4a73-a4a1-f5ce1916b073",
+          "name": "Activate Card",
+          "request": {
+            "name": "Activate Card",
+            "description": {
+              "content": "Activate a loyalty card, returning card details and enrollment date.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "transaction",
+                "activate.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"headerInfo\": {\n    \"merchantId\": \"<integer>\",\n    \"storeCode\": \"<string>\",\n    \"programId\": \"<string>\",\n    \"terminal\": \"<string>\",\n    \"operator\": \"<string>\",\n    \"posTransactionId\": \"<string>\"\n  },\n  \"cardInfo\": {\n    \"printedCardNumber\": \"<string>\",\n    \"magstripe\": \"<string>\",\n    \"cardTemplateCode\": \"<string>\"\n  },\n  \"autoActivateCard\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "048d3602-fc81-4447-88b6-41c5833a3cb8",
+              "name": "Transaction reply.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transaction",
+                    "activate.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"headerInfo\": {\n    \"merchantId\": 1000,\n    \"storeCode\": \"1\",\n    \"programId\": \"PX\",\n    \"terminal\": \"1\",\n    \"operator\": \"100\",\n    \"posTransactionId\": \"string\"\n  },\n  \"cardInfo\": {\n    \"printedCardNumber\": \"60490012345678\",\n    \"magstripe\": \"string\",\n    \"cardTemplateCode\": \"1\"\n  },\n  \"autoActivateCard\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"result\": \"success\",\n  \"pxTransactionId\": \"TXN-12345\",\n  \"maskedCardNumber\": \"******5678\",\n  \"enrollmentDate\": \"2026-06-03\",\n  \"walletBalances\": [\n    {\n      \"walletCode\": \"1\",\n      \"name\": \"Points\",\n      \"balance\": 1250\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2aab124c-680c-405e-a113-2e60f3a354fc",
+          "name": "Balance Inquiry",
+          "request": {
+            "name": "Balance Inquiry",
+            "description": {
+              "content": "Retrieve current stored-value balance and loyalty program information for a card.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "transaction",
+                "balanceInquiry.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"headerInfo\": {\n    \"merchantId\": \"<integer>\",\n    \"storeCode\": \"<string>\",\n    \"programId\": \"<string>\",\n    \"terminal\": \"<string>\",\n    \"operator\": \"<string>\",\n    \"posTransactionId\": \"<string>\"\n  },\n  \"cardInfo\": {\n    \"printedCardNumber\": \"<string>\",\n    \"magstripe\": \"<string>\",\n    \"cardTemplateCode\": \"<string>\"\n  },\n  \"autoActivateCard\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "769366ee-d708-4064-8044-07f37d949220",
+              "name": "Transaction reply with balances.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transaction",
+                    "balanceInquiry.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"headerInfo\": {\n    \"merchantId\": 1000,\n    \"storeCode\": \"1\",\n    \"programId\": \"PX\",\n    \"terminal\": \"1\",\n    \"operator\": \"100\",\n    \"posTransactionId\": \"string\"\n  },\n  \"cardInfo\": {\n    \"printedCardNumber\": \"60490012345678\",\n    \"magstripe\": \"string\",\n    \"cardTemplateCode\": \"1\"\n  },\n  \"autoActivateCard\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"result\": \"success\",\n  \"pxTransactionId\": \"TXN-12345\",\n  \"maskedCardNumber\": \"******5678\",\n  \"enrollmentDate\": \"2026-06-03\",\n  \"walletBalances\": [\n    {\n      \"walletCode\": \"1\",\n      \"name\": \"Points\",\n      \"balance\": 1250\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "642f0745-98e8-42e4-84ec-b854679c6cf2",
+          "name": "Add Or Redeem Wallet Value",
+          "request": {
+            "name": "Add Or Redeem Wallet Value",
+            "description": {
+              "content": "Add value to or redeem value from a card account using add and redeem wallet content lists. Use programId SV for gift and LP for loyalty.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "transaction",
+                "addRedeem.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"headerInfo\": {\n    \"merchantId\": \"<integer>\",\n    \"storeCode\": \"<string>\",\n    \"programId\": \"<string>\",\n    \"terminal\": \"<string>\",\n    \"operator\": \"<string>\",\n    \"posTransactionId\": \"<string>\"\n  },\n  \"cardInfo\": {\n    \"printedCardNumber\": \"<string>\",\n    \"magstripe\": \"<string>\",\n    \"cardTemplateCode\": \"<string>\"\n  },\n  \"addWalletContents\": [\n    {\n      \"walletCode\": \"<string>\",\n      \"quantity\": \"<number>\",\n      \"expiration\": \"<date>\"\n    },\n    {\n      \"walletCode\": \"<string>\",\n      \"quantity\": \"<number>\",\n      \"expiration\": \"<date>\"\n    }\n  ],\n  \"redeemWalletContents\": [\n    {\n      \"walletCode\": \"<string>\",\n      \"quantity\": \"<number>\",\n      \"expiration\": \"<date>\"\n    },\n    {\n      \"walletCode\": \"<string>\",\n      \"quantity\": \"<number>\",\n      \"expiration\": \"<date>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3b6ab4b3-45ff-43dc-96d6-e07925642d21",
+              "name": "Add/redeem reply with updated balances.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transaction",
+                    "addRedeem.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"headerInfo\": {\n    \"merchantId\": 1000,\n    \"storeCode\": \"1\",\n    \"programId\": \"PX\",\n    \"terminal\": \"1\",\n    \"operator\": \"100\",\n    \"posTransactionId\": \"string\"\n  },\n  \"cardInfo\": {\n    \"printedCardNumber\": \"60490012345678\",\n    \"magstripe\": \"string\",\n    \"cardTemplateCode\": \"1\"\n  },\n  \"addWalletContents\": [\n    {\n      \"walletCode\": \"1\",\n      \"quantity\": 10,\n      \"expiration\": \"2026-06-03\"\n    }\n  ],\n  \"redeemWalletContents\": [\n    {\n      \"walletCode\": \"1\",\n      \"quantity\": 10,\n      \"expiration\": \"2026-06-03\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"result\": \"success\",\n  \"pxTransactionId\": \"TXN-67890\",\n  \"walletContents\": [\n    {\n      \"walletCode\": \"1\",\n      \"name\": \"Points\",\n      \"balance\": 1250\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c40cb1e2-6015-4aa6-b58c-cb8ffe8547cc",
+          "name": "Query Accounts",
+          "request": {
+            "name": "Query Accounts",
+            "description": {
+              "content": "Search for accounts by phone, name, email, or postal code, returning matching customer records and field values.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "transaction",
+                "accountQuery.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"headerInfo\": {\n    \"merchantId\": \"<integer>\",\n    \"storeCode\": \"<string>\",\n    \"programId\": \"<string>\",\n    \"terminal\": \"<string>\",\n    \"operator\": \"<string>\",\n    \"posTransactionId\": \"<string>\"\n  },\n  \"accountQueries\": [\n    {\n      \"phone\": \"<string>\",\n      \"email\": \"<string>\",\n      \"firstName\": \"<string>\",\n      \"lastName\": \"<string>\",\n      \"postalCode\": \"<string>\"\n    },\n    {\n      \"phone\": \"<string>\",\n      \"email\": \"<string>\",\n      \"firstName\": \"<string>\",\n      \"lastName\": \"<string>\",\n      \"postalCode\": \"<string>\"\n    }\n  ],\n  \"pageSize\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8eab3755-146e-4a47-ad29-648cb93f6d7d",
+              "name": "Account query reply.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transaction",
+                    "accountQuery.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"headerInfo\": {\n    \"merchantId\": 1000,\n    \"storeCode\": \"1\",\n    \"programId\": \"PX\",\n    \"terminal\": \"1\",\n    \"operator\": \"100\",\n    \"posTransactionId\": \"string\"\n  },\n  \"pageSize\": 25,\n  \"accountQueries\": [\n    {\n      \"phone\": \"string\",\n      \"email\": \"string\",\n      \"firstName\": \"string\",\n      \"lastName\": \"string\",\n      \"postalCode\": \"string\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"result\": \"success\",\n  \"accounts\": [\n    {\n      \"accountId\": 0,\n      \"printedCardNumber\": \"string\",\n      \"fieldValues\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.opendining.net",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "ff4a78b8-5b4d-498a-b479-ad15512cf192",
+    "name": "Paytronix Online Ordering Check Transaction API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Paytronix Online Ordering API (Open Dining) powers ordering experiences across in-store, online web, online app, call-in, call-center, and drive-through order methods. It exposes restaurant/location discovery, menu retrieval, fuzzy and geospatial search, and order creation, retrieval, and submission, connecting ordering systems to the broader Paytronix loyalty and guest engagement platform. This specification was generated from the public Open Dining documentation at http://docs.opendining.net and the Online Ordering Resource Center at https://support.opendining.net.\n\nContact Support:\n Name: Kin Lane\n Email: kin@apievangelist.com",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Paytronix Online Ordering Check Payment API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Payment",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Recharge Stored Value Card",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.opendining.net/payment/recharge.json",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Recharge a stored-value card with a given amount using a saved or new payment method."
+        },
+        {
+          "info": {
+            "name": "Get Saved Payment Methods",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.opendining.net/payment/savedPaymentMethods.json",
+            "params": [
+              {
+                "name": "merchantId",
+                "value": "",
+                "type": "query",
+                "description": "Paytronix-assigned merchant identifier."
+              },
+              {
+                "name": "printedCardNumber",
+                "value": "",
+                "type": "query",
+                "description": "Printed card number identifying the account."
+              }
+            ]
+          },
+          "docs": "List the saved payment methods associated with a stored-value card."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,78 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Paytronix Online Ordering Check Transaction API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Transaction",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Activate Card",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.opendining.net/transaction/activate.json",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Activate a loyalty card, returning card details and enrollment date."
+        },
+        {
+          "info": {
+            "name": "Balance Inquiry",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.opendining.net/transaction/balanceInquiry.json",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieve current stored-value balance and loyalty program information for a card."
+        },
+        {
+          "info": {
+            "name": "Add Or Redeem Wallet Value",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.opendining.net/transaction/addRedeem.json",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add value to or redeem value from a card account using add and redeem wallet content lists. Use programId SV for gift and LP for loyalty."
+        },
+        {
+          "info": {
+            "name": "Query Accounts",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.opendining.net/transaction/accountQuery.json",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Search for accounts by phone, name, email, or postal code, returning matching customer records and field values."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

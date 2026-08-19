@@ -1,0 +1,86 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Paytronix Online Ordering Check Store API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Store",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Nearby Locations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.opendining.net/store/nearbyLocations.json",
+            "params": [
+              {
+                "name": "merchantId",
+                "value": "",
+                "type": "query",
+                "description": "Paytronix-assigned merchant identifier."
+              },
+              {
+                "name": "latitude",
+                "value": "",
+                "type": "query",
+                "description": "Search center latitude."
+              },
+              {
+                "name": "longitude",
+                "value": "",
+                "type": "query",
+                "description": "Search center longitude."
+              },
+              {
+                "name": "maxDistance",
+                "value": "",
+                "type": "query",
+                "description": "Maximum distance in miles."
+              },
+              {
+                "name": "maxLocations",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results."
+              },
+              {
+                "name": "storeGroupCode",
+                "value": "",
+                "type": "query",
+                "description": "Optional store group filter."
+              }
+            ]
+          },
+          "docs": "Retrieve store locations within a maximum distance of a latitude and longitude, ordered by distance."
+        },
+        {
+          "info": {
+            "name": "Get All Stores",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.opendining.net/store/stores.json",
+            "params": [
+              {
+                "name": "merchantId",
+                "value": "",
+                "type": "query",
+                "description": "Paytronix-assigned merchant identifier."
+              }
+            ]
+          },
+          "docs": "Retrieve the complete list of all store locations for a merchant."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
