@@ -212,6 +212,8 @@ apis:
   humanURL: https://developers.paytronix.com/pxs_api_reference/index.html
   baseURL: https://m{merchantId}.api.paytronix.com/rest/26.6
   tags:
+  - Authentication
+  tags_raw:
   - OAuth
   properties:
   - type: OpenAPI
@@ -246,6 +248,8 @@ apis:
   humanURL: https://developers.paytronix.com/pxs_api_reference/index.html
   baseURL: https://m{merchantId}.api.paytronix.com/rest/26.6
   tags:
+  - Order
+  tags_raw:
   - Orders
   properties:
   - type: OpenAPI
@@ -314,6 +318,8 @@ apis:
   humanURL: https://developers.paytronix.com/pxs_api_reference/index.html
   baseURL: https://m{merchantId}.api.paytronix.com/rest/26.6
   tags:
+  - Restaurant
+  tags_raw:
   - Restaurants
   properties:
   - type: OpenAPI
