@@ -9,6 +9,18 @@ description: >-
   Basic), and B2B flows. A separate Online Ordering API is documented for ordering integrations, making Paytronix a
   developer-friendly guest engagement provider.
 type: Index
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: unknown
   onboarding: self-serve
