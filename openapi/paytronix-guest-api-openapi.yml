@@ -1,17 +1,29 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Paytronix Online Ordering Check Guest API
-  version: '1.0'
-  description: The Paytronix Online Ordering API (Open Dining) powers ordering experiences across in-store, online web, online app, call-in, call-center, and drive-through order methods. It exposes restaurant/location discovery, menu retrieval, fuzzy and geospatial search, and order creation, retrieval, and submission, connecting ordering systems to the broader Paytronix loyalty and guest engagement platform. This specification was generated from the public Open Dining documentation at http://docs.opendining.net and the Online Ordering Resource Center at https://support.opendining.net.
+  title: Paytronix Server Guest API
+  version: '26.6'
+  description: The Paytronix Server (PXS) REST API exposes the guest engagement platform used by 1,800-plus restaurant and convenience-store brands. It spans loyalty and stored-value accounts, enrollment and registration, transactions and point accrual, gift card sales and redemption, stored-value recharge and payment, store/location lookup, and guest authentication. All requests and responses are JSON. Operations authenticate with an integration identifier and secret sent as an HTTP Basic authorization header; guest-scoped operations additionally use an OAuth bearer token issued by the OAuth Service. This specification was generated from the public Paytronix integration documentation at https://developers.paytronix.com.
   contact:
     name: Kin Lane
     email: kin@apievangelist.com
   x-generated-from: documentation
-  x-source-url: http://docs.opendining.net/api/
+  x-source-url: https://developers.paytronix.com/pxs_api_reference/index.html
   x-last-validated: '2026-06-03'
 servers:
-- url: https://api.opendining.net
-  description: Open Dining Online Ordering API base URL.
+- url: https://m{merchantId}.api.{server}.com/rest/{release}
+  description: Paytronix REST base URL. The hostname embeds the merchant ID (mMID) and the assigned server; the path embeds the release/version (e.g. 26.6).
+  variables:
+    merchantId:
+      default: '1000'
+      description: Paytronix-assigned merchant identifier (mMID).
+    server:
+      default: paytronix
+      description: Assigned Paytronix server name.
+    release:
+      default: '26.6'
+      description: API release/version the request body conforms to.
+security:
+- basicAuth: []
 tags:
 - name: Guest
   description: Guest account and user information lookup and management.
@@ -285,40 +297,41 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    WalletBalance:
-      type: object
-      properties:
-        walletCode:
-          type: string
-          example: '1'
-        name:
-          type: string
-          example: Points
-        balance:
-          type: number
-          example: 1250
-    UserInformationReply:
+    AccountInformationReply:
       type: object
       properties:
         result:
           type: string
           example: success
-        userFields:
-          type: object
-          additionalProperties: true
-          example:
-            firstName: Jane
-            lastName: Doe
-            email: jane@example.com
-        primaryCardNumbers:
+        username:
+          type: string
+          example: jdoe
+        accountStatus:
+          type: string
+          example: ACTIVE
+        queryCardStatus:
+          type: string
+          example: ACTIVE
+        registrationStatus:
+          type: string
+          example: REGISTERED
+        cardTemplateCode:
+          type: string
+          example: '1'
+        tierCode:
+          type: string
+          example: GOLD
+        primaryCard:
+          type: string
+          example: '60490012345678'
+        additionalCards:
           type: array
           items:
             type: string
-        accountIds:
+        walletBalances:
           type: array
           items:
-            type: integer
-            format: int64
+            $ref: '#/components/schemas/WalletBalance'
     ChangeCardStatusRequest:
       type: object
       required:
@@ -367,41 +380,28 @@ components:
                 type: number
               balance:
                 type: number
-    AccountInformationReply:
+    UserInformationReply:
       type: object
       properties:
         result:
           type: string
           example: success
-        username:
-          type: string
-          example: jdoe
-        accountStatus:
-          type: string
-          example: ACTIVE
-        queryCardStatus:
-          type: string
-          example: ACTIVE
-        registrationStatus:
-          type: string
-          example: REGISTERED
-        cardTemplateCode:
-          type: string
-          example: '1'
-        tierCode:
-          type: string
-          example: GOLD
-        primaryCard:
-          type: string
-          example: '60490012345678'
-        additionalCards:
+        userFields:
+          type: object
+          additionalProperties: true
+          example:
+            firstName: Jane
+            lastName: Doe
+            email: jane@example.com
+        primaryCardNumbers:
           type: array
           items:
             type: string
-        walletBalances:
+        accountIds:
           type: array
           items:
-            $ref: '#/components/schemas/WalletBalance'
+            type: integer
+            format: int64
     SimpleReply:
       type: object
       description: Standard success/failure envelope.
@@ -413,3 +413,25 @@ components:
           type: string
         errorMessage:
           type: string
+    WalletBalance:
+      type: object
+      properties:
+        walletCode:
+          type: string
+          example: '1'
+        name:
+          type: string
+          example: Points
+        balance:
+          type: number
+          example: 1250
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic authentication with the base64-encoded integration identifier and secret (identifier:secret).
+    guestBearer:
+      type: http
+      scheme: bearer
+      bearerFormat: OAuth
+      description: OAuth bearer token issued by the OAuth Service for guest-scoped operations.

@@ -1,17 +1,29 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Paytronix Online Ordering Check Transaction API
-  version: '1.0'
-  description: The Paytronix Online Ordering API (Open Dining) powers ordering experiences across in-store, online web, online app, call-in, call-center, and drive-through order methods. It exposes restaurant/location discovery, menu retrieval, fuzzy and geospatial search, and order creation, retrieval, and submission, connecting ordering systems to the broader Paytronix loyalty and guest engagement platform. This specification was generated from the public Open Dining documentation at http://docs.opendining.net and the Online Ordering Resource Center at https://support.opendining.net.
+  title: Paytronix Server Transaction API
+  version: '26.6'
+  description: The Paytronix Server (PXS) REST API exposes the guest engagement platform used by 1,800-plus restaurant and convenience-store brands. It spans loyalty and stored-value accounts, enrollment and registration, transactions and point accrual, gift card sales and redemption, stored-value recharge and payment, store/location lookup, and guest authentication. All requests and responses are JSON. Operations authenticate with an integration identifier and secret sent as an HTTP Basic authorization header; guest-scoped operations additionally use an OAuth bearer token issued by the OAuth Service. This specification was generated from the public Paytronix integration documentation at https://developers.paytronix.com.
   contact:
     name: Kin Lane
     email: kin@apievangelist.com
   x-generated-from: documentation
-  x-source-url: http://docs.opendining.net/api/
+  x-source-url: https://developers.paytronix.com/pxs_api_reference/index.html
   x-last-validated: '2026-06-03'
 servers:
-- url: https://api.opendining.net
-  description: Open Dining Online Ordering API base URL.
+- url: https://m{merchantId}.api.{server}.com/rest/{release}
+  description: Paytronix REST base URL. The hostname embeds the merchant ID (mMID) and the assigned server; the path embeds the release/version (e.g. 26.6).
+  variables:
+    merchantId:
+      default: '1000'
+      description: Paytronix-assigned merchant identifier (mMID).
+    server:
+      default: paytronix
+      description: Assigned Paytronix server name.
+    release:
+      default: '26.6'
+      description: API release/version the request body conforms to.
+security:
+- basicAuth: []
 tags:
 - name: Transaction
   description: Loyalty and stored-value transaction processing at the POS.
@@ -234,50 +246,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    WalletBalance:
-      type: object
-      properties:
-        walletCode:
-          type: string
-          example: '1'
-        name:
-          type: string
-          example: Points
-        balance:
-          type: number
-          example: 1250
-    TransactionReply:
-      type: object
-      properties:
-        result:
-          type: string
-          example: success
-        pxTransactionId:
-          type: string
-          example: TXN-12345
-        maskedCardNumber:
-          type: string
-          example: '******5678'
-        enrollmentDate:
-          type: string
-          format: date
-        walletBalances:
-          type: array
-          items:
-            $ref: '#/components/schemas/WalletBalance'
-    AddRedeemReply:
-      type: object
-      properties:
-        result:
-          type: string
-          example: success
-        pxTransactionId:
-          type: string
-          example: TXN-67890
-        walletContents:
-          type: array
-          items:
-            $ref: '#/components/schemas/WalletBalance'
     AccountQueryReply:
       type: object
       properties:
@@ -297,6 +265,19 @@ components:
               fieldValues:
                 type: object
                 additionalProperties: true
+    AddRedeemReply:
+      type: object
+      properties:
+        result:
+          type: string
+          example: success
+        pxTransactionId:
+          type: string
+          example: TXN-67890
+        walletContents:
+          type: array
+          items:
+            $ref: '#/components/schemas/WalletBalance'
     TransactionRequest:
       type: object
       required:
@@ -309,70 +290,6 @@ components:
           $ref: '#/components/schemas/CardInfo'
         autoActivateCard:
           type: boolean
-    HeaderInfo:
-      type: object
-      description: Common transaction header. programId is PX, SV, or LP.
-      properties:
-        merchantId:
-          type: integer
-          example: 1000
-        storeCode:
-          type: string
-          example: '1'
-        programId:
-          type: string
-          example: PX
-        terminal:
-          type: string
-          example: '1'
-        operator:
-          type: string
-          example: '100'
-        posTransactionId:
-          type: string
-    CardInfo:
-      type: object
-      description: Identifies a card for transaction operations.
-      properties:
-        printedCardNumber:
-          type: string
-          example: '60490012345678'
-        magstripe:
-          type: string
-        cardTemplateCode:
-          type: string
-          example: '1'
-    WalletContent:
-      type: object
-      description: A wallet code and quantity used in add/redeem operations.
-      properties:
-        walletCode:
-          type: string
-          example: '1'
-        quantity:
-          type: number
-          example: 10
-        expiration:
-          type: string
-          format: date
-    AddRedeemRequest:
-      type: object
-      required:
-      - headerInfo
-      - cardInfo
-      properties:
-        headerInfo:
-          $ref: '#/components/schemas/HeaderInfo'
-        cardInfo:
-          $ref: '#/components/schemas/CardInfo'
-        addWalletContents:
-          type: array
-          items:
-            $ref: '#/components/schemas/WalletContent'
-        redeemWalletContents:
-          type: array
-          items:
-            $ref: '#/components/schemas/WalletContent'
     AccountQueryRequest:
       type: object
       required:
@@ -399,3 +316,108 @@ components:
                 type: string
               postalCode:
                 type: string
+    AddRedeemRequest:
+      type: object
+      required:
+      - headerInfo
+      - cardInfo
+      properties:
+        headerInfo:
+          $ref: '#/components/schemas/HeaderInfo'
+        cardInfo:
+          $ref: '#/components/schemas/CardInfo'
+        addWalletContents:
+          type: array
+          items:
+            $ref: '#/components/schemas/WalletContent'
+        redeemWalletContents:
+          type: array
+          items:
+            $ref: '#/components/schemas/WalletContent'
+    TransactionReply:
+      type: object
+      properties:
+        result:
+          type: string
+          example: success
+        pxTransactionId:
+          type: string
+          example: TXN-12345
+        maskedCardNumber:
+          type: string
+          example: '******5678'
+        enrollmentDate:
+          type: string
+          format: date
+        walletBalances:
+          type: array
+          items:
+            $ref: '#/components/schemas/WalletBalance'
+    WalletContent:
+      type: object
+      description: A wallet code and quantity used in add/redeem operations.
+      properties:
+        walletCode:
+          type: string
+          example: '1'
+        quantity:
+          type: number
+          example: 10
+        expiration:
+          type: string
+          format: date
+    CardInfo:
+      type: object
+      description: Identifies a card for transaction operations.
+      properties:
+        printedCardNumber:
+          type: string
+          example: '60490012345678'
+        magstripe:
+          type: string
+        cardTemplateCode:
+          type: string
+          example: '1'
+    HeaderInfo:
+      type: object
+      description: Common transaction header. programId is PX, SV, or LP.
+      properties:
+        merchantId:
+          type: integer
+          example: 1000
+        storeCode:
+          type: string
+          example: '1'
+        programId:
+          type: string
+          example: PX
+        terminal:
+          type: string
+          example: '1'
+        operator:
+          type: string
+          example: '100'
+        posTransactionId:
+          type: string
+    WalletBalance:
+      type: object
+      properties:
+        walletCode:
+          type: string
+          example: '1'
+        name:
+          type: string
+          example: Points
+        balance:
+          type: number
+          example: 1250
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic authentication with the base64-encoded integration identifier and secret (identifier:secret).
+    guestBearer:
+      type: http
+      scheme: bearer
+      bearerFormat: OAuth
+      description: OAuth bearer token issued by the OAuth Service for guest-scoped operations.

@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Paytronix Online Ordering Check Orders API
+  title: Paytronix Online Ordering Orders API
   version: '1.0'
   description: The Paytronix Online Ordering API (Open Dining) powers ordering experiences across in-store, online web, online app, call-in, call-center, and drive-through order methods. It exposes restaurant/location discovery, menu retrieval, fuzzy and geospatial search, and order creation, retrieval, and submission, connecting ordering systems to the broader Paytronix loyalty and guest engagement platform. This specification was generated from the public Open Dining documentation at http://docs.opendining.net and the Online Ordering Resource Center at https://support.opendining.net.
   contact:
@@ -241,38 +241,30 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    DeliveryAddress:
+    OrderItem:
       type: object
       properties:
-        address1:
+        menuItemId:
           type: string
-          example: 456 Elm St
-        address2:
+          example: 4b96f1bafc9f100ca79231ef
+        name:
           type: string
-        city:
-          type: string
-          example: Boston
-        state:
-          type: string
-          example: MA
-        postalCode:
-          type: string
-          example: '02110'
-    Customer:
-      type: object
-      properties:
-        firstName:
-          type: string
-          example: Jane
-        lastName:
-          type: string
-          example: Doe
-        email:
-          type: string
-          example: jane@example.com
-        phone:
-          type: string
-          example: '+16175551234'
+          example: Chicken Burrito
+        quantity:
+          type: integer
+          example: 2
+        price:
+          type: number
+          example: 9.5
+        options:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              price:
+                type: number
     Order:
       type: object
       properties:
@@ -343,27 +335,35 @@ components:
           example: 3.0
         deliveryAddress:
           $ref: '#/components/schemas/DeliveryAddress'
-    OrderItem:
+    Customer:
       type: object
       properties:
-        menuItemId:
+        firstName:
           type: string
-          example: 4b96f1bafc9f100ca79231ef
-        name:
+          example: Jane
+        lastName:
           type: string
-          example: Chicken Burrito
-        quantity:
-          type: integer
-          example: 2
-        price:
-          type: number
-          example: 9.5
-        options:
-          type: array
-          items:
-            type: object
-            properties:
-              name:
-                type: string
-              price:
-                type: number
+          example: Doe
+        email:
+          type: string
+          example: jane@example.com
+        phone:
+          type: string
+          example: '+16175551234'
+    DeliveryAddress:
+      type: object
+      properties:
+        address1:
+          type: string
+          example: 456 Elm St
+        address2:
+          type: string
+        city:
+          type: string
+          example: Boston
+        state:
+          type: string
+          example: MA
+        postalCode:
+          type: string
+          example: '02110'
