@@ -221,42 +221,6 @@ apis:
     url: examples/online-ordering-api-order-example.json
   - type: JSONLD
     url: json-ld/paytronix-online-ordering-api-context.jsonld
-- aid: paytronix:paytronix-oauth-api
-  name: Paytronix OAuth API
-  description: Guest authentication and token issuance.
-  humanURL: https://developers.paytronix.com/pxs_api_reference/index.html
-  baseURL: https://m{merchantId}.api.paytronix.com/rest/26.6
-  tags:
-  - Authentication
-  tags_raw:
-  - OAuth
-  properties:
-  - type: OpenAPI
-    url: openapi/paytronix-oauth-api-openapi.yml
-  - type: Documentation
-    url: https://developers.paytronix.com/pxs_api_reference/index.html
-  - type: Authentication
-    url: https://developers.paytronix.com/pxs_api_reference/oauth.html
-  - type: GettingStarted
-    url: https://developers.paytronix.com/welcome/index.html
-  - type: JSONSchema
-    url: json-schema/server-api-account-information-reply-schema.json
-  - type: JSONStructure
-    url: json-structure/server-api-account-information-reply-structure.json
-  - type: Examples
-    url: examples/server-api-account-information-reply-example.json
-  - type: JSONLD
-    url: json-ld/paytronix-server-api-context.jsonld
-  - type: Documentation
-    url: http://docs.opendining.net/
-  - type: JSONSchema
-    url: json-schema/online-ordering-api-order-schema.json
-  - type: JSONStructure
-    url: json-structure/online-ordering-api-order-structure.json
-  - type: Examples
-    url: examples/online-ordering-api-order-example.json
-  - type: JSONLD
-    url: json-ld/paytronix-online-ordering-api-context.jsonld
 - aid: paytronix:paytronix-orders-api
   name: Paytronix Orders API
   description: Order creation, retrieval, and submission.
@@ -441,6 +405,40 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/paytronix-transaction-api-openapi.yml
+  - type: Documentation
+    url: https://developers.paytronix.com/pxs_api_reference/index.html
+  - type: Authentication
+    url: https://developers.paytronix.com/pxs_api_reference/oauth.html
+  - type: GettingStarted
+    url: https://developers.paytronix.com/welcome/index.html
+  - type: JSONSchema
+    url: json-schema/server-api-account-information-reply-schema.json
+  - type: JSONStructure
+    url: json-structure/server-api-account-information-reply-structure.json
+  - type: Examples
+    url: examples/server-api-account-information-reply-example.json
+  - type: JSONLD
+    url: json-ld/paytronix-server-api-context.jsonld
+  - type: Documentation
+    url: http://docs.opendining.net/
+  - type: JSONSchema
+    url: json-schema/online-ordering-api-order-schema.json
+  - type: JSONStructure
+    url: json-structure/online-ordering-api-order-structure.json
+  - type: Examples
+    url: examples/online-ordering-api-order-example.json
+  - type: JSONLD
+    url: json-ld/paytronix-online-ordering-api-context.jsonld
+- aid: paytronix:paytronix-oauth-api
+  name: Paytronix O Auth API
+  description: Guest authentication and token issuance.
+  humanURL: https://developers.paytronix.com/pxs_api_reference/index.html
+  baseURL: https://m{merchantId}.api.paytronix.com/rest/26.6
+  tags:
+  - OAuth
+  properties:
+  - type: OpenAPI
+    url: openapi/paytronix-oauth-api-openapi.yml
   - type: Documentation
     url: https://developers.paytronix.com/pxs_api_reference/index.html
   - type: Authentication
