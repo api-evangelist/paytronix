@@ -123,6 +123,8 @@ apis:
   humanURL: https://developers.paytronix.com/pxs_api_reference/index.html
   baseURL: https://m{merchantId}.api.paytronix.com/rest/26.6
   tags:
+  - Gifts
+  tags_raw:
   - Gift
   properties:
   - type: OpenAPI
@@ -263,6 +265,8 @@ apis:
   humanURL: https://developers.paytronix.com/pxs_api_reference/index.html
   baseURL: https://m{merchantId}.api.paytronix.com/rest/26.6
   tags:
+  - Payments
+  tags_raw:
   - Payment
   properties:
   - type: OpenAPI
@@ -435,6 +439,8 @@ apis:
   humanURL: https://developers.paytronix.com/pxs_api_reference/index.html
   baseURL: https://m{merchantId}.api.paytronix.com/rest/26.6
   tags:
+  - Authentication
+  tags_raw:
   - OAuth
   properties:
   - type: OpenAPI
