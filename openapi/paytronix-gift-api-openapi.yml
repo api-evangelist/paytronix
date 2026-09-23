@@ -2,7 +2,7 @@ openapi: 3.2.0
 info:
   title: Paytronix Server Gift API
   version: '26.6'
-  description: The Paytronix Server (PXS) REST API exposes the guest engagement platform used by 1,800-plus restaurant and convenience-store brands. It spans loyalty and stored-value accounts, enrollment and registration, transactions and point accrual, gift card sales and redemption, stored-value recharge and payment, store/location lookup, and guest authentication. All requests and responses are JSON. Operations authenticate with an integration identifier and secret sent as an HTTP Basic authorization header; guest-scoped operations additionally use an OAuth bearer token issued by the OAuth Service. This specification was generated from the public Paytronix integration documentation at https://developers.paytronix.com.
+  description: The Paytronix Server (PXS) REST API exposes the guest engagement platform used by 1,800-plus restaurant and convenience-store brands.
   contact:
     name: Kin Lane
     email: kin@apievangelist.com
@@ -241,26 +241,6 @@ components:
           example: '1'
         cardInfo:
           $ref: '#/components/schemas/CardInfo'
-    GiftRedeemRequest:
-      allOf:
-      - $ref: '#/components/schemas/GiftRequest'
-      - type: object
-        properties:
-          tip:
-            type: number
-            example: 5.0
-    CardInfo:
-      type: object
-      description: Identifies a card for transaction operations.
-      properties:
-        printedCardNumber:
-          type: string
-          example: '60490012345678'
-        magstripe:
-          type: string
-        cardTemplateCode:
-          type: string
-          example: '1'
     GiftReply:
       type: object
       properties:
@@ -280,6 +260,14 @@ components:
           type: string
         errorMessage:
           type: string
+    GiftRedeemRequest:
+      allOf:
+      - $ref: '#/components/schemas/GiftRequest'
+      - type: object
+        properties:
+          tip:
+            type: number
+            example: 5.0
     GiftRequest:
       type: object
       required:
@@ -307,6 +295,18 @@ components:
           type: string
         externalTransactionId:
           type: string
+    CardInfo:
+      type: object
+      description: Identifies a card for transaction operations.
+      properties:
+        printedCardNumber:
+          type: string
+          example: '60490012345678'
+        magstripe:
+          type: string
+        cardTemplateCode:
+          type: string
+          example: '1'
   securitySchemes:
     basicAuth:
       type: http

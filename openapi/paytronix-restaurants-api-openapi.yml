@@ -2,7 +2,7 @@ openapi: 3.2.0
 info:
   title: Paytronix Online Ordering Restaurants API
   version: '1.0'
-  description: The Paytronix Online Ordering API (Open Dining) powers ordering experiences across in-store, online web, online app, call-in, call-center, and drive-through order methods. It exposes restaurant/location discovery, menu retrieval, fuzzy and geospatial search, and order creation, retrieval, and submission, connecting ordering systems to the broader Paytronix loyalty and guest engagement platform. This specification was generated from the public Open Dining documentation at http://docs.opendining.net and the Online Ordering Resource Center at https://support.opendining.net.
+  description: The Paytronix Online Ordering API (Open Dining) powers ordering experiences across in-store, online web, online app, call-in, call-center, and drive-through order methods.
   contact:
     name: Kin Lane
     email: kin@apievangelist.com
@@ -62,6 +62,17 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    Coordinates:
+      type: object
+      properties:
+        lat:
+          type: number
+          format: double
+          example: 40.0
+        lon:
+          type: number
+          format: double
+          example: -81.0
     Restaurant:
       type: object
       properties:
@@ -100,14 +111,3 @@ components:
           type: string
         description:
           type: string
-    Coordinates:
-      type: object
-      properties:
-        lat:
-          type: number
-          format: double
-          example: 40.0
-        lon:
-          type: number
-          format: double
-          example: -81.0

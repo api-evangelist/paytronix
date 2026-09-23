@@ -2,7 +2,7 @@ openapi: 3.2.0
 info:
   title: Paytronix Online Ordering Search API
   version: '1.0'
-  description: The Paytronix Online Ordering API (Open Dining) powers ordering experiences across in-store, online web, online app, call-in, call-center, and drive-through order methods. It exposes restaurant/location discovery, menu retrieval, fuzzy and geospatial search, and order creation, retrieval, and submission, connecting ordering systems to the broader Paytronix loyalty and guest engagement platform. This specification was generated from the public Open Dining documentation at http://docs.opendining.net and the Online Ordering Resource Center at https://support.opendining.net.
+  description: The Paytronix Online Ordering API (Open Dining) powers ordering experiences across in-store, online web, online app, call-in, call-center, and drive-through order methods.
   contact:
     name: Kin Lane
     email: kin@apievangelist.com
@@ -229,18 +229,10 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    RestaurantSearchResults:
+    Facets:
       type: object
-      properties:
-        count:
-          type: integer
-          example: 12
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/Restaurant'
-        facets:
-          $ref: '#/components/schemas/Facets'
+      description: Applicable search facets such as tags for refining a search.
+      additionalProperties: true
     MenuItemSearchResults:
       type: object
       properties:
@@ -289,6 +281,18 @@ components:
               price:
                 type: number
                 example: 1.5
+    RestaurantSearchResults:
+      type: object
+      properties:
+        count:
+          type: integer
+          example: 12
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Restaurant'
+        facets:
+          $ref: '#/components/schemas/Facets'
     Coordinates:
       type: object
       properties:
@@ -338,7 +342,3 @@ components:
           type: string
         description:
           type: string
-    Facets:
-      type: object
-      description: Applicable search facets such as tags for refining a search.
-      additionalProperties: true

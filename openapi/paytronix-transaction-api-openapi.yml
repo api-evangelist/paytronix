@@ -2,7 +2,7 @@ openapi: 3.2.0
 info:
   title: Paytronix Server Transaction API
   version: '26.6'
-  description: The Paytronix Server (PXS) REST API exposes the guest engagement platform used by 1,800-plus restaurant and convenience-store brands. It spans loyalty and stored-value accounts, enrollment and registration, transactions and point accrual, gift card sales and redemption, stored-value recharge and payment, store/location lookup, and guest authentication. All requests and responses are JSON. Operations authenticate with an integration identifier and secret sent as an HTTP Basic authorization header; guest-scoped operations additionally use an OAuth bearer token issued by the OAuth Service. This specification was generated from the public Paytronix integration documentation at https://developers.paytronix.com.
+  description: The Paytronix Server (PXS) REST API exposes the guest engagement platform used by 1,800-plus restaurant and convenience-store brands.
   contact:
     name: Kin Lane
     email: kin@apievangelist.com
@@ -246,39 +246,41 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    AccountQueryReply:
+    HeaderInfo:
       type: object
+      description: Common transaction header. programId is PX, SV, or LP.
       properties:
-        result:
+        merchantId:
+          type: integer
+          example: 1000
+        storeCode:
           type: string
-          example: success
-        accounts:
-          type: array
-          items:
-            type: object
-            properties:
-              accountId:
-                type: integer
-                format: int64
-              printedCardNumber:
-                type: string
-              fieldValues:
-                type: object
-                additionalProperties: true
-    AddRedeemReply:
+          example: '1'
+        programId:
+          type: string
+          example: PX
+        terminal:
+          type: string
+          example: '1'
+        operator:
+          type: string
+          example: '100'
+        posTransactionId:
+          type: string
+    WalletContent:
       type: object
+      description: A wallet code and quantity used in add/redeem operations.
       properties:
-        result:
+        walletCode:
           type: string
-          example: success
-        pxTransactionId:
+          example: '1'
+        quantity:
+          type: number
+          example: 10
+        expiration:
           type: string
-          example: TXN-67890
-        walletContents:
-          type: array
-          items:
-            $ref: '#/components/schemas/WalletBalance'
-    TransactionRequest:
+          format: date
+    AddRedeemRequest:
       type: object
       required:
       - headerInfo
@@ -288,8 +290,26 @@ components:
           $ref: '#/components/schemas/HeaderInfo'
         cardInfo:
           $ref: '#/components/schemas/CardInfo'
-        autoActivateCard:
-          type: boolean
+        addWalletContents:
+          type: array
+          items:
+            $ref: '#/components/schemas/WalletContent'
+        redeemWalletContents:
+          type: array
+          items:
+            $ref: '#/components/schemas/WalletContent'
+    WalletBalance:
+      type: object
+      properties:
+        walletCode:
+          type: string
+          example: '1'
+        name:
+          type: string
+          example: Points
+        balance:
+          type: number
+          example: 1250
     AccountQueryRequest:
       type: object
       required:
@@ -316,24 +336,6 @@ components:
                 type: string
               postalCode:
                 type: string
-    AddRedeemRequest:
-      type: object
-      required:
-      - headerInfo
-      - cardInfo
-      properties:
-        headerInfo:
-          $ref: '#/components/schemas/HeaderInfo'
-        cardInfo:
-          $ref: '#/components/schemas/CardInfo'
-        addWalletContents:
-          type: array
-          items:
-            $ref: '#/components/schemas/WalletContent'
-        redeemWalletContents:
-          type: array
-          items:
-            $ref: '#/components/schemas/WalletContent'
     TransactionReply:
       type: object
       properties:
@@ -353,19 +355,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/WalletBalance'
-    WalletContent:
-      type: object
-      description: A wallet code and quantity used in add/redeem operations.
-      properties:
-        walletCode:
-          type: string
-          example: '1'
-        quantity:
-          type: number
-          example: 10
-        expiration:
-          type: string
-          format: date
     CardInfo:
       type: object
       description: Identifies a card for transaction operations.
@@ -378,39 +367,50 @@ components:
         cardTemplateCode:
           type: string
           example: '1'
-    HeaderInfo:
+    TransactionRequest:
       type: object
-      description: Common transaction header. programId is PX, SV, or LP.
+      required:
+      - headerInfo
+      - cardInfo
       properties:
-        merchantId:
-          type: integer
-          example: 1000
-        storeCode:
-          type: string
-          example: '1'
-        programId:
-          type: string
-          example: PX
-        terminal:
-          type: string
-          example: '1'
-        operator:
-          type: string
-          example: '100'
-        posTransactionId:
-          type: string
-    WalletBalance:
+        headerInfo:
+          $ref: '#/components/schemas/HeaderInfo'
+        cardInfo:
+          $ref: '#/components/schemas/CardInfo'
+        autoActivateCard:
+          type: boolean
+    AddRedeemReply:
       type: object
       properties:
-        walletCode:
+        result:
           type: string
-          example: '1'
-        name:
+          example: success
+        pxTransactionId:
           type: string
-          example: Points
-        balance:
-          type: number
-          example: 1250
+          example: TXN-67890
+        walletContents:
+          type: array
+          items:
+            $ref: '#/components/schemas/WalletBalance'
+    AccountQueryReply:
+      type: object
+      properties:
+        result:
+          type: string
+          example: success
+        accounts:
+          type: array
+          items:
+            type: object
+            properties:
+              accountId:
+                type: integer
+                format: int64
+              printedCardNumber:
+                type: string
+              fieldValues:
+                type: object
+                additionalProperties: true
   securitySchemes:
     basicAuth:
       type: http

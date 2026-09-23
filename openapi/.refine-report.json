@@ -1,8 +1,8 @@
 {
   "provider": "paytronix",
   "sources": [
-    "_original/paytronix-online-ordering-api-openapi.yml",
-    "_original/paytronix-server-api-openapi.yml"
+    "_ae-authored/paytronix-online-ordering-api-openapi.yml",
+    "_ae-authored/paytronix-server-api-openapi.yml"
   ],
   "outputs": [
     "paytronix-menu-items-api-openapi.yml",
@@ -18,13 +18,17 @@
     "paytronix-store-api-openapi.yml",
     "paytronix-transaction-api-openapi.yml"
   ],
-  "archived": [],
+  "archived": [
+    "deleted 1 superseded output(s) from the previous generation"
+  ],
   "errors": [],
   "warnings": [],
   "notes": [
-    "sourced from openapi/_original/ (2 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "sourced from openapi/_original/ (0 archived document(s)); previously refined output at the top level was skipped rather than re-split",
     "paytronix-online-ordering-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "paytronix-server-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0"
+    "paytronix-server-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "superseded outputs removed: paytronix-o-auth-api-openapi.yml",
+    "apis.yml register: written (+1 apis, 12 total)"
   ],
   "skipped": [
     "paytronix-check-api-openapi.yml: previously refined output, superseded by openapi/_original/",
@@ -32,7 +36,7 @@
     "paytronix-gift-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "paytronix-guest-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "paytronix-menu-items-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "paytronix-oauth-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "paytronix-o-auth-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "paytronix-orders-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "paytronix-payment-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "paytronix-restaurants-api-openapi.yml: previously refined output, superseded by openapi/_original/",
