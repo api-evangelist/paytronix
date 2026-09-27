@@ -297,18 +297,25 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    WalletBalance:
+    ChangeCardStatusRequest:
       type: object
+      required:
+      - merchantId
+      - printedCardNumber
+      - status
       properties:
-        walletCode:
+        merchantId:
+          type: integer
+          example: 1000
+        printedCardNumber:
           type: string
-          example: '1'
-        name:
+          example: '60490012345678'
+        status:
           type: string
-          example: Points
-        balance:
-          type: number
-          example: 1250
+          enum:
+          - ACTIVE
+          - DISABLED
+          example: DISABLED
     UserInformationReply:
       type: object
       properties:
@@ -331,35 +338,17 @@ components:
           items:
             type: integer
             format: int64
-    TransactionHistoryReply:
+    SimpleReply:
       type: object
+      description: Standard success/failure envelope.
       properties:
         result:
           type: string
           example: success
-        walletInfo:
-          type: array
-          items:
-            $ref: '#/components/schemas/WalletBalance'
-        transactions:
-          type: array
-          items:
-            type: object
-            properties:
-              transactionId:
-                type: string
-              datetime:
-                type: string
-                format: date-time
-              type:
-                type: string
-                example: ACCRUAL
-              walletCode:
-                type: string
-              amount:
-                type: number
-              balance:
-                type: number
+        errorCode:
+          type: string
+        errorMessage:
+          type: string
     AccountInformationReply:
       type: object
       properties:
@@ -395,36 +384,47 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/WalletBalance'
-    ChangeCardStatusRequest:
+    TransactionHistoryReply:
       type: object
-      required:
-      - merchantId
-      - printedCardNumber
-      - status
-      properties:
-        merchantId:
-          type: integer
-          example: 1000
-        printedCardNumber:
-          type: string
-          example: '60490012345678'
-        status:
-          type: string
-          enum:
-          - ACTIVE
-          - DISABLED
-          example: DISABLED
-    SimpleReply:
-      type: object
-      description: Standard success/failure envelope.
       properties:
         result:
           type: string
           example: success
-        errorCode:
+        walletInfo:
+          type: array
+          items:
+            $ref: '#/components/schemas/WalletBalance'
+        transactions:
+          type: array
+          items:
+            type: object
+            properties:
+              transactionId:
+                type: string
+              datetime:
+                type: string
+                format: date-time
+              type:
+                type: string
+                example: ACCRUAL
+              walletCode:
+                type: string
+              amount:
+                type: number
+              balance:
+                type: number
+    WalletBalance:
+      type: object
+      properties:
+        walletCode:
           type: string
-        errorMessage:
+          example: '1'
+        name:
           type: string
+          example: Points
+        balance:
+          type: number
+          example: 1250
   securitySchemes:
     basicAuth:
       type: http

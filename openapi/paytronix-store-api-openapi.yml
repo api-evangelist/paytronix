@@ -152,32 +152,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    Address:
-      type: object
-      properties:
-        address1:
-          type: string
-        address2:
-          type: string
-        city:
-          type: string
-        stateProvince:
-          type: string
-        postalCode:
-          type: string
-        country:
-          type: string
-          example: US
-    LocationsReply:
-      type: object
-      properties:
-        result:
-          type: string
-          example: success
-        locations:
-          type: array
-          items:
-            $ref: '#/components/schemas/Location'
     Location:
       type: object
       properties:
@@ -205,6 +179,32 @@ components:
         metadata:
           type: object
           additionalProperties: true
+    LocationsReply:
+      type: object
+      properties:
+        result:
+          type: string
+          example: success
+        locations:
+          type: array
+          items:
+            $ref: '#/components/schemas/Location'
+    Address:
+      type: object
+      properties:
+        address1:
+          type: string
+        address2:
+          type: string
+        city:
+          type: string
+        stateProvince:
+          type: string
+        postalCode:
+          type: string
+        country:
+          type: string
+          example: US
   securitySchemes:
     basicAuth:
       type: http

@@ -246,70 +246,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    HeaderInfo:
-      type: object
-      description: Common transaction header. programId is PX, SV, or LP.
-      properties:
-        merchantId:
-          type: integer
-          example: 1000
-        storeCode:
-          type: string
-          example: '1'
-        programId:
-          type: string
-          example: PX
-        terminal:
-          type: string
-          example: '1'
-        operator:
-          type: string
-          example: '100'
-        posTransactionId:
-          type: string
-    WalletContent:
-      type: object
-      description: A wallet code and quantity used in add/redeem operations.
-      properties:
-        walletCode:
-          type: string
-          example: '1'
-        quantity:
-          type: number
-          example: 10
-        expiration:
-          type: string
-          format: date
-    AddRedeemRequest:
-      type: object
-      required:
-      - headerInfo
-      - cardInfo
-      properties:
-        headerInfo:
-          $ref: '#/components/schemas/HeaderInfo'
-        cardInfo:
-          $ref: '#/components/schemas/CardInfo'
-        addWalletContents:
-          type: array
-          items:
-            $ref: '#/components/schemas/WalletContent'
-        redeemWalletContents:
-          type: array
-          items:
-            $ref: '#/components/schemas/WalletContent'
-    WalletBalance:
-      type: object
-      properties:
-        walletCode:
-          type: string
-          example: '1'
-        name:
-          type: string
-          example: Points
-        balance:
-          type: number
-          example: 1250
     AccountQueryRequest:
       type: object
       required:
@@ -336,25 +272,6 @@ components:
                 type: string
               postalCode:
                 type: string
-    TransactionReply:
-      type: object
-      properties:
-        result:
-          type: string
-          example: success
-        pxTransactionId:
-          type: string
-          example: TXN-12345
-        maskedCardNumber:
-          type: string
-          example: '******5678'
-        enrollmentDate:
-          type: string
-          format: date
-        walletBalances:
-          type: array
-          items:
-            $ref: '#/components/schemas/WalletBalance'
     CardInfo:
       type: object
       description: Identifies a card for transaction operations.
@@ -367,31 +284,19 @@ components:
         cardTemplateCode:
           type: string
           example: '1'
-    TransactionRequest:
+    WalletContent:
       type: object
-      required:
-      - headerInfo
-      - cardInfo
+      description: A wallet code and quantity used in add/redeem operations.
       properties:
-        headerInfo:
-          $ref: '#/components/schemas/HeaderInfo'
-        cardInfo:
-          $ref: '#/components/schemas/CardInfo'
-        autoActivateCard:
-          type: boolean
-    AddRedeemReply:
-      type: object
-      properties:
-        result:
+        walletCode:
           type: string
-          example: success
-        pxTransactionId:
+          example: '1'
+        quantity:
+          type: number
+          example: 10
+        expiration:
           type: string
-          example: TXN-67890
-        walletContents:
-          type: array
-          items:
-            $ref: '#/components/schemas/WalletBalance'
+          format: date
     AccountQueryReply:
       type: object
       properties:
@@ -411,6 +316,101 @@ components:
               fieldValues:
                 type: object
                 additionalProperties: true
+    WalletBalance:
+      type: object
+      properties:
+        walletCode:
+          type: string
+          example: '1'
+        name:
+          type: string
+          example: Points
+        balance:
+          type: number
+          example: 1250
+    AddRedeemRequest:
+      type: object
+      required:
+      - headerInfo
+      - cardInfo
+      properties:
+        headerInfo:
+          $ref: '#/components/schemas/HeaderInfo'
+        cardInfo:
+          $ref: '#/components/schemas/CardInfo'
+        addWalletContents:
+          type: array
+          items:
+            $ref: '#/components/schemas/WalletContent'
+        redeemWalletContents:
+          type: array
+          items:
+            $ref: '#/components/schemas/WalletContent'
+    HeaderInfo:
+      type: object
+      description: Common transaction header. programId is PX, SV, or LP.
+      properties:
+        merchantId:
+          type: integer
+          example: 1000
+        storeCode:
+          type: string
+          example: '1'
+        programId:
+          type: string
+          example: PX
+        terminal:
+          type: string
+          example: '1'
+        operator:
+          type: string
+          example: '100'
+        posTransactionId:
+          type: string
+    TransactionRequest:
+      type: object
+      required:
+      - headerInfo
+      - cardInfo
+      properties:
+        headerInfo:
+          $ref: '#/components/schemas/HeaderInfo'
+        cardInfo:
+          $ref: '#/components/schemas/CardInfo'
+        autoActivateCard:
+          type: boolean
+    TransactionReply:
+      type: object
+      properties:
+        result:
+          type: string
+          example: success
+        pxTransactionId:
+          type: string
+          example: TXN-12345
+        maskedCardNumber:
+          type: string
+          example: '******5678'
+        enrollmentDate:
+          type: string
+          format: date
+        walletBalances:
+          type: array
+          items:
+            $ref: '#/components/schemas/WalletBalance'
+    AddRedeemReply:
+      type: object
+      properties:
+        result:
+          type: string
+          example: success
+        pxTransactionId:
+          type: string
+          example: TXN-67890
+        walletContents:
+          type: array
+          items:
+            $ref: '#/components/schemas/WalletBalance'
   securitySchemes:
     basicAuth:
       type: http

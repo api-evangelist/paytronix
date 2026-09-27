@@ -241,52 +241,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    OrderInput:
-      type: object
-      required:
-      - restaurantId
-      - items
-      - customer
-      properties:
-        restaurantId:
-          type: string
-          example: 4b96f1bafc9f100ca79231ef
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/OrderItem'
-        customer:
-          $ref: '#/components/schemas/Customer'
-        orderMethod:
-          type: string
-          enum:
-          - in_store
-          - online_web
-          - online_app
-          - call_in
-          - call_center
-          - drive_through
-          example: online_app
-        tip:
-          type: number
-          example: 3.0
-        deliveryAddress:
-          $ref: '#/components/schemas/DeliveryAddress'
-    Customer:
-      type: object
-      properties:
-        firstName:
-          type: string
-          example: Jane
-        lastName:
-          type: string
-          example: Doe
-        email:
-          type: string
-          example: jane@example.com
-        phone:
-          type: string
-          example: '+16175551234'
     OrderItem:
       type: object
       properties:
@@ -367,3 +321,49 @@ components:
         createdAt:
           type: string
           format: date-time
+    Customer:
+      type: object
+      properties:
+        firstName:
+          type: string
+          example: Jane
+        lastName:
+          type: string
+          example: Doe
+        email:
+          type: string
+          example: jane@example.com
+        phone:
+          type: string
+          example: '+16175551234'
+    OrderInput:
+      type: object
+      required:
+      - restaurantId
+      - items
+      - customer
+      properties:
+        restaurantId:
+          type: string
+          example: 4b96f1bafc9f100ca79231ef
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderItem'
+        customer:
+          $ref: '#/components/schemas/Customer'
+        orderMethod:
+          type: string
+          enum:
+          - in_store
+          - online_web
+          - online_app
+          - call_in
+          - call_center
+          - drive_through
+          example: online_app
+        tip:
+          type: number
+          example: 3.0
+        deliveryAddress:
+          $ref: '#/components/schemas/DeliveryAddress'

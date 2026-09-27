@@ -170,28 +170,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    EnrollmentReply:
-      type: object
-      properties:
-        result:
-          type: string
-          example: success
-        printedCardNumber:
-          type: string
-          example: '60490012345678'
-        accountId:
-          type: integer
-          format: int64
-          example: 998877
-        username:
-          type: string
-          example: jdoe
-        errorCode:
-          type: string
-        errorsByField:
-          type: object
-          additionalProperties:
-            type: string
     ActivateAndRegisterRequest:
       type: object
       required:
@@ -215,6 +193,56 @@ components:
         setAccountFields:
           type: object
           additionalProperties: true
+    EnrollmentReply:
+      type: object
+      properties:
+        result:
+          type: string
+          example: success
+        printedCardNumber:
+          type: string
+          example: '60490012345678'
+        accountId:
+          type: integer
+          format: int64
+          example: 998877
+        username:
+          type: string
+          example: jdoe
+        errorCode:
+          type: string
+        errorsByField:
+          type: object
+          additionalProperties:
+            type: string
+    EnrollmentConfigReply:
+      type: object
+      properties:
+        result:
+          type: string
+          example: success
+        config:
+          type: object
+          properties:
+            fields:
+              type: array
+              items:
+                type: object
+                properties:
+                  name:
+                    type: string
+                    example: email
+                  type:
+                    type: string
+                    example: string
+                  label:
+                    type: string
+                    example: Email Address
+                  required:
+                    type: boolean
+                    example: true
+                  pattern:
+                    type: string
     CreateAndRegisterRequest:
       type: object
       required:
@@ -250,34 +278,6 @@ components:
           type: boolean
         smsVerificationCode:
           type: string
-    EnrollmentConfigReply:
-      type: object
-      properties:
-        result:
-          type: string
-          example: success
-        config:
-          type: object
-          properties:
-            fields:
-              type: array
-              items:
-                type: object
-                properties:
-                  name:
-                    type: string
-                    example: email
-                  type:
-                    type: string
-                    example: string
-                  label:
-                    type: string
-                    example: Email Address
-                  required:
-                    type: boolean
-                    example: true
-                  pattern:
-                    type: string
   securitySchemes:
     basicAuth:
       type: http

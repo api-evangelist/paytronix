@@ -226,48 +226,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    GiftBalanceRequest:
-      type: object
-      required:
-      - merchantId
-      - storeCode
-      - cardInfo
-      properties:
-        merchantId:
-          type: integer
-          example: 1000
-        storeCode:
-          type: string
-          example: '1'
-        cardInfo:
-          $ref: '#/components/schemas/CardInfo'
-    GiftReply:
-      type: object
-      properties:
-        result:
-          type: string
-          example: success
-        pxTransactionId:
-          type: string
-          example: GIFT-44556
-        printedCardNumber:
-          type: string
-          example: '70123456789012'
-        currentBalance:
-          type: number
-          example: 50.0
-        errorCode:
-          type: string
-        errorMessage:
-          type: string
-    GiftRedeemRequest:
-      allOf:
-      - $ref: '#/components/schemas/GiftRequest'
-      - type: object
-        properties:
-          tip:
-            type: number
-            example: 5.0
     GiftRequest:
       type: object
       required:
@@ -307,6 +265,48 @@ components:
         cardTemplateCode:
           type: string
           example: '1'
+    GiftBalanceRequest:
+      type: object
+      required:
+      - merchantId
+      - storeCode
+      - cardInfo
+      properties:
+        merchantId:
+          type: integer
+          example: 1000
+        storeCode:
+          type: string
+          example: '1'
+        cardInfo:
+          $ref: '#/components/schemas/CardInfo'
+    GiftRedeemRequest:
+      allOf:
+      - $ref: '#/components/schemas/GiftRequest'
+      - type: object
+        properties:
+          tip:
+            type: number
+            example: 5.0
+    GiftReply:
+      type: object
+      properties:
+        result:
+          type: string
+          example: success
+        pxTransactionId:
+          type: string
+          example: GIFT-44556
+        printedCardNumber:
+          type: string
+          example: '70123456789012'
+        currentBalance:
+          type: number
+          example: 50.0
+        errorCode:
+          type: string
+        errorMessage:
+          type: string
   securitySchemes:
     basicAuth:
       type: http

@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Paytronix Server O Auth API
+  title: Paytronix Server OAuth API
   version: '26.6'
   description: The Paytronix Server (PXS) REST API exposes the guest engagement platform used by 1,800-plus restaurant and convenience-store brands.
   contact:
@@ -89,19 +89,27 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    ErrorReply:
+    GuestTokenResponse:
       type: object
-      description: Standard failure envelope returned across PXS services.
       properties:
-        result:
+        access_token:
           type: string
-          example: failure
-        errorCode:
+          example: 9f8c1a2b3c4d5e6f
+        token_type:
           type: string
-          example: invalid_grant
-        errorMessage:
+          example: bearer
+        expires_in:
+          type: integer
+          example: 1800
+        refresh_token:
           type: string
-          example: The supplied credentials were not valid.
+          example: 1a2b3c4d5e6f7a8b
+        scope:
+          type: string
+          example: user_read account_read
+        username:
+          type: string
+          example: jdoe
     GuestTokenRequest:
       type: object
       required:
@@ -131,27 +139,19 @@ components:
           example: user_read account_read
         refresh_token:
           type: string
-    GuestTokenResponse:
+    ErrorReply:
       type: object
+      description: Standard failure envelope returned across PXS services.
       properties:
-        access_token:
+        result:
           type: string
-          example: 9f8c1a2b3c4d5e6f
-        token_type:
+          example: failure
+        errorCode:
           type: string
-          example: bearer
-        expires_in:
-          type: integer
-          example: 1800
-        refresh_token:
+          example: invalid_grant
+        errorMessage:
           type: string
-          example: 1a2b3c4d5e6f7a8b
-        scope:
-          type: string
-          example: user_read account_read
-        username:
-          type: string
-          example: jdoe
+          example: The supplied credentials were not valid.
   securitySchemes:
     basicAuth:
       type: http
