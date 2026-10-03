@@ -241,30 +241,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    OrderItem:
-      type: object
-      properties:
-        menuItemId:
-          type: string
-          example: 4b96f1bafc9f100ca79231ef
-        name:
-          type: string
-          example: Chicken Burrito
-        quantity:
-          type: integer
-          example: 2
-        price:
-          type: number
-          example: 9.5
-        options:
-          type: array
-          items:
-            type: object
-            properties:
-              name:
-                type: string
-              price:
-                type: number
     DeliveryAddress:
       type: object
       properties:
@@ -336,6 +312,30 @@ components:
         phone:
           type: string
           example: '+16175551234'
+    OrderItem:
+      type: object
+      properties:
+        menuItemId:
+          type: string
+          example: 4b96f1bafc9f100ca79231ef
+        name:
+          type: string
+          example: Chicken Burrito
+        quantity:
+          type: integer
+          example: 2
+        price:
+          type: number
+          example: 9.5
+        options:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              price:
+                type: number
     OrderInput:
       type: object
       required:

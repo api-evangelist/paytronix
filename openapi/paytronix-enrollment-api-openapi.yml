@@ -170,51 +170,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    ActivateAndRegisterRequest:
-      type: object
-      required:
-      - merchantId
-      - printedCardNumber
-      - setUserFields
-      properties:
-        merchantId:
-          type: integer
-          example: 1000
-        printedCardNumber:
-          type: string
-          example: '60490012345678'
-        enforceUniqueFields:
-          type: array
-          items:
-            type: string
-        setUserFields:
-          type: object
-          additionalProperties: true
-        setAccountFields:
-          type: object
-          additionalProperties: true
-    EnrollmentReply:
-      type: object
-      properties:
-        result:
-          type: string
-          example: success
-        printedCardNumber:
-          type: string
-          example: '60490012345678'
-        accountId:
-          type: integer
-          format: int64
-          example: 998877
-        username:
-          type: string
-          example: jdoe
-        errorCode:
-          type: string
-        errorsByField:
-          type: object
-          additionalProperties:
-            type: string
     EnrollmentConfigReply:
       type: object
       properties:
@@ -278,6 +233,51 @@ components:
           type: boolean
         smsVerificationCode:
           type: string
+    ActivateAndRegisterRequest:
+      type: object
+      required:
+      - merchantId
+      - printedCardNumber
+      - setUserFields
+      properties:
+        merchantId:
+          type: integer
+          example: 1000
+        printedCardNumber:
+          type: string
+          example: '60490012345678'
+        enforceUniqueFields:
+          type: array
+          items:
+            type: string
+        setUserFields:
+          type: object
+          additionalProperties: true
+        setAccountFields:
+          type: object
+          additionalProperties: true
+    EnrollmentReply:
+      type: object
+      properties:
+        result:
+          type: string
+          example: success
+        printedCardNumber:
+          type: string
+          example: '60490012345678'
+        accountId:
+          type: integer
+          format: int64
+          example: 998877
+        username:
+          type: string
+          example: jdoe
+        errorCode:
+          type: string
+        errorsByField:
+          type: object
+          additionalProperties:
+            type: string
   securitySchemes:
     basicAuth:
       type: http

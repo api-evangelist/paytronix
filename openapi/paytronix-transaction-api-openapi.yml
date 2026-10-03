@@ -246,32 +246,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    AccountQueryRequest:
-      type: object
-      required:
-      - headerInfo
-      - accountQueries
-      properties:
-        headerInfo:
-          $ref: '#/components/schemas/HeaderInfo'
-        pageSize:
-          type: integer
-          example: 25
-        accountQueries:
-          type: array
-          items:
-            type: object
-            properties:
-              phone:
-                type: string
-              email:
-                type: string
-              firstName:
-                type: string
-              lastName:
-                type: string
-              postalCode:
-                type: string
     CardInfo:
       type: object
       description: Identifies a card for transaction operations.
@@ -284,6 +258,70 @@ components:
         cardTemplateCode:
           type: string
           example: '1'
+    AddRedeemRequest:
+      type: object
+      required:
+      - headerInfo
+      - cardInfo
+      properties:
+        headerInfo:
+          $ref: '#/components/schemas/HeaderInfo'
+        cardInfo:
+          $ref: '#/components/schemas/CardInfo'
+        addWalletContents:
+          type: array
+          items:
+            $ref: '#/components/schemas/WalletContent'
+        redeemWalletContents:
+          type: array
+          items:
+            $ref: '#/components/schemas/WalletContent'
+    AddRedeemReply:
+      type: object
+      properties:
+        result:
+          type: string
+          example: success
+        pxTransactionId:
+          type: string
+          example: TXN-67890
+        walletContents:
+          type: array
+          items:
+            $ref: '#/components/schemas/WalletBalance'
+    TransactionRequest:
+      type: object
+      required:
+      - headerInfo
+      - cardInfo
+      properties:
+        headerInfo:
+          $ref: '#/components/schemas/HeaderInfo'
+        cardInfo:
+          $ref: '#/components/schemas/CardInfo'
+        autoActivateCard:
+          type: boolean
+    HeaderInfo:
+      type: object
+      description: Common transaction header. programId is PX, SV, or LP.
+      properties:
+        merchantId:
+          type: integer
+          example: 1000
+        storeCode:
+          type: string
+          example: '1'
+        programId:
+          type: string
+          example: PX
+        terminal:
+          type: string
+          example: '1'
+        operator:
+          type: string
+          example: '100'
+        posTransactionId:
+          type: string
     WalletContent:
       type: object
       description: A wallet code and quantity used in add/redeem operations.
@@ -316,6 +354,32 @@ components:
               fieldValues:
                 type: object
                 additionalProperties: true
+    AccountQueryRequest:
+      type: object
+      required:
+      - headerInfo
+      - accountQueries
+      properties:
+        headerInfo:
+          $ref: '#/components/schemas/HeaderInfo'
+        pageSize:
+          type: integer
+          example: 25
+        accountQueries:
+          type: array
+          items:
+            type: object
+            properties:
+              phone:
+                type: string
+              email:
+                type: string
+              firstName:
+                type: string
+              lastName:
+                type: string
+              postalCode:
+                type: string
     WalletBalance:
       type: object
       properties:
@@ -328,57 +392,6 @@ components:
         balance:
           type: number
           example: 1250
-    AddRedeemRequest:
-      type: object
-      required:
-      - headerInfo
-      - cardInfo
-      properties:
-        headerInfo:
-          $ref: '#/components/schemas/HeaderInfo'
-        cardInfo:
-          $ref: '#/components/schemas/CardInfo'
-        addWalletContents:
-          type: array
-          items:
-            $ref: '#/components/schemas/WalletContent'
-        redeemWalletContents:
-          type: array
-          items:
-            $ref: '#/components/schemas/WalletContent'
-    HeaderInfo:
-      type: object
-      description: Common transaction header. programId is PX, SV, or LP.
-      properties:
-        merchantId:
-          type: integer
-          example: 1000
-        storeCode:
-          type: string
-          example: '1'
-        programId:
-          type: string
-          example: PX
-        terminal:
-          type: string
-          example: '1'
-        operator:
-          type: string
-          example: '100'
-        posTransactionId:
-          type: string
-    TransactionRequest:
-      type: object
-      required:
-      - headerInfo
-      - cardInfo
-      properties:
-        headerInfo:
-          $ref: '#/components/schemas/HeaderInfo'
-        cardInfo:
-          $ref: '#/components/schemas/CardInfo'
-        autoActivateCard:
-          type: boolean
     TransactionReply:
       type: object
       properties:
@@ -395,19 +408,6 @@ components:
           type: string
           format: date
         walletBalances:
-          type: array
-          items:
-            $ref: '#/components/schemas/WalletBalance'
-    AddRedeemReply:
-      type: object
-      properties:
-        result:
-          type: string
-          example: success
-        pxTransactionId:
-          type: string
-          example: TXN-67890
-        walletContents:
           type: array
           items:
             $ref: '#/components/schemas/WalletBalance'

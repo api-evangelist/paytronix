@@ -297,25 +297,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    ChangeCardStatusRequest:
-      type: object
-      required:
-      - merchantId
-      - printedCardNumber
-      - status
-      properties:
-        merchantId:
-          type: integer
-          example: 1000
-        printedCardNumber:
-          type: string
-          example: '60490012345678'
-        status:
-          type: string
-          enum:
-          - ACTIVE
-          - DISABLED
-          example: DISABLED
     UserInformationReply:
       type: object
       properties:
@@ -338,17 +319,35 @@ components:
           items:
             type: integer
             format: int64
-    SimpleReply:
+    TransactionHistoryReply:
       type: object
-      description: Standard success/failure envelope.
       properties:
         result:
           type: string
           example: success
-        errorCode:
-          type: string
-        errorMessage:
-          type: string
+        walletInfo:
+          type: array
+          items:
+            $ref: '#/components/schemas/WalletBalance'
+        transactions:
+          type: array
+          items:
+            type: object
+            properties:
+              transactionId:
+                type: string
+              datetime:
+                type: string
+                format: date-time
+              type:
+                type: string
+                example: ACCRUAL
+              walletCode:
+                type: string
+              amount:
+                type: number
+              balance:
+                type: number
     AccountInformationReply:
       type: object
       properties:
@@ -384,35 +383,17 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/WalletBalance'
-    TransactionHistoryReply:
+    SimpleReply:
       type: object
+      description: Standard success/failure envelope.
       properties:
         result:
           type: string
           example: success
-        walletInfo:
-          type: array
-          items:
-            $ref: '#/components/schemas/WalletBalance'
-        transactions:
-          type: array
-          items:
-            type: object
-            properties:
-              transactionId:
-                type: string
-              datetime:
-                type: string
-                format: date-time
-              type:
-                type: string
-                example: ACCRUAL
-              walletCode:
-                type: string
-              amount:
-                type: number
-              balance:
-                type: number
+        errorCode:
+          type: string
+        errorMessage:
+          type: string
     WalletBalance:
       type: object
       properties:
@@ -425,6 +406,25 @@ components:
         balance:
           type: number
           example: 1250
+    ChangeCardStatusRequest:
+      type: object
+      required:
+      - merchantId
+      - printedCardNumber
+      - status
+      properties:
+        merchantId:
+          type: integer
+          example: 1000
+        printedCardNumber:
+          type: string
+          example: '60490012345678'
+        status:
+          type: string
+          enum:
+          - ACTIVE
+          - DISABLED
+          example: DISABLED
   securitySchemes:
     basicAuth:
       type: http

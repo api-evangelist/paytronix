@@ -179,16 +179,6 @@ components:
         metadata:
           type: object
           additionalProperties: true
-    LocationsReply:
-      type: object
-      properties:
-        result:
-          type: string
-          example: success
-        locations:
-          type: array
-          items:
-            $ref: '#/components/schemas/Location'
     Address:
       type: object
       properties:
@@ -205,6 +195,16 @@ components:
         country:
           type: string
           example: US
+    LocationsReply:
+      type: object
+      properties:
+        result:
+          type: string
+          example: success
+        locations:
+          type: array
+          items:
+            $ref: '#/components/schemas/Location'
   securitySchemes:
     basicAuth:
       type: http

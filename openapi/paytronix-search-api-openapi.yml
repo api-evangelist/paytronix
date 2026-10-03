@@ -229,22 +229,21 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    Coordinates:
+      type: object
+      properties:
+        lat:
+          type: number
+          format: double
+          example: 40.0
+        lon:
+          type: number
+          format: double
+          example: -81.0
     Facets:
       type: object
       description: Applicable search facets such as tags for refining a search.
       additionalProperties: true
-    RestaurantSearchResults:
-      type: object
-      properties:
-        count:
-          type: integer
-          example: 12
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/Restaurant'
-        facets:
-          $ref: '#/components/schemas/Facets'
     MenuItemSearchResults:
       type: object
       properties:
@@ -255,6 +254,18 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/MenuItem'
+        facets:
+          $ref: '#/components/schemas/Facets'
+    RestaurantSearchResults:
+      type: object
+      properties:
+        count:
+          type: integer
+          example: 12
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Restaurant'
         facets:
           $ref: '#/components/schemas/Facets'
     Restaurant:
@@ -331,14 +342,3 @@ components:
               price:
                 type: number
                 example: 1.5
-    Coordinates:
-      type: object
-      properties:
-        lat:
-          type: number
-          format: double
-          example: 40.0
-        lon:
-          type: number
-          format: double
-          example: -81.0

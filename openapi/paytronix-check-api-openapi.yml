@@ -166,6 +166,18 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    CardInfo:
+      type: object
+      description: Identifies a card for transaction operations.
+      properties:
+        printedCardNumber:
+          type: string
+          example: '60490012345678'
+        magstripe:
+          type: string
+        cardTemplateCode:
+          type: string
+          example: '1'
     ComputeRewardsRequest:
       type: object
       required:
@@ -194,18 +206,6 @@ components:
             mode:
               type: string
               example: AUTOMATIC
-    CardInfo:
-      type: object
-      description: Identifies a card for transaction operations.
-      properties:
-        printedCardNumber:
-          type: string
-          example: '60490012345678'
-        magstripe:
-          type: string
-        cardTemplateCode:
-          type: string
-          example: '1'
     PostAndAccrueRequest:
       type: object
       required:

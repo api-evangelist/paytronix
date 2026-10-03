@@ -226,6 +226,45 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    CardInfo:
+      type: object
+      description: Identifies a card for transaction operations.
+      properties:
+        printedCardNumber:
+          type: string
+          example: '60490012345678'
+        magstripe:
+          type: string
+        cardTemplateCode:
+          type: string
+          example: '1'
+    GiftReply:
+      type: object
+      properties:
+        result:
+          type: string
+          example: success
+        pxTransactionId:
+          type: string
+          example: GIFT-44556
+        printedCardNumber:
+          type: string
+          example: '70123456789012'
+        currentBalance:
+          type: number
+          example: 50.0
+        errorCode:
+          type: string
+        errorMessage:
+          type: string
+    GiftRedeemRequest:
+      allOf:
+      - $ref: '#/components/schemas/GiftRequest'
+      - type: object
+        properties:
+          tip:
+            type: number
+            example: 5.0
     GiftRequest:
       type: object
       required:
@@ -253,18 +292,6 @@ components:
           type: string
         externalTransactionId:
           type: string
-    CardInfo:
-      type: object
-      description: Identifies a card for transaction operations.
-      properties:
-        printedCardNumber:
-          type: string
-          example: '60490012345678'
-        magstripe:
-          type: string
-        cardTemplateCode:
-          type: string
-          example: '1'
     GiftBalanceRequest:
       type: object
       required:
@@ -280,33 +307,6 @@ components:
           example: '1'
         cardInfo:
           $ref: '#/components/schemas/CardInfo'
-    GiftRedeemRequest:
-      allOf:
-      - $ref: '#/components/schemas/GiftRequest'
-      - type: object
-        properties:
-          tip:
-            type: number
-            example: 5.0
-    GiftReply:
-      type: object
-      properties:
-        result:
-          type: string
-          example: success
-        pxTransactionId:
-          type: string
-          example: GIFT-44556
-        printedCardNumber:
-          type: string
-          example: '70123456789012'
-        currentBalance:
-          type: number
-          example: 50.0
-        errorCode:
-          type: string
-        errorMessage:
-          type: string
   securitySchemes:
     basicAuth:
       type: http

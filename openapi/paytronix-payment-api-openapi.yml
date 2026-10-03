@@ -125,57 +125,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    RechargeRequest:
-      type: object
-      required:
-      - merchantId
-      - printedCardNumber
-      - amount
-      - paymentMethod
-      properties:
-        merchantId:
-          type: integer
-          example: 1000
-        printedCardNumber:
-          type: string
-          example: '60490012345678'
-        amount:
-          type: number
-          example: 25.0
-        paymentMethod:
-          type: object
-          properties:
-            type:
-              type: string
-              example: CREDIT_CARD
-            token:
-              type: string
-            lastFour:
-              type: string
-              example: '4242'
-        address:
-          $ref: '#/components/schemas/Address'
-    ChargeResponse:
-      type: object
-      properties:
-        result:
-          type: string
-          example: success
-        amount:
-          type: number
-          example: 25.0
-        cardType:
-          type: string
-          example: VISA
-        lastFour:
-          type: string
-          example: '4242'
-        processorAuthCode:
-          type: string
-          example: AUTH123
-        transactionState:
-          type: string
-          example: APPROVED
     Address:
       type: object
       properties:
@@ -216,6 +165,57 @@ components:
                 type: array
                 items:
                   type: string
+    ChargeResponse:
+      type: object
+      properties:
+        result:
+          type: string
+          example: success
+        amount:
+          type: number
+          example: 25.0
+        cardType:
+          type: string
+          example: VISA
+        lastFour:
+          type: string
+          example: '4242'
+        processorAuthCode:
+          type: string
+          example: AUTH123
+        transactionState:
+          type: string
+          example: APPROVED
+    RechargeRequest:
+      type: object
+      required:
+      - merchantId
+      - printedCardNumber
+      - amount
+      - paymentMethod
+      properties:
+        merchantId:
+          type: integer
+          example: 1000
+        printedCardNumber:
+          type: string
+          example: '60490012345678'
+        amount:
+          type: number
+          example: 25.0
+        paymentMethod:
+          type: object
+          properties:
+            type:
+              type: string
+              example: CREDIT_CARD
+            token:
+              type: string
+            lastFour:
+              type: string
+              example: '4242'
+        address:
+          $ref: '#/components/schemas/Address'
   securitySchemes:
     basicAuth:
       type: http
