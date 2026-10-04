@@ -166,18 +166,59 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    CardInfo:
+    Check:
       type: object
-      description: Identifies a card for transaction operations.
+      description: A POS check with line items used in reward computation and posting.
       properties:
-        printedCardNumber:
+        number:
           type: string
-          example: '60490012345678'
-        magstripe:
+          example: '4501'
+        openTime:
           type: string
-        cardTemplateCode:
+          format: date-time
+        subtotal:
+          type: number
+          example: 42.5
+        items:
+          type: array
+          items:
+            type: object
+            properties:
+              itemCode:
+                type: string
+              name:
+                type: string
+              quantity:
+                type: number
+              price:
+                type: number
+    PostAndAccrueRequest:
+      type: object
+      required:
+      - merchantId
+      - storeCode
+      - check
+      - cardInfo
+      properties:
+        merchantId:
+          type: integer
+          example: 1000
+        storeCode:
           type: string
           example: '1'
+        check:
+          $ref: '#/components/schemas/Check'
+        cardInfo:
+          $ref: '#/components/schemas/CardInfo'
+        autoActivateCard:
+          type: boolean
+        terminal:
+          type: string
+        operator:
+          type: string
+        receiptSettings:
+          type: object
+          additionalProperties: true
     ComputeRewardsRequest:
       type: object
       required:
@@ -206,33 +247,6 @@ components:
             mode:
               type: string
               example: AUTOMATIC
-    PostAndAccrueRequest:
-      type: object
-      required:
-      - merchantId
-      - storeCode
-      - check
-      - cardInfo
-      properties:
-        merchantId:
-          type: integer
-          example: 1000
-        storeCode:
-          type: string
-          example: '1'
-        check:
-          $ref: '#/components/schemas/Check'
-        cardInfo:
-          $ref: '#/components/schemas/CardInfo'
-        autoActivateCard:
-          type: boolean
-        terminal:
-          type: string
-        operator:
-          type: string
-        receiptSettings:
-          type: object
-          additionalProperties: true
     ComputeRewardsReply:
       type: object
       properties:
@@ -286,32 +300,18 @@ components:
         balance:
           type: number
           example: 1250
-    Check:
+    CardInfo:
       type: object
-      description: A POS check with line items used in reward computation and posting.
+      description: Identifies a card for transaction operations.
       properties:
-        number:
+        printedCardNumber:
           type: string
-          example: '4501'
-        openTime:
+          example: '60490012345678'
+        magstripe:
           type: string
-          format: date-time
-        subtotal:
-          type: number
-          example: 42.5
-        items:
-          type: array
-          items:
-            type: object
-            properties:
-              itemCode:
-                type: string
-              name:
-                type: string
-              quantity:
-                type: number
-              price:
-                type: number
+        cardTemplateCode:
+          type: string
+          example: '1'
   securitySchemes:
     basicAuth:
       type: http

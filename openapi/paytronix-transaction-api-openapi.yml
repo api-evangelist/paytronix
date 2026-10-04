@@ -246,49 +246,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    CardInfo:
-      type: object
-      description: Identifies a card for transaction operations.
-      properties:
-        printedCardNumber:
-          type: string
-          example: '60490012345678'
-        magstripe:
-          type: string
-        cardTemplateCode:
-          type: string
-          example: '1'
-    AddRedeemRequest:
-      type: object
-      required:
-      - headerInfo
-      - cardInfo
-      properties:
-        headerInfo:
-          $ref: '#/components/schemas/HeaderInfo'
-        cardInfo:
-          $ref: '#/components/schemas/CardInfo'
-        addWalletContents:
-          type: array
-          items:
-            $ref: '#/components/schemas/WalletContent'
-        redeemWalletContents:
-          type: array
-          items:
-            $ref: '#/components/schemas/WalletContent'
-    AddRedeemReply:
-      type: object
-      properties:
-        result:
-          type: string
-          example: success
-        pxTransactionId:
-          type: string
-          example: TXN-67890
-        walletContents:
-          type: array
-          items:
-            $ref: '#/components/schemas/WalletBalance'
     TransactionRequest:
       type: object
       required:
@@ -322,38 +279,6 @@ components:
           example: '100'
         posTransactionId:
           type: string
-    WalletContent:
-      type: object
-      description: A wallet code and quantity used in add/redeem operations.
-      properties:
-        walletCode:
-          type: string
-          example: '1'
-        quantity:
-          type: number
-          example: 10
-        expiration:
-          type: string
-          format: date
-    AccountQueryReply:
-      type: object
-      properties:
-        result:
-          type: string
-          example: success
-        accounts:
-          type: array
-          items:
-            type: object
-            properties:
-              accountId:
-                type: integer
-                format: int64
-              printedCardNumber:
-                type: string
-              fieldValues:
-                type: object
-                additionalProperties: true
     AccountQueryRequest:
       type: object
       required:
@@ -380,18 +305,25 @@ components:
                 type: string
               postalCode:
                 type: string
-    WalletBalance:
+    AccountQueryReply:
       type: object
       properties:
-        walletCode:
+        result:
           type: string
-          example: '1'
-        name:
-          type: string
-          example: Points
-        balance:
-          type: number
-          example: 1250
+          example: success
+        accounts:
+          type: array
+          items:
+            type: object
+            properties:
+              accountId:
+                type: integer
+                format: int64
+              printedCardNumber:
+                type: string
+              fieldValues:
+                type: object
+                additionalProperties: true
     TransactionReply:
       type: object
       properties:
@@ -411,6 +343,74 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/WalletBalance'
+    AddRedeemReply:
+      type: object
+      properties:
+        result:
+          type: string
+          example: success
+        pxTransactionId:
+          type: string
+          example: TXN-67890
+        walletContents:
+          type: array
+          items:
+            $ref: '#/components/schemas/WalletBalance'
+    WalletContent:
+      type: object
+      description: A wallet code and quantity used in add/redeem operations.
+      properties:
+        walletCode:
+          type: string
+          example: '1'
+        quantity:
+          type: number
+          example: 10
+        expiration:
+          type: string
+          format: date
+    WalletBalance:
+      type: object
+      properties:
+        walletCode:
+          type: string
+          example: '1'
+        name:
+          type: string
+          example: Points
+        balance:
+          type: number
+          example: 1250
+    CardInfo:
+      type: object
+      description: Identifies a card for transaction operations.
+      properties:
+        printedCardNumber:
+          type: string
+          example: '60490012345678'
+        magstripe:
+          type: string
+        cardTemplateCode:
+          type: string
+          example: '1'
+    AddRedeemRequest:
+      type: object
+      required:
+      - headerInfo
+      - cardInfo
+      properties:
+        headerInfo:
+          $ref: '#/components/schemas/HeaderInfo'
+        cardInfo:
+          $ref: '#/components/schemas/CardInfo'
+        addWalletContents:
+          type: array
+          items:
+            $ref: '#/components/schemas/WalletContent'
+        redeemWalletContents:
+          type: array
+          items:
+            $ref: '#/components/schemas/WalletContent'
   securitySchemes:
     basicAuth:
       type: http

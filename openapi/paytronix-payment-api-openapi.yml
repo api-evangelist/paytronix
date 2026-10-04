@@ -125,46 +125,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    Address:
-      type: object
-      properties:
-        address1:
-          type: string
-        address2:
-          type: string
-        city:
-          type: string
-        stateProvince:
-          type: string
-        postalCode:
-          type: string
-        country:
-          type: string
-          example: US
-    SavedPaymentMethodsReply:
-      type: object
-      properties:
-        result:
-          type: string
-          example: success
-        paymentMethods:
-          type: array
-          items:
-            type: object
-            properties:
-              type:
-                type: string
-                example: CREDIT_CARD
-              cardholderName:
-                type: string
-                example: Jane Doe
-              lastFour:
-                type: string
-                example: '4242'
-              defaultUsages:
-                type: array
-                items:
-                  type: string
     ChargeResponse:
       type: object
       properties:
@@ -216,6 +176,46 @@ components:
               example: '4242'
         address:
           $ref: '#/components/schemas/Address'
+    Address:
+      type: object
+      properties:
+        address1:
+          type: string
+        address2:
+          type: string
+        city:
+          type: string
+        stateProvince:
+          type: string
+        postalCode:
+          type: string
+        country:
+          type: string
+          example: US
+    SavedPaymentMethodsReply:
+      type: object
+      properties:
+        result:
+          type: string
+          example: success
+        paymentMethods:
+          type: array
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+                example: CREDIT_CARD
+              cardholderName:
+                type: string
+                example: Jane Doe
+              lastFour:
+                type: string
+                example: '4242'
+              defaultUsages:
+                type: array
+                items:
+                  type: string
   securitySchemes:
     basicAuth:
       type: http

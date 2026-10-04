@@ -319,6 +319,37 @@ components:
           items:
             type: integer
             format: int64
+    ChangeCardStatusRequest:
+      type: object
+      required:
+      - merchantId
+      - printedCardNumber
+      - status
+      properties:
+        merchantId:
+          type: integer
+          example: 1000
+        printedCardNumber:
+          type: string
+          example: '60490012345678'
+        status:
+          type: string
+          enum:
+          - ACTIVE
+          - DISABLED
+          example: DISABLED
+    WalletBalance:
+      type: object
+      properties:
+        walletCode:
+          type: string
+          example: '1'
+        name:
+          type: string
+          example: Points
+        balance:
+          type: number
+          example: 1250
     TransactionHistoryReply:
       type: object
       properties:
@@ -394,37 +425,6 @@ components:
           type: string
         errorMessage:
           type: string
-    WalletBalance:
-      type: object
-      properties:
-        walletCode:
-          type: string
-          example: '1'
-        name:
-          type: string
-          example: Points
-        balance:
-          type: number
-          example: 1250
-    ChangeCardStatusRequest:
-      type: object
-      required:
-      - merchantId
-      - printedCardNumber
-      - status
-      properties:
-        merchantId:
-          type: integer
-          example: 1000
-        printedCardNumber:
-          type: string
-          example: '60490012345678'
-        status:
-          type: string
-          enum:
-          - ACTIVE
-          - DISABLED
-          example: DISABLED
   securitySchemes:
     basicAuth:
       type: http

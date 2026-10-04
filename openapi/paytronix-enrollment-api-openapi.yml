@@ -198,41 +198,6 @@ components:
                     example: true
                   pattern:
                     type: string
-    CreateAndRegisterRequest:
-      type: object
-      required:
-      - merchantId
-      - cardTemplateCode
-      - setUserFields
-      properties:
-        merchantId:
-          type: integer
-          example: 1000
-        cardTemplateCode:
-          type: string
-          example: '1'
-        enforceUniqueFields:
-          type: array
-          items:
-            type: string
-          example:
-          - email
-        setUserFields:
-          type: object
-          additionalProperties: true
-          example:
-            username: jdoe
-            password: s3cret
-            firstName: Jane
-            lastName: Doe
-            email: jane@example.com
-        setAccountFields:
-          type: object
-          additionalProperties: true
-        sendSmsVerification:
-          type: boolean
-        smsVerificationCode:
-          type: string
     ActivateAndRegisterRequest:
       type: object
       required:
@@ -278,6 +243,41 @@ components:
           type: object
           additionalProperties:
             type: string
+    CreateAndRegisterRequest:
+      type: object
+      required:
+      - merchantId
+      - cardTemplateCode
+      - setUserFields
+      properties:
+        merchantId:
+          type: integer
+          example: 1000
+        cardTemplateCode:
+          type: string
+          example: '1'
+        enforceUniqueFields:
+          type: array
+          items:
+            type: string
+          example:
+          - email
+        setUserFields:
+          type: object
+          additionalProperties: true
+          example:
+            username: jdoe
+            password: s3cret
+            firstName: Jane
+            lastName: Doe
+            email: jane@example.com
+        setAccountFields:
+          type: object
+          additionalProperties: true
+        sendSmsVerification:
+          type: boolean
+        smsVerificationCode:
+          type: string
   securitySchemes:
     basicAuth:
       type: http

@@ -89,6 +89,27 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    GuestTokenResponse:
+      type: object
+      properties:
+        access_token:
+          type: string
+          example: 9f8c1a2b3c4d5e6f
+        token_type:
+          type: string
+          example: bearer
+        expires_in:
+          type: integer
+          example: 1800
+        refresh_token:
+          type: string
+          example: 1a2b3c4d5e6f7a8b
+        scope:
+          type: string
+          example: user_read account_read
+        username:
+          type: string
+          example: jdoe
     ErrorReply:
       type: object
       description: Standard failure envelope returned across PXS services.
@@ -131,27 +152,6 @@ components:
           example: user_read account_read
         refresh_token:
           type: string
-    GuestTokenResponse:
-      type: object
-      properties:
-        access_token:
-          type: string
-          example: 9f8c1a2b3c4d5e6f
-        token_type:
-          type: string
-          example: bearer
-        expires_in:
-          type: integer
-          example: 1800
-        refresh_token:
-          type: string
-          example: 1a2b3c4d5e6f7a8b
-        scope:
-          type: string
-          example: user_read account_read
-        username:
-          type: string
-          example: jdoe
   securitySchemes:
     basicAuth:
       type: http

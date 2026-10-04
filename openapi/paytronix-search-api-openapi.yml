@@ -240,10 +240,6 @@ components:
           type: number
           format: double
           example: -81.0
-    Facets:
-      type: object
-      description: Applicable search facets such as tags for refining a search.
-      additionalProperties: true
     MenuItemSearchResults:
       type: object
       properties:
@@ -254,18 +250,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/MenuItem'
-        facets:
-          $ref: '#/components/schemas/Facets'
-    RestaurantSearchResults:
-      type: object
-      properties:
-        count:
-          type: integer
-          example: 12
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/Restaurant'
         facets:
           $ref: '#/components/schemas/Facets'
     Restaurant:
@@ -306,6 +290,18 @@ components:
           type: string
         description:
           type: string
+    RestaurantSearchResults:
+      type: object
+      properties:
+        count:
+          type: integer
+          example: 12
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Restaurant'
+        facets:
+          $ref: '#/components/schemas/Facets'
     MenuItem:
       type: object
       properties:
@@ -342,3 +338,7 @@ components:
               price:
                 type: number
                 example: 1.5
+    Facets:
+      type: object
+      description: Applicable search facets such as tags for refining a search.
+      additionalProperties: true
