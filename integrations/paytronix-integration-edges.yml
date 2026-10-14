@@ -36,10 +36,46 @@ edges:
       - feed
   detected_by: sweep-cdp.py
   first_seen: '2026-10-14'
+- partner_name: Olo (own)
+  partner: olo
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://www.olo.com/partners/paytronix
+  mirror_of: olo/integrations/olo-integration-edges.yml
+  apps:
+  - Paytronix
+  listing_count: 1
+  detected: '2026-10-14'
+  detected_by: mirror-platform-listings.py
+  category: Gift Cards
+- partner_name: Toast (own)
+  partner: toast
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://pos.toasttab.com/partners/directory/paytronix
+  mirror_of: toast/integrations/toast-integration-edges.yml
+  apps:
+  - Paytronix
+  listing_count: 1
+  detected: '2026-10-14'
+  detected_by: mirror-platform-listings.py
+  category: Loyalty
 method: searched
 checked:
 - https://docs.mparticle.com/integrations/paytronix/feed/
 - https://www.twilio.com/docs/segment/connections/sources/catalog/cloud-apps/paytronix
+- olo/integrations/olo-integration-edges.yml
+- toast/integrations/toast-integration-edges.yml
 source:
 - https://docs.mparticle.com/integrations/paytronix/feed/
 - https://www.twilio.com/docs/segment/connections/sources/catalog/cloud-apps/paytronix
