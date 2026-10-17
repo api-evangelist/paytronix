@@ -246,18 +246,25 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    TransactionRequest:
+    TransactionReply:
       type: object
-      required:
-      - headerInfo
-      - cardInfo
       properties:
-        headerInfo:
-          $ref: '#/components/schemas/HeaderInfo'
-        cardInfo:
-          $ref: '#/components/schemas/CardInfo'
-        autoActivateCard:
-          type: boolean
+        result:
+          type: string
+          example: success
+        pxTransactionId:
+          type: string
+          example: TXN-12345
+        maskedCardNumber:
+          type: string
+          example: '******5678'
+        enrollmentDate:
+          type: string
+          format: date
+        walletBalances:
+          type: array
+          items:
+            $ref: '#/components/schemas/WalletBalance'
     HeaderInfo:
       type: object
       description: Common transaction header. programId is PX, SV, or LP.
@@ -305,6 +312,31 @@ components:
                 type: string
               postalCode:
                 type: string
+    WalletContent:
+      type: object
+      description: A wallet code and quantity used in add/redeem operations.
+      properties:
+        walletCode:
+          type: string
+          example: '1'
+        quantity:
+          type: number
+          example: 10
+        expiration:
+          type: string
+          format: date
+    CardInfo:
+      type: object
+      description: Identifies a card for transaction operations.
+      properties:
+        printedCardNumber:
+          type: string
+          example: '60490012345678'
+        magstripe:
+          type: string
+        cardTemplateCode:
+          type: string
+          example: '1'
     AccountQueryReply:
       type: object
       properties:
@@ -324,25 +356,6 @@ components:
               fieldValues:
                 type: object
                 additionalProperties: true
-    TransactionReply:
-      type: object
-      properties:
-        result:
-          type: string
-          example: success
-        pxTransactionId:
-          type: string
-          example: TXN-12345
-        maskedCardNumber:
-          type: string
-          example: '******5678'
-        enrollmentDate:
-          type: string
-          format: date
-        walletBalances:
-          type: array
-          items:
-            $ref: '#/components/schemas/WalletBalance'
     AddRedeemReply:
       type: object
       properties:
@@ -356,19 +369,18 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/WalletBalance'
-    WalletContent:
+    TransactionRequest:
       type: object
-      description: A wallet code and quantity used in add/redeem operations.
+      required:
+      - headerInfo
+      - cardInfo
       properties:
-        walletCode:
-          type: string
-          example: '1'
-        quantity:
-          type: number
-          example: 10
-        expiration:
-          type: string
-          format: date
+        headerInfo:
+          $ref: '#/components/schemas/HeaderInfo'
+        cardInfo:
+          $ref: '#/components/schemas/CardInfo'
+        autoActivateCard:
+          type: boolean
     WalletBalance:
       type: object
       properties:
@@ -381,18 +393,6 @@ components:
         balance:
           type: number
           example: 1250
-    CardInfo:
-      type: object
-      description: Identifies a card for transaction operations.
-      properties:
-        printedCardNumber:
-          type: string
-          example: '60490012345678'
-        magstripe:
-          type: string
-        cardTemplateCode:
-          type: string
-          example: '1'
     AddRedeemRequest:
       type: object
       required:

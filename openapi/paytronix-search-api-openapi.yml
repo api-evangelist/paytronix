@@ -229,29 +229,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    Coordinates:
-      type: object
-      properties:
-        lat:
-          type: number
-          format: double
-          example: 40.0
-        lon:
-          type: number
-          format: double
-          example: -81.0
-    MenuItemSearchResults:
-      type: object
-      properties:
-        count:
-          type: integer
-          example: 34
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/MenuItem'
-        facets:
-          $ref: '#/components/schemas/Facets'
     Restaurant:
       type: object
       properties:
@@ -290,18 +267,33 @@ components:
           type: string
         description:
           type: string
-    RestaurantSearchResults:
+    Facets:
+      type: object
+      description: Applicable search facets such as tags for refining a search.
+      additionalProperties: true
+    MenuItemSearchResults:
       type: object
       properties:
         count:
           type: integer
-          example: 12
+          example: 34
         results:
           type: array
           items:
-            $ref: '#/components/schemas/Restaurant'
+            $ref: '#/components/schemas/MenuItem'
         facets:
           $ref: '#/components/schemas/Facets'
+    Coordinates:
+      type: object
+      properties:
+        lat:
+          type: number
+          format: double
+          example: 40.0
+        lon:
+          type: number
+          format: double
+          example: -81.0
     MenuItem:
       type: object
       properties:
@@ -338,7 +330,15 @@ components:
               price:
                 type: number
                 example: 1.5
-    Facets:
+    RestaurantSearchResults:
       type: object
-      description: Applicable search facets such as tags for refining a search.
-      additionalProperties: true
+      properties:
+        count:
+          type: integer
+          example: 12
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Restaurant'
+        facets:
+          $ref: '#/components/schemas/Facets'

@@ -62,17 +62,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    Coordinates:
-      type: object
-      properties:
-        lat:
-          type: number
-          format: double
-          example: 40.0
-        lon:
-          type: number
-          format: double
-          example: -81.0
     Restaurant:
       type: object
       properties:
@@ -111,3 +100,14 @@ components:
           type: string
         description:
           type: string
+    Coordinates:
+      type: object
+      properties:
+        lat:
+          type: number
+          format: double
+          example: 40.0
+        lon:
+          type: number
+          format: double
+          example: -81.0

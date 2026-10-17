@@ -226,21 +226,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    GiftBalanceRequest:
-      type: object
-      required:
-      - merchantId
-      - storeCode
-      - cardInfo
-      properties:
-        merchantId:
-          type: integer
-          example: 1000
-        storeCode:
-          type: string
-          example: '1'
-        cardInfo:
-          $ref: '#/components/schemas/CardInfo'
     GiftRequest:
       type: object
       required:
@@ -268,14 +253,21 @@ components:
           type: string
         externalTransactionId:
           type: string
-    GiftRedeemRequest:
-      allOf:
-      - $ref: '#/components/schemas/GiftRequest'
-      - type: object
-        properties:
-          tip:
-            type: number
-            example: 5.0
+    GiftBalanceRequest:
+      type: object
+      required:
+      - merchantId
+      - storeCode
+      - cardInfo
+      properties:
+        merchantId:
+          type: integer
+          example: 1000
+        storeCode:
+          type: string
+          example: '1'
+        cardInfo:
+          $ref: '#/components/schemas/CardInfo'
     CardInfo:
       type: object
       description: Identifies a card for transaction operations.
@@ -307,6 +299,14 @@ components:
           type: string
         errorMessage:
           type: string
+    GiftRedeemRequest:
+      allOf:
+      - $ref: '#/components/schemas/GiftRequest'
+      - type: object
+        properties:
+          tip:
+            type: number
+            example: 5.0
   securitySchemes:
     basicAuth:
       type: http

@@ -297,28 +297,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    UserInformationReply:
-      type: object
-      properties:
-        result:
-          type: string
-          example: success
-        userFields:
-          type: object
-          additionalProperties: true
-          example:
-            firstName: Jane
-            lastName: Doe
-            email: jane@example.com
-        primaryCardNumbers:
-          type: array
-          items:
-            type: string
-        accountIds:
-          type: array
-          items:
-            type: integer
-            format: int64
     ChangeCardStatusRequest:
       type: object
       required:
@@ -338,18 +316,6 @@ components:
           - ACTIVE
           - DISABLED
           example: DISABLED
-    WalletBalance:
-      type: object
-      properties:
-        walletCode:
-          type: string
-          example: '1'
-        name:
-          type: string
-          example: Points
-        balance:
-          type: number
-          example: 1250
     TransactionHistoryReply:
       type: object
       properties:
@@ -379,6 +345,40 @@ components:
                 type: number
               balance:
                 type: number
+    UserInformationReply:
+      type: object
+      properties:
+        result:
+          type: string
+          example: success
+        userFields:
+          type: object
+          additionalProperties: true
+          example:
+            firstName: Jane
+            lastName: Doe
+            email: jane@example.com
+        primaryCardNumbers:
+          type: array
+          items:
+            type: string
+        accountIds:
+          type: array
+          items:
+            type: integer
+            format: int64
+    WalletBalance:
+      type: object
+      properties:
+        walletCode:
+          type: string
+          example: '1'
+        name:
+          type: string
+          example: Points
+        balance:
+          type: number
+          example: 1250
     AccountInformationReply:
       type: object
       properties:
