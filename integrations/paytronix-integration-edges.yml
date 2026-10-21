@@ -1,41 +1,5 @@
 generated: '2026-10-14'
 edges:
-- partner_name: Twilio Segment
-  partner: segment
-  partner_match: aggregator
-  marketplace: coverage
-  channel: partner-built
-  direction: partner-built
-  type: coverage
-  relationship: connector-coverage
-  evidence: https://www.twilio.com/docs/segment/connections/sources/catalog/cloud-apps/paytronix
-  coverage_role:
-  - source
-  cdp_signals:
-    source:
-      catalog_entries:
-      - paytronix
-  detected_by: sweep-cdp.py
-  first_seen: '2026-10-14'
-- partner_name: mParticle
-  partner: mparticle
-  partner_match: aggregator
-  marketplace: coverage
-  channel: partner-built
-  direction: partner-built
-  type: coverage
-  relationship: connector-coverage
-  evidence: https://docs.mparticle.com/integrations/paytronix/feed/
-  coverage_role:
-  - source
-  cdp_signals:
-    source:
-      catalog_entries:
-      - paytronix
-      integration_types:
-      - feed
-  detected_by: sweep-cdp.py
-  first_seen: '2026-10-14'
 - partner_name: Olo (own)
   partner: olo
   partner_match: mirror
@@ -102,6 +66,59 @@ edges:
   - STORE_SPECIAL_HOURS
   publisher_verified:
   - DoorDash Certified Integration
+- partner_name: Twilio Segment
+  partner: segment
+  partner_match: aggregator
+  marketplace: coverage
+  channel: partner-built
+  direction: partner-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://www.twilio.com/docs/segment/connections/sources/catalog/cloud-apps/paytronix
+  coverage_role:
+  - source
+  cdp_signals:
+    source:
+      catalog_entries:
+      - paytronix
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: mParticle
+  partner: mparticle
+  partner_match: aggregator
+  marketplace: coverage
+  channel: partner-built
+  direction: partner-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://docs.mparticle.com/integrations/paytronix/feed/
+  coverage_role:
+  - source
+  cdp_signals:
+    source:
+      catalog_entries:
+      - paytronix
+      integration_types:
+      - feed
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Square franchise partners
+  partner: square
+  partner_match: mirror
+  mirror_match: register-name
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://squareup.com/us/en/franchises
+  mirror_of: square/integrations/square-integration-edges.yml
+  apps:
+  - Paytronix
+  detected: '2026-10-21'
+  detected_by: sweep-franchise-registries.py
+  identity_source: register-name
+  identity_note: register-name 'paytronix' = paytronix; no wikidata P856
 method: searched
 checked:
 - doordash/integrations/doordash-integration-edges.yml
@@ -109,6 +126,16 @@ checked:
 - https://www.twilio.com/docs/segment/connections/sources/catalog/cloud-apps/paytronix
 - olo/integrations/olo-integration-edges.yml
 - toast/integrations/toast-integration-edges.yml
+- https://apps.dfi.wi.gov/apps/FranchiseSearch/MainSearch.aspx
+- https://cards.web.commerce.state.mn.us/franchise-registrations
+- https://dfpi.ca.gov/regulated-industries/regulated-entities-list/
+- https://docqnet.dfpi.ca.gov/
+- https://pos.toasttab.com/franchise
+- https://squareup.com/us/en/franchises
+- https://www.franchise.org/franchise-opportunities/
+- https://www.franchise.org/suppliers/
+- https://www.franchise.org/wp-json/wp/v2/member
+- https://www.servicetitan.com/market/franchise-management-software
 source:
 - https://docs.mparticle.com/integrations/paytronix/feed/
 - https://www.twilio.com/docs/segment/connections/sources/catalog/cloud-apps/paytronix
